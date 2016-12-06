@@ -1,0 +1,31 @@
+doctype html
+<!--[if IE 9 ]><html dir="ltr" lang="ru" class="ie9"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!-->
+html(dir="ltr" lang="ru")
+<!--<![endif]-->
+	block layout-settings
+		- var pageTitle = 'Courses - HTML5 - Noveo Software University'
+
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		meta(name="apple-mobile-web-app-capable", content="yes")
+		meta(name="mobile-web-app-capable", content="yes")
+
+		title #{pageTitle}
+		meta(name="apple-mobile-web-app-title" content="#{pageTitle}")
+		meta(name="application-name" content="#{pageTitle}")
+		
+		block js
+
+		//--- Styles ---//
+		link(rel='stylesheet', href='./css/main.css')
+
+	body
+		.page
+			// Include header
+			
+			.content
+				block content
+
+			// Include footer

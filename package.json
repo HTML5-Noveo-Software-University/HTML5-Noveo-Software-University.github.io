@@ -1,0 +1,33 @@
+{
+  "name": "courses",
+  "version": "1.0.0",
+  "description": " Courses HTML5 Noveo Software University",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp",
+    "deploy": "gulp deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HTML5-Noveo-Software-University/cources.git"
+  },
+  "author": "Noveo Software University",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/HTML5-Noveo-Software-University/cources/issues"
+  },
+  "homepage": "https://github.com/HTML5-Noveo-Software-University/cources#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.2",
+    "csscomb": "^3.1.7",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-changed": "^1.3.2",
+    "gulp-combine-mq": "^0.4.0",
+    "gulp-csso": "^2.0.0",
+    "gulp-pug": "^3.2.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.9.1"
+  }
+}
