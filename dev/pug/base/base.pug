@@ -43,29 +43,72 @@ html(dir="ltr" lang="en")
                 }
             script(src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"  onerror="loadLocal('jquery')")
             script.
-                // TODO: refactor + make it responsive (recalc height & offsets)
-                $stick = $('aside');
-                $foot = $('footer');
-                margin = 0;
-                offtop = $stick.offset().top - margin;
-                offbtm = $foot.offset().top - ( margin*2 + $stick.height());
-                $(window).scroll(function () {
-                  scrtop = $(window).scrollTop();
-                  if (scrtop > offtop && $stick.hasClass('natural')) {
-                    $stick.removeClass('natural').addClass('fixed').css('top', margin);
-                  }
-                  if (offtop > scrtop && $stick.hasClass('fixed')) {
-                    $stick.removeClass('fixed').addClass('natural').css('top', '');
-                  }
-                  if (scrtop > offbtm && $stick.hasClass('fixed')) {
-                    $stick.removeClass('fixed').addClass('bottom').css('top', offbtm+margin-offtop);
-                  }
-                  if (offbtm > scrtop && $stick.hasClass('bottom')) {
-                    $stick.removeClass('bottom').addClass('fixed').css('top', margin);
-                  }
-                });
+                function stick(options) {
+                    // TODO: refactor + make it responsive (recalc height & offsets)
+                    var $stick = $('aside');
+                    var height = $stick.height();
 
+                    if (height > $stick.prev().height()) {
+                        console.log('bigger than prev');
+                        return;
+                    }
 
+                    $stick.addClass('--sticky');
+
+                    var $foot = $('footer');
+                    var offtop = $stick.offset().top;
+                    var offbtm = $foot.offset().top - height;
+
+                    $(window).resize(function(){
+                        var offtop = $stick.offset().top;
+                        var offbtm = $foot.offset().top - height;
+                    });
+
+                    function styleStick(direction, scrtop) {
+                        if (offtop > scrtop) {
+                            $stick.css({
+                                top: '',
+                                bottom: '',
+                                position: ''
+                            });
+                          } else if (scrtop > offtop && scrtop < offbtm ) {
+                            if (direction === 'down') {
+                                $stick.css({
+                                    top: 'auto',
+                                    bottom: 0,
+                                    position: 'fixed'
+                                })
+                            } else {
+                                $stick.css({
+                                    top: '',
+                                    bottom: '',
+                                    position: 'fixed'
+                                });
+                            }
+
+                          }  else {
+                                $stick.css({
+                                    top: 'auto',
+                                    bottom: 0,
+                                    position: ''
+                                });
+                          }
+                    }
+
+                    var lastScrtop = 0;
+                    var scrollDirection = 'down';
+                    var scrollTimer;
+                    $(window).scroll(function () {
+                        clearTimeout(scrollTimer);
+                        scrollTimer = setTimeout(function(){
+                            scrtop = $(window).scrollTop();
+                            scrollDirection = (scrtop > lastScrtop) ? 'down' : 'up';
+                            lastScrtop = scrtop;
+                            styleStick(scrollDirection, scrtop)
+                        }, 0);
+                    });
+                 }
+                 stick();
 
 
 
