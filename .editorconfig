@@ -12,3 +12,4 @@ insert_final_newline = true
 
 [*.{js,json,html,jade,md,scss}]
 indent_size = 4
+indent_style = space

@@ -10,15 +10,15 @@ const csso = require('gulp-csso');
 const combineMq = require('gulp-combine-mq');
 
 const paths = {
-    pugPages: 'dev/pug/pages/*.pug',
-    pugPartials: 'dev/pug/pages/**/*.pug',
+    pugPages: './dev/pug/pages/*.pug',
+    pugPartials: './dev/pug/**/*.pug',
     html: './',
 
-    scss: 'dev/scss',
-    cssComb: 'dev/.csscomb.json',
-    mainScss: 'dev/scss/main.scss',
-    scssPartials: 'dev/scss/**/*.scss',
-    css: 'static/css/'
+    scss: './dev/scss',
+    cssComb: './dev/.csscomb.json',
+    mainScss: './dev/scss/main.scss',
+    scssPartials: './dev/scss/**/*.scss',
+    css: './static/css/'
 };
 
 gulp.task('html', () => {
@@ -45,8 +45,8 @@ gulp.task('css-dev', ['csscomb'], () => {
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.write())
     .pipe(prefix(">0.05%", "ie 9"))
-    .pipe(gulp.dest(paths.css));
-
+    .pipe(gulp.dest(paths.css))
+    .pipe(browserSync.stream());
 });
 
 gulp.task('css', () => {
@@ -65,14 +65,18 @@ gulp.task('css', () => {
 });
 
 gulp.task('serve', () => {
+    gulp.watch(paths.scssPartials, ['css-dev']);
+    gulp.watch(paths.pugPages, ['html']);
+    gulp.watch(paths.pugPartials, ['html']);
+
     browserSync.init({
         server: {
             baseDir: "./"
         }
     });
 
-    gulp.watch(paths.scssPartials, ['css-dev']);
     gulp.watch(`${paths.html}*.html`).on('change', browserSync.reload);
+    gulp.watch('dev/js/**/*.js').on('change', browserSync.reload);
 });
 
 gulp.task('default', ['html', 'css-dev', 'serve']);

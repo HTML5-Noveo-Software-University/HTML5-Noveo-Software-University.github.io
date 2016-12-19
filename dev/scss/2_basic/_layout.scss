@@ -1,0 +1,63 @@
+html, body {
+	background: transparent;
+	height: 100%;
+}
+
+.page {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+.content {
+	flex: 1;
+	min-height: 100%;
+	position: relative;
+}
+
+.main {
+	&:not(:only-child) {
+		background: lightgray;
+		background-clip: padding-box;
+		border-right: ($aside-width + $basic-gap) solid transparent;
+		min-height: 1400px;
+	}
+}
+
+aside {
+	background: lightblue;
+	display: block;
+	min-height: 800px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: $aside-width;
+}
+
+aside.fixed {
+	position: fixed;
+}
+
+footer {
+	min-height: 400px;
+}
+
+header {
+	min-height: 200px;
+}
+
+.hidden {
+	display: none;
+}
+
+.modal {
+	> div {
+		background: red;
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 101;
+	}
+}
