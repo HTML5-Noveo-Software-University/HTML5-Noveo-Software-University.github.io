@@ -12,7 +12,8 @@ html, body {
 .content {
 	@include inline-nowrap();
 
-	flex: 1;
+	display: flex;
+	flex: 1 0 auto;
 	min-height: 100%;
 	overflow: hidden;
 	position: relative;
@@ -20,37 +21,17 @@ html, body {
 
 .main {
 	&:not(:only-child) {
-		background: lightgray;
 		background-clip: padding-box;
 		border-right: ($aside-width + $basic-gap) solid transparent;
-		display: inline-block;
+		flex: 1 0 auto;
 		min-height: 1600px;
-		vertical-align: top;
+		padding-right: 4rem;
 		width: 100%;
 	}
 }
 
-aside {
-	background: lightblue;
-	display: inline-block;
-	margin-left: -($aside-width);
-	min-height: 100vh;
-	vertical-align: top;
-	width: $aside-width;
-	&.--sticky {
-		margin-left: 0;
-		position: absolute;
-		right: 0;
-		top: 0;
-	}
-}
-
-aside.fixed {
-	position: fixed;
-}
-
 footer {
-	min-height: 400px;
+	min-height: 800px;
 }
 
 header {
@@ -70,5 +51,14 @@ header {
 		right: 0;
 		top: 0;
 		z-index: 101;
+	}
+}
+
+
+@media screen and (max-width: $layout-middle) {
+	.main {
+		&:not(:only-child) {
+			border-right: ($aside-width-mobile) solid transparent;
+		}
 	}
 }
