@@ -1,64 +1,94 @@
-html, body {
-	background: transparent;
-	height: 100%;
+html {
+    background: darken(white, 1%);
+    height: 100%;
+}
+
+body {
+    margin: auto;
+    max-width: $layout-max;
+    min-height: 100%;
 }
 
 .page {
-	display: flex;
-	flex-direction: column;
-	min-height: 100%;
+    background: white;
+    box-shadow: 0 0  0 1px darken(white, 6%), 0 0 20px 0 darken(white, 10%);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
 .content {
-	@include inline-nowrap();
+    @include inline-nowrap();
 
-	display: flex;
-	flex: 1 0 auto;
-	min-height: 100%;
-	overflow: hidden;
-	position: relative;
+    display: flex;
+    flex: 1 0 auto;
+    height: 4000px;
+    min-height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
 }
 
 .main {
-	&:not(:only-child) {
-		background-clip: padding-box;
-		border-right: ($aside-width + $basic-gap) solid transparent;
-		flex: 1 0 auto;
-		min-height: 1600px;
-		padding-right: 4rem;
-		width: 100%;
-	}
+    &:not(:only-child) {
+        background-clip: padding-box;
+        border-right: ($aside-width-mobile-small) solid transparent;
+        flex: 1 0 auto;
+        min-height: 1600px;
+        padding-right: 4rem;
+        width: 100%;
+    }
 }
 
 footer {
-	min-height: 800px;
+    min-height: 800px;
 }
 
 header {
-	min-height: 200px;
+    padding: 10px;
+}
+.logo {
+    max-width: 240px;
 }
 
 .hidden {
-	display: none;
+    display: none;
 }
 
 .modal {
-	> div {
-		background: red;
-		bottom: 0;
-		left: 0;
-		position: absolute;
-		right: 0;
-		top: 0;
-		z-index: 101;
-	}
+    > div {
+        background: red;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 101;
+    }
+}
+
+@media screen and (min-width: $layout-wide-phone +1) {
+    .main {
+        &:not(:only-child) {
+            border-right: ($aside-width-mobile) solid transparent;
+        }
+    }
 }
 
 
-@media screen and (max-width: $layout-middle) {
-	.main {
-		&:not(:only-child) {
-			border-right: ($aside-width-mobile) solid transparent;
-		}
-	}
+@media screen and (min-width: $layout-middle +1) {
+    .main {
+        &:not(:only-child) {
+            border-right: ($aside-width + $basic-gap) solid transparent;
+        }
+    }
+}
+
+
+@media screen and (min-width: $layout-wide+1) {
+    .main {
+        &:not(:only-child) {
+            border-right: ( $aside-width-wide + $basic-gap) solid transparent;
+        }
+    }
 }

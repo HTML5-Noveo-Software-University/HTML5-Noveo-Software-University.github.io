@@ -2,51 +2,215 @@
 - var technologies = ['html', 'css', 'sass', 'jade', 'responsive', 'optimization', 'tools', 'js', 'tips']
 -
     var data = [{
-        page: 'lect_git', title: 'Git', tech: ['tools']
+        page: 'lecture-git',
+        href: 'lecture-git',
+        title: 'Git',
+        tech: ['tools'],
+        subthemes: [{
+            title: 'SubT1',
+            href: '#ff1'
+        }, {
+            title: 'SubT2',
+            href: '#ff2'
+        }]
     }, {
-        page: 'lect2', title: 'Работа с макетом. Графические редакторы', tech: ['tools']
+        page: 'lect2',
+        href: '',
+        title: 'Работа с макетом. Графические редакторы',
+        tech: ['tools'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect3', title: 'Основы HTML', tech: ['html']
+        page: 'lect3',
+        href: '',
+        title: 'Основы HTML',
+        tech: ['html'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect4', title: 'Основы CSS. CSS-именования (БЭМ) vs CSS-фреймворки', tech: ['css']
+        page: 'lect4',
+        href: '',
+        title: 'Основы CSS. CSS-именования (БЭМ) vs CSS-фреймворки',
+        tech: ['css'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect5', title: 'Текст. Семантика, стилизация. Типографика!', tech: ['html', 'css']
+        page: 'lect5',
+        href: '',
+        title: 'Текст. Семантика, стилизация. Типографика!',
+        tech: ['html', 'css'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect6', title: 'Ссылки, списки, меню', tech: ['html', 'css']
+        page: 'lect6',
+        href: '',
+        title: 'Ссылки, списки, меню',
+        tech: ['html', 'css'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect7', title: 'Layout - часть 1. Боксовая модель, display, позиционирование, z-index и приколы', tech: ['html', 'css']
+        page: 'lect7',
+        href: '',
+        title: 'Layout - часть 1. Боксовая модель, display, позиционирование, z-index и приколы',
+        tech: ['html', 'css'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect8', title: 'Layout - часть 2. Центрирование & липкий футер (sticky footer)', tech: ['html', 'css']
+        page: 'lect8',
+        href: '',
+        title: 'Layout - часть 2. Центрирование & липкий футер (sticky footer)',
+        tech: ['html', 'css'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect9', title: 'Layout - часть 3. Responsive словарь, типы layout\'ов и сетки (Флексы здесь!). Медизапросы и брейк-поинты', tech: ['html', 'css', 'responsive']
+        page: 'lect9',
+        href: '',
+        title: 'Layout - часть 3. Responsive словарь, типы layout\'ов и сетки (Флексы здесь!). Медизапросы и брейк-поинты',
+        tech: ['html', 'css', 'responsive'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect10', title: 'Работа с графикой - часть 1. Растр vs вектор. Иконки и контентные изображения', tech: ['graphics', 'css', 'html']
+        page: 'lect10',
+        href: '',
+        title: 'Работа с графикой - часть 1. Растр vs вектор. Иконки и контентные изображения',
+        tech: ['graphics', 'css', 'html'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect11', title: 'Работа с графикой - часть 2. Фоновые изображения. Responsive - изображения', tech: ['responsive', 'graphics', 'optimization']
+        page: 'lect11',
+        href: '',
+        title: 'Работа с графикой - часть 2. Фоновые изображения. Responsive - изображения',
+        tech: ['responsive', 'graphics', 'optimization'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect12', title: 'CSS3 плюшки - часть 1. Рамки, тени, градиенты', tech: ['css']
+        page: 'lect12',
+        href: '',
+        title: 'CSS3 плюшки - часть 1. Рамки, тени, градиенты',
+        tech: ['css'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect13', title: 'CSS3 плюшки - часть 2. Трансформации', tech: ['css']
+        page: 'lect13',
+        href: '',
+        title: 'CSS3 плюшки - часть 2. Трансформации',
+        tech: ['css'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
      }, {
-        page: 'lect14', title: 'CSS3 плюшки - часть 3. Анимации и эффекты', tech: ['css']
+        page: 'lect14',
+        href: '',
+        title: 'CSS3 плюшки - часть 3. Анимации и эффекты',
+        tech: ['css'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect15', title: 'Стилизация таблиц. Responsive таблицы', tech: ['html', 'css', 'responsive']
+        page: 'lect15',
+        href: '',
+        title: 'Стилизация таблиц. Responsive таблицы',
+        tech: ['html', 'css', 'responsive'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect16', title: 'Формы - часть 1. Обзор современных возможностей и ограничений, ', tech: ['html']
+        page: 'lect16',
+        href: '',
+        title: 'Формы - часть 1. Обзор современных возможностей и ограничений, ',
+        tech: ['html'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect17', title: 'Формы - часть 1. Стилизация форм. Использование сторонних библиотек', tech: ['css', 'responsive', 'js']
+        page: 'lect17',
+        href: '',
+        title: 'Формы - часть 1. Стилизация форм. Использование сторонних библиотек',
+        tech: ['css', 'responsive', 'js'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect18', title: 'Шаблонизаторы и препроцессоры. Jade и Scss', tech: ['jade', 'scss']
+        page: 'lect18',
+        href: '',
+        title: 'Шаблонизаторы и препроцессоры. Jade и Scss',
+        tech: ['jade', 'scss'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect19', title: 'Web automation tools - часть 1. Возможности Chrome: developer tools, remote debugging', tech: ['tools']
+        page: 'lect19',
+        href: '',
+        title: 'Web automation tools - часть 1. Возможности Chrome: developer tools, remote debugging',
+        tech: ['tools'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect20', title: 'Web automation tools - часть 2. Сборка проекта: пакетные менеджеры и билдеры', tech: ['tools', 'jade', 'scss']
+        page: 'lect20',
+        href: '',
+        title: 'Web automation tools - часть 2. Сборка проекта: пакетные менеджеры и билдеры',
+        tech: ['tools', 'jade', 'scss'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect21', title: 'Порядок в проекте: с чего начать и как поддерживать', tech: ['tools', 'tips']
+        page: 'lect21',
+        href: '',
+        title: 'Порядок в проекте: с чего начать и как поддерживать',
+        tech: ['tools', 'tips'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect22', title: 'CSS фреймворки', tech: ['css', 'responsive', 'js']
+        page: 'lect22',
+        href: '',
+        title: 'CSS фреймворки',
+        tech: ['css', 'responsive', 'js'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }, {
-        page: 'lect23', title: 'Полезные ресурсы', tech: ['tips']
+        page: 'lect23',
+        href: '',
+        title: 'Полезные ресурсы',
+        tech: ['tips'],
+        subthemes: [{
+            title: '',
+            href: ''
+        }]
     }]
 
 aside.aside-nav.--hidden-mobile
@@ -61,9 +225,13 @@ aside.aside-nav.--hidden-mobile
                             span(class="aside-nav__tech --" + tech)
                                 span.aside-nav__tech-text=tech
                     if currentPage === val.page
-                        span.aside-nav__title= val.title
+                        span.aside-nav__title.--active= val.title
+                            ul
+                                each subtheme in val.subthemes
+                                    li
+                                        a.aside-nav__title.--subtheme(href=subtheme.href)= subtheme.title
                     else
-                        a(href=val.page).aside-nav__title= val.title
+                        a(href=val.href).aside-nav__title= val.title
             li.aside-nav__all-tech
                 span.aside-nav__tech-wrap.--horizontal
                     each tech in technologies

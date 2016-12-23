@@ -18,7 +18,10 @@ const paths = {
     cssComb: './dev/.csscomb.json',
     mainScss: './dev/scss/main.scss',
     scssPartials: './dev/scss/**/*.scss',
-    css: './static/css/'
+    css: './static/css/',
+
+    jsPartials: './dev/js/*.js',
+    js: './static/js/'
 };
 
 gulp.task('html', () => {
@@ -64,10 +67,16 @@ gulp.task('css', () => {
     .pipe(gulp.dest(paths.css));
 });
 
+gulp.task('js', () => {
+    gulp.src(paths.jsPartials)
+    .pipe(gulp.dest(paths.js));
+});
+
 gulp.task('serve', () => {
     gulp.watch(paths.scssPartials, ['css-dev']);
     gulp.watch(paths.pugPages, ['html']);
     gulp.watch(paths.pugPartials, ['html']);
+    gulp.watch(paths.jsPartials, ['js']);
 
     browserSync.init({
         server: {
@@ -79,5 +88,5 @@ gulp.task('serve', () => {
     gulp.watch('dev/js/**/*.js').on('change', browserSync.reload);
 });
 
-gulp.task('default', ['html', 'css-dev', 'serve']);
-gulp.task('deploy', ['html', 'css']);
+gulp.task('default', ['html', 'js', 'css-dev', 'serve']);
+gulp.task('deploy', ['html', 'js', 'css']);

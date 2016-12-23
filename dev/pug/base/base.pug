@@ -13,7 +13,7 @@ html(dir="ltr" lang="en")
     block visible
         head
             meta(charset="utf-8")
-            meta(name="viewport", content="width=device-width, initial-scale=1")
+            meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1.0, minimal-ui")
             meta(name="apple-mobile-web-app-status-bar-style", content="black")
             meta(name="apple-mobile-web-app-capable", content="yes")
             meta(name="apple-mobile-web-app-status-bar-style" content="black-translucent")
@@ -24,6 +24,30 @@ html(dir="ltr" lang="en")
             //--- Styles ---//
             link(rel='stylesheet', href='./static/css/main.css')
 
+            link(rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png")
+            link(rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png")
+            link(rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png")
+            link(rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png")
+            link(rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png")
+            link(rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png")
+            link(rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png")
+            link(rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png")
+            link(rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32")
+            link(rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192")
+            link(rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96")
+            link(rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16")
+            //- <link rel="manifest" href="/manifest.json">
+            meta(name="msapplication-TileColor" content="#c8f2ff")
+            meta(name="msapplication-TileImage" content="/mstile-144x144.png")
+            meta(name="theme-color" content="#69bcd6")
+
+            <meta property="og:title" content="Noveo University - Обучение в Noveo">
+            <meta property="og:description" content="Мы предлагаем различные форматы образовательных программ как для студентов технических факультетов, еще только мечтающих о карьере программиста, так и для разработчиков с небольшим стажем работы.">
+            <meta property="og:image" content="https://university.noveogroup.ru/images/banner.png">
+
+            //- <title>Noveo University - Обучение в Noveo</title>
+            <meta name="description" content="Мы предлагаем различные форматы образовательных программ как для студентов технических факультетов, еще только мечтающих о карьере программиста, так и для разработчиков с небольшим стажем работы.">
+
     body
         include ../blocks/graphics/svg-sprite.pug
 
@@ -32,8 +56,6 @@ html(dir="ltr" lang="en")
                 include ../blocks/common/header.pug
                 .content
                     block content
-                    block aside
-                        include ../blocks/common/aside-nav.pug
                 include ../blocks/common/footer.pug
             block modals
         block scripts
@@ -41,113 +63,6 @@ html(dir="ltr" lang="en")
                 function loadLocal(name) {
                     console.log('Failed to load external! TODO - polyfill', name)
                 }
-            script(src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"  onerror="loadLocal('jquery')")
-            script.
-                function Nav() {
-                    this.$win =  $(window);
-                    this.$htmlBody = $('html, body');
-                    this.$el = $('.aside-nav');
-                    this.mobileBtnSelector = '.aside-nav__btn';
-                    this.$mobileBtn = $(this.mobileBtnSelector);
-                    this.$parent = this.$el.prev();
-                    this.$footer =  $('footer');
-                    this.initialText = this.$mobileBtn.text();
-                    this.closeText = this.$mobileBtn.data('closeText');
-                    this.mobileBreakpoint = 900;
+            script(src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"  onerror="loadLocal('jquery')" defer="")
 
-
-                    this.init = function() {
-                        this.setAttrs();
-                        this.stick();
-                        this.mobile();
-                        this.$win.resize(function(){
-                            this.setAttrs();
-                        }.bind(this));
-                    }
-
-                    this.setAttrs = function() {
-                        this.offsetTop = this.$el.offset().top;
-                        this.height = this.$el.height();
-                        this.parentHeight = this.$parent.height();
-                        this.footerOffset = this.$footer.offset().top;
-                        this.offsetBottom = this.footerOffset - this.height;
-                        this.isMobile = $('body').width() <= this.mobileBreakpoint;
-                    }
-
-                    this.stick = function() {
-                        var lastScrtop = 0;
-                        var scrollDirection = 'down';
-
-                        this.$win.scroll(function () {
-
-                                scrtop = this.$win.scrollTop();
-                                scrollDirection = (scrtop > lastScrtop) ? 'down' : 'up';
-                                lastScrtop = scrtop;
-                                this.styleStick(scrollDirection, scrtop)
-
-                        }.bind(this));
-                    }
-
-                    this.styleStick = function(direction, scrolled) {
-                        //- if (isTouch) return;
-                        if (this.height > this.parentHeight) {
-                            console.log('bigger than prev');
-                            this.$el.removeClass('--sticky');
-                            return;
-                        }
-
-                        var isSticky = this.$el.hasClass('--sticky');
-                        this.$el.addClass('--sticky');
-
-                        setTimeout(function(){
-                            if (!isSticky) this.setAttrs(); /* Height might change after position changes */
-
-                            if (this.offsetTop > scrolled) {
-                                this.$el.removeClass('--fixed');
-                                this.$el.removeClass('--bottom');
-                            } else if (scrolled > this.offsetTop && scrolled < this.offsetBottom) {
-                                if (direction === 'down' && !this.isMobile) {
-                                    this.$el.addClass('--fixed');
-                                    this.$el.addClass('--bottom');
-                                } else {
-                                    this.$el.addClass('--fixed')
-                                    this.$el.removeClass('--bottom');
-                                }
-
-                            } else {
-                                this.$el.removeClass('--fixed');
-                                this.$el.addClass('--bottom');
-                            }
-
-                        }.bind(this), 0);
-                    }
-
-                    this.mobile = function() {
-                        this.$el.on('click', this.mobileBtnSelector, function() {
-                            if (this.$el.hasClass('--hidden-mobile')) {
-                                this.$htmlBody.animate({
-                                        scrollTop: this.offsetTop - 50
-                                }, 300);
-                                this.$mobileBtn.text(this.closeText);
-                                this.$mobileBtn.addClass('--close');
-                            } else {
-                                this.$mobileBtn.text(this.initialText);
-                                this.$mobileBtn.removeClass('--close');
-                            }
-                            this.$el.toggleClass('--hidden-mobile');
-                            setTimeout(function(){
-                                this.$mobileBtn.blur();
-                            }.bind(this), 500);
-                        }.bind(this));
-                    }
-
-                }
-                var isTouch = false;
-                $(document).one('touchstart', function(){
-                    $('html').addClass('is-touch');
-                    isTouch = true;
-                });
-
-                var nav = new Nav();
-                nav.init();
 

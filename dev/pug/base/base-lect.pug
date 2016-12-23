@@ -1,0 +1,7 @@
+extends ./base.pug
+block content
+    block main
+    block aside
+        include ../blocks/common/aside-nav.pug
+block append scripts
+    script(src="./static/js/lectures.js" defer="")
