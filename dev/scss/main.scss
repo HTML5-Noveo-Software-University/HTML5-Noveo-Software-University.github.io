@@ -7,7 +7,9 @@
 
 // @import "2_basic/typo.scss";
 @import "2_basic/layout.scss";
-// @import "2_basic/animation.scss";
+@import "2_basic/animation.scss";
 
 
 @import "3_blocks/aside-nav.scss";
+@import "3_blocks/aside-nav/tech.scss";
+@import "3_blocks/headers.scss";

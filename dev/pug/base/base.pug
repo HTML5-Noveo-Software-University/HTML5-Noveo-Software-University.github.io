@@ -6,7 +6,7 @@ doctype html
 <!--[if IE 9 ]><html dir="ltr" lang="ru" class="ie9"><![endif]-->
 <!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!-->
 html(dir="ltr" lang="en")
-<!--<![endif]-->
+    <!--<![endif]-->
     block layout-settings
         - var pageTitle = 'Courses'
 
@@ -45,24 +45,21 @@ html(dir="ltr" lang="en")
             <meta property="og:description" content="Мы предлагаем различные форматы образовательных программ как для студентов технических факультетов, еще только мечтающих о карьере программиста, так и для разработчиков с небольшим стажем работы.">
             <meta property="og:image" content="https://university.noveogroup.ru/images/banner.png">
 
-            //- <title>Noveo University - Обучение в Noveo</title>
+            //- //- <title>Noveo University - Обучение в Noveo</title>
             <meta name="description" content="Мы предлагаем различные форматы образовательных программ как для студентов технических факультетов, еще только мечтающих о карьере программиста, так и для разработчиков с небольшим стажем работы.">
+        body
+            include ../blocks/graphics/svg-sprite.pug
 
-    body
-        include ../blocks/graphics/svg-sprite.pug
-
-        block body
-            .page
-                include ../blocks/common/header.pug
-                .content
-                    block content
-                include ../blocks/common/footer.pug
-            block modals
-        block scripts
-            script.
-                function loadLocal(name) {
-                    console.log('Failed to load external! TODO - polyfill', name)
-                }
-            script(src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"  onerror="loadLocal('jquery')" defer="")
-
-
+            block body
+                .page
+                    include ../blocks/common/header.pug
+                    .content
+                        block content
+                    include ../blocks/common/footer.pug
+                block modals
+            block scripts
+                script.
+                    function loadLocal(name) {
+                        console.log('Failed to load external! TODO - polyfill', name)
+                    }
+                script(src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"  onerror="loadLocal('jquery')" defer="")
