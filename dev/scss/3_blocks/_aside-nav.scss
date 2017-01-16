@@ -16,16 +16,19 @@
     text-align: right;
     transition: margin .5s;
     width: 100%;
-    &:not(.--hidden-mobile) {
+    .-slides-layout & {
+        display: none !important;
+    }
+    &:not(.-hidden-mobile) {
         position: relative;
     }
-    &.--sticky {
+    &.-sticky {
         margin-left: -100%;
         min-height: 100%;
         position: relative;
         width: 100%;
     }
-    &.--bottom {
+    &.-bottom {
         bottom: auto;
         top: 0;
     }
@@ -61,24 +64,24 @@
         .icon-cancel-circle {
             right: .2rem;
         }
-        .--hidden-mobile & {
+        .-hidden-mobile & {
             display: none;
         }
     }
-    &.--hidden-mobile {
+    &.-hidden-mobile {
         height: $aside-mobile-button-width;
         margin-left: -($aside-width-mobile);
         width: $aside-width-mobile;
-        &.--sticky {
+        &.-sticky {
             margin-left: 0;
             position: absolute;
             right: 0;
             top: 0;
         }
-        &.--fixed {
+        &.-fixed {
             position: fixed;
         }
-        &.--bottom {
+        &.-bottom {
             bottom: 0;
             top: auto;
         }
@@ -86,7 +89,7 @@
 
     &__btn {
         &-wrap {
-            &.--close {
+            &.-close {
                 background: white;
                 display: block;
                 height: 3.2rem;
@@ -95,7 +98,7 @@
                 z-index: 10;
             }
         }
-        .--mobile & {
+        .-mobile & {
             @include btn-reset();
 
             background: white;
@@ -120,7 +123,7 @@
                 box-shadow: 0 0 5px $orange;
             }
         }
-        .--close & {
+        .-close & {
             box-shadow: 0 2px 3px 0 lighten(gray, 36%);
             right: 0rem;
             top: 0rem;
@@ -130,23 +133,26 @@
     &__nav {
         background: white;
         counter-reset: aside-theme;
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
         max-height: 100%;
         padding-top: $aside-width-mobile-small +.2rem;
         position: relative;
         text-align: left;
         width: 100%;
         z-index: 1;
-        .--hidden-mobile & {
+        .-hidden-mobile & {
             height: 0;
             right: -($aside-width * 3);
         }
     }
+
     &__list-item {
         animation: slideIn .5s linear both;
         box-shadow: 3px 2px 5px 0 lighten(gray, 38%);
         counter-increment: aside-theme;
         display: flex;
+        flex: 0 0 auto;
         left: 0;
         margin-bottom: 1.2rem;
         min-height: 5rem;
@@ -154,6 +160,7 @@
         position: relative;
         transform: translateX(0);
         transition: transform .5s;
+
         &-inner {
             padding-right: 1.5rem;
             position: relative;
@@ -170,7 +177,7 @@
                 z-index: 2;
             }
 
-            .--mobile-open & {
+            .-mobile-open & {
                 &::after {
                     border: 5px solid transparent;
                     border-bottom: 5px solid lighten(gray, 28%);
@@ -178,7 +185,7 @@
             }
         }
 
-        &.--slide-out {
+        &.-slide-out {
             animation: slideOut .5s linear both;
             transform: translateX($aside-width-wide*3);
             transition: transform .5s;
@@ -200,7 +207,7 @@
         position: absolute;
         transform: translateY(1000px);
         transition: transform .2s;
-        .--mobile-open & {
+        .-mobile-open & {
             position: relative;
             transform: translateY(0);
             transition: transform .2s;
@@ -210,8 +217,8 @@
         cursor: pointer;
         display: inline-block;
         font-size: 1.2rem;
-        line-height: 1.2em;
         line-height: 1.5;
+        line-height: 1.2em;
         min-height: 3rem;
         padding: .4rem 1rem .4rem 2.2rem;
         position: relative;
@@ -220,14 +227,14 @@
 
             content: counter(aside-theme)".";
         }
-        &.--subtheme {
+        &.-subtheme {
             &::before {
                 @extend %number;
 
                 content: counter(aside-theme)"."counter(aside-subtheme)".";
             }
         }
-        &:not(.--active), &.--subtheme {
+        &:not(.-active), &.-subtheme {
             &:hover {
                 text-decoration: underline;
             }
@@ -238,14 +245,14 @@
 @media screen and (min-width: $layout-wide-phone + 1) {
     .aside-nav {
         &__btn {
-            .--mobile & {
+            .-mobile & {
                 font-size: 1.2rem;
                 margin-right: 0rem;
                 margin-top: .5rem;
                 padding: .5rem;
                 width: $aside-mobile-button-width;
             }
-            .--close & {
+            .-close & {
                 right: 1rem;
             }
         }
@@ -269,12 +276,15 @@
         max-height: none;
         padding-top: 1.5rem;
         width: $aside-width;
-        &.--hidden-mobile {
+        &__btn-wrap.-close {
+            display: none;
+        }
+        &.-hidden-mobile {
             height: auto;
             margin-left: -($aside-width);
             width: $aside-width;
         }
-        &.--sticky.--sticky {
+        &.-sticky.-sticky {
             margin-left: 0;
             min-height: 0;
             position: absolute;
@@ -282,10 +292,10 @@
             top: 0;
             width: $aside-width;
         }
-        &.--fixed.--fixed {
+        &.-fixed.-fixed {
             position: fixed;
         }
-        &.--bottom.--bottom {
+        &.-bottom.-bottom {
             bottom: 0;
             top: auto;
         }
@@ -295,19 +305,19 @@
             position: absolute;
             right: 1rem;
             top: 0;;
-            .--hidden-mobile & {
+            .-hidden-mobile & {
                 display: inline-block;
             }
         }
         &__btn {
-            .--mobile & {
+            .-mobile & {
                 display: none;
             }
         }
         &__nav {
             height: auto;
             padding-top: 1rem;
-            .--hidden-mobile & {
+            .-hidden-mobile & {
                 height: auto;
                 overflow-x: hidden;
                 overflow-y: auto;
@@ -315,7 +325,7 @@
             }
         }
         &__list-item {
-            &:not(.--active) {
+            &:not(.-active) {
                 &::after {
                     background: linear-gradient(to right, rgba(white, .01) 0%, white 25%);
                     bottom: 0;
@@ -347,15 +357,15 @@
         background-clip: padding-box;
         margin-left: -($aside-width-wide);
         width: $aside-width-wide;
-        &.--hidden-mobile {
+        &.-hidden-mobile {
             margin-left: -($aside-width-wide);
             width: $aside-width-wide;
         }
-        &.--sticky.--sticky {
+        &.-sticky.-sticky {
             margin-left: -($aside-width-wide);
             width: $aside-width-wide;
         }
-        &.--fixed {
+        &.-fixed {
             border-right: 1px solid transparent;
         }
     }

@@ -5,11 +5,13 @@
 @import "0_helpers/mixins/grid.scss";
 @import "0_helpers/mixins/components.scss";
 
-// @import "2_basic/typo.scss";
+@import "2_basic/typo.scss";
 @import "2_basic/layout.scss";
 @import "2_basic/animation.scss";
 
-
+@import "3_blocks/footer.scss";
+@import "3_blocks/header.scss";
 @import "3_blocks/aside-nav.scss";
 @import "3_blocks/aside-nav/tech.scss";
-@import "3_blocks/headers.scss";
+@import "3_blocks/hs.scss";
+@import "3_blocks/view-switcher.scss";

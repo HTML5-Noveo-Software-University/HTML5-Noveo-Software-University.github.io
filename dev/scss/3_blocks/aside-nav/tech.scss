@@ -5,12 +5,12 @@
         flex-direction: column;
         width: .3rem;
 
-        &.--horizontal {
+        &.-horizontal {
             flex-direction: row;
             margin-top: -1.2rem;
             position: relative;
             width: 100%;
-            .--mobile & {
+            .-mobile & {
                 bottom: 0;
                 left: 0;
                 position: absolute;
@@ -18,7 +18,7 @@
         }
     }
     &__all-tech {
-        min-height: 8rem;
+        min-height: 9rem;
         padding-left: 1.2rem;
         position: relative;
     }
@@ -30,7 +30,7 @@
         &:nth-child(n+5) {
             display: none;
         }
-        .--horizontal & {
+        .-horizontal & {
             height: .5rem;
             max-width: 4.8rem;
             min-width: 2rem;
@@ -59,12 +59,12 @@
                 right: .3rem;
                 top: 0;
                 z-index: -1;
-                .--horizontal & {
+                .-horizontal & {
                     box-shadow: 2px 0 4px 0 lighten(gray, 36%);
                     left: 1rem;
                     right: 0;
                 }
-                .--mobile & {
+                .-mobile & {
                     box-shadow: none;
                 }
             }
@@ -72,7 +72,7 @@
                 padding: .2rem 2rem .1rem .5rem;
                 z-index: 1;
             }
-            .--horizontal & {
+            .-horizontal & {
                 display: inline-block;
                 left: 1px;
                 right: auto;
@@ -86,7 +86,7 @@
                 &:hover {
                     padding: .1rem 2rem .1rem .5rem;
                 }
-                .--mobile & {
+                .-mobile & {
                     top: 2px;
                     transform: rotate(90deg) translate(-100%, -100%);
                     transform-origin: top left;
@@ -96,46 +96,46 @@
     }
 }
 
-.--css {
+.-css {
     background: lighten($dark-blue, 10%);
 }
 
-.--html {
+.-html {
     background: $orange2;
 }
 
-.--sass {
+.-sass {
     background: $pink;
 }
 
-.--pug {
+.-pug {
     background: $green;
 }
 
-.--responsive {
+.-responsive {
     background: $red;
 }
 
-.--graphics {
+.-graphics {
     background: $violet;
 }
-.--tools {
+.-tools {
     background: $blue;
 }
-.--optimization {
+.-optimization {
     background: darken($turq, 10%);
 }
-.--js {
+.-js {
     background: darken($yellow, 4%);
 }
-.--tips {
+.-tips {
     background: $turq;
 }
 
 @media screen and (min-width: ($aside-width + 7.5rem)) {
     .aside-nav {
         &__all-tech {
-            &.--mobile {
+            &.-mobile {
                 display: none;
             }
         }

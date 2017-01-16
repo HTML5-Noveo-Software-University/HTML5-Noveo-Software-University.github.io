@@ -1,213 +1,223 @@
 - var technologies = ['html', 'css', 'sass', 'pug', 'responsive', 'optimization', 'tools', 'js', 'tips']
+
+include themes/git.pug
+include themes/graphic-editors.pug
+include themes/html-basics.pug
+include themes/css-basics.pug
+
 -
-    var data = [{
-        page: 'lecture-git',
-        href: 'lecture-git',
-        title: 'Git',
-        tech: ['tools'],
-        subthemes: [{
-            title: 'SubT1',
-            href: '#ff1'
-        }, {
-            title: 'SubT2',
-            href: '#ff2'
-        }]
-    }, {
-        page: 'lect2',
-        href: '',
-        title: 'Работа с макетом. Графические редакторы',
-        tech: ['tools'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
-    }, {
-        page: 'lect3',
-        href: '',
-        title: 'Основы HTML',
-        tech: ['html'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
-    }, {
-        page: 'lect4',
-        href: '',
-        title: 'Основы CSS. CSS-именования (БЭМ) vs CSS-фреймворки',
-        tech: ['css'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
-    }, {
+    var data = [
+        git,
+        graphicEditors,
+        htmlBasics,
+        cssBasics,
+    {
         page: 'lect5',
         href: '',
         title: 'Текст. Семантика, стилизация. Типографика!',
         tech: ['html', 'css'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect6',
         href: '',
         title: 'Ссылки, списки, меню',
         tech: ['html', 'css'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect7',
         href: '',
         title: 'Layout - часть 1. Боксовая модель, display, позиционирование, z-index и приколы',
         tech: ['html', 'css'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect8',
         href: '',
         title: 'Layout - часть 2. Центрирование & липкий футер (sticky footer)',
         tech: ['html', 'css'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect9',
         href: '',
         title: 'Layout - часть 3. Responsive словарь, типы layout\'ов и сетки (Флексы здесь!). Медизапросы и брейк-поинты',
         tech: ['html', 'css', 'responsive'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect10',
         href: '',
         title: 'Работа с графикой - часть 1. Растр vs вектор. Иконки и контентные изображения',
         tech: ['graphics', 'css', 'html'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect11',
         href: '',
         title: 'Работа с графикой - часть 2. Фоновые изображения. Responsive - изображения',
         tech: ['responsive', 'graphics', 'optimization'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect12',
         href: '',
         title: 'CSS3 плюшки - часть 1. Рамки, тени, градиенты',
         tech: ['css'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect13',
         href: '',
         title: 'CSS3 плюшки - часть 2. Трансформации',
         tech: ['css'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
      }, {
         page: 'lect14',
         href: '',
         title: 'CSS3 плюшки - часть 3. Анимации и эффекты',
         tech: ['css'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect15',
         href: '',
         title: 'Стилизация таблиц. Responsive таблицы',
         tech: ['html', 'css', 'responsive'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect16',
         href: '',
         title: 'Формы - часть 1. Обзор современных возможностей и ограничений, ',
         tech: ['html'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect17',
         href: '',
         title: 'Формы - часть 1. Стилизация форм. Использование сторонних библиотек',
         tech: ['css', 'responsive', 'js'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect18',
         href: '',
         title: 'Шаблонизаторы и препроцессоры. Jade и Scss',
         tech: ['pug', 'sass'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect19',
         href: '',
         title: 'Web automation tools - часть 1. Возможности Chrome: developer tools, remote debugging',
         tech: ['tools'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect20',
         href: '',
         title: 'Web automation tools - часть 2. Сборка проекта: пакетные менеджеры и билдеры',
         tech: ['tools', 'pug', 'sass'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect21',
         href: '',
         title: 'Порядок в проекте: с чего начать и как поддерживать',
         tech: ['tools', 'tips'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect22',
         href: '',
         title: 'CSS фреймворки',
         tech: ['css', 'responsive', 'js'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }, {
         page: 'lect23',
         href: '',
         title: 'Полезные ресурсы',
         tech: ['tips'],
-        subthemes: [{
-            title: '',
-            href: ''
-        }]
+        subthemes: {
+            theme: {
+              title: '',
+              href: ''
+            }
+        }
     }]

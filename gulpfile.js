@@ -79,6 +79,7 @@ gulp.task('serve', () => {
     gulp.watch(paths.jsPartials, ['js']);
 
     browserSync.init({
+        notify: false,
         server: {
             baseDir: "./"
         }

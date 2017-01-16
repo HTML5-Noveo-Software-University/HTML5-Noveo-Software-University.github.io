@@ -1,37 +1,37 @@
-include lectures-list.pug
+include ../../lectures/lectures-list.pug
 
-aside.aside-nav.--hidden-mobile
+aside.aside-nav.-hidden-mobile
     .aside-nav__filtered-by
-    .aside-nav__btn-wrap.--mobile
+    .aside-nav__btn-wrap.-mobile
         button.aside-nav__btn(type="button" data-close-text="Убрать темы") Показать темы
     nav.aside-nav__nav
         ul
-            li.aside-nav__all-tech.--mobile
-                span.aside-nav__tech-wrap.--horizontal
+            li.aside-nav__all-tech.-mobile
+                span.aside-nav__tech-wrap.-horizontal
                     each tech in technologies
-                        span(data-tech=tech class="aside-nav__tech --" + tech)
+                        span(data-tech=tech class="aside-nav__tech -" + tech)
                             span.aside-nav__tech-text=tech
             each val in data
-                li.aside-nav__list-item(class=(currentPage === val.page) ? '--active --mobile-open':'')
+                li.aside-nav__list-item(class=(currentPage === val.page) ? '-active -mobile-open':'')
                     span.aside-nav__tech-wrap
                         each tech in val.tech
-                            span(data-tech=tech class="aside-nav__tech --" + tech)
+                            span(data-tech=tech class="aside-nav__tech -" + tech)
                                 span.aside-nav__tech-text=tech
 
                     .aside-nav__list-item-inner
                       if currentPage === val.page
-                        span.aside-nav__title.--active= val.title
+                        span.aside-nav__title.-active= val.title
                       else
                         span.aside-nav__title
                           a(href=val.href)= val.title
-                      if val.subthemes[0].title
-                          ul.aside-nav__sublist
-                              each subtheme in val.subthemes
-                                  li.aside-nav__subitem
-                                      span.aside-nav__title.--subtheme
-                                        a(href=subtheme.href)= subtheme.title
+
+                      ul.aside-nav__sublist
+                          each subtheme in val.subthemes
+                              li.aside-nav__subitem
+                                  span.aside-nav__title.-subtheme
+                                    a(href=subtheme.href)= subtheme.title
             li.aside-nav__all-tech
-                span.aside-nav__tech-wrap.--horizontal
+                span.aside-nav__tech-wrap.-horizontal
                     each tech in technologies
-                        span(data-tech=tech class="aside-nav__tech --" + tech)
+                        span(data-tech=tech class="aside-nav__tech -" + tech)
                             span.aside-nav__tech-text=tech

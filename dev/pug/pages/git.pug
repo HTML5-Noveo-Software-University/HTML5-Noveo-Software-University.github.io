@@ -1,11 +1,10 @@
 extends ../base/base-lect.pug
 
 block layout-settings
-    include ../blocks/common/lectures-list.pug
+    include ../lectures/themes/git.pug
     - var pageTitle = 'Git';
     - var pageType = 'lecture'
-    - var currentPage = 'lecture-git';
-
+    - var currentPage = 'git';
 block main
     main.main
         h1.h1= pageTitle

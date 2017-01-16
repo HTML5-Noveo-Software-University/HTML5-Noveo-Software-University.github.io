@@ -1,0 +1,18 @@
+extends ../base/base-lect.pug
+
+block layout-settings
+    include ../lectures/themes/html-basics.pug
+    - var conf = htmlBasics;
+    - var pageTitle = conf.title;
+    - var pageType = 'lecture'
+    - var currentPage = conf.page;
+    - var subthemes = conf.subthemes;
+
+block main
+    main.main
+        .slide
+            h1.h1.theme-h= pageTitle
+            h2= subthemes
+        .slide
+            h1.h1.theme-h= pageTitle
+            h2= subthemes

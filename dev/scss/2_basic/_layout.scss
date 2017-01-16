@@ -1,12 +1,18 @@
 html {
     background: darken(white, 1%);
     height: 100%;
+    &.-slides-layout {
+        background: $white;
+    }
 }
 
 body {
     height: 100%;
     margin: auto;
     max-width: $layout-max;
+    .-slides-layout & {
+        max-width: 100%;
+    }
 }
 
 .page {
@@ -15,6 +21,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    .-slides-layout & {
+        box-shadow: none;
+    }
 }
 
 .content {
@@ -26,6 +35,9 @@ body {
     overflow: hidden;
     position: relative;
     width: 100%;
+    .-slides-layout & {
+        overflow: visible;
+    }
 }
 
 .main {
@@ -37,16 +49,21 @@ body {
         min-height: 2800px;
         padding-right: 4rem;
         width: 100%;
+        .-slides-layout & {
+            border-right: none;
+            display: flex;
+            flex-direction: row;
+            padding: 1rem;
+            .slide {
+                flex: 1 0 100vw;
+                width: 100vw;
+            }
+        }
     }
 }
 
-footer {
-    min-height: 1200px;
-}
 
-header {
-    padding: 10px;
-}
+
 .logo {
     max-width: 240px;
 }
@@ -78,14 +95,14 @@ header {
 
 @media screen and (max-width: $layout-middle) {
     footer, header {
-        .--show-aside & {
+        .-show-aside & {
             display: none;
         }
     }
 
     .main {
         &:not(:only-child) {
-            .--show-aside & {
+            .-show-aside & {
                 height: 0;
                 min-height: 0;
                 opacity: 0;
