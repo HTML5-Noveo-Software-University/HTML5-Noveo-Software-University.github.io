@@ -43,4 +43,3 @@ $ npm run dev
 
 Please, do it.
 If there is an issue with build system, do not forget to mention your OS, Node and npm versions.
-

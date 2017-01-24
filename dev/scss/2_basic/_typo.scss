@@ -1,0 +1,13 @@
+html {
+    color: $black;
+    font-family: Open Sans, Arial, sans-cerif;
+    font-size: 100%;
+    line-height: 1.5;
+    * {
+        color: inherit;
+        line-height: inherit;
+    }
+    &.-slides-layout {
+        font-size: 1.8vh;
+    }
+}
