@@ -8,6 +8,8 @@ const Comb = require('csscomb');
 const sourcemaps = require('gulp-sourcemaps');
 const csso = require('gulp-csso');
 const combineMq = require('gulp-combine-mq');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
 
 const paths = {
     pugPages: './dev/pug/pages/*.pug',
@@ -20,7 +22,9 @@ const paths = {
     scssPartials: './dev/scss/**/*.scss',
     css: './static/css/',
 
-    jsPartials: './dev/js/*.js',
+    jsPartials: ['./dev/js/slides.js',
+                 './dev/js/themes.js',
+                 './dev/js/lectures.js'],
     js: './static/js/'
 };
 
@@ -69,6 +73,8 @@ gulp.task('css', () => {
 
 gulp.task('js', () => {
     gulp.src(paths.jsPartials)
+    .pipe(concat('lectures.js'))
+    // .pipe(uglify())
     .pipe(gulp.dest(paths.js));
 });
 

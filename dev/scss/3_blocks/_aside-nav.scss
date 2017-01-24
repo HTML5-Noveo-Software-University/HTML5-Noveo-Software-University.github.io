@@ -6,6 +6,7 @@
     position: absolute;
     right: 100%;
 }
+
 .aside-nav {
     background: rgba(white, .9);
     box-sizing: content-box;
@@ -14,8 +15,14 @@
     margin-left: -100%;
     max-height: 100%;
     text-align: right;
-    transition: margin .5s;
     width: 100%;
+    &__h {
+        @extend .h2;
+
+        display: none;
+        font-size: 1.8rem;
+        margin: 0 0 2rem;
+    }
     .-slides-layout & {
         display: none !important;
     }
@@ -88,6 +95,7 @@
     }
 
     &__btn {
+        cursor: pointer;
         &-wrap {
             &.-close {
                 background: white;
@@ -112,10 +120,9 @@
             padding: .4rem;
             position: absolute;
             right: -($aside-mobile-button-width) + 1rem;
-            top: 0;
+            top: 1.5rem;
             transform: rotate(90deg);
             transform-origin: top left;
-            transition: all .5s;
             width: $aside-mobile-button-width - 1rem;
             z-index: 2;
             &:focus {
@@ -139,11 +146,12 @@
         padding-top: $aside-width-mobile-small +.2rem;
         position: relative;
         text-align: left;
+        transition: transform .2s;
         width: 100%;
         z-index: 1;
         .-hidden-mobile & {
             height: 0;
-            right: -($aside-width * 3);
+            transform: translateX($aside-width * 3);
         }
     }
 
@@ -159,7 +167,7 @@
         opacity: 1;
         position: relative;
         transform: translateX(0);
-        transition: transform .5s;
+        transition: transform .3s;
 
         &-inner {
             padding-right: 1.5rem;
@@ -216,9 +224,9 @@
     &__title {
         cursor: pointer;
         display: inline-block;
-        font-size: 1.2rem;
-        line-height: 1.5;
+        font-size: 1rem;
         line-height: 1.2em;
+        line-height: 1.5;
         min-height: 3rem;
         padding: .4rem 1rem .4rem 2.2rem;
         position: relative;
@@ -276,6 +284,9 @@
         max-height: none;
         padding-top: 1.5rem;
         width: $aside-width;
+        &__h {
+            display: block;
+        }
         &__btn-wrap.-close {
             display: none;
         }
@@ -322,6 +333,7 @@
                 overflow-x: hidden;
                 overflow-y: auto;
                 position: static;
+                transform: translateX(0);
             }
         }
         &__list-item {

@@ -1,0 +1,17 @@
+extends ../base/base-lect.pug
+
+block layout-settings
+    include ../lectures/themes/text-semantics-style.pug
+    - var conf = textSemanticsStyle;
+    - var pageTitle = conf.title;
+    - var pageType = 'lecture'
+    - var currentPage = conf.page;
+    - var subthemes = conf.subthemes;
+    -
+      var listToRead = []
+block main
+    include ../base/mixins/mixin-slides.pug
+    main.main
+        .slides-wrap
+            +main-slide(pageTitle, 'Имя автора лекции')
+        .slide

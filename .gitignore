@@ -1,3 +1,5 @@
 node_modules/
 *.html
+# Keep this ignored. We don't need example hosted on github pages
+example.html
 static/css/

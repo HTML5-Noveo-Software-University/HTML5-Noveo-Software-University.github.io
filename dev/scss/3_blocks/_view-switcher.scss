@@ -10,6 +10,10 @@
     user-select: none;
     white-space: nowrap;
     z-index: 5;
+    .-slides-layout & {
+        text-align: center;
+        top: .5rem;
+    }
     &__icon {
         background: lighten(gray, 30%);
         border-radius: .3em;
@@ -22,6 +26,7 @@
         width: 2em;
         .-slides-layout & {
             background: lighten(desaturate($green, 30%), 30%);
+            height: .7em;
         }
         &:before {
             background: lighten(gray, 10%);
@@ -40,6 +45,12 @@
             }
         }
     }
+    &__text {
+        .-slides-layout & {
+            display: block;
+            font-size: .9rem;
+        }
+    }
 }
 
 @media screen and (min-width: $layout-middle +1) {
@@ -53,5 +64,9 @@
         left: 50%;
         margin-left: $layout-max/2 - 16;
         transform: translateX(-100%);
+        .-slides-layout & {
+            left: 100%;
+            margin-left: -.9em;
+        }
     }
 }

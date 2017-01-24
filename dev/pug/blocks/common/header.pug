@@ -1,8 +1,6 @@
 header
-    .view-switcher
-      span.view-switcher__icon
-      span.view-switcher__text Режим слайдов
-    h1.header-logo-wrap
-        .header-logo-wrap__logo
-            img(src="./static/images/logo.svg" alt="Noveo Software University")
-        .header-logo-wrap__html5 HTML5
+    block header
+        h1.header-logo-wrap
+            a(href="/").header-logo-wrap__logo
+                img(src="./static/images/logo.svg" alt="Noveo Software University")
+            .header-logo-wrap__html5 HTML5

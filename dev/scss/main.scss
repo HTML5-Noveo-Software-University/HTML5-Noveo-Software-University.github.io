@@ -4,14 +4,22 @@
 
 @import "0_helpers/mixins/grid.scss";
 @import "0_helpers/mixins/components.scss";
+@import "0_helpers/placeholders/common-components.scss";
 
 @import "2_basic/typo.scss";
 @import "2_basic/layout.scss";
 @import "2_basic/animation.scss";
+@import "2_basic/syntax-highlighter.scss";
 
+@import "3_blocks/hs.scss";
+@import "3_blocks/lists.scss";
 @import "3_blocks/footer.scss";
 @import "3_blocks/header.scss";
 @import "3_blocks/aside-nav.scss";
 @import "3_blocks/aside-nav/tech.scss";
-@import "3_blocks/hs.scss";
+@import "3_blocks/common-blocks.scss";
 @import "3_blocks/view-switcher.scss";
+@import "3_blocks/slides-switcher.scss";
+@import "3_blocks/slides-layout.scss";
+@import "3_blocks/strike-block.scss";
+@import "3_blocks/gif.scss";

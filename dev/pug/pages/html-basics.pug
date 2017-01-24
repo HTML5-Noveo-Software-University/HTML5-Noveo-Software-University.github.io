@@ -7,12 +7,11 @@ block layout-settings
     - var pageType = 'lecture'
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
-
+    -
+      var listToRead = []
 block main
+    include ../base/mixins/mixin-slides.pug
     main.main
+        .slides-wrap
+            +main-slide(pageTitle, 'Имя автора лекции')
         .slide
-            h1.h1.theme-h= pageTitle
-            h2= subthemes
-        .slide
-            h1.h1.theme-h= pageTitle
-            h2= subthemes

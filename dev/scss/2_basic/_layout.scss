@@ -3,6 +3,7 @@ html {
     height: 100%;
     &.-slides-layout {
         background: $white;
+        overflow: hidden;
     }
 }
 
@@ -35,9 +36,6 @@ body {
     overflow: hidden;
     position: relative;
     width: 100%;
-    .-slides-layout & {
-        overflow: visible;
-    }
 }
 
 .main {
@@ -46,23 +44,17 @@ body {
         background-clip: padding-box;
         border-right: ($aside-width-mobile-small) solid transparent;
         flex: 1 0 auto;
-        min-height: 2800px;
-        padding-right: 4rem;
+        /*min-height: 2800px;*/
+        padding-right: 1rem;
         width: 100%;
         .-slides-layout & {
             border-right: none;
-            display: flex;
-            flex-direction: row;
-            padding: 1rem;
-            .slide {
-                flex: 1 0 100vw;
-                width: 100vw;
-            }
+            height: 100vh;
+            overflow: hidden;
+            padding: 0;
         }
     }
 }
-
-
 
 .logo {
     max-width: 240px;
@@ -91,6 +83,10 @@ body {
     stroke: currentColor;
     stroke-width: 0;
     width: 1em;
+}
+
+.section {
+    margin: 2rem 0;
 }
 
 @media screen and (max-width: $layout-middle) {
@@ -124,6 +120,7 @@ body {
     .main {
         &:not(:only-child) {
             border-right: ($aside-width + $basic-gap) solid transparent;
+            padding-top: 2rem;
         }
     }
 }

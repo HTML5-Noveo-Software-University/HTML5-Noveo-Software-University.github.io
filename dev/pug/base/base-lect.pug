@@ -1,7 +1,13 @@
 extends ./base.pug
-block content
-    block main
-    block aside
-        include ../blocks/common/aside-nav.pug
+block body
+    .page
+        include ../blocks/common/header-lectures.pug
+        .content
+            block content
+                block main
+                block aside
+                    include ../blocks/common/aside-nav.pug
+                include ../blocks/common/slides-switcher.pug
+        include ../blocks/common/footer.pug
+    block modals
 block append scripts
-    script(src="./static/js/lectures.js" defer="")

@@ -5,7 +5,9 @@ aside.aside-nav.-hidden-mobile
     .aside-nav__btn-wrap.-mobile
         button.aside-nav__btn(type="button" data-close-text="Убрать темы") Показать темы
     nav.aside-nav__nav
-        ul
+        if pageType !== 'lecture'
+            h2.aside-nav__h Темы
+        ol
             li.aside-nav__all-tech.-mobile
                 span.aside-nav__tech-wrap.-horizontal
                     each tech in technologies
@@ -19,17 +21,15 @@ aside.aside-nav.-hidden-mobile
                                 span.aside-nav__tech-text=tech
 
                     .aside-nav__list-item-inner
-                      if currentPage === val.page
-                        span.aside-nav__title.-active= val.title
-                      else
-                        span.aside-nav__title
-                          a(href=val.href)= val.title
-
-                      ul.aside-nav__sublist
-                          each subtheme in val.subthemes
-                              li.aside-nav__subitem
-                                  span.aside-nav__title.-subtheme
-                                    a(href=subtheme.href)= subtheme.title
+                        if currentPage === val.page
+                            span.aside-nav__title.-active= val.title
+                        else
+                            a.aside-nav__title(href=val.href)= val.title
+                        ol.aside-nav__sublist
+                            each subtheme in val.subthemes
+                                li.aside-nav__subitem
+                                    span.aside-nav__title.-subtheme
+                                        a(href=(currentPage === val.page) ? '#' + subtheme.href : val.href + '#' + subtheme.href)= subtheme.title
             li.aside-nav__all-tech
                 span.aside-nav__tech-wrap.-horizontal
                     each tech in technologies

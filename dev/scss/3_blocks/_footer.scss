@@ -8,4 +8,7 @@
         margin-right: 2rem;
         text-decoration: underline;
     }
+    .-slides-layout & {
+        display: none;
+    }
 }

@@ -2,9 +2,16 @@ extends ../base/base-lect.pug
 
 block layout-settings
     include ../lectures/themes/git.pug
-    - var pageTitle = 'Git';
+    - var conf = git;
+    - var pageTitle = conf.title;
     - var pageType = 'lecture'
-    - var currentPage = 'git';
+    - var currentPage = conf.page;
+    - var subthemes = conf.subthemes;
+    -
+      var listToRead = []
 block main
+    include ../base/mixins/mixin-slides.pug
     main.main
-        h1.h1= pageTitle
+        .slides-wrap
+            +main-slide(pageTitle, 'Имя автора лекции')
+        .slide
