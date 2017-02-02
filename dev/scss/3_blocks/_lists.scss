@@ -70,6 +70,7 @@
     &.-mdn, &.-can-i-use, &.-github {
         top: .2rem;
     }
+
     &.-youtube {
         top: .1rem;
     }
@@ -96,6 +97,27 @@
             max-width: 1.7em;
             width: 1.7em;
         }
+    }
+    &.learn-js {
+        left: -.2rem;
+        top: .2rem;
+        img {
+            max-width: 1.7em;
+            width: 1.7em;
+        }
+    }
+    &.google-dev {
+        left: .1rem;
+        margin-right: .7rem;
+        top: .2rem;
+        img {
+            max-width: 1.4em;
+            width: 1.4em;
+        }
+    }
+    &.apple-dev {
+        margin-right: .5rem;
+        top: .05rem;
     }
 }
 

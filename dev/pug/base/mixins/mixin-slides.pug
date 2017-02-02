@@ -68,35 +68,51 @@ mixin link-to-source(sorceList, number)
             sup.link-to-source__sup= number
 
 mixin external-logo(link)
-    - var isMDN = link.indexOf('developer.mozilla.org')
-    - var isUdacity = link.indexOf('udacity.com')
-    - var isCSSTricks = link.indexOf('css-tricks.com')
-    - var isCanIUse = link.indexOf('caniuse.com')
-    - var isGithub = link.indexOf('github.com')
-    - var isYoutube = link.indexOf('youtube.com')
-    - var isW3 = link.indexOf('w3.org')
-    if isMDN !== -1
+    - var isMDN = link.indexOf('developer.mozilla.org') !== -1
+    - var isUdacity = link.indexOf('udacity.com') !== -1
+    - var isCSSTricks = link.indexOf('css-tricks.com') !== -1
+    - var isCanIUse = link.indexOf('caniuse.com') !== -1
+    - var isGithub = link.indexOf('github.com') !== -1
+    - var isYoutube = link.indexOf('youtube.com') !== -1
+    - var isW3 = link.indexOf('w3.org') !== -1
+    - var isLearnJs = link.indexOf('learn.javascript.ru') !== -1
+    - var isGoogleDevelopers = link.indexOf('developers.google.com') !== -1
+    - var isDeveloperChrome = link.indexOf('developer.chrome.com') !== -1
+    - var isAppleDevelopers = link.indexOf('developer.apple.com') !== -1
+
+    if isMDN
         .source-logo.-mdn
             img(src="/static/images/logos/mdn.svg" alt="Mozilla Developers Network")
-    else if isUdacity !== -1
+    else if isUdacity
         .source-logo.-udacity
             img(src="/static/images/logos/udacity.svg" alt="Udacity")
-    else if isCSSTricks !== -1
+    else if isCSSTricks
         .source-logo.-css-tricks
             img(src="/static/images/logos/css-tricks.svg" alt="CSS Tricks")
-    else if isCanIUse !== -1
+    else if isCanIUse
         .source-logo.-can-i-use
             img(src="/static/images/logos/caniuse.png" alt="Can I use")
-    else if isGithub !== -1
+    else if isGithub
         .source-logo.-github
             img(src="/static/images/logos/github.svg" alt="Github")
-    else if isYoutube !== -1
+    else if isYoutube
         .source-logo.-youtube
             img(src="/static/images/logos/youtube.svg" alt="Youtube")
-    else if isW3 !== -1
+    else if isW3
         .source-logo.-w3c
             img(src="/static/images/logos/w3c.svg" alt="W3C")
-
+    else if isLearnJs
+        .source-logo.learn-js
+            img(src="/static/images/logos/learnjsru.svg" alt="Learn.JavaScript.ru")
+    else if isGoogleDevelopers
+        .source-logo.google-dev
+            img(src="/static/images/logos/google-developers.svg" alt="Google Developers")
+    else if isAppleDevelopers
+        .source-logo.apple-dev
+            img(src="/static/images/logos/apple.svg" alt="Apple Developer")
+    else if isDeveloperChrome
+        .source-logo.chrome-dev
+            img(src="/static/images/logos/chrome.svg" alt="Chrome")
 mixin toRead(header, data)
     section.section
         if header.length
