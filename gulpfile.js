@@ -13,7 +13,7 @@ const uglify = require('gulp-uglify');
 
 const paths = {
     pugPages: './dev/pug/pages/*.pug',
-    pugPartials: './dev/pug/**/*.pug',
+    pugPartials: ['./dev/pug/**/*.pug', '!./dev/pug/pages/*.pug'],
     html: './',
 
     scss: './dev/scss',
@@ -30,15 +30,22 @@ const paths = {
 
 gulp.task('html', () => {
     gulp.src(paths.pugPages)
+    .pipe(pug({pretty: false}))
+    .pipe(gulp.dest(paths.html));
+});
+gulp.task('html-watch', () => {
+    gulp.src(paths.pugPages)
     .pipe(changed(paths.html, {extension: '.html'}))
     .pipe(pug({pretty: false}))
-    .pipe(gulp.dest(paths.html));
+    .pipe(gulp.dest(paths.html))
+    .pipe(browserSync.reload({stream: true}));
+});
 
-  gulp.src(paths.pugPages)
-    .pipe(changed(paths.pugPartials, {extension: '.pug'}))
+gulp.task('html-partials-watch', () => {
+    gulp.src(paths.pugPages)
     .pipe(pug({pretty: false}))
-    .pipe(gulp.dest(paths.html));
-
+    .pipe(gulp.dest(paths.html))
+    .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('csscomb', () => {
@@ -78,11 +85,18 @@ gulp.task('js', () => {
     .pipe(gulp.dest(paths.js));
 });
 
+
+gulp.task('bs-reload-js', ['js'], function (done) {
+    browserSync.reload();
+    done();
+});
+
+
 gulp.task('serve', () => {
     gulp.watch(paths.scssPartials, ['css-dev']);
-    gulp.watch(paths.pugPages, ['html']);
-    gulp.watch(paths.pugPartials, ['html']);
-    gulp.watch(paths.jsPartials, ['js']);
+    gulp.watch(paths.pugPages, ['html-watch']);
+    gulp.watch(paths.pugPartials, ['html-partials-watch']);
+    gulp.watch(paths.jsPartials, ['bs-reload-js']);
 
     browserSync.init({
         notify: false,
@@ -91,9 +105,11 @@ gulp.task('serve', () => {
         }
     });
 
-    gulp.watch(`${paths.html}*.html`).on('change', browserSync.reload);
-    gulp.watch('dev/js/**/*.js').on('change', browserSync.reload);
+   //  gulp.watch(`${paths.html}*.html`).on('change', function(file) {
+   //      browserSync.reload(file);
+   // });
 });
+
 
 gulp.task('default', ['html', 'js', 'css-dev', 'serve']);
 gulp.task('deploy', ['html', 'js', 'css']);

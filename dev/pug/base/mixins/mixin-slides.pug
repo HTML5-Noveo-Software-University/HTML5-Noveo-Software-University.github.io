@@ -1,3 +1,6 @@
+mixin space()
+    | &#x20;
+
 mixin icon(iconName)
     svg(class=iconName + ' icon')
         use(xlink:href="#"+iconName)
@@ -168,26 +171,35 @@ mixin remember()
         block
 
 mixin strike(text)
+    +space()
     s.strike= text
+    +space()
 
 mixin bold-no-sematics(text)
+    +space()
     span.-bold= text
-
+    +space()
 mixin bold-sematics-super-important(text)
+    +space()
     strong.-bold= text
-
+    +space()
 mixin bold-sematics-attention(text)
+    +space()
     strong.-bold= text
+    +space()
 
 mixin italic-no-sematics(text)
+    +space()
     span.-italic= text
-
+    +space()
 mixin italic-sematics-important(text)
+    +space()
     em.-italic= text
-
+    +space()
 mixin italic-sematics-intonation(text)
+    +space()
     i.-italic= text
-
+    +space()
 mixin blockquote(autor, sorceList, number)
     - var source = sorceList[number-1]
 
@@ -206,3 +218,29 @@ mixin gif(filename)
     .gif
         button(type="button" data-gif-source=path title="GIF").gif__btn
         .gif__image
+
+mixin figure(title, lecture, name, sourceList, number)
+    - var imgSource = "static/images/pages/" + lecture + "/" + name
+    figure.figure
+        img(src=imgSource alt=title)
+        figcaption.figure__caption= title
+            if sourceList && sourceList[number-1]
+                |&#x20;
+                +link-to-source(sourceList, number)
+
+
+
+mixin line(number)
+    span.line
+        | line
+        +space()
+        = number
+        +space()
+        | –
+        +space()
+mixin inline-html()
+    +space()
+    span.-bold
+        +escape()
+            block
+    +space()

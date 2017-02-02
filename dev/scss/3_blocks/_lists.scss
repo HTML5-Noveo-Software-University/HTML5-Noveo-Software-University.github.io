@@ -1,6 +1,9 @@
 .list {
-    padding-left: 1rem;
-
+    font-size: 1rem;
+    padding-left: .5rem;
+    .-slides-layout & {
+        font-size: 1.2rem;
+    }
     &.-ordered {
         counter-reset: simple-ol;
     }
@@ -10,15 +13,6 @@
 
         .-ordered & {
             counter-increment: simple-ol;
-            &:before {
-                color: $turq;
-                content: counter(simple-ol) ". ";
-            }
-        }
-        .-ordered-gray & {
-            &:before {
-                color: gray;
-            }
         }
         .-unordered & {
             padding-left: 1.2rem;
@@ -47,6 +41,21 @@
         }
         .icon {
             margin-left: .5em;
+        }
+        &:hover, .list__item:target & {
+            background: darken(white, 5%);
+        }
+        .-ordered & {
+            &:before {
+                color: $turq;
+                content: counter(simple-ol) ". ";
+                margin: 0 .5em 0 0;
+            }
+        }
+        .-ordered-gray & {
+            &:before {
+                color: gray;
+            }
         }
     }
 }
