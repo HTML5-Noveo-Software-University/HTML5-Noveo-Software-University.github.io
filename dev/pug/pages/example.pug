@@ -1,0 +1,184 @@
+extends ../base/base-lect.pug
+
+block layout-settings
+    include ../lectures/themes/html-basics.pug
+    - var conf = htmlBasics;
+    - var pageTitle = conf.title;
+    - var pageType = 'lecture'
+    - var currentPage = conf.page;
+    - var subthemes = conf.subthemes;
+    -
+      var listToRead = [{
+          id: "toRead-1",
+          title: "Mozilla Developers Network ",
+          href: "https://developer.mozilla.org/ru/docs/Web/HTML"
+      }, {
+          id: "",
+          title: "Udacity",
+          href: "https://www.udacity.com/course/building-high-conversion-web-forms--ud890"
+      }, {
+          id: "",
+          title: "CSS Tricks",
+          href: "https://css-tricks.com/almanac/properties/u/user-select/"
+
+      }, {
+          id: "",
+          title: "Can I use",
+          href: "http://caniuse.com/#search=h"
+      }, {
+          id: "",
+          title: "github",
+          href: "https://github.com/pugjs/pug/issues/1900"
+      }, {
+          id: "",
+          title: "youtube",
+          href: "https://www.youtube.com/watch?v=fGqUzrs09vs"
+      }, {
+          id: "",
+          title: "Custom link doesn't have icon",
+          href: "custom"
+      }, {
+          id: "",
+          title: "W3C",
+          href: "https://www.w3.org/TR/html5/text-level-semantics.html#the-dfn-element"
+      }, {
+          id: "",
+          title: "Simple text",
+          href: "#"
+      }]
+
+block main
+    include ../base/mixins/mixin-slides.pug
+    main.main
+        .slides-wrap
+            +main-slide(pageTitle, 'Света Шарипова')
+
+            .slide(id=subthemes.structure.href)
+                h2.h2.-subtheme-h= subthemes.structure.title
+                +p().
+                    Этот слайд с айдишником, на него можно ссылаться
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.structure.title
+                +p().
+                    Заголовок этого слайда виден только в режиме слайдов
+            .slide(id=subthemes.semantics.href)
+                h2.h2.-subtheme-h= subthemes.semantics.title
+                //- Up to 24 lines
+                +code('scss').
+                    .slides-switcher {
+                        display: none;
+                        .-slides-layout & {
+                            bottom: 1rem;
+                            display: flex;
+                            flex-direction: row;
+                            position: absolute;
+                            width: 100%;
+                            z-index: 100;
+                        }
+                        &__group {
+                            flex: 0 0 auto;
+                            &:nth-child(2) {
+                                flex: 1 0 auto;
+                                text-align: center;
+                            }
+                        }
+                        &__current-slide {
+                        }
+                        &__current-slide {
+                        }
+                        &__current-slide {
+                        }
+                    }
+
+            .slide
+                h2.h2.-subtheme-h Код с подсветкой
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .color {
+                              color: red;
+                            }
+                        +code('jade').
+                            .color(attr="value")
+
+                        +code('html').
+                            <div>Ololo</div>
+
+                        +code('js').
+                            var a = function(e) { return e; }
+
+                        p.-hidden-on-slide Этот коммент скрыт в режиме слайдов
+                        +console("C:/", "ololo")
+                    .slide__col
+                        +p().
+                            В режиме слайдов этот слайд состоит из 2 колонок, а этот текст находится справа
+            .slide
+                h2.h2.-subtheme-h= subthemes.semantics.title
+
+                .-hidden-on-slide
+                    div Этот блок скрыт в режиме слайдов
+                    +code('css').
+                        .color {
+                          color: red;
+                        }
+                +codepen()
+                    <p data-height="300" data-theme-id="light" data-slug-hash="dOQZyp" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="Profile theme" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/dOQZyp/">Profile theme</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide
+                h2.h2.-subtheme-h Разные кодпены для разных лейаутов
+                // Different codepen for slides
+                +codepen-article()
+                    <p data-height="300" data-theme-id="light" data-slug-hash="dOQZyp" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="Profile theme" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/dOQZyp/">Profile theme</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                +codepen-slide()
+                    <p data-height="300" data-theme-id="light" data-slug-hash="dOQZyp" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="Profile theme" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/dOQZyp/">Profile theme</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide
+                h2.h2.-subtheme-h Зачеркнутый блок
+                +strike-block()
+                    +code('css').
+                        .color {
+                          color: red;
+                        }
+                        .color {
+                          color: red;
+                        }
+
+                +p()
+                    |Номер после этого текста ссылается на источник из списка полезных ссылок
+                    +link-to-source(listToRead, 1)
+
+            .slide
+                +toRead("Полезные ссылки", listToRead)
+            .slide
+                -
+                    var simpleList = [
+                        'First', 'secound'
+                    ]
+                +list("Simple unordered list", simpleList)
+                +listCap("Simple unordered list, first letter of each item is capitalized", simpleList)
+                +listOrd("Simple ordered list", simpleList)
+                +listOrdCap("Simple ordered list, first letter of each item is capitalized", simpleList)
+            .slide
+                h2.h2.-subtheme-h Параграф с семантическими строчными элементами
+                +p()
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    +strike(' strike text ')
+                    +bold-no-sematics(' bold no sematics text ')
+                    +bold-sematics-super-important(' bold sematics super important text ')
+                    +bold-sematics-attention(' bold sematics attention text ')
+                    +italic-no-sematics(' italic no sematics text ')
+                    +italic-sematics-important(' italic sematics important text ')
+                    +italic-sematics-intonation(' italic sematics intonation text ')
+
+            .slide
+                h2.h2.-subtheme-h Подсказки и запоминалки
+                +hint()
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                +remember()
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            .slide
+                h2.h2.-subtheme-h Цитата
+                +blockquote("Somebody", listToRead, 1)
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+            .slide
+                h2.h2.-subtheme-h Гиф
+                +gif('Responsive')
