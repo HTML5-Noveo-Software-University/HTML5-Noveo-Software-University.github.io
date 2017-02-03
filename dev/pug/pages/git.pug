@@ -120,13 +120,17 @@ block main
 
             .slide
                 h2.h2.-subtheme-h Git. Основные особенности
-                .slide__cols
-                    .slide__col
-                        img(src="/static/images/pages/git/git-logo.png" alt="Git logo")
-                    .slide__col
-                        +p().
-                            На данный момент, фактически, Git - самая распространенная СКВ. Появился в 2005 году, создатели - разработчики Linux (в частности, основатель Linux Линус Торвальдс).
-                +listCap('Основные особенности Git:', listGitFeatures)
+                .-centered
+                    .slide__cols
+                        .slide__col
+                            img(src="/static/images/pages/git/git-logo.png" alt="Git logo")
+                        .slide__col
+                            +p().
+                                На данный момент, фактически, Git - самая распространенная СКВ. Появился в 2005 году, создатели - разработчики Linux (в частности, основатель Linux Линус Торвальдс).
+                    +listCap('Основные особенности Git:', listGitFeatures)
+
+            .slide
+                h2.h2.-subtheme-h Хранение данных в Git
                 .slide__cols
                     .slide__col
                         .-hidden-on-slide
@@ -134,18 +138,14 @@ block main
                                 Главное отличие Git'а от любых других СКВ (например, Subversion и ей подобных) — это то, как Git смотрит на свои данные. В принципе, большинство других систем хранит информацию как список изменений (патчей) для файлов. Эти системы (CVS, Subversion, Perforce, Bazaar и другие) относятся к хранимым данным как к набору файлов и изменений, сделанных для каждого из этих файлов во времени, как показано на рисунке 1.
                         .-visible-on-slide
                             h3.h3 Другие СКВ
-                        figure
-                            img(src="/static/images/pages/git/data-saving-other.png" alt="Другие системы хранят данные как изменения к базовой версии для каждого файла")
-                            figcaption Рисунок 1. Другие системы хранят данные как изменения к базовой версии для каждого файла
+                        +figure('Рисунок 1. Другие системы хранят данные как изменения к базовой версии для каждого файла', conf.page, 'data-saving-other.png')
                     .slide__col
                         .-hidden-on-slide
                             +p().
                                 Git не хранит свои данные в таком виде. Вместо этого Git считает хранимые данные набором слепков небольшой файловой системы. Каждый раз, когда вы фиксируете текущую версию проекта, Git, по сути, сохраняет слепок того, как выглядят все файлы проекта на текущий момент. Ради эффективности, если файл не менялся, Git не сохраняет файл снова, а делает ссылку на ранее сохранённый файл. То, как Git подходит к хранению данных, похоже на рисунок 2.
                         .-visible-on-slide
                             h3.h3 Git
-                        figure
-                            img(src="/static/images/pages/git/data-saving-git.png" alt="Git хранит данные как слепки состояний проекта во времени.")
-                            figcaption Рисунок 2. Git хранит данные как слепки состояний проекта во времени.
+                        +figure('Рисунок 2. Git хранит данные как слепки состояний проекта во времени', conf.page, 'data-saving-git.png')
 
             .slide
                 h2.h2.-subtheme-h Установка и первоначальная настройка Git
@@ -219,9 +219,7 @@ block main
                         +hint().
                             Как только вы отредактируете файлы, Git будет рассматривать их как изменённые, т.к. вы изменили их с момента последнего коммита. Вы индексируете (stage) эти изменения и затем фиксируете все индексированные изменения, а затем цикл повторяется. Этот жизненный цикл изображён на рисунке 3.
                     .slide__col
-                        figure
-                            img(src="/static/images/pages/git/git-file-status-lifecycle.png" alt="Жизненный цикл состояний файлов в Git")
-                            figcaption Рисунок 3. Жизненный цикл состояний файлов
+                        +figure('Рисунок 3. Жизненный цикл состояний файлов', conf.page, 'git-file-status-lifecycle.png')
 
             .slide
                 h2.h2.-subtheme-h Отслеживание состояния файлов
@@ -418,9 +416,7 @@ block main
                                 Пример: репозиторий с тремя файлами. Делаем коммит. Схематично данные в этом репозитории выглядят так, как показано на рисунке 4.
                             +console("C:/Project", "git add README test.rb LICENSE")
                             +console("C:/Project", "git commit -m 'initial commit'")
-                        figure
-                            img(src="/static/images/pages/git/git-initial-commit.png" alt="Данные репозитория с единственным коммитом")
-                            figcaption Рисунок 4. Данные репозитория с единственным коммитом.
+                        +figure('Рисунок 4. Данные репозитория с единственным коммитом', conf.page, 'git-initial-commit.png')
                     .slide__col
                         .-hidden-on-slide
                             +p().
@@ -428,9 +424,7 @@ block main
                         .-visible-on-slide
                             +p().
                                 После следующих двух коммитов история будет выглядеть так:
-                        figure
-                            img(src="/static/images/pages/git/git-commit-next.png" alt="Данные объектов Git'а для нескольких коммитов")
-                            figcaption Рисунок 5. Данные объектов Git'а для нескольких коммитов.
+                        +figure('Рисунок 5. Данные объектов Git для нескольких коммитов', conf.page, 'git-commit-next.png')
 
             .slide
                 h2.h2.-subtheme-h.-visible-on-slide= subthemes.branching.title
@@ -442,9 +436,7 @@ block main
                         .-visible-on-slide
                             +remember()
                                 | Ветка в Git'е — это просто легковесный подвижный указатель на один из коммитов. Ветка по умолчанию в Git'е называется master.
-                        figure
-                            img(src="/static/images/pages/git/branch.png" alt="Ветка указывает на историю коммитов")
-                            figcaption Рисунок 6. Ветка указывает на историю коммитов.
+                        +figure('Рисунок 6. Ветка указывает на историю коммитов', conf.page, 'branch.png')
                     .slide__col
                         +p().
                             При создании новой ветки вы создаете новый указатель, который можно будет перемещать.
@@ -455,9 +447,7 @@ block main
                         +console("C:/Project", "git branch testing")
                         +p().
                             Эта команда создаст новый указатель на тот самый коммит, на котором вы сейчас находитесь (рисунок 7).
-                        figure
-                            img(src="/static/images/pages/git/new-branch.png" alt="Две ветки, указывающие на историю коммитов")
-                            figcaption Рисунок 7. Две ветки, указывающие на историю коммитов.
+                        +figure('Рисунок 7. Две ветки, указывающие на историю коммитов', conf.page, 'new-branch.png')
 
             .slide
                 h2.h2.-subtheme-h.-visible-on-slide= subthemes.branching.title
@@ -469,16 +459,12 @@ block main
                         .-visible-on-slide
                             +remember
                                 | HEAD - специальный указатель, указывающий на текущую ветку
-                        figure
-                            img(src="/static/images/pages/git/branch-head.png" alt="HEAD указывает на текущую ветку")
-                            figcaption Рисунок 8. HEAD указывает на текущую ветку.
+                        +figure('Рисунок 8. HEAD указывает на текущую ветку', conf.page, 'branch-head.png')
                     .slide__col
                         +p().
                             Чтобы перейти на существующую ветку, нужно выполнить команду:
                         +console("C:/Project", "git checkout testing")
-                        figure
-                            img(src="/static/images/pages/git/git-checkout.png" alt="HEAD указывает на другую ветку после переключения веток")
-                            figcaption Рисунок 9. HEAD указывает на другую ветку после переключения веток.
+                        +figure('Рисунок 9. HEAD указывает на другую ветку после переключения веток', conf.page, 'git-checkout.png')
                         +p().
                             Чтобы создать ветку и сразу же перейти на неё, вы можете выполнить команду:
                         +console("C:/Project", "git checkout -b Название ветки")
@@ -493,9 +479,7 @@ block main
                         .-visible-on-slide
                             +p().
                                 Сделаем коммит в ветке testing (рисунок 10).
-                        figure
-                            img(src="/static/images/pages/git/git-checkout2.png" alt="Ветка, на которую указывает HEAD, движется вперёд с каждым коммитом")
-                            figcaption Рисунок 10. Ветка, на которую указывает HEAD, движется вперёд с каждым коммитом.
+                        +figure('Рисунок 10. Ветка, на которую указывает HEAD, движется вперёд с каждым коммитом', conf.page, 'git-checkout2.png').
                     .slide__col
                         +p().
                             Выполним команду
@@ -503,9 +487,7 @@ block main
                         .-hidden-on-slide
                             +p().
                                 Эта команда выполнила два действия. Она передвинула указатель HEAD назад на ветку master и вернула файлы в вашем рабочем каталоге назад, в соответствие со снимком состояния, на который указывает master. Это также означает, что изменения, которые вы делаете, начиная с этого момента, будут ответвляться от старой версии проекта. Это, по сути, откатывает изменения, которые вы временно делали на ветке testing, так что дальше вы можете двигаться в другом направлении (рисунок 11).
-                        figure
-                            img(src="/static/images/pages/git/git-checkout3.png" alt="HEAD перемещается на другую ветку при checkout'е")
-                            figcaption Рисунок 11. HEAD перемещается на другую ветку при checkout'е.
+                        +figure('Рисунок 11. HEAD перемещается на другую ветку при checkout', conf.page, 'git-checkout3.png')
 
             .slide
                 h2.h2.-subtheme-h.-visible-on-slide= subthemes.branching.title
@@ -517,9 +499,7 @@ block main
                         .-visible-on-slide
                             +p().
                                 Сделаем коммит в ветке master (рисунок 12).
-                        figure
-                            img(src="/static/images/pages/git/git-checkout4.png" alt="История с разошедшимися ветками")
-                            figcaption Рисунок 12. История с разошедшимися ветками.
+                        +figure('Рисунок 12. История с разошедшимися ветками', conf.page, 'git-checkout4.png')
                         +hint().
                             Из-за того, что ветка в Git'е на самом деле является простым файлом, который содержит 40 символов контрольной суммы SHA-1 коммита, на который он указывает, создание и удаление веток практически беззатратно и мгновенно.
                     .slide__col
@@ -611,9 +591,7 @@ block main
                         .-visible-on-slide
                             +p().
                                 Рассмотрим пример. Склонируем репозиторий с Git-сервера (рисунок 13).
-                        figure
-                            img(src="/static/images/pages/git/git-remote.png" alt="Клонирование Git-проекта даёт вам собственную ветку master и origin/master, указывающий на ветку master в origin")
-                            figcaption Рисунок 13. Клонирование Git-проекта даёт вам собственную ветку master и origin/master, указывающий на ветку master в origin.
+                        +figure('Рисунок 13. Клонирование Git-проекта даёт вам собственную ветку master и origin/master, указывающий на ветку master в origin', conf.page, 'git-remote.png')
 
             .slide
                 h2.h2.-subtheme-h.-visible-on-slide= subthemes.remoteRepos.title
@@ -621,9 +599,7 @@ block main
                     .slide__col
                         +p().
                             Если вы сделаете что-то в своей локальной ветке master, а тем временем кто-то ещё отправит изменения на git.ourcompany.com и обновит там ветку master, то ваши истории продолжатся по-разному (рисунок 14).
-                        figure
-                            img(src="/static/images/pages/git/git-remote2.png" alt="При выполнении локальной работы и отправке кем-то изменений на удалённый сервер каждая история продолжается по-разному")
-                            figcaption Рисунок 14. При выполнении локальной работы и отправке кем-то изменений на удалённый сервер каждая история продолжается по-разному.
+                        +figure('Рисунок 14. При выполнении локальной работы и отправке кем-то изменений на удалённый сервер каждая история продолжается по-разному', conf.page, 'git-remote2.png')
                     .slide__col
                         +p().
                             Для синхронизации вашей работы выполняется команда
@@ -631,9 +607,7 @@ block main
                         .-hidden-on-slide
                             +p().
                                 Эта команда ищет, какому серверу соответствует origin (в нашем случае это git.ourcompany.com); извлекает оттуда все данные, которых у вас ещё нет, и обновляет ваше локальное хранилище данных; сдвигает указатель origin/master на новую позицию (рисунок 15).
-                        figure
-                            img(src="/static/images/pages/git/git-fetch.png" alt="Команда git fetch обновляет ваши удалённые ссылки")
-                            figcaption Рисунок 15. Команда git fetch обновляет ваши удалённые ссылки.
+                        +figure('Рисунок 15. Команда git fetch обновляет ваши удалённые ссылки', conf.page, 'git-fetch.png')
                         .-hidden-on-slide
                             +p().
                                 Команда git fetch origin связывается с указанным удалённым проектом и забирает все те данные проекта, которых у вас ещё нет. После того как вы выполнили команду, у вас должны появиться ссылки на все ветки из этого удалённого проекта.
