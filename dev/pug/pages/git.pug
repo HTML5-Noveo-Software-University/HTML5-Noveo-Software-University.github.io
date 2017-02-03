@@ -669,21 +669,22 @@ block main
 
             .slide
                 h2.h2.-subtheme-h Процесс работы с Git
-                +p().
-                    Находясь на ветке master, получаем все изменения с удаленного сервера:
-                +console("C:/Project", "git pull")
-                +p().
-                    Переключаемся на новую ветку для решения конкретной задачи:
-                +console("C:/Project", "git checkout -b 'Название ветки'")
-                +p().
-                    Индексируем изменения во всех файлах:
-                +console("C:/Project", "git add .")
-                +p().
-                    Фиксируем изменения:
-                +console("C:/Project", "git commit -m 'Название коммита'")
-                +p().
-                    Отправляем изменения в удаленный репозиторий:
-                +console("C:/Project", "git push origin 'Название ветки'")
+                .-centered
+                    +p().
+                        Находясь на ветке master, получаем все изменения с удаленного сервера:
+                    +console("C:/Project", "git pull")
+                    +p().
+                        Переключаемся на новую ветку для решения конкретной задачи:
+                    +console("C:/Project", "git checkout -b 'Название ветки'")
+                    +p().
+                        Индексируем изменения во всех файлах:
+                    +console("C:/Project", "git add .")
+                    +p().
+                        Фиксируем изменения:
+                    +console("C:/Project", "git commit -m 'Название коммита'")
+                    +p().
+                        Отправляем изменения в удаленный репозиторий:
+                    +console("C:/Project", "git push origin 'Название ветки'")
 
             .slide
                 h2.h2.-subtheme-h Регистрация на GitLab
@@ -719,7 +720,7 @@ block main
 
             .slide
                 h2.h2.-subtheme-h Тестовое задание
-                +listOrd("", listTestTask)
+                +listCap("", listTestTask)
 
             .slide
                 h2.h2.-subtheme-h Полезные ссылки
