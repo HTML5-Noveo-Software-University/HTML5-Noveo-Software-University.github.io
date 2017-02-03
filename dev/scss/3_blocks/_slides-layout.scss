@@ -11,6 +11,26 @@
     }
 }
 
+.-centered {
+    .-slides-layout & {
+        margin: auto;
+        max-width: 60%;
+    }
+}
+.-centered-wide {
+    .-slides-layout & {
+        margin: auto;
+        max-width: 80%;
+    }
+}
+
+.-pushed-down {
+    margin-top: 3.4rem;
+    .-slides-layout & {
+        margin-top: 1rem;
+    }
+}
+
 .-slides-layout {
     .slides-wrap {
         border-right: none;

@@ -39,13 +39,13 @@ body {
 }
 
 .main {
-    padding: 1rem;
+    padding: 1rem 6rem;
     &:not(:only-child) {
         background-clip: padding-box;
         border-right: ($aside-width-mobile-small) solid transparent;
         flex: 1 0 auto;
         /*min-height: 2800px;*/
-        padding-right: 1rem;
+        padding-right: 4rem;
         width: 100%;
         .-slides-layout & {
             border-right: none;
@@ -97,7 +97,9 @@ body {
     }
 
     .main {
+        padding: 1rem 2rem;
         &:not(:only-child) {
+            padding-right: 2rem;
             .-show-aside & {
                 height: 0;
                 min-height: 0;

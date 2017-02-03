@@ -339,11 +339,10 @@
         &__list-item {
             &:not(.-active) {
                 &::after {
-                    background: linear-gradient(to right, rgba(white, .01) 0%, white 25%);
+                    background: linear-gradient(to right, rgba(white, .3) 0%, rgba(white, .5) 15%, rgba(white, .7) 30%);
                     bottom: 0;
                     content: "";
-                    left: -10rem;
-                    opacity: .5;
+                    left: -11rem;
                     position: absolute;
                     right: 0;
                     top: 0;

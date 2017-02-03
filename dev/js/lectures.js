@@ -6,8 +6,8 @@ function Lect() {
     this.$nav = $('.aside-nav__nav'); /**/
     this.$listItems = $('.aside-nav__list-item');
     this.$header = $('header');
-    this.mobileBreakpoint = 1100;
-    this.wideScreenBreakpoint = 1440;
+    this.mobileBreakpoint = 1280; /* When aside is hidden */
+    this.wideScreenBreakpoint = 1600;
     this.mobileBtn = 210;
     this.slidesLayout = false;
 

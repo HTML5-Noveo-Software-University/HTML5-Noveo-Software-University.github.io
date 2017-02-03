@@ -8,10 +8,532 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+      var listToRead = [{
+          id: "toRead-1",
+          title: "Responsive Meta Tag",
+          href: "https://css-tricks.com/snippets/html/responsive-meta-tag/"
+      }, {
+          id: "toRead-2",
+          title: "Add to Homescreen",
+          href: "https://developer.chrome.com/multidevice/android/installtohomescreen"
+      }, {
+          id: "toRead-3",
+          title: "Apple-specific Meta Tags",
+          href: "https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html"
+      }, {
+          id: "toRead-4",
+          title: "Optimizing Mobile Web Apps for iOS",
+          href: "http://blog.teamtreehouse.com/optimizing-mobile-web-apps-ios"
+      }, {
+          id: "toRead-5",
+          title: "Website Performance Optimization",
+          href: "https://www.udacity.com/course/website-performance-optimization--ud884"
+      }, {
+          id: "toRead-6",
+          title: "Создание модели визуализации и макета, вывод страницы на экран",
+          href: "https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction"
+      }, {
+         id: "toRead-7",
+         title: "CSS Triggers - список свойств, влияющих на Layout и Paint",
+         href: "https://csstriggers.com/"
+      }, {
+          id: "toRead-8",
+          title: "Оптимизация JavaScript для быстрой визуализации страницы",
+          href: "https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript"
+      }, {
+          id:"toRead-9",
+          title: "Внешние скрипты, порядок исполнения",
+          href: "https://learn.javascript.ru/external-script"
+      }, {
+          id: "toRead-10",
+          title: "New semantic elements",
+          href: "http://caniuse.com/#feat=html5semantic"
+      }, {
+          id: "toRead-11",
+          title: "Sections",
+          href: "https://www.w3.org/TR/html/sections.html#sections"
+      }]
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
-            +main-slide(pageTitle, 'Имя автора лекции')
-        .slide
+            +main-slide(pageTitle, 'Света Шарипова')
+
+            .slide(id=subthemes.structure.href)
+                h2.h2.-subtheme-h= subthemes.structure.title
+                .-hidden-on-slide
+                    +p().
+                        Рассмотрим структуру верхних уровней:
+                .-centered
+                    +code('html').
+                        <!DOCTYPE html>
+                        <html>
+                            <head>...</head>
+                            <body>...</body>
+                        </html>
+                .-hidden-on-slide
+                    +p()
+                        +inline-html()
+                            <!DOCTYPE html>
+                        | сообщает браузеру, что это HTML5 документ.
+            .slide().-pushed-down
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.structure.title
+                .-centered
+                    +code('html').
+                        <!DOCTYPE html>
+                        <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                            </head>
+                            <body>...</body>
+                        </html>
+                    .section
+                        +p()
+                            +line(2)
+                            | основной язык страницы - английский
+                        +p()
+                            +line(4)
+                            | кодировка
+                        .-visible-on-slide
+                            +p()
+                                +line(5)
+                                | Мета тег для улучшенной отрисовки в старых IE
+                        .-hidden-on-slide
+                            +p()
+                                +line(5)
+                                | Мета тег для улучшенной отрисовки в старых IE.
+                                +bold-sematics-attention(' IE=edge ')
+                                | означает, что IE должен использовать последнюю версию движка для отрисовки, а
+                                +bold-sematics-attention(' chrome=1 ')
+                                | означает, что IE должен использовать Google Chrome Frame, если он установлен. Google Chrome Frame - это плагин для IE на основе Chromium, работает в IE 6 - 9. Позволяет отображать страницы, используя  WebKit layout engine и V8 JavaScript engine.
+            .slide().-pushed-down
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.structure.title
+                .-centered-wide
+                    +code('html').
+                        <!DOCTYPE html>
+                        <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                                <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2.0">
+                                <meta name="mobile-web-app-capable" content="yes">
+                                <meta name="apple-mobile-web-app-capable" content="yes">
+                            </head>
+                            <body>...</body>
+                        </html>
+                    .section
+                        .-visible-on-slide
+                            +p()
+                                +line(6)
+                                | Мета тег viewport сообщает мобильному браузеру, как должна выглядеть и масштабироваться страница.
+                            +p()
+                                +line(7)
+                                | Мета тег, позволяющий в Chrome на Android "установить" страницу на домашний экран и запускать в полноэкранном режиме ("app mode").
+                                +link-to-source(listToRead, 2)
+                            +p()
+                                +line(8)
+                                | Если значение = yes, то веб-приложение отображается в полноэкранном режиме на мобильных устройствах Apple.
+                                +link-to-source(listToRead, 3)
+                                +space()
+                                +link-to-source(listToRead, 4)
+                        .-hidden-on-slide
+                            +p()
+                                +line(6)
+                                | Мета тег viewport сообщает мобильному браузеру, как должна выглядеть страница.
+                                +link-to-source(listToRead, 1)
+                                br
+                                +bold-sematics-attention(' width=device-width ')
+                                | - ширина root элемента (тег html) равна ширине устройства (если не указано, то страница будет отображаться значительно шире, чем нужно)
+                                br
+                                +bold-no-sematics( '*-scale' )
+                                | - правила масштабирования.
+                                +bold-sematics-attention(' initial-scale ')
+                                | - дефолтные пропорции,
+                                +bold-sematics-attention(' minimum-scale ')
+                                | - минимальный зум,
+                                +bold-sematics-attention(' maximum-scale ')
+                                | - максимальный. Т.е. по умолчанию страница отобразится 1 к 1, но пользователь сможет уменьшить масштаб до масштаба 0.5 к 1 и увеличить до размеров, больше стандартных в 2 раза.
+
+                            +p()
+                                +line(7)
+                                | Мета тег, позволяющий в Chrome на Android "установить" страницу на домашний экран и запускать в полноэкранном режиме ("app mode").
+                                +link-to-source(listToRead, 2)
+                            +p()
+                                +line(8)
+                                | Если значение = yes, то веб-приложение отображается в полноэкранном режиме на мобильных устройствах Apple.
+                                +link-to-source(listToRead, 3)
+                                +space()
+                                +link-to-source(listToRead, 4)
+            .slide().-pushed-down
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.structure.title
+                .-centered-wide
+                    +code('html').
+                        <!DOCTYPE html>
+                        <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                                <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2.0">
+                                <meta name="mobile-web-app-capable" content="yes">
+                                <meta name="apple-mobile-web-app-capable" content="yes">
+
+                                <meta name="apple-mobile-web-app-title" content="HTML5">
+                                <title>HTML5 Noveo Software University</title>
+                            </head>
+                            <body>...</body>
+                        </html>
+                    .section
+                        +p()
+                            +line(10)
+                            | Заголовок страницы на мобильном iOS.
+                            | Если мета тег
+                            +bold-no-sematics('apple-mobile-web-app-title ')
+                            | не указан, то по умолчанию используется заголовок из тега
+                            +inline-html()
+                                <title>
+                            |.
+                        +p()
+                            +line(11)
+                            | Заголовок страницы. Отображается на вкладке.
+            .slide().-pushed-down
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.structure.title
+                .slide__cols
+                    .slide__col
+                        +code('html').
+                            <!DOCTYPE html>
+                            <html lang="en">
+                                <head>
+                                    <meta charset="UTF-8">
+                                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                                    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2.0">
+                                    <meta name="mobile-web-app-capable" content="yes">
+                                    <meta name="apple-mobile-web-app-capable" content="yes">
+
+                                    <meta name="apple-mobile-web-app-title" content="HTML5">
+                                    <title>HTML5 Noveo Software University</title>
+
+                                    <script src="app.js" defer></script>
+                                    <link rel="stylesheet" href="main.css">
+                                </head>
+                                <body>...</body>
+                            </html>
+                        +p()
+                            +line(13)
+                            | Подключение скрипта
+                        +p()
+                            +line(14)
+                            | Подключение стилей
+
+                    .slide__col
+                        +figure('Critical Rendering Path', conf.page, 'critical_rendering_path.png', listToRead, 5)
+
+                    .section.-hidden-on-slide
+                        +p()
+                            +bold-sematics-attention('DOM (Document Object Model)')
+                            +space()
+                            | - это то, во что браузер преобразует полученный HTML-код.
+                            br
+                            | DOM имеет древовидную структуру.
+                            br
+                            | В DeveloperTools можно посмотреть визуальную интерпретацию DOM (правда, с небольшими отличиями).
+
+                        +p()
+                            +bold-sematics-attention('CSSOM (CSS Object Model)')
+                            +space()
+                            | - это то, во что браузер преобразует полученныe стили.
+                            br
+                            | CSSOM тоже имеет древовидную структуру.
+
+                        +p()
+                            +bold-sematics-attention('Render tree')
+                            +space()
+                            | - это комбинация DOM и CSSOM. Чтобы получить Render tree, всем
+                            +space()
+                            +bold-sematics-super-important('видимым')
+                            +space()
+                            | элементам DOM присваиваются наборы стилей из модели CSSOM.
+
+                        +p()
+                            +bold-sematics-attention('Layout')
+                            +space()
+                            | - это этап отрисовки, на котором рассчитываются размеры и взаимное расположение элементов на странице. На этом этапе роль играют такие свойства, как:
+                            +space()
+                            +bold-no-sematics('width')
+                            | ,
+                            +space()
+                            +bold-no-sematics('height')
+                            | ,
+                            +space()
+                            +bold-no-sematics('margin')
+                            +space()
+                            | и т.п.
+                            +link-to-source(listToRead, 7)
+                        +p()
+                            +bold-sematics-attention('Paint')
+                            +space()
+                            | - это этап отрисовки, на котором применяются остальные свойства, например, цвет, фон и т.п.
+                            +link-to-source(listToRead, 7)
+                    .section.-hidden-on-slide
+                        +remember()
+                            | Загрузка скриптов через тег
+                            +inline-html()
+                                <script>
+                            | без указания атрибутов
+                            +bold-sematics-attention(' defer ')
+                            | или
+                            +bold-sematics-attention(' async ')
+                            +link-to-source(listToRead, 9)
+                            +space()
+                            | – синхронная, при обнаружении тега скрипта создание DOM останавливается до тех пор, пока скрипт не будет выполнен. Это означает, что браузер, когда дойдет до тега
+                            +inline-html()
+                                <script>
+                            |, будет ждать, пока скрипт скачается, затем исполнит скрипт и только потом продолжит отрисовку. Из-за взаимосвязей между DOM, CSSOM
+                            +space()
+                            +link-to-source(listToRead, 6)
+                            +space()
+                            | и кодом JavaScript выполнение скриптов может вызвать задержку в обработке и визуализации страницы
+                            +space()
+                            +link-to-source(listToRead, 8)
+                            |. Поэтому рекомендуется подключать скрипты асинхронно и перед стилями. Тогда, даже в старых браузерах, не поддерживающих асинхронную загрузку скриптов, отрисовка не будет начинаться заново.
+
+
+                    .section.-hidden-on-slide
+                        +blockquote("JavaScript.ru", listToRead, 9)
+                            | Можно поставить все подобные скрипты в конец страницы – это уменьшит проблему, но не избавит от неё полностью, если скриптов несколько. Допустим, в конце страницы 3 скрипта, и первый из них тормозит – получается, другие два его будут ждать – тоже нехорошо.
+                            br
+                            br
+                            | Кроме того, браузер дойдёт до скриптов, расположенных в конце страницы, они начнут грузиться только тогда, когда вся страница загрузится. А это не всегда правильно.
+
+                    .section.-hidden-on-slide
+                        h4.h4 В чем разница между
+                            +bold-sematics-attention(' defer ')
+                            | и
+                            +bold-sematics-attention(' async ')
+                            | ?
+                        +p()
+                            | Оба атрибута позволяют загрузить скрипты асинхронно, т.е. не блокируя DOM. При этом, атрибут
+                            +bold-sematics-attention(' async ')
+                            | загружает скрипт полностью асинхронно,  скрипт исполняется при первой возможности, без учета порядка подключения и готовности DOM. Атрибут
+                            +bold-sematics-attention(' defer ')
+                            | загружает скрипт асинхронно, но исполняться он будет с учетом порядка подключения скриптов с этим атрибутом и только после того, как DOM будет готов.
+                            br
+                            br
+                            | Используйте атрибут
+                            +bold-sematics-attention(' async ')
+                            | для скриптов, которые не связаны с элементами HTML и не зависят от других скриптов (и другие не зависят от них), например, для скриптов аналитики. Во всех остальных случаях используйте атрибут
+                            +bold-sematics-attention(' defer ')
+                            |.
+
+                        .-hidden-on-slide
+                            +code('html').
+                                    <script src="app.js" defer></script>
+            .slide.-pushed-down(id=subthemes.semantics.href)
+                h2.h2.-subtheme-h= subthemes.semantics.title
+                .-centered
+                    +code('html').
+                        <body>
+                        	<header>
+                                ...
+                                <nav>
+                                    <ul>...</ul>
+                                </nav>
+                                ...
+                            </header>
+                        	<main>...</main>
+                        	<footer>...</footer>
+                        </body>
+
+                    +p()
+                        +inline-html()
+                            <main>
+                        | может быть использован только 1 раз на странице. Означает основной контент.
+                        br
+                        br
+                        +inline-html()
+                            <nav>
+                        | - обертка для основной навигации на странице (как правило, встречается 1-2 раза).
+            .slide.-pushed-down()
+                h2.h2.-subtheme-h.-visible-on-slide Article и Section
+                .-centered
+                    +code('html').
+                        <main>
+                        	<article>
+                                <header>...</header>
+                                <section>...</section>
+                                <section>...</section>
+                                <footer>...</footer>
+                            </article>
+                        </main>
+                    div ИЛИ
+                    +code('html').
+                        <main>
+                        	<article>
+                                <header>...</header>
+                                <p>...</p>
+                                <p>...</p>
+                                <aside>...</aside>
+                                <p>...</p>
+                                <blockquote>...</blockquote>
+                                <footer>...</footer>
+                            </article>
+                            <section>...</section>
+                        </main>
+                    .-hidden-on-slide
+                        +p()
+                            +inline-html()
+                                <article>
+                            | - независимая часть контента, например, статья из журнала или газеты, пост в блоге или на форуме, комментарий пользователя. Обычно имеет свой
+                            +inline-html()
+                                <header>
+                            | и иногда -
+                            +inline-html()
+                                <footer>
+                            |. Между ними - контент, который может быть разбит на части тегами
+                            +inline-html()
+                                <section>
+                            | или просто состоять из параграфов.
+                            br
+                            br
+                            +inline-html()
+                                <p>
+                            | - параграф текста. Дочерними элементами не могут быть списки
+                            +strike('<ol>')
+                            | или
+                            +strike('<ul>')
+                            |.
+
+                            br
+                            br
+                            +inline-html()
+                                <section>
+
+                            | - часть контента, имеющая общее значение, отличное от других таких частей. Например, этот тег подойдет для глав книги или статьи, контента в табах. Домашнюю страницу можно разделить тегами
+                            +inline-html()
+                                <section>
+                            | на независимые блоки, такие как: "Преимущества использования",  "Новые товары", "Контакты". Обычно, первый дочерний элемент секции - это заголовок h1-h6. Может также иметь свои
+                            +inline-html()
+                                <header>
+                            | и
+                            +inline-html()
+                                <footer>
+                            br
+                            | Если нужно обернуть контент в блок только в целях стилизации, следует использовать
+                            +inline-html()
+                                <div>
+                            |.
+                            br
+                            br
+                            +inline-html()
+                                <aside>
+                            | - тег для размещения
+                            +bold-sematics-attention('дополнительной информации, связанной')
+                            | c основным контентом. Например, глоссария терминов.
+                            +strike('Реклама, поиск')
+                            | и другие блоки, не относящиеся к статье - не подходят для размещения в этом теге.
+            .slide.-pushed-down()
+                h2.h2.-subtheme-h.-visible-on-slide Цитаты
+                .-centered
+                    +code('html').
+                        <blockquote>
+                                <p>...</p>
+                                <p>...</p>
+                                <footer>
+                                    <cite>
+                                        <a href="...">
+                                            Autor
+                                        </a>
+                                    </cite>
+                                </footer>
+                        </blockquote>
+
+                    div ИЛИ
+                    +code('html').
+                        <p>
+                            ...
+                            <q>
+                                <cite>
+                                        Autor
+                                </cite>
+                            </q>
+                            ...
+                        </p>
+
+                    .-hidden-on-slide
+                        +p()
+                            +inline-html()
+                                <blockquote>
+                            | - тег для блочной цитаты. Обычно имеет футер, в котором указан автор.
+                            br
+                            br
+                            +inline-html()
+                                <q>
+                            | - тег для строчной цитаты (как правило, это косвенная речь). Может быть как с указанием автора, так и без.
+                            br
+                            br
+                            +inline-html()
+                                <cite>
+                            | - тег для указания автора и/или названия произведения. Может содержать ссылку на источник.
+            .slide.-pushed-down(id=subthemes.sectioningContent.href)
+                h2.h2.-subtheme-h= subthemes.sectioningContent.title
+                .-centered
+                    +p()
+                        | Некоторые теги могут иметь хедер и футер:
+                        +inline-html()
+                            <body>
+                        |,
+                        +inline-html()
+                            <article>
+                        |,
+                        +inline-html()
+                            <section>
+                        |,
+                        +inline-html()
+                            <blockquote>
+                    +p()
+                        | Хедер используется для группировки заголовков, изображений (например, логотипов), навигации, поиска и т.п. Если в хедере только заголовок, то хедер не нужен, достаточно тега заголовка.
+                    +p()
+                        | Согласно спецификации HTML5.1, на
+                        +bold-sematics-attention('странице должен быть один заголовок h1.')
+                        | Это заголовок верхнего уровня, он используется для названия страницы.
+                    +p()
+                        | Заголовки h2-h6 могут встречаться несколько раз.
+
+            .slide.-pushed-down(id=subthemes.support.href)
+                h2.h2.-subtheme-h= subthemes.support.title
+                .-centered
+                    +figure('HTML5 semantic elements - Can I use', conf.page, 'can_i_use_html5.png', listToRead, 10)
+
+                    +p()
+                        | В браузерах, в которых частичная поддержка HTML5 тегов, эти теги отображаются как строчные. Но можно сделать их блочными:
+                    +code('css').
+                        main, section, article, aside, footer, header, nav {
+                            display: block;
+                        }
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.support.title
+                .-centered
+                    h4.h4 Полифил для IE<9 через условные комментарии
+                    +code('html').
+                        <!--[if lt IE 9]>
+                            <script>
+                            document.createElement("header );
+                            document.createElement("footer");
+                            document.createElement("section");
+                            document.createElement("main");
+                            document.createElement("aside");
+                            document.createElement("nav");
+                            document.createElement("article");
+                            document.createElement("time" );
+                            </script>
+                        <![endif]-->
+                    //-" This somehow fixes highlihgt issue in Atom
+                    h4.h4 Условные классы для IE до 9 версии включительно
+                    +code('html').
+                        <!DOCTYPE html>
+                        <!--[if IE 9 ]><html class="ie"><![endif]-->
+                        <!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]>
+                        <!--><html><!--<![endif]-->
+            .slide()
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)

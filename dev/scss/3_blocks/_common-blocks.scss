@@ -86,17 +86,18 @@
     &:before, &:after {
         color: $orange;
         font-size: 3rem;
+        line-height: 1;
         position: absolute;
     }
     &:before {
         content: "«";
-        left: 0;
-        top: 1rem;
+        left: -.5rem;
+        top: -.2rem;
     }
     &:after {
-        bottom: 4rem;
+        bottom: 3rem;
         content: "»";
-        right: 0;
+        right: -.5rem;
     }
     &__footer {
         margin-top: 1rem;
@@ -116,5 +117,17 @@
         transform: scale(1.45);
         transform-origin: top left;
         width: 68%;
+    }
+}
+.figure {
+    border-top: 1px solid rgba($turq, .3);
+    display: inline-block;
+    font-style: italic;
+    padding: .5rem 0 0;
+    text-align: center;
+    &__caption {
+        border-bottom: 1px solid rgba($turq, .3);
+        border-top: 1px solid rgba($turq, .1);
+        padding: 1rem 0;
     }
 }
