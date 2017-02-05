@@ -1,0 +1,143 @@
+.aside-nav {
+    &__tech-wrap {
+        display: flex;
+        flex: 0 0 auto;
+        flex-direction: column;
+        width: .3rem;
+
+        &.-horizontal {
+            flex-direction: row;
+            margin-top: -1.2rem;
+            position: relative;
+            width: 100%;
+            .-mobile & {
+                bottom: 0;
+                left: 0;
+                position: absolute;
+            }
+        }
+    }
+    &__all-tech {
+        min-height: 9rem;
+        padding-left: 1.2rem;
+        position: relative;
+    }
+    &__tech {
+        display: block;
+        flex: 1 0 auto;
+        position: relative;
+        z-index: 3;
+        &:nth-child(n+5) {
+            display: none;
+        }
+        .-horizontal & {
+            height: .5rem;
+            max-width: 4.8rem;
+            min-width: 2rem;
+            overflow: visible;
+            &:nth-child(n+5) {
+                display: block;
+            }
+        }
+        &-text {
+            background: inherit;
+            color: white;
+            cursor: pointer;
+            display: block;
+            padding: .1rem .4rem .1rem;
+            position: absolute;
+            right: 0rem;
+            white-space: nowrap;
+            z-index: 1;
+
+            &:before {
+                bottom: 0;
+                box-shadow: -2px 3px 3px 0 lighten(gray, 36%);
+                content: "";
+                left: 0;
+                position: absolute;
+                right: .3rem;
+                top: 0;
+                z-index: -1;
+                .-horizontal & {
+                    box-shadow: 2px 0 4px 0 lighten(gray, 36%);
+                    left: 1rem;
+                    right: 0;
+                }
+                .-mobile & {
+                    box-shadow: none;
+                }
+            }
+            &:hover {
+                padding: .2rem 2rem .1rem .5rem;
+                z-index: 1;
+            }
+            .-horizontal & {
+                display: inline-block;
+                left: 1px;
+                right: auto;
+                top: 0;
+                transform: rotate(90deg);
+                transform-origin: top left;
+                z-index: 3;
+                .is-touch & {
+                    padding: .15rem 2rem .15rem .5rem;
+                }
+                &:hover {
+                    padding: .1rem 2rem .1rem .5rem;
+                }
+                .-mobile & {
+                    top: 2px;
+                    transform: rotate(90deg) translate(-100%, -100%);
+                    transform-origin: top left;
+                }
+            }
+        }
+    }
+}
+
+.-css {
+    background: lighten($dark-blue, 10%);
+}
+
+.-html {
+    background: $orange2;
+}
+
+.-sass {
+    background: $pink;
+}
+
+.-pug {
+    background: $green;
+}
+
+.-responsive {
+    background: $red;
+}
+
+.-graphics {
+    background: $violet;
+}
+.-tools {
+    background: $blue;
+}
+.-optimization {
+    background: darken($turq, 10%);
+}
+.-js {
+    background: darken($yellow, 4%);
+}
+.-tips {
+    background: $turq;
+}
+
+@media screen and (min-width: ($aside-width + 7.5rem)) {
+    .aside-nav {
+        &__all-tech {
+            &.-mobile {
+                display: none;
+            }
+        }
+    }
+}

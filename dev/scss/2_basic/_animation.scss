@@ -1,0 +1,22 @@
+@keyframes slideOut {
+    0% {
+        position: relative;
+    }
+    19% {
+        position: relative;
+    }
+    20% {
+        position: absolute;
+    }
+    100% {
+        position: absolute;
+    }
+}
+@keyframes slideIn {
+    30% {
+        position: relative;
+    }
+    100% {
+        position: relative;
+    }
+}

@@ -1,0 +1,13 @@
+extends ./base.pug
+block body
+    .page
+        include ../blocks/common/header-lectures.pug
+        .content
+            block content
+                block main
+                block aside
+                    include ../blocks/common/aside-nav.pug
+                include ../blocks/common/slides-switcher.pug
+        include ../blocks/common/footer.pug
+    block modals
+block append scripts

@@ -1,0 +1,132 @@
+.list {
+    font-size: 1rem;
+    padding-left: .5rem;
+    .-slides-layout & {
+        font-size: 1.2rem;
+    }
+    &.-ordered {
+        counter-reset: simple-ol;
+    }
+    &__item {
+        margin-bottom: 1rem;
+        position: relative;
+
+        .-ordered & {
+            counter-increment: simple-ol;
+        }
+        .-unordered & {
+            padding-left: 1.2rem;
+
+            &:before {
+                background: $turq;
+                border-radius: 50%;
+                content: "";
+                display: inline-block;
+                height: .5em;
+                left: 0;
+                margin: 0 .5em 0 0;
+                position: absolute;
+                top: .5em;
+                width: .5em;
+            }
+        }
+    }
+    &__link {
+        display: inline-block;
+        padding: .2rem .1rem;
+
+        &:not(.-disabled) {
+            border-bottom: 2px solid rgba($turq, .4);
+            color: $turq;
+        }
+        .icon {
+            margin-left: .5em;
+        }
+        &:hover, .list__item:target & {
+            background: darken(white, 5%);
+        }
+        .-ordered & {
+            &:before {
+                color: $turq;
+                content: counter(simple-ol) ". ";
+                margin: 0 .5em 0 0;
+            }
+        }
+        .-ordered-gray & {
+            &:before {
+                color: gray;
+            }
+        }
+    }
+}
+
+.source-logo {
+    display: inline-block;
+    height: 1.2rem;
+    margin-right: .6rem;
+    overflow: visible;
+    position: relative;
+    width: 1.2rem;
+    &.-mdn, &.-can-i-use, &.-github {
+        top: .2rem;
+    }
+
+    &.-youtube {
+        top: .1rem;
+    }
+    &.-css-tricks {
+        background: #faebdc;
+        top: .1rem;
+        img {
+            height: 90%;
+            margin: 5%;
+            width: 90%;
+        }
+    }
+    &.-udacity {
+        height: 1.1rem;
+        left: .1rem;
+        margin-right: .7rem;
+        top: .1rem;
+        width: 1.1rem;
+    }
+    &.-w3c {
+        left: -.2em;
+        top: .2rem;
+        img {
+            max-width: 1.7em;
+            width: 1.7em;
+        }
+    }
+    &.learn-js {
+        left: -.2rem;
+        top: .2rem;
+        img {
+            max-width: 1.7em;
+            width: 1.7em;
+        }
+    }
+    &.google-dev {
+        left: .1rem;
+        margin-right: .7rem;
+        top: .2rem;
+        img {
+            max-width: 1.4em;
+            width: 1.4em;
+        }
+    }
+    &.apple-dev {
+        margin-right: .5rem;
+        top: .05rem;
+    }
+}
+
+.link-to-source {
+    font-weight: bold;
+
+    &__sup {
+        color: $turq;
+        font-size: .8em;
+        vertical-align: super;
+    }
+}
