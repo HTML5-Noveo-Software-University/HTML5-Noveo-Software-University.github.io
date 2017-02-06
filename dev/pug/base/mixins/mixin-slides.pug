@@ -82,37 +82,37 @@ mixin external-logo(link)
 
     if isMDN
         .source-logo.-mdn
-            img(src="/static/images/logos/mdn.svg" alt="Mozilla Developers Network")
+            img(src="static/images/logos/mdn.svg" alt="Mozilla Developers Network")
     else if isUdacity
         .source-logo.-udacity
-            img(src="/static/images/logos/udacity.svg" alt="Udacity")
+            img(src="static/images/logos/udacity.svg" alt="Udacity")
     else if isCSSTricks
         .source-logo.-css-tricks
-            img(src="/static/images/logos/css-tricks.svg" alt="CSS Tricks")
+            img(src="static/images/logos/css-tricks.svg" alt="CSS Tricks")
     else if isCanIUse
         .source-logo.-can-i-use
-            img(src="/static/images/logos/caniuse.png" alt="Can I use")
+            img(src="static/images/logos/caniuse.png" alt="Can I use")
     else if isGithub
         .source-logo.-github
-            img(src="/static/images/logos/github.svg" alt="Github")
+            img(src="static/images/logos/github.svg" alt="Github")
     else if isYoutube
         .source-logo.-youtube
-            img(src="/static/images/logos/youtube.svg" alt="Youtube")
+            img(src="static/images/logos/youtube.svg" alt="Youtube")
     else if isW3
         .source-logo.-w3c
-            img(src="/static/images/logos/w3c.svg" alt="W3C")
+            img(src="static/images/logos/w3c.svg" alt="W3C")
     else if isLearnJs
         .source-logo.learn-js
-            img(src="/static/images/logos/learnjsru.svg" alt="Learn.JavaScript.ru")
+            img(src="static/images/logos/learnjsru.svg" alt="Learn.JavaScript.ru")
     else if isGoogleDevelopers
         .source-logo.google-dev
-            img(src="/static/images/logos/google-developers.svg" alt="Google Developers")
+            img(src="static/images/logos/google-developers.svg" alt="Google Developers")
     else if isAppleDevelopers
         .source-logo.apple-dev
-            img(src="/static/images/logos/apple.svg" alt="Apple Developer")
+            img(src="static/images/logos/apple.svg" alt="Apple Developer")
     else if isDeveloperChrome
         .source-logo.chrome-dev
-            img(src="/static/images/logos/chrome.svg" alt="Chrome")
+            img(src="static/images/logos/chrome.svg" alt="Chrome")
 mixin toRead(header, data)
     section.section
         if header.length
@@ -229,7 +229,7 @@ mixin blockquote(autor, sorceList, number)
                 cite.blockquote__autor= auto
 
 mixin gif(filename)
-    - var path = '/static/images/gif/' + filename + '.gif'
+    - var path = 'static/images/gif/' + filename + '.gif'
 
     .gif
         button(type="button" data-gif-source=path title="GIF").gif__btn
