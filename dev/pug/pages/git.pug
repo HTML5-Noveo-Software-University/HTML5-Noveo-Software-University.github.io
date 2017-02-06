@@ -23,10 +23,22 @@ block layout-settings
             'распределенные (Git, Mercurial, Bazaar) - клиенты не просто выгружают последние версии файлов, а полностью копируют весь репозиторий. Поэтому в случае, когда "умирает" сервер, через который шла работа, любой клиентский репозиторий может быть скопирован обратно на сервер, чтобы восстановить базу данных. Каждый раз, когда клиент забирает свежую версию файлов, он создаёт себе полную копию всех данных.'
         ];
     -
+        var listVCSTypesShort = [
+            'локальные;',
+            'централизованные;',
+            'распределенные (Git, Mercurial, Bazaar).'
+        ];
+    -
         var listGitFeatures = [
             'слепки вместо патчей.',
             'почти все операции - локальные. Плюсы: быстрота, возможность работать без интернета (сохранил изменения локально, а затем отправил их на сервер, когда появилась сеть).',
             'чаще всего данные в Git только добавляются. Очень сложно заставить систему удалить данные или сделать что-то неотменяемое. Можно, как и в любой другой СКВ, потерять данные, которые вы ещё не сохранили, но как только они зафиксированы, их очень сложно потерять, особенно если вы регулярно отправляете изменения в другой репозиторий.'
+        ];
+    -
+        var listGitFeaturesShort = [
+            'слепки вместо патчей.',
+            'почти все операции - локальные.',
+            'очень сложно заставить систему удалить данные или сделать что-то неотменяемое.'
         ];
     -
         var listGitInitRepo = [
@@ -80,7 +92,7 @@ block layout-settings
             'Склонировать свой проект.',
             'Создать ветку test-task.',
             'Изменить файл readme.',
-            'Запушить изменения в ветку test-task'
+            'Запушить изменения в ветку test-task.'
         ];
     -
       var listToRead = [{
@@ -115,19 +127,28 @@ block main
                 h2.h2.-subtheme-h Системы контроля версий
                 +p().
                     Система контроля версий (СКВ) — это система, регистрирующая изменения в одном или нескольких файлах с тем, чтобы в дальнейшем была возможность вернуться к определённым старым версиям этих файлов.
-                +list('СКВ дает возможность:', listVCSFeatures)
-                +listCap('Виды СКВ:', listVCSTypes)
+                .slide__cols
+                    .slide__col
+                        +list('СКВ дает возможность:', listVCSFeatures)
+                        .-hidden-on-slide
+                            +listCap('Виды СКВ:', listVCSTypes)
+                    .slide__col
+                        .-visible-on-slide
+                            +listCap('Виды СКВ:', listVCSTypesShort)
 
             .slide
                 h2.h2.-subtheme-h Git. Основные особенности
                 .-centered
                     .slide__cols
                         .slide__col
-                            img(src="/static/images/pages/git/git-logo.png" alt="Git logo")
+                            img(src="static/images/pages/git/git-logo.png" alt="Git logo")
                         .slide__col
                             +p().
                                 На данный момент, фактически, Git - самая распространенная СКВ. Появился в 2005 году, создатели - разработчики Linux (в частности, основатель Linux Линус Торвальдс).
-                    +listCap('Основные особенности Git:', listGitFeatures)
+                    .-hidden-on-slide
+                        +listCap('Основные особенности Git:', listGitFeatures)
+                    .-visible-on-slide
+                        +listCap('Основные особенности Git:', listGitFeaturesShort)
 
             .slide
                 h2.h2.-subtheme-h Хранение данных в Git
@@ -168,13 +189,14 @@ block main
                     .slide__col
                         +p().
                             Для изменения размера текста нужно щелкнуть правой кнопкой мыши по логотипу Git Bash в верхнем левом углу и выбрать пункт Options:
-                        img(src="/static/images/pages/git/git-bash-options.jpg" alt="Окно настроек Git Bash")
+                        img(src="static/images/pages/git/git-bash-options.jpg" alt="Окно настроек Git Bash")
 
             .slide(id=subthemes.basic.href)
                 h2.h2.-subtheme-h Создание Git-репозитория
-                +p().
-                    Репозиторий - это проектная папка, в которой хранятся все документы вместе с историей их изменения и другой служебной информацией.
-                +list('2 способа создать репозиторий:', listGitInitRepo)
+                .-centered
+                    +p().
+                        Репозиторий - это проектная папка, в которой хранятся все документы вместе с историей их изменения и другой служебной информацией.
+                    +list('2 способа создать репозиторий:', listGitInitRepo)
                 .slide__cols
                     .slide__col
                         h3.h3 Импорт в Git уже существующего проекта
@@ -195,14 +217,17 @@ block main
                         .-hidden-on-slide
                             +p().
                                 Эта команда создаёт каталог с именем jquery, инициализирует в нём каталог .git, скачивает все данные для этого репозитория и создаёт (checks out) рабочую копию последней версии. Если вы зайдёте в новый каталог jquery, вы увидите в нём проектные файлы, пригодные для работы и использования.
-                +p().
-                    В Git'е реализовано несколько транспортных протоколов, которые вы можете использовать. Наиболее используемые: https и ssh
+                .-centered
+                    +p().
+                        В Git'е реализовано несколько транспортных протоколов, которые вы можете использовать. Наиболее используемые: https и ssh.
 
             .slide
                 h2.h2.-subtheme-h Состояния файлов
-                +remember()
-                    | Основной принцип работы с Git: делаем некоторые изменения и фиксируем “снимки” состояния (snapshots или commits) этих изменений в репозитории каждый раз, когда проект достигает состояния, которое хотелось бы сохранить.
-                +list('Каждый файл в вашем рабочем каталоге может находиться в одном из двух состояний:', listFilesStage)
+                .-hidden-on-slide
+                    +remember()
+                        | Основной принцип работы с Git: делаем некоторые изменения и фиксируем “снимки” состояния (snapshots или commits) этих изменений в репозитории каждый раз, когда проект достигает состояния, которое хотелось бы сохранить.
+                .-centered
+                    +list('Каждый файл в вашем рабочем каталоге может находиться в одном из двух состояний:', listFilesStage)
                 .slide__cols
                     .slide__col
                         +list('Отслеживаемые файлы — это те файлы, которые были в последнем слепке состояния проекта (snapshot); они могут быть:', listFilesTracked)
@@ -231,7 +256,7 @@ block main
                     .slide__col
                         +p().
                             После создания файла index.html рабочий каталог выглядит так:
-                        img(src="/static/images/pages/git/git-status.jpg" alt="Вывод команды git status")
+                        img(src="static/images/pages/git/git-status.jpg" alt="Вывод команды git status")
 
             .slide
                 h2.h2.-subtheme-h Отслеживание новых файлов
@@ -243,14 +268,18 @@ block main
                     .slide__col
                         +p().
                             После добавления файла index.html под версионный контроль рабочий каталог выглядит так:
-                        img(src="/static/images/pages/git/git-add.jpg" alt="Вывод команды git add")
+                        img(src="static/images/pages/git/git-add.jpg" alt="Вывод команды git add")
 
             .slide
                 h2.h2.-subtheme-h Индексация отслеживаемых файлов
                 .slide__cols
                     .slide__col
-                        +p().
-                            Если внести изменения в отслеживаемый файл, то он окажется в секции "Changes not staged for commit" - это означает, что отслеживаемый файл был изменён в рабочем каталоге, но пока не проиндексирован. Чтобы проиндексировать его, необходимо также выполнить команду
+                        .-hidden-on-slide
+                            +p().
+                                Если внести изменения в отслеживаемый файл, то он окажется в секции "Changes not staged for commit" - это означает, что отслеживаемый файл был изменён в рабочем каталоге, но пока не проиндексирован. Чтобы проиндексировать его, необходимо также выполнить команду
+                        .-visible-on-slide
+                            +p().
+                                Чтобы проиндексировать файл, необходимо выполнить команду
                         +console("C:/Project", "git add Название файла")
                         h3.h3 Полезные команды
                         +p().
@@ -262,10 +291,10 @@ block main
                     .slide__col
                         +p().
                             При изменении отслеживаемого файла index.html рабочий каталог выглядит так:
-                        img(src="/static/images/pages/git/git-add-index.jpg" alt="Вывод команды git add")
+                        img(src="static/images/pages/git/git-add-index.jpg" alt="Вывод команды git add")
                         +p().
                             После выполнения команды git add index.html:
-                        img(src="/static/images/pages/git/git-add-index2.jpg" alt="Вывод команды git add")
+                        img(src="static/images/pages/git/git-add-index2.jpg" alt="Вывод команды git add")
 
             .slide
                 h2.h2.-subtheme-h Фиксация изменений
@@ -277,10 +306,14 @@ block main
                         +p().
                             Для фиксации изменений используется команда
                         +console("C:/Project", "git commit")
-                        +p().
-                            Эта команда откроет текстовый редактор (по умолчанию Vim), в котором нужно будет ввести сообщение коммита.
-                        +p().
-                            Работать в этом редакторе неудобно, проще вводить сообщение коммита прямо в консоли при помощи команды
+                        .-hidden-on-slide
+                            +p().
+                                Эта команда откроет текстовый редактор (по умолчанию Vim), в котором нужно будет ввести сообщение коммита.
+                            +p().
+                                Работать в этом редакторе неудобно, проще вводить сообщение коммита прямо в консоли при помощи команды
+                        .-visible-on-slide
+                            +p().
+                                Ввести сообщение коммита прямо в консоли:
                         +console("C:/Project", "git commit -m Название коммита")
                         .-hidden-on-slide
                             +p().
@@ -292,13 +325,13 @@ block main
                                 +listCap('Примеры плохих названий коммитов:', listBadCommitExamples)
                             .slide__col
                                 +listCap('Примеры хороших названий коммитов:', listGoodCommitExamples)
-                        +p().
-                            Можно сразу фиксировать изменения без дополнительной индексации файлов (git add):
-                        +console("C:/Project", "git commit -a -m Название коммита")
                     .slide__col
                         +p().
                             После выполнения команды git commit -m "Add index.html":
-                        img(src="/static/images/pages/git/git-commit.jpg" alt="Вывод команды git commit")
+                        img(src="static/images/pages/git/git-commit.jpg" alt="Вывод команды git commit")
+                        +p().
+                            Можно сразу фиксировать изменения без дополнительной индексации файлов (git add):
+                        +console("C:/Project", "git commit -a -m Название коммита")
 
             .slide
                 h2.h2.-subtheme-h Удаление файлов
@@ -310,7 +343,7 @@ block main
                     .slide__col
                         +p().
                             После выполнения команды git rm index.html:
-                        img(src="/static/images/pages/git/git-rm.jpg" alt="Вывод команды git rm")
+                        img(src="static/images/pages/git/git-rm.jpg" alt="Вывод команды git rm")
 
             .slide
                 h2.h2.-subtheme-h Игнорирование файлов
@@ -345,7 +378,7 @@ block main
                     .slide__col
                         +p().
                             После выполнения команды git diff:
-                        img(src="/static/images/pages/git/git-diff.jpg" alt="Вывод команды git diff")
+                        img(src="static/images/pages/git/git-diff.jpg" alt="Вывод команды git diff")
 
             .slide
                 h2.h2.-subtheme-h Просмотр истории коммитов
@@ -359,7 +392,7 @@ block main
                     .slide__col
                         +p().
                             После выполнения команды git log:
-                        img(src="/static/images/pages/git/git-log.jpg" alt="Вывод команды git log")
+                        img(src="static/images/pages/git/git-log.jpg" alt="Вывод команды git log")
 
             .slide
                 h2.h2.-subtheme-h Отмена изменений
@@ -396,27 +429,29 @@ block main
                         .-hidden-on-slide
                             +hint().
                                 Некоторые говорят, что модель ветвления Git'а - это его “killer feature“. Способ ветвления в Git'е чрезвычайно легковесен, что делает операции ветвления практически мгновенными и переключение туда-сюда между ветками обычно так же быстрым.
-                    .slide__col
                         .-visible-on-slide
                             +hint().
                                 Модель ветвления Git'а - это его “killer feature“.
-                .-hidden-on-slide
-                    +p().
-                        Для наглядности давайте предположим, что у вас есть каталог, содержащий три файла, и вы хотите добавить их все в индекс и сделать коммит. При добавлении файлов в индекс для каждого из них вычислится контрольная сумма, затем эти версии файлов будут сохранены в Git-репозиторий (Git обращается к ним как к двоичным данным), а их контрольные суммы добавятся в индекс
-                    +console("C:/Project", "git add README test.rb LICENSE")
-                    +console("C:/Project", "git commit -m 'initial commit'")
-                    +p().
-                        Когда вы создаёте коммит, выполняя git commit, Git вычисляет контрольную сумму каждого подкаталога (в нашем случае только корневого каталога) и сохраняет эти объекты-деревья в Git-репозиторий. Затем Git создаёт объект для коммита, в котором есть метаданные и указатель на объект-дерево для корня проекта. Таким образом, Git сможет воссоздать текущее состояние, когда будет нужно.
-                    +p().
-                        Ваш Git-репозиторий теперь содержит пять объектов: по одному блобу для содержимого каждого из трёх файлов, одно дерево, в котором перечислено содержимое каталога и определено соответствие имён файлов и блобов, и один коммит с указателем на тот самый объект-дерево для корня и со всеми метаданными коммита. Схематично данные в этом Git-репозитории выглядят так, как показано на рисунке 4.
-                .slide__cols
-                    .slide__col
+                        .-hidden-on-slide
+                            +p().
+                                Для наглядности давайте предположим, что у вас есть каталог, содержащий три файла, и вы хотите добавить их все в индекс и сделать коммит. При добавлении файлов в индекс для каждого из них вычислится контрольная сумма, затем эти версии файлов будут сохранены в Git-репозиторий (Git обращается к ним как к двоичным данным), а их контрольные суммы добавятся в индекс
+                            +console("C:/Project", "git add README test.rb LICENSE")
+                            +console("C:/Project", "git commit -m 'initial commit'")
+                            +p().
+                                Когда вы создаёте коммит, выполняя git commit, Git вычисляет контрольную сумму каждого подкаталога (в нашем случае только корневого каталога) и сохраняет эти объекты-деревья в Git-репозиторий. Затем Git создаёт объект для коммита, в котором есть метаданные и указатель на объект-дерево для корня проекта. Таким образом, Git сможет воссоздать текущее состояние, когда будет нужно.
+                            +p().
+                                Ваш Git-репозиторий теперь содержит пять объектов: по одному блобу для содержимого каждого из трёх файлов, одно дерево, в котором перечислено содержимое каталога и определено соответствие имён файлов и блобов, и один коммит с указателем на тот самый объект-дерево для корня и со всеми метаданными коммита. Схематично данные в этом Git-репозитории выглядят так, как показано на рисунке 4.
                         .-visible-on-slide
                             +p().
                                 Пример: репозиторий с тремя файлами. Делаем коммит. Схематично данные в этом репозитории выглядят так, как показано на рисунке 4.
                             +console("C:/Project", "git add README test.rb LICENSE")
                             +console("C:/Project", "git commit -m 'initial commit'")
+                    .slide__col
                         +figure('Рисунок 4. Данные репозитория с единственным коммитом', conf.page, 'git-initial-commit.png')
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.branching.title
+                .slide__cols
                     .slide__col
                         .-hidden-on-slide
                             +p().
@@ -425,10 +460,6 @@ block main
                             +p().
                                 После следующих двух коммитов история будет выглядеть так:
                         +figure('Рисунок 5. Данные объектов Git для нескольких коммитов', conf.page, 'git-commit-next.png')
-
-            .slide
-                h2.h2.-subtheme-h.-visible-on-slide= subthemes.branching.title
-                .slide__cols
                     .slide__col
                         .-hidden-on-slide
                             +p().
@@ -437,6 +468,10 @@ block main
                             +remember()
                                 | Ветка в Git'е — это просто легковесный подвижный указатель на один из коммитов. Ветка по умолчанию в Git'е называется master.
                         +figure('Рисунок 6. Ветка указывает на историю коммитов', conf.page, 'branch.png')
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.branching.title
+                .slide__cols
                     .slide__col
                         +p().
                             При создании новой ветки вы создаете новый указатель, который можно будет перемещать.
@@ -447,26 +482,31 @@ block main
                         +console("C:/Project", "git branch testing")
                         +p().
                             Эта команда создаст новый указатель на тот самый коммит, на котором вы сейчас находитесь (рисунок 7).
+                    .slide__col
                         +figure('Рисунок 7. Две ветки, указывающие на историю коммитов', conf.page, 'new-branch.png')
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.branching.title
+                .-hidden-on-slide
+                    +p().
+                        Откуда Git узнает, на какой ветке вы находитесь в данный момент? Он хранит специальный указатель, который называется HEAD (верхушка). В данный момент вы всё ещё на ветке master. Команда git branch только создала новую ветку, она не переключила вас на неё (рисунок 8).
+                .-centered
+                    .-visible-on-slide
+                        +remember
+                            | HEAD - специальный указатель, указывающий на текущую ветку
+                    +figure('Рисунок 8. HEAD указывает на текущую ветку', conf.page, 'branch-head.png')
 
             .slide
                 h2.h2.-subtheme-h.-visible-on-slide= subthemes.branching.title
                 .slide__cols
                     .slide__col
-                        .-hidden-on-slide
-                            +p().
-                                Откуда Git узнает, на какой ветке вы находитесь в данный момент? Он хранит специальный указатель, который называется HEAD (верхушка). В данный момент вы всё ещё на ветке master. Команда git branch только создала новую ветку, она не переключила вас на неё (рисунок 8).
-                        .-visible-on-slide
-                            +remember
-                                | HEAD - специальный указатель, указывающий на текущую ветку
-                        +figure('Рисунок 8. HEAD указывает на текущую ветку', conf.page, 'branch-head.png')
-                    .slide__col
                         +p().
-                            Чтобы перейти на существующую ветку, нужно выполнить команду:
+                            Чтобы перейти на существующую ветку:
                         +console("C:/Project", "git checkout testing")
                         +figure('Рисунок 9. HEAD указывает на другую ветку после переключения веток', conf.page, 'git-checkout.png')
+                    .slide__col
                         +p().
-                            Чтобы создать ветку и сразу же перейти на неё, вы можете выполнить команду:
+                            Чтобы создать ветку и сразу же перейти на неё:
                         +console("C:/Project", "git checkout -b Название ветки")
 
             .slide
@@ -500,13 +540,14 @@ block main
                             +p().
                                 Сделаем коммит в ветке master (рисунок 12).
                         +figure('Рисунок 12. История с разошедшимися ветками', conf.page, 'git-checkout4.png')
-                        +hint().
-                            Из-за того, что ветка в Git'е на самом деле является простым файлом, который содержит 40 символов контрольной суммы SHA-1 коммита, на который он указывает, создание и удаление веток практически беззатратно и мгновенно.
+                        .-hidden-on-slide
+                            +hint().
+                                Из-за того, что ветка в Git'е на самом деле является простым файлом, который содержит 40 символов контрольной суммы SHA-1 коммита, на который он указывает, создание и удаление веток практически беззатратно и мгновенно.
                     .slide__col
                         +p().
                             Для просмотра всех веток в репозитории используется команда
                         +console("C:/Project", "git branch")
-                        img(src="/static/images/pages/git/git-branch.jpg" alt="Результат работы команды git branch")
+                        img(src="static/images/pages/git/git-branch.jpg" alt="Результат работы команды git branch")
                         +p().
                             Текущая ветка подсвечена и отмечена символом *.
 
@@ -534,7 +575,7 @@ block main
                             Предположим, в ветке master вы добавили в файл index.html строку I'm Vasya!, а в ветке testing - строку I'm Peter!
                         +p().
                             При попытке выполнить команду git merge testing в ветке master возникнет конфликт слияния:
-                        img(src="/static/images/pages/git/merge-conflict.jpg" alt="Конфликт слияния")
+                        img(src="static/images/pages/git/merge-conflict.jpg" alt="Конфликт слияния")
                     .slide__col
                         .-hidden-on-slide
                             +p().
@@ -543,7 +584,7 @@ block main
                             +p().
                                 Посмотреть какие файлы не прошли слияние:
                             +console("C:/Project", "git status")
-                        img(src="/static/images/pages/git/merge-conflict2.jpg" alt="Конфликт слияния")
+                        img(src="static/images/pages/git/merge-conflict2.jpg" alt="Конфликт слияния")
 
             .slide
                 h2.h2.-subtheme-h.-visible-on-slide Конфликты при слиянии веток
@@ -555,7 +596,7 @@ block main
                         .-visible-on-slide
                             +p().
                                 При конфликте слияния файл содержит секцию, которая выглядит так:
-                        img(src="/static/images/pages/git/merge-conflict3.jpg" alt="Содержимое файла при конфликте слияния")
+                        img(src="static/images/pages/git/merge-conflict3.jpg" alt="Содержимое файла при конфликте слияния")
                         .-hidden-on-slide
                             +p().
                                 В верхней части блока (всё, что выше =======) это версия из HEAD (ветки master, так как именно на неё вы перешли перед выполнением команды merge), всё, что находится в нижней части — версия в testing. Чтобы разрешить конфликт, вы должны либо выбрать одну из этих частей, либо как-то объединить содержимое по своему усмотрению.
@@ -564,12 +605,12 @@ block main
                                 Всё, что выше ======= - версия в master, что ниже - версия в testing.
                         +p().
                             Выберем вариант из ветки testing:
-                        img(src="/static/images/pages/git/merge-conflict4.jpg" alt="Разрешение конфликта слияния")
+                        img(src="static/images/pages/git/merge-conflict4.jpg" alt="Разрешение конфликта слияния")
                     .slide__col
                         +p().
                             После разрешения конфликта нужно добавить файл в индекс:
                         +console("C:/Project", "git add index.html")
-                        img(src="/static/images/pages/git/merge-conflict5.jpg" alt="Разрешение конфликта слияния")
+                        img(src="static/images/pages/git/merge-conflict5.jpg" alt="Разрешение конфликта слияния")
                         +p().
                             И зафиксировать изменения:
                         +console("C:/Project", "git commit -m 'Merge branch testing'")
@@ -584,25 +625,27 @@ block main
                             Они выглядят как (имя удал. репоз.)/(ветка).
                         +p().
                             По умолчанию Git называет удаленный репозиторий origin.
-                    .slide__col
                         .-hidden-on-slide
                             +p().
                                 Рассмотрим пример. Скажем, у вас в сети есть свой Git-сервер на git.ourcompany.com. Если вы с него что-то склонируете (git clone), Git автоматически назовёт его origin, заберёт оттуда все данные, создаст указатель на то, на что там указывает ветка master, и назовёт его локально origin/master (но вы не можете его двигать). Git также сделает вам вашу собственную ветку master, которая будет начинаться там же, где и ветка master в origin, так что вам будет с чем работать (рисунок 13).
                         .-visible-on-slide
                             +p().
                                 Рассмотрим пример. Склонируем репозиторий с Git-сервера (рисунок 13).
+                    .slide__col
                         +figure('Рисунок 13. Клонирование Git-проекта даёт вам собственную ветку master и origin/master, указывающий на ветку master в origin', conf.page, 'git-remote.png')
 
             .slide
                 h2.h2.-subtheme-h.-visible-on-slide= subthemes.remoteRepos.title
                 .slide__cols
                     .slide__col
-                        +p().
-                            Если вы сделаете что-то в своей локальной ветке master, а тем временем кто-то ещё отправит изменения на git.ourcompany.com и обновит там ветку master, то ваши истории продолжатся по-разному (рисунок 14).
+                        .-hidden-on-slide
+                            +p().
+                                Если вы сделаете что-то в своей локальной ветке master, а тем временем кто-то ещё отправит изменения на git.ourcompany.com и обновит там ветку master, то ваши истории продолжатся по-разному (рисунок 14).
                         +figure('Рисунок 14. При выполнении локальной работы и отправке кем-то изменений на удалённый сервер каждая история продолжается по-разному', conf.page, 'git-remote2.png')
                     .slide__col
-                        +p().
-                            Для синхронизации вашей работы выполняется команда
+                        .-hidden-on-slide
+                            +p().
+                                Для синхронизации вашей работы выполняется команда
                         +console("C:/Project", "git fetch origin")
                         .-hidden-on-slide
                             +p().
@@ -629,8 +672,12 @@ block main
                     .slide__col
                         h3.h3 Отправка изменений на сервер (git push)
                         +console("C:/Project", "git push [удал. сервер] [ветка]")
-                        +p().
-                            Когда вы хотите поделиться своими наработками, вам необходимо отправить (push) их в главный репозиторий. Чтобы отправить вашу ветку master на сервер origin, вы можете выполнить следующую команду для отправки наработок на сервер:
+                        .-hidden-on-slide
+                            +p().
+                                Когда вы хотите поделиться своими наработками, вам необходимо отправить (push) их в главный репозиторий. Чтобы отправить вашу ветку master на сервер origin, вы можете выполнить следующую команду для отправки наработок на сервер:
+                        .-visible-on-slide
+                            +p().
+                                Чтобы отправить вашу ветку master на сервер origin:
                         +console("C:/Project", "git push origin master")
                         .-hidden-on-slide
                             +p().
@@ -645,7 +692,7 @@ block main
                 h2.h2.-subtheme-h Процесс работы с Git
                 .-centered
                     +p().
-                        Находясь на ветке master, получаем все изменения с удаленного сервера:
+                        Находясь на ветке master, получаем изменения с сервера:
                     +console("C:/Project", "git pull")
                     +p().
                         Переключаемся на новую ветку для решения конкретной задачи:
@@ -665,21 +712,22 @@ block main
                 +listOrd("Порядок регистрации", listGitLabRegistration)
                 .slide__cols
                     .slide__col
-                        img(src="/static/images/pages/git/gitlab.jpg" alt="Добавление проекта в группу")
+                        img(src="static/images/pages/git/gitlab.jpg" alt="Добавление проекта в группу")
                     .slide__col
-                        img(src="/static/images/pages/git/gitlab2.jpg" alt="Добавление проекта в группу")
+                        img(src="static/images/pages/git/gitlab2.jpg" alt="Добавление проекта в группу")
 
             .slide
                 h2.h2.-subtheme-h Генерация SSH-ключа
-                +p().
-                    SSH позволяет устанавливать защищенное подключение между вашим компьютером и GitLab. Не нужно будет при каждом пулле и пуше вводить логин и пароль.
-                h3.h3 Порядок генерации SSH-ключа
+                .-hidden-on-slide
+                    +p().
+                        SSH позволяет устанавливать защищенное подключение между вашим компьютером и GitLab. Не нужно будет при каждом пулле и пуше вводить логин и пароль.
+                    h3.h3 Порядок генерации SSH-ключа
                 .slide__cols
                     .slide__col
                         +p().
                             Зайти в настройках профиля на вкладку SSH keys
                         .-hidden-on-slide
-                            img(src="/static/images/pages/git/ssh.jpg" alt="Генерация SSH-ключа")
+                            img(src="static/images/pages/git/ssh.jpg" alt="Генерация SSH-ключа")
                         +p().
                             Ввести в консоли команду:
                         +console("C:/Project", "ssh-keygen -t rsa -C 'your_email'")
@@ -690,12 +738,14 @@ block main
                             Вставить скопированное значение в поле Key, ввести Title (Work) и нажать Add key.
                     .slide__col
                         .-visible-on-slide
-                            img(src="/static/images/pages/git/ssh.jpg" alt="Генерация SSH-ключа")
+                            img(src="static/images/pages/git/ssh.jpg" alt="Генерация SSH-ключа")
 
             .slide
                 h2.h2.-subtheme-h Тестовое задание
-                +listCap("", listTestTask)
+                .-centered
+                    +listCap("", listTestTask)
 
             .slide
                 h2.h2.-subtheme-h Полезные ссылки
-                +toRead("", listToRead)
+                .-centered
+                    +toRead("", listToRead)
