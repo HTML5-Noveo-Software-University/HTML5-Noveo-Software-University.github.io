@@ -5,6 +5,7 @@
 @import "0_helpers/mixins/grid.scss";
 @import "0_helpers/mixins/components.scss";
 @import "0_helpers/placeholders/common-components.scss";
+@import "0_helpers/placeholders/backgrounds.scss";
 
 @import "2_basic/typo.scss";
 @import "2_basic/layout.scss";
@@ -23,3 +24,4 @@
 @import "3_blocks/slides-layout.scss";
 @import "3_blocks/strike-block.scss";
 @import "3_blocks/gif.scss";
+@import "3_blocks/tables.scss";

@@ -99,7 +99,7 @@ body {
     .main {
         padding: 1rem 2rem;
         &:not(:only-child) {
-            padding-right: 2rem;
+            padding-right: 1rem;
             .-show-aside & {
                 height: 0;
                 min-height: 0;

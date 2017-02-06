@@ -34,6 +34,21 @@ mixin code(lang)
             code(class="language-" + lang)
                 block
 
+mixin code-no-lines(lang)
+    if lang === 'html'
+        pre
+            code.language-html
+                - var oldBuf = pug_html
+                - pug_html = ''
+                block
+                - pug_html = oldBuf + pug.escape(pug_html)
+    else
+        pre
+            code(class="language-" + lang)
+                block
+
+
+
 mixin codepen()
     .-hidden-on-slide
         block
@@ -260,3 +275,13 @@ mixin inline-html()
         +escape()
             block
     +space()
+
+mixin two-col-table-th-in-tbody-css(data)
+    .simple-table
+        table.-fixed-two-col
+            each val in data
+                tr
+                    th= val[0]
+                    td(data-th=val[0])
+                        +code-no-lines('css')
+                            = val[1]
