@@ -1,0 +1,14 @@
+.footer {
+    background: lighten(black, 15%);
+    color: darken($white, 15%);
+    padding: 1rem;
+    position: relative;
+    &__nav-item {
+        display: inline-block;
+        margin-right: 2rem;
+        text-decoration: underline;
+    }
+    .-slides-layout & {
+        display: none;
+    }
+}

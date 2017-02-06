@@ -1,0 +1,3 @@
+node_modules/
+# Keep this ignored. We don't need example hosted on github pages
+example.html

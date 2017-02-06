@@ -1,0 +1,38 @@
+@mixin centerV($amount) {
+    letter-spacing: -.35em;
+    > * {
+        display: inline-block;
+        letter-spacing: normal;
+        vertical-align: middle;
+    }
+
+    @if $amount == 1 {
+        white-space: nowrap;
+        &:before {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+        > * {
+            white-space: initial;
+        }
+    }
+}
+
+@mixin inline-block-fix() {
+    letter-spacing: -.35em;
+    > * {
+        letter-spacing: normal;
+    }
+}
+
+
+@mixin inline-nowrap() {
+    letter-spacing: -.35em;
+    white-space: nowrap;
+    > * {
+        letter-spacing: normal;
+        white-space: normal;
+    }
+}
