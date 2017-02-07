@@ -120,6 +120,7 @@
         width: 68%;
     }
 }
+
 .figure {
     border-top: 1px solid rgba($turq, .3);
     display: inline-block;
@@ -132,6 +133,9 @@
         padding: 1rem 0;
     }
     img {
+        height: auto;
         max-height: 60vh;
+        max-width: 100%;
+        width: auto;
     }
 }

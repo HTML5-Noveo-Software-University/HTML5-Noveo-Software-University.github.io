@@ -10,6 +10,7 @@ const csso = require('gulp-csso');
 const combineMq = require('gulp-combine-mq');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
+const debug = require('gulp-debug');
 
 const paths = {
     pugPages: './dev/pug/pages/*.pug',
@@ -30,6 +31,7 @@ const paths = {
 
 gulp.task('html', () => {
     gulp.src(paths.pugPages)
+    .pipe(debug())
     .pipe(pug({pretty: false}))
     .pipe(gulp.dest(paths.html));
 });
@@ -50,7 +52,8 @@ gulp.task('html-partials-watch', () => {
 
 gulp.task('csscomb', () => {
     var comb = new Comb(require(paths.cssComb));
-    return comb.processDirectory(paths.scss);
+    comb.processDirectory(`${paths.scss}/2_basic`);
+    return comb.processDirectory(`${paths.scss}/3_blocks`);
 });
 
 gulp.task('css-dev', ['csscomb'], () => {

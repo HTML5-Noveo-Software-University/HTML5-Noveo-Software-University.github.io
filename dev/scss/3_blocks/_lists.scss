@@ -3,6 +3,8 @@
     padding-left: .5rem;
     .-slides-layout & {
         font-size: 1.2rem;
+        max-height: 78vh;
+        overflow: hidden;
     }
     &.-ordered {
         counter-reset: simple-ol;
