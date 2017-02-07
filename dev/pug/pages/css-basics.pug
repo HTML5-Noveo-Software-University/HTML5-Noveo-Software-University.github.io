@@ -8,10 +8,504 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+        var selectorsTable = [[
+                'Селектор тега:',
+                'p { ... }'
+            ], [
+                'Селектор класса:',
+                '.class { ... }'
+            ], [
+                'Селектор индентификатора:',
+                '#id { ... }'
+            ], [
+                'Селектор атрибута:',
+                '[data-title=”...”] { ... }'
+            ], [
+                'Селектор псевдокласса:',
+                ':hover { ... }'
+            ], [
+                'Селектор псевдоэлемента:',
+                '::before { ... }'
+            ], [
+                'Универсальный селектор:',
+                '* { ... }'
+        ]]
+    -
+        var combinatorsTable1 = [[
+                'Все <div class=”wrapper”>:',
+                'div.wrapper { ... }'
+            ], [
+                'Только <div id=”modal”>:',
+                'div#modal { ... }'
+            ], [
+                'Все <a>, имеющие атрибут title:',
+                'a[title] { ... }'
+            ], [
+                'Все <a>, атрибут title которых содержит слово show:',
+                'a[title*=”show”] { ... }'
+            ], [
+                'Все <a>, title которых содержит show, отделенное пробелом:',
+                'a[title~=”show”] { ... }'
+            ], [
+                'Все <a>, title которых начинается с show:',
+                'a[title^=”show”] { ... }'
+            ], [
+                'Все <a>, title которых заканчивается на show:',
+                'a[title$=”show”] { ... }'
+            ], [
+                'Все <a>, при наведении на них курсора:',
+                'a:hover { ... }'
+            ], [
+                'Псевдоэлемент:',
+                'a::before { ... }'
+        ]]
+    -
+        var combinatorsTable2 = [[
+                'Все <p>, все <div>:',
+                'div, p { ... }'
+            ], [
+                'Все <p>, являющиеся потомками <div>:',
+                'div p { ... }'
+            ], [
+                'Все <p>, являющиеся прямыми потомками <div>:',
+                'div > p { ... }'
+            ], [
+                'Все потомки <div>:	',
+                'div * { ... }'
+            ], [
+                'Все прямыe потомки <div>:',
+                'div > * { ... }'
+            ], [
+                'Каждый <p>, следующий сразу после <div>:',
+                'div + p { ... }'
+            ], [
+                'Все <p>, после <div>:',
+                'div ~ p { ... }'
+        ]]
+    -
+        var otherPseudoClasses = [[
+                'Выбирает пустые теги',
+                ':empty {}'
+            ], [
+                'выбирает теги за исключением тегов с селектором в скобках',
+                ':not() {}'
+            ], [
+                'Ввыбирает теги по указанному языку',
+                ':lang() {}'
+            ], [
+                'То же, что html, но специфичность выше',
+                ':root {}'
+            ], [
+                'Используется для стилизации цели “якоря”',
+                ':target {}'
+        ]]
+    -
+        var listToRead = [{
+            id: "toRead-1",
+            title: "Reset:",
+            href: "http://meyerweb.com/eric/tools/css/reset/"
+        },{
+            id: "toRead-2",
+            title: "Normalize:",
+            href: "http://necolas.github.io/normalize.css/"
+        }, {
+            id: "toRead-3",
+            title: "БЭМ (Яндекс)",
+            href: "https://ru.bem.info/method/naming-convention/"
+        }, {
+            id: "toRead-4",
+            title: "MindBEMding – getting your head ’round BEM syntax",
+            href: "https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/"
+        }]
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
-            +main-slide(pageTitle, 'Имя автора лекции')
-        .slide
+            +main-slide(pageTitle, 'Света Шарипова')
+
+            .slide(id=subthemes.linkingStyles.href)
+                h2.h2.-subtheme-h= subthemes.linkingStyles.title
+                .section.-centered
+                    h3.h4.-black 1. Подключение стилей в отдельном документе
+                    include ../lectures/code-examples/css-basics/external-css.pug
+
+                .section.-centered
+                    h3.h4.-black 2. Подключение стилей в
+                        +inline-html()
+                            <head>
+                    include ../lectures/code-examples/css-basics/css-in-head.pug
+
+                .-hidden-on-slide
+                    +remember()
+                        | Подключать в
+                        +inline-html()
+                            <head>
+                        | имеет смысл, только если у вас SPA (Single Page Application) и есть подтвержденная тестами производительности необходимость в этом. В таком случае нужно разработать стратегию поддержки таких стилей и автоматизировать их добавление.
+                        br
+                        br
+                        | Обычная практика - подключать стили в отдельном документе (1).
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.linkingStyles.title
+                .section.-centered
+                    h3.h4.-black 3. Инлайн-стили
+                    +strike-block()
+                        include ../lectures/code-examples/css-basics/inline-styles.pug
+                    .-hidden-on-slide
+                        +hint()
+                            | Инлайн-стили можно добавлять динамически с помощью JavaScript, но только если стили рассчитываются на лету. Если стили нужно обновить через JS и они заранее известны, то всегда используйте атрибут class.
+                .section.-centered
+                    h3.h4.-black 4. Импорт стилей внутри документа .css
+                    +strike-block()
+                        include ../lectures/code-examples/css-basics/import-in-css.pug
+            .slide(id=subthemes.selectors.href)
+                h2.h2.-subtheme-h= subthemes.selectors.title
+                +two-col-table-th-in-tbody-css(selectorsTable)
+            .slide(id=subthemes.combinators.href)
+                h2.h2.-subtheme-h= subthemes.combinators.title
+                h3.h4.-black.-hidden-on-slide Несколько селекторов одного элемента
+                +two-col-table-th-in-tbody-css(combinatorsTable1)
+            .slide().section
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.combinators.title
+                h3.h4.-black.-hidden-on-slide Комбинации селекторов разных элементов
+                +two-col-table-th-in-tbody-css(combinatorsTable2)
+            .slide(id=subthemes.specificity.href)
+                h2.h2.-subtheme-h= subthemes.specificity.title
+                .-centered
+                    .-hidden-on-slide
+                        +p()
+                            +bold-sematics-attention('Специфичность (specificity)')
+                            | - это "вес селектора", помогающий браузеру определить, какое из нескольких конфликтующих правил применить к элементу.
+                    +p()
+                        | При одинаковой специфичности, правило, которое находится ниже, переопределяет все предыдущие.
+
+                    | main.css:
+
+                    +code('css').
+                        p { color: red; }
+
+                    | additional.css:
+                    +code('css').
+                        p { color: green; }
+                        ...
+                        p { color: orange; }
+
+                    | index.html:
+
+                    +code('html').
+                        <link rel="stylesheet" href="main.css">
+                        <style>
+                            p {color: blue;}
+                        </style>
+                        <link rel="stylesheet" href="additional.css">
+
+                    .-hidden-on-slide Цвет параграфа будет оранжевым.
+            .slide().-visible-on-slide
+                h3.h3.-subtheme-h Какого цвета текст параграфа?
+                .-centered
+                    +code('html').
+                        <html>
+                            <head>...</head>
+                            <body>
+                                <div>
+                                    <p class="text"> Lorem </p>
+                                </div>
+                            </body>
+                        </html>
+                    br
+                    br
+                    +code('css').
+                        .text { color: blue;}
+                        html body div p { color: red;}
+            .slide()
+                h3.h3.-subtheme-h Расчет специфичности
+
+                .simple-table
+                    table
+                        tr
+                            th Универсальный селектор
+                                +bold-no-sematics('*')
+                                br
+                                | или
+                                br
+                                | Псевдокласс
+                                +bold-no-sematics(':not')
+                            td 0, 0, 0, 0
+                        tr
+                            th Элемент (селектор тега), например,
+                                +bold-no-sematics('p')
+                                br
+                                | или
+                                br
+                                | Псевдоэлемент, например,
+                                +bold-no-sematics('::before')
+                            td
+                                | 0, 0, 0,
+                                +space()
+                                span.-bold 1
+                        tr
+                            th Класс, например,
+                                +bold-no-sematics('.wrapper')
+                                br
+                                | или
+                                br
+                                | Атрибут, например,
+                                +bold-no-sematics('[title]')
+                            td
+                                | 0, 0,
+                                +space()
+                                span.-bold 1
+                                |, 0
+
+                        tr
+                            th ID, например,
+                                +bold-no-sematics('#modal')
+                            td
+                                | 0,
+                                +space()
+                                span.-bold 1
+                                |, 0, 0
+                        tr
+                            th Инлайн-стиль
+                                +inline-html().
+                                    <style></style>
+                            td
+                                span.-bold 1
+                                |, 0, 0, 0
+                        tr
+                            th
+                                span.-bold !important
+                            td
+                                span.-bold 1
+                                |, 0, 0, 0, 0
+            .slide().-pushed-down
+                h3.h4.-black.-subtheme-h Пример
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="ZLRPqN" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css basics] - specificity" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/ZLRPqN/">[css basics] - specificity</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.reset.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.reset.title
+                .slide__cols
+                    .slide__col
+                        h3.h3.-black Пример правила CSS Reset
+                        +code('css').
+                            html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+                                margin: 0;
+                                padding: 0;
+                                border: 0;
+                                font-size: 100%;
+                                font: inherit;
+                                vertical-align: baseline;
+                            }
+
+
+                    .slide__col
+                        h3.h3.-black Пример правил CSS Normalize
+                        +code('css').
+                            html {
+                              font-family: sans-serif;
+                              -ms-text-size-adjust: 100%;
+                              -webkit-text-size-adjust: 100%;
+                            }
+                            body {
+                              margin: 0;
+                            }
+                +p().
+                    Reset сбрасывает стандартные стили браузера, а Normalize корректирует стандартные стили, чтобы сделать отображение кросс-браузерным настолько, насколько это возможно.
+                .-hidden-on-slide
+                    +p().
+                        Normalize идеально подходит для прототипирования, а Reset может оказаться более удобным, если дизайн очень продуман и на каждую деталь есть кастомное дизайнерское решение. Однако, на практике обычно оказывается недостаточно только Reset или Normalize, приходится добавлять свои стили "сброса". Бывает и так, что что-то из Reset или Normalize нужно убрать. Поэтому важно знать, какие стили есть в каждом из этих наборов, чтобы выбирать и адаптировать их под нужды проекта.
+            .slide(id=subthemes.pseudoelements.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.pseudoelements.title
+                .-centered
+                    +code-no-lines('css').
+                        ::after {}
+                        ::before {}
+                        ::first-letter {}
+                        ::first-line {}
+                        ::selection {} /* нет поддержки на iOS */
+            .slide()
+                h2.h2.-subtheme-h.-visible-on-slide Псевдоэлементы ::before и ::after
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="KaBwjV" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css basics] - pseudoelements ::before and ::after" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/KaBwjV/">[css basics] - pseudoelements ::before and ::after</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide().section
+                h2.h2.-subtheme-h.-visible-on-slide Псевдоэлементы ::before и ::after
+                .-centered
+                    +figure('Псевдоэлементы ::before и ::after появляются в визуальной модели DOM в инструментах разработчика после применения стилей', 'css-basics', 'pseudoelements.png')
+            .slide().section
+                h2.h2.-subtheme-h.-visible-on-slide Псевдоэлементы ::before и ::after
+                .-hidden-on-slide
+                    +p()
+                        | Если свойство
+                        +bold-no-sematics('content')
+                        | не задано, то псевдоэлемент не отобразится в визуальной модели DOM. Это происходит потому, что перед тем, как добавить псевдоэлемент, браузер вычисляет все стили, которые относятся к этому псевдоэлементу. Если обязательного свойства
+                        +bold-no-sematics('content')
+                        | нет, то и отображать псевдоэлемент незачем.
+                .-centered
+                    +gif('pseudoelements-nocontent')
+            .slide().section
+                h2.h2.-subtheme-h.-visible-on-slide Псевдоэлементы ::before и ::after
+                .-hidden-on-slide
+                    +p()
+                        | Тоже самое происходит, если псевдоэлемент скрывается при помощи
+                        +bold-no-sematics('display: none')
+                .-centered
+                    +gif('pseudoelements-display-none')
+            .slide(id=subthemes.pseudoClassesCondition.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.pseudoClassesCondition.title
+                .-centered
+                    +code-no-lines('css').
+                        :active {}
+                        :focus {}
+                        :hover {}
+                        :visited {} /* только для ссылок c атрибутом href */
+                        :link {} /* только для ссылок c атрибутом href */
+                    h3.h4.-black Порядок без переопределения:
+                    +code-no-lines('css').
+                        :link {}
+                        :visited {}
+                        :hover {}
+                        :active {}
+            .slide(id=subthemes.pseudoClassesForms.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.pseudoClassesForms.title
+                .-centered
+                    +code-no-lines('css').
+                        :checked {}
+                        :disabled {}
+                        :enabled {}
+                    h3.h4.-black Псевдоклассы валидации (IE10+)
+                    +code-no-lines('css').
+                        :invalid {}
+                        :optional {}
+                        :required {}
+                        :valid {}
+            .slide(id=subthemes.pseudoClassesOrder.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.pseudoClassesOrder.title
+                .-centered
+                    +code-no-lines('css').
+                        :first-child {}
+                        :first-of-type {}
+                        :last-child {}
+                        :last-of-type {}
+                        :nth-child() {}
+                        :nth-last-child() {}
+                        :nth-last-of-type() {}
+                        :nth-of-type() {}
+                        :only-child {}
+                        :only-of-type {}
+            .slide.-pushed-down
+                h2.h3.-subtheme-h :first-child и :first-of-type
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="RKBRxo" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css basics] - :first-child and :first-of-type" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/RKBRxo/">[css basics] - :first-child and :first-of-type</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide.-pushed-down
+                h2.h3.-subtheme-h :last-child и :last-of-type
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="GrBqGm" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css basics] - :last-child и :last-of-type" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/GrBqGm/">[css basics] - :last-child и :last-of-type</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide.-pushed-down
+                h2.h3.-subtheme-h :only-child и :only-of-type
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="zNLBmg" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css basics] - :only-child и :only-of-type" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/zNLBmg/">[css basics] - :only-child и :only-of-type</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide.-pushed-down
+                h2.h3.-subtheme-h :nth-child() и :nth-of-type()
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="KaBMJr" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css basics] - :nth-child() и :nth-of-type() - simple number" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/KaBMJr/">[css basics] - :nth-child() и :nth-of-type() - simple number</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide.-pushed-down
+                h2.h3.-subtheme-h :nth-child() и :nth-of-type()
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="zNLKvG" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css basics] - :nth-child() и :nth-of-type() - последовательности" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/zNLKvG/">[css basics] - :nth-child() и :nth-of-type() - последовательности</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide.-pushed-down
+                h2.h3.-subtheme-h :nth-last-child() и :nth-last-of-type()
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="YNjGWx" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css basics] - :nth-last-child() и :nth-last-of-type()" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/YNjGWx/">[css basics] - :nth-last-child() и :nth-last-of-type()</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide(id=subthemes.pseudoClassesOther.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.pseudoClassesOther.title
+                +two-col-table-th-in-tbody-css(otherPseudoClasses)
+            .slide.-pushed-down
+                h2.h3.-subtheme-h :empty
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="ygqpKL" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css basics] - :empty" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/ygqpKL/">[css basics] - :empty</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide.-pushed-down
+                h2.h3.-subtheme-h :not()
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="xgJpyd" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css basics] - :not" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/xgJpyd/">[css basics] - :not</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide.-pushed-down
+                h2.h3.-subtheme-h :not()
+                .slide__cols
+                    .slide__col
+                        +code('html').
+                            <a href="#mainInfo">Link to target</a>
+                            <div id="mainInfo" class="block">This is target block</div>
+                            <div class="block">This is block</div>
+                        br
+                        +code('css').
+                            .block:target{
+                                color: blue;
+                            }
+                    .slide__col
+                        +gif('target')
+            .slide(id=subthemes.namingConventions.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.namingConventions.title
+                .-hidden-on-slide
+                    +p()
+                        | Соглашение по именованию селекторов - набор правил, которого придерживаются разработчики, придумывая названия классов. Cоглашение по именованию необходимо, чтобы писать код в одном стиле, чтобы быстрее читать и разбираться в чужом коде.
+                    +p()
+                        | Веб развивается стремительно, а кроссбраузерность и корректное отображение верстки на огромном количестве различных устройств - давно стали необходимостью. В таких условиях нет времени на бесконечный рефакторинг и багфиксинг множества взаимосвязанных стилей. Поэтому разработчики стремятся разделять макет на независимые компоненты, чтобы в последствии их не дублировать, а переиспользовать.
+
+
+                .slide__cols
+                    .slide__col
+                        .-text-centered-on-slide
+                            +figure('UI kit', 'css-basics', 'ui-kit.png')
+                    .slide__col
+                        .-text-centered-on-slide
+                            +figure('Mockup', 'css-basics', 'mockup.jpg')
+                .-hidden-on-slide
+                    +p()
+                        | Даже если UI-kit отстутсвует, к верстке макета нужно приступать только после тщательного анализа компонентов. Желательно, чтобы у вас были готовые макеты всех страниц, для всех устройств. Тогда можно их изучить и понять, какие компоненты где переиспользуются, все их возможные состояния и контексты. Такое понимание позволяет сразу писать стили, которые легко поддерживать, которые не придется переписывать или обновлять с каждой новой страницей.
+                    +p()
+                        | Соглашение по именованию должно быть ориентировано на модульность. Среди таких соглашений наиболее популярным и пригодным для быстро растущих проектов является БЭМ.
+            .slide().-pushed-down
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.namingConventions.title
+                .-text-centered-on-slide
+                    +figure('Разделение на компоненты в БЭМ', 'css-basics', 'bem.png')
+
+            .slide().-pushed-down
+                h2.h3.-black.-subtheme-h БЭМ (BEM-101) абстрактно
+                .-centered
+                    +code('html').
+                        <div class="block">
+                            <div class="block__element"></div>
+                            <div class="block__element  block__element--modifier"></div>
+                        </div>
+            .slide().-pushed-down
+                h2.h3.-black.-subtheme-h БЭМ (BEM-101) на примере
+                .-centered
+                    +code('css').
+                        .person {}
+                        .person__hand {}
+                        .person--female {}
+                        .person--female__hand {}
+                        .person__hand--left {}
+                    +code('html').
+                        <div class="person person--female">
+                            <div class="person__hand person__hand--left person--female__hand"></div>
+                        </div>
+            .slide().-pushed-down
+                h2.h3.-black.-subtheme-h Блок внутри блока?
+                .-centered
+                    +strike-block()
+                        +code('html').
+                            <div class="block">
+                                <div class="block__element">
+                                    <div class="block__element__element"></div>
+                                </div>
+                            </div>
+                    .section
+                        +code('html').
+                            <div class="block">
+                                <div class="block__element">
+                                	<div class="other-block"></div>
+                                </div>
+                            </div>
+            .slide()
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)

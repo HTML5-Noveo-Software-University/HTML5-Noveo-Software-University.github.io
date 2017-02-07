@@ -78,7 +78,7 @@ block main
                         | сообщает браузеру, что это HTML5 документ.
             .slide().-pushed-down
                 h2.h2.-subtheme-h.-visible-on-slide= subthemes.structure.title
-                .-centered
+                .-centered-wide
                     +code('html').
                         <!DOCTYPE html>
                         <html lang="en">
@@ -88,25 +88,21 @@ block main
                             </head>
                             <body>...</body>
                         </html>
-                    .section
+                    .section.-hidden-on-slide
                         +p()
                             +line(2)
                             | основной язык страницы - английский
                         +p()
                             +line(4)
                             | кодировка
-                        .-visible-on-slide
-                            +p()
-                                +line(5)
-                                | Мета тег для улучшенной отрисовки в старых IE
-                        .-hidden-on-slide
-                            +p()
-                                +line(5)
-                                | Мета тег для улучшенной отрисовки в старых IE.
-                                +bold-sematics-attention(' IE=edge ')
-                                | означает, что IE должен использовать последнюю версию движка для отрисовки, а
-                                +bold-sematics-attention(' chrome=1 ')
-                                | означает, что IE должен использовать Google Chrome Frame, если он установлен. Google Chrome Frame - это плагин для IE на основе Chromium, работает в IE 6 - 9. Позволяет отображать страницы, используя  WebKit layout engine и V8 JavaScript engine.
+
+                        +p()
+                            +line(5)
+                            | Мета тег для улучшенной отрисовки в старых IE.
+                            +bold-sematics-attention(' IE=edge ')
+                            | означает, что IE должен использовать последнюю версию движка для отрисовки, а
+                            +bold-sematics-attention(' chrome=1 ')
+                            | означает, что IE должен использовать Google Chrome Frame, если он установлен. Google Chrome Frame - это плагин для IE на основе Chromium, работает в IE 6 - 9. Позволяет отображать страницы, используя  WebKit layout engine и V8 JavaScript engine.
             .slide().-pushed-down
                 h2.h2.-subtheme-h.-visible-on-slide= subthemes.structure.title
                 .-centered-wide
@@ -123,20 +119,6 @@ block main
                             <body>...</body>
                         </html>
                     .section
-                        .-visible-on-slide
-                            +p()
-                                +line(6)
-                                | Мета тег viewport сообщает мобильному браузеру, как должна выглядеть и масштабироваться страница.
-                            +p()
-                                +line(7)
-                                | Мета тег, позволяющий в Chrome на Android "установить" страницу на домашний экран и запускать в полноэкранном режиме ("app mode").
-                                +link-to-source(listToRead, 2)
-                            +p()
-                                +line(8)
-                                | Если значение = yes, то веб-приложение отображается в полноэкранном режиме на мобильных устройствах Apple.
-                                +link-to-source(listToRead, 3)
-                                +space()
-                                +link-to-source(listToRead, 4)
                         .-hidden-on-slide
                             +p()
                                 +line(6)
@@ -183,7 +165,7 @@ block main
                             </head>
                             <body>...</body>
                         </html>
-                    .section
+                    .section.-hidden-on-slide
                         +p()
                             +line(10)
                             | Заголовок страницы на мобильном iOS.
@@ -218,15 +200,17 @@ block main
                                 </head>
                                 <body>...</body>
                             </html>
-                        +p()
-                            +line(13)
-                            | Подключение скрипта
-                        +p()
-                            +line(14)
-                            | Подключение стилей
+                        .-hidden-on-slide
+                            +p()
+                                +line(13)
+                                | Подключение скрипта
+                            +p()
+                                +line(14)
+                                | Подключение стилей
 
                     .slide__col
-                        +figure('Critical Rendering Path', conf.page, 'critical_rendering_path.png', listToRead, 5)
+                        .-text-centered-on-slide
+                            +figure('Critical Rendering Path', conf.page, 'critical_rendering_path.png', listToRead, 5)
 
                     .section.-hidden-on-slide
                         +p()
@@ -355,30 +339,33 @@ block main
                         | - обертка для основной навигации на странице (как правило, встречается 1-2 раза).
             .slide.-pushed-down()
                 h2.h2.-subtheme-h.-visible-on-slide Article и Section
-                .-centered
-                    +code('html').
-                        <main>
-                        	<article>
-                                <header>...</header>
+                .slide__cols
+                    .slide__col
+                        +code('html').
+                            <main>
+                            	<article>
+                                    <header>...</header>
+                                    <section>...</section>
+                                    <section>...</section>
+                                    <footer>...</footer>
+                                </article>
+                            </main>
+
+                    .slide__col
+                        div ИЛИ
+                        +code('html').
+                            <main>
+                            	<article>
+                                    <header>...</header>
+                                    <p>...</p>
+                                    <p>...</p>
+                                    <aside>...</aside>
+                                    <p>...</p>
+                                    <blockquote>...</blockquote>
+                                    <footer>...</footer>
+                                </article>
                                 <section>...</section>
-                                <section>...</section>
-                                <footer>...</footer>
-                            </article>
-                        </main>
-                    div ИЛИ
-                    +code('html').
-                        <main>
-                        	<article>
-                                <header>...</header>
-                                <p>...</p>
-                                <p>...</p>
-                                <aside>...</aside>
-                                <p>...</p>
-                                <blockquote>...</blockquote>
-                                <footer>...</footer>
-                            </article>
-                            <section>...</section>
-                        </main>
+                            </main>
                     .-hidden-on-slide
                         +p()
                             +inline-html()
@@ -451,11 +438,7 @@ block main
                     +code('html').
                         <p>
                             ...
-                            <q>
-                                <cite>
-                                        Autor
-                                </cite>
-                            </q>
+                            <q> ... <cite> Autor </cite> </q>
                             ...
                         </p>
 
@@ -515,8 +498,7 @@ block main
                 .-centered
                     h4.h4 Полифил для IE<9 через условные комментарии
                     +code('html').
-                        <!--[if lt IE 9]>
-                            <script>
+                        <!--[if lt IE 9]><script>
                             document.createElement("header );
                             document.createElement("footer");
                             document.createElement("section");
@@ -524,16 +506,14 @@ block main
                             document.createElement("aside");
                             document.createElement("nav");
                             document.createElement("article");
-                            document.createElement("time" );
-                            </script>
-                        <![endif]-->
+                            ...
+                        </script><![endif]-->
                     //-" This somehow fixes highlihgt issue in Atom
                     h4.h4 Условные классы для IE до 9 версии включительно
                     +code('html').
                         <!DOCTYPE html>
                         <!--[if IE 9 ]><html class="ie"><![endif]-->
-                        <!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]>
-                        <!--><html><!--<![endif]-->
+                        <!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html><!--<![endif]-->
             .slide()
                 .-centered
                     +toRead("Полезные ссылки", listToRead)
