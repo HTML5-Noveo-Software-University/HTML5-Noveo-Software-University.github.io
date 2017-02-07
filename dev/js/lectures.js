@@ -165,8 +165,8 @@ $(document).ready(function() {
 
     // Style codepens for slides 80vh
     $('.slide__codepen').each(function() {
-        $(this).find('p').attr('data-height', Math.round(lect.winHeight * 0.8 / 1.5))
-            .closest('.slide__codepen').css('height', Math.round(lect.winHeight * 0.8))
+        $(this).find('p').attr('data-height', Math.round(lect.winHeight * 0.78 / 1.5))
+            .closest('.slide__codepen').css('height', Math.round(lect.winHeight * 0.78))
     });
     $('body').append('<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>')
 
@@ -177,10 +177,10 @@ $(document).ready(function() {
         var img = new Image();
         img.src = src;
         img.onload = function() {
-            imageContainer.css(
-                'padding-bottom',
-                (img.height / img.width * 100) + '%'
-            );
+            imageContainer.css({
+                'padding-bottom': (img.height / img.width * 100) + '%',
+                'max-width': ((lect.winHeight * 0.78)  / (img.height / img.width)) + 'px'
+            });
         }
 
         btn.on('click', function() {

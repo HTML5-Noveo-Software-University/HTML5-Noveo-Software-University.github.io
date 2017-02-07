@@ -2,9 +2,14 @@
 .gif {
     border: 2px solid gray;
     max-height: 80vh;
+    max-width: 30rem;
     min-height: 10em;
     position: relative;
     z-index: 1;
+    .-slides-layout & {
+        margin: auto;
+        max-width: 80%;
+    }
     &:before {
         content: "GIF";
         height: 1rem;
@@ -53,6 +58,7 @@
         }
     }
     &__image {
+        margin: auto;
         position: relative;
         z-index: 1;
         img {
