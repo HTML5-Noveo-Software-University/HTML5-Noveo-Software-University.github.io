@@ -21,6 +21,8 @@ html:not(.-slides-layout) {
         }
     }
     &__current-slide {
+        position: relative;
+        top: .5rem;
     }
     &__to-start {
         @extend %btn-reset;
