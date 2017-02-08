@@ -265,9 +265,10 @@ block main
                                 span.-bold 1
                                 |, 0, 0
                         tr
-                            th Инлайн-стиль
+                            th Инлайн-стиль (атрибут
                                 +inline-html().
-                                    <style></style>
+                                    style=""
+                                |)
                             td
                                 span.-bold 1
                                 |, 0, 0, 0
@@ -428,7 +429,7 @@ block main
                 +codepen()
                     <p data-height="265" data-theme-id="light" data-slug-hash="xgJpyd" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css basics] - :not" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/xgJpyd/">[css basics] - :not</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
             .slide.-pushed-down
-                h2.h3.-subtheme-h :not()
+                h2.h3.-subtheme-h :target()
                 .slide__cols
                     .slide__col
                         +code('html').
