@@ -134,7 +134,7 @@ mixin toRead(header, data)
             h3.h3.-subtheme-h
                 +capitalizeFirst(header)
         block
-        ol.list.-ordered.-ordered-gray
+        ol.list.-ordered.-ordered-gray.-to-read
             each val in data
                 li.list__item(id=val.id)
                     if val.href !== '#'
