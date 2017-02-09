@@ -16,6 +16,18 @@
         .-ordered & {
             counter-increment: simple-ol;
         }
+        .-ordered:not(.-to-read) & {
+            &:before {
+                color: $turq;
+                content: counter(simple-ol) ". ";
+                margin: 0 .5em 0 0;
+            }
+        }
+        .-ordered-gray:not(.-to-read) & {
+            &:before {
+                color: gray;
+            }
+        }
         .-unordered & {
             padding-left: 1.2rem;
 
@@ -47,14 +59,14 @@
         &:hover, .list__item:target & {
             background: darken(white, 5%);
         }
-        .-ordered & {
+        .-ordered.-to-read & {
             &:before {
                 color: $turq;
                 content: counter(simple-ol) ". ";
                 margin: 0 .5em 0 0;
             }
         }
-        .-ordered-gray & {
+        .-ordered-gray.-to-read & {
             &:before {
                 color: gray;
             }
