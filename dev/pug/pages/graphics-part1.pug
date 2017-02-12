@@ -8,10 +8,609 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+        var listToRead = [{
+            id: "toRead-1",
+            title: "Формат JPEG",
+            href: "https://ru.wikipedia.org/wiki/JPEG"
+        }, {
+            id: "toRead-2",
+            title: "Формат PNG",
+            href: "https://ru.wikipedia.org/wiki/PNG"
+        }, {
+            id: "toRead-3",
+            title: "Формат GIF",
+            href: "https://ru.wikipedia.org/wiki/GIF"
+        }, {
+            id: "toRead-4",
+            title: "Формат SVG",
+            href: "https://ru.wikipedia.org/wiki/SVG"
+        }, {
+            id: "toRead-5",
+            title: "Использование SVG на веб-странице",
+            href: "https://css-tricks.com/using-svg/"
+        }, {
+            id: "toRead-6",
+            title: "Онлайн оптимизатор SVG",
+            href: "https://jakearchibald.github.io/svgomg/"
+        }, {
+            id: "toRead-7",
+            title: "Иконочные шрифты vs SVG",
+            href: "https://css-tricks.com/icon-fonts-vs-svg/"
+        }, {
+            id: "toRead-8",
+            title: "Готовый иконочный шрифт Font Awesome",
+            href: "http://fontawesome.io/"
+        }, {
+            id: "toRead-9",
+            title: "Коллекция svg-изображений",
+            href: "http://www.flaticon.com/"
+        }, {
+            id: "toRead-10",
+            title: "Генератор иконочных шрифтов",
+            href: "http://fontello.com/"
+        }, {
+            id: "toRead-11",
+            title: "Способы создания SVG-спрайтов",
+            href: "https://24ways.org/2014/an-overview-of-svg-sprite-creation-techniques/"
+        }, {
+            id: "toRead-12",
+            title: "Плагин svg4everybody",
+            href: "https://github.com/jonathantneal/svg4everybody"
+        }];
+    -
+        var listImgAttrs = [
+            'src - задает путь до изображения;',
+            'alt - задает альтернативный текст для изображения (отобразится, если изображение не загрузилось, а также читается скринридером).'
+        ];
+    -
+        var listImgFormats = [
+            'JPEG - хорош для фотографий, плох для текста, графики. Не поддерживает прозрачность;',
+            'PNG - хорош для схем, чертежей, текста, графики, фотографий (обычно проигрывает JPEG по размеру файла). Поддерживает полупрозрачность;',
+            'GIF - используется только для анимации;',
+            'SVG - масштабируемая векторная графика. Хорош для иконок, мелкой графики (логотипы, иллюстрации). Плюсы: масштабируемость, возможность стилизации через CSS, анимации через Javascript, малый размер файла. Поддержка браузерами: IE9+.'
+        ];
+    -
+        var listIconsCreationMethods = [
+            'подключение картинок через тег img. Плохо, так как каждая картинка - отдельный запрос на сервер!',
+            'PNG-спрайты. Вымерли;',
+            'иконочные шрифты. Вымирают;',
+            'векторная графика (SVG), SVG-спрайты;',
+            'иконки на чистом CSS.'
+        ];
+    -
+        var listIconFontsPros = [
+            'масштабируемость;',
+            'возможность применения CSS-свойств;',
+            '1 HTTP-запрос для всех иконок;',
+            'маленький размер файла.'
+        ];
+    -
+        var listIconFontsCons = [
+            'иконочный шрифт может не загрузиться;',
+            'монохромность;',
+            'иконочный шрифт - хак, несемантичное использование;',
+            'возможно неодинаковое отображение в разных браузерах.'
+        ];
+    -
+        var listSVGSprites = [
+            'SVG-спрайт из CSS файла;',
+            'SVG-спрайт с общим viewBox;',
+            'SVG-спрайт инлайново в HTML.'
+        ];
+    -
+        var listSVGCSSSpritesPros = [
+            'иконки кэшируются браузером, так как кэшируется css-файл.'
+        ];
+    -
+        var listSVGCSSSpritesCons = [
+            'иконки нельзя стилизовать через css;',
+            'не поддерживается анимация.'
+        ];
+    -
+        var listSVGViewBoxSpritesPros = [
+            'кэширование изображений;',
+            'можно отображать svg-картинки разными способами: через тег svg, img, background-image.'
+        ];
+    -
+        var listSVGViewBoxSpritesCons = [
+            'частичная браузерная поддержка (не поддерживают Safari, Android Browser).'
+        ];
+    -
+        var listSVGInlineSpritesPros = [
+            'прост в понимании;',
+            'автоматическая генерация спрайтов (при помощи инструментов автоматизации).'
+        ];
+    -
+        var listSVGInlineSpritesCons = [
+            'SVG-спрайт не кэшируется.'
+        ];
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
-            +main-slide(pageTitle, 'Имя автора лекции')
-        .slide
+            +main-slide(pageTitle, 'Дмитрий Мещеряков')
+
+            .slide(id=subthemes.contentImages.href)
+                h2.h2.-subtheme-h= subthemes.contentImages.title
+                .-centered
+                    +p()
+                        | Для добавления изображения на страницу используется тег
+                        +inline-html()
+                            <img>
+                        | .
+                    +list('2 основных атрибута:', listImgAttrs)
+                    +code('html').
+                        <img src="image.jpg" alt="Это картинка">
+                    img(src='image.jpg' alt='Это картинка')
+
+            .slide
+                h2.h2.-subtheme-h Форматы изображений в вебе
+                .-centered
+                    +list('', listImgFormats)
+
+            .slide
+                h2.h2.-subtheme-h PNG vs SVG
+                +gif('png-vs-svg')
+
+            .slide
+                h2.h2.-subtheme-h Адаптивные изображения
+                .-centered
+                    +code('css').
+                        img {
+                            width: 100%;
+                            height: auto;
+                        }
+                    +gif('responsive-img')
+
+            .slide
+                h2.h2.-subtheme-h Обертка для изображений
+                .slide__cols
+                    .slide__col
+                        +code('html').
+                            <div class="img-container">
+                                <img src="cat.jpg" alt="Cat">
+                            </div>
+                    .slide__col
+                        +code('css').
+                            .img-container {
+                                position: relative;
+                            }
+
+                            .img-container img {
+                                position: absolute;
+                                top: 0;
+                                bottom: 0;
+                                left: 0;
+                                right: 0;
+                                max-width: 100%;
+                                max-height: 100%;
+                                width: auto;
+                                height: auto;
+                                margin: auto;
+                            }
+
+            .slide
+                h2.h2.-subtheme-h Обертка для изображений. Примеры
+                .-centered
+                    +p().
+                        2 картинки разного размера в 2 одинаковых соседних блоках. Картинки вложены в блоки-обертки:
+                +gif('img-wrapper1')
+
+            .slide
+                h2.h2.-subtheme-h Обертка для изображений. Примеры
+                .-centered
+                    +p().
+                        2 картинки разного размера в 2 одинаковых соседних блоках. Картинки без блоков-оберток:
+                +gif('img-wrapper2')
+
+            .slide
+                h2.h2.-subtheme-h Резиновая высота изображения
+                .-centered
+                    +p().
+                        Блоку-обертке задается свойство padding-top или padding-bottom со значением в %, пропорциональным размерам картинки (делим высоту картинки на ширину и умножаем на 100%).
+                    +code('css').
+                        .img-container {
+                            position: relative;
+                            padding-top: 64.11%;
+                            /* (577px  / 900px) * 100% (image proportions) */
+                        }
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Резиновая высота изображения. Пример
+                +gif('responsive-height-img')
+
+            .slide
+                h2.h2.-subtheme-h SVG. Способы добавления векторной графики на страницу
+                .slide__cols
+                    .slide__col
+                        +p()
+                            | 1. Через тег
+                            +inline-html()
+                                <img>
+                            | как обычное изображение (поддержка IE9+):
+                        +code('html').
+                            <img src="image.svg">
+                    .slide__col
+                        +p()
+                            | 2. Через свойство background-image (поддержка IE9+):
+                        +code('css').
+                            .block {
+                                width: 100px;
+                                height: 50px;
+                                background: url("image.svg");
+                                background-size: 100px 50px;
+                            }
+                .-hidden-on-slide
+                    +p().
+                        Обратите внимание, что для селектора .block задан размер background-size. Это необходимо, если исходный файл SVG имеет размер больше блока, иначе будет видна только верхняя левая часть изображения SVG.
+                .-centered
+                    +hint().
+                        Проблема способов 1 и 2: нет возможности управлять свойствами SVG-изображения через CSS.
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide SVG. Способы добавления векторной графики на страницу
+                .slide__cols
+                    .slide__col
+                        +p()
+                            | 3. Добавление SVG непосредственно в HTML-документ (поддержка IE9+):
+                        +code('html').
+                            <svg>
+                                <rect width="100" height="100"
+                                  stroke-width="1" stroke="rgb(0,0,0)"/>
+                            </svg>
+                        svg(width='100' height='100')
+                            rect(width='100' height='100' stroke-width='1' stroke='rgb(0,0,0)')
+                        .-hidden-on-slide
+                            +p().
+                                Любое сложное SVG изображение (например, созданное в Adobe Illustrator или найденное в интернете) можно открыть в текстовом редакторе, скопировать его код и вставить непосредственно в HTML.
+                            +p().
+                                Этот приём может быть полезным, так как изображение встроено прямо в документ, и для его загрузки не происходит дополнительный HTTP-запрос.
+                        +p().
+                            Недостатки: вероятность получения очень тяжелого документа, наличие блоков SVG-кода в нем и невозможность кэширования.
+                        .-hidden-on-slide
+                            +p()
+                                | Тегам внутри тега
+                                +inline-html()
+                                    <svg>
+                                | можно задавать классы и прописывать этим классам css-свойства, например, менять цвет изображения.
+                    .slide__col
+                        +p()
+                            | 4. Через тег
+                            +inline-html()
+                                <object>
+                            | (поддержка IE9+):
+                        +code('html').
+                            <object type="image/svg+xml"
+                              data="image.svg"></object>
+
+            .slide
+                h2.h2.-subtheme-h SVG. Оптимизация
+                .-centered
+                    +remember()
+                        | В коде SVG-файлов содержится много служебной информации, которая никак не влияет на отображение SVG, но увеличивает вес файлов. Для оптимизации SVG-файлов можно воспользоваться онлайн-ресурсами
+                        +link-to-source(listToRead, 6)
+                        +space()
+                        | или плагином для инструментов автоматизации (Gulp, Grunt, Webpack).
+
+            .slide(id=subthemes.optimization.href)
+                h2.h2.-subtheme-h= subthemes.optimization.title
+
+            .slide(id=subthemes.icons.href)
+                h2.h2.-subtheme-h= subthemes.icons.title
+                .-centered
+                    +list('Способы создания иконок:', listIconsCreationMethods)
+
+            .slide
+                h2.h2.-subtheme-h Иконочные шрифты
+                .-centered
+                    +p().
+                        Иконочный шрифт - шрифт, каждый символ которого представлен иконкой.
+                .slide__cols
+                    .slide__col
+                        +list('Преимущества:', listIconFontsPros)
+                    .slide__col
+                        +list('Недостатки:', listIconFontsCons)
+
+            .slide
+                h2.h2.-subtheme-h Использование иконочного шрифта (fontello.com)
+                .-centered
+                    +p().
+                        Шаг 1. Выбираем/загружаем нужные иконки и нажимаем на кнопку Download webfont.
+                    .-text-centered-on-slide
+                        +figure('Шаг 1. Выбираем/загружаем нужные иконки', conf.page, 'fontello1.jpg')
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Использование иконочного шрифта (fontello.com)
+                .-centered
+                    +p().
+                        Шаг 2. В скачанной папке заходим в папку fonts и копируем из нее все файлы со сгенерированными шрифтами в проектную папку fonts.
+                    .-text-centered-on-slide
+                        +figure('Шаг 2. Копируем файлы со шрифтами в проектную папку fonts', conf.page, 'fontello2.jpg')
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Использование иконочного шрифта (fontello.com)
+                .-centered
+                    +p().
+                        Шаг 3. Подключаем иконочный шрифт в CSS (копируем целиком сгенерированный файл со стилями в наш стилевой файл).
+                    +p().
+                        Основное в этом файле:
+                .slide__cols
+                    .slide__col
+                        +p()
+                            | 1. Подключение иконочного шрифта:
+                        +code('css').
+                            @font-face {
+                                font-family: 'my-icon-font';
+                                src: url('../font/my-icon-font.eot?32949143');
+                                     /* подключение всех типов шрифтов */
+                                font-weight: normal;
+                                font-style: normal;
+                            }
+                    .slide__col
+                        +p()
+                            | 2. Стили для всех классов, начинающихся с "icon-":
+                        +code('css').
+                            [class^="icon-"]:before, [class*=" icon-"]:before {
+                                font-family: "my-icon-font";
+                                font-style: normal;
+                                font-weight: normal;
+                            }
+                        +p()
+                            | 3. Названия всех иконок, входящих в данный шрифт:
+                        +code('css').
+                            .icon-emo-happy:before { content: '\e800'; }
+                            .icon-emo-wink:before { content: '\e801'; }
+                            .icon-emo-wink2:before { content: '\e802'; }
+                            .icon-emo-unhappy:before { content: '\e803'; }
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Использование иконочного шрифта (fontello.com)
+                .-centered
+                    +p()
+                        | Шаг 4. В html-разметке в нужном месте вставляем тег
+                        +inline-html
+                            <i>
+                        | с нужным классом (названием нужной иконки).
+                    +code('html').
+                        <p>
+                            <i class="icon-emo-happy"></i>
+                                Тестируем иконочный шрифт
+                            <i class="icon-emo-wink2"></i>
+                        </p>
+                    .-text-centered-on-slide
+                        img(src="static/images/pages/graphics-part1/fontello3.jpg")
+                    +p().
+                        Добавим стилей:
+                    +code('css').
+                        p i {
+                            font-size: 3rem;
+                            color: red;
+                        }
+                    .-text-centered-on-slide
+                        img(src="static/images/pages/graphics-part1/fontello4.jpg")
+                .-hidden-on-slide
+                    h2.h2.-subtheme-h Поддержка иконочного шрифта
+                    .-centered
+                        +p().
+                            Для добавления новых иконок в существующий иконочный шрифт можно воспользоваться файлом config.json, который автоматически создается при генерации иконочного шрифта на fontello.com.
+                        +p().
+                            Все, что нужно сделать, это загрузить файл config.json на fontello.com методом drag-and-drop (самый верхний раздел Custom Icons), и все иконки из шрифта отобразятся на сайте.
+                        +p().
+                            После этого останется добавить новые иконки и повторить шаги 1-4.
+
+            .slide
+                h2.h2.-subtheme-h SVG-спрайты
+                .-centered
+                    +p().
+                        Назначение SVG-спрайта: упростить и структурировать работу с мелкой графикой (иконками).
+                    +list('Основные способы создания SVG-спрайтов:', listSVGSprites)
+                    .-hidden-on-slide
+                        +p()
+                            |Подробнее про использование первых двух способов см. здесь
+                            +link-to-source(listToRead, 11)
+                            | .
+
+            .slide
+                h2.h2.-subtheme-h SVG-спрайт из CSS-файла
+                .slide__cols
+                    .slide__col
+                        +list('Преимущества:', listSVGCSSSpritesPros)
+                    .slide__col
+                        +list('Недостатки:', listSVGCSSSpritesCons)
+
+            .slide
+                h2.h2.-subtheme-h SVG-спрайт с общим viewBox
+                .slide__cols
+                    .slide__col
+                        +list('Преимущества:', listSVGViewBoxSpritesPros)
+                    .slide__col
+                        +list('Недостатки:', listSVGViewBoxSpritesCons)
+
+            .slide
+                h2.h2.-subtheme-h SVG-спрайт инлайново в HTML
+                .-centered
+                    +p().
+                        Шаг 1. В HTML вставляем контейнер для спрайта:
+                    +code('html').
+                        <svg style="display:none;">
+                            <!-- здесь будут иконки -->
+                        </svg>
+                    +p()
+                        | Шаг 2. В контейнер спрайта вставляем код каждой иконки в тег-обертку
+                        +inline-html()
+                            <symbol>
+                        | :
+                    +code('html').
+                        <svg style="display:none;">
+                            <symbol id="icon-facebook" viewBox="0 0 49.652 49.652">
+                                <path d="M24.826,0C11.137 …"></path>
+                            </symbol>
+                        </svg>
+                    .-hidden-on-slide
+                        +hint()
+                            | Атрибут viewBox тега
+                            +inline-html()
+                                <symbol>
+                            +space()
+                            | имеет 4 значения.
+                            | Первые два (как правило, 0, 0) задают координаты левого верхнего угла изображения.
+                            | Третье и четвертое значения определяют размер изображения.
+                    +p()
+                        | Шаг 3. Обращаемся к нужной иконке в нужном месте страницы при помощи тега
+                        +inline-html()
+                            <use>
+                        | :
+                    +code('html').
+                        <svg class="icon">
+                            <use xlink:href="#icon-facebook"></use>
+                        <svg>
+
+            .slide
+                h2.h2.-subtheme-h SVG-спрайт инлайново в HTML. Пример
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="ygGOOw" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[graphics] - SVG sprite" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/ygGOOw/">[graphics] - SVG sprite</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h SVG-спрайт инлайново в HTML. Преимущества и недостатки
+                .slide__cols
+                    .slide__col
+                        +list('Преимущества:', listSVGInlineSpritesPros)
+                    .slide__col
+                        +list('Недостаток:', listSVGInlineSpritesCons)
+                .-centered
+                    +p().
+                        Чтобы исправить этот недостаток, можно ссылаться на внешний SVG-спрайт вместо включения его в документ инлайново:
+                    +code('html').
+                        <svg class="icon">
+                            <use xlink:href="path/to/icons.svg#icon-facebook"></use>
+                        <svg>
+                    +p().
+                        Недостаток: не поддерживается IE.
+                    +p()
+                        | Решение: плагин svg4everybody
+                        +link-to-source(listToRead, 12)
+                        | .
+
+            .slide
+                h2.h2.-subtheme-h Поясняющий текст для иконок в HTML
+                .-centered
+                    +p().
+                        Для доступности необходимо указывать поясняющий текст для иконок (аналог атрибута alt для изображений), который будет визуально скрыт, но будет доступен для скринридеров.
+                    +p().
+                        Способ 1. Класс-хелпер .text-hide
+                .slide__cols
+                    .slide__col
+                        +code('html').
+                            <span class="icon">Facebook</span>
+                        .-text-centered-on-slide
+                            style(type='text/css').
+                                .icon-no-text-hide {
+                                    display: inline-block;
+                                    width: 100px;
+                                    height: 100px;
+                                    background: url('static/images/pages/graphics-part1/facebook.svg');
+                                    background-size: 100px 100px;
+                                }
+                            span.icon-no-text-hide
+                                | Facebook
+                    .slide__col
+                        +code('html').
+                            <span class="icon text-hide">Facebook</span>
+                        +code('css').
+                            .text-hide {
+                                text-indent: 100%;
+                                white-space: nowrap;
+                                overflow: hidden;
+                            }
+                        .-text-centered-on-slide
+                            style(type='text/css').
+                                .text-hide {
+                                    text-indent: 100%;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                }
+                                .icon-text-hide {
+                                    display: inline-block;
+                                    width: 100px;
+                                    height: 100px;
+                                    background: url('static/images/pages/graphics-part1/facebook.svg');
+                                    background-size: 100px 100px;
+                                }
+                            span.text-hide.icon-text-hide
+                                | Facebook
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Поясняющий текст для иконок в HTML
+                .-centered
+                    +p().
+                        Способ 2. Класс-хелпер .visually-hidden (более универсальный, подходит не только для текста)
+                    +code('css').
+                        .visually-hidden {
+                            position: absolute !important;
+                            clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+                            clip: rect(1px, 1px, 1px, 1px);
+                            padding:0 !important;
+                            border:0 !important;
+                            height: 1px !important;
+                            width: 1px !important;
+                            overflow: hidden;
+                        }
+                    .-text-centered-on-slide
+                        style(type='text/css').
+                            .visually-hidden {
+                                position: absolute !important;
+                                clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+                                clip: rect(1px, 1px, 1px, 1px);
+                                padding:0 !important;
+                                border:0 !important;
+                                height: 1px !important;
+                                width: 1px !important;
+                                overflow: hidden;
+                            }
+                            .icon-visually-hidden {
+                                display: inline-block;
+                                width: 100px;
+                                height: 100px;
+                                background: url('static/images/pages/graphics-part1/facebook.svg');
+                                background-size: 100px 100px;
+                            }
+                        span.icon-visually-hidden
+                            span.visually-hidden Facebook
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Поясняющий текст для иконок в HTML
+                .-centered
+                    +p()
+                        | Способ 3. Указание поясняющего текста в атрибуте title (только при использовании инлайнового
+                        +inline-html
+                            <svg>
+                        |)
+                    +code('html').
+                        <svg width="100" height="100" viewBox="0 0 100 100"
+                            aria-labelledby="title desc">
+                            <title id="title">Title</title>
+                            <desc id="desc">Description</desc>
+                            <text y="-10">Text</text>
+                            <path d="..."/>
+                        </svg>
+                    .-text-centered-on-slide
+                        svg(width='100px' height='100px' viewBox='0 0 49.652 49.652' aria-labelledby='title desc')
+                            title(id='title') Facebook
+                            desc(id='desc') Facebook
+                            text(y='-10') Facebook
+                            path(d='M24.826,0C11.137,0,0,11.137,0,24.826c0,13.688,11.137,24.826,24.826,24.826c13.688,0,24.826-11.138,24.826-24.826    C49.652,11.137,38.516,0,24.826,0z M31,25.7h-4.039c0,6.453,0,14.396,0,14.396h-5.985c0,0,0-7.866,0-14.396h-2.845v-5.088h2.845    v-3.291c0-2.357,1.12-6.04,6.04-6.04l4.435,0.017v4.939c0,0-2.695,0-3.219,0c-0.524,0-1.269,0.262-1.269,1.386v2.99h4.56L31,25.7z' fill='#3c5899')
+
+            .slide
+                h2.h2.-subtheme-h Иконки на чистом CSS
+                .-hidden-on-slide
+                    +p().
+                        Довольно часто простые иконки можно реализовать на чистом CSS, не прибегая к иконочным шрифтам или SVG (иконка гамбургер-меню, крестик на кнопке "Закрыть", различные стрелки).
+                    +p().
+                        Ниже представлен пример реализации на чистом CSS иконок управления плеером.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="NderJr" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[graphics] - pure css icons" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/NderJr/">[graphics] - pure css icons</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h Полезные ссылки
+                .-centered
+                    +toRead("", listToRead)
