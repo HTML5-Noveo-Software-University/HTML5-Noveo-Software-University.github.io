@@ -30,14 +30,15 @@ block main
                 h2.h2.-subtheme-h= subthemes.flexBox.title
                 .-hidden-on-slide
                     +p()
-                        | Браузерная поддержка на данный момент не позволяет полноценно использовать флексы на реальных проектах.
+                        | Браузерная поддержка на данный момент не позволяет полноценно использовать флексы на реальных проектах. Известно большое количество багов в различных браузерах (не только IE), поэтому стоит закладывать больше времени в оценку задач, для которых планируется использовать флексы.
                     +p()
-                        | К использованию флексов лучше подходить с позиции прогрессивного улучшения - сначала построить основной лейаут таким образом, чтобы он работал в старых браузерах, а затем в некоторых случаях применить флексы для лучшего визуального эффекта. Тогда в старых браузерах, не поддерживающих флексы, или поддерживающих только старый синтаксис (без переноса на новую строку) верстка не сломается.
+                        | К использованию флексов лучше подходить с позиции прогрессивного улучшения - сначала построить основной лейаут таким образом, чтобы он работал в старых браузерах, а затем в некоторых случаях применять флексы для лучшего визуального эффекта. Тогда в старых браузерах, не поддерживающих флексы, или поддерживающих только старый синтаксис (без переноса на новую строку) верстка не сломается.
 
                 .-text-centered-on-slide
                     +figure('Поддержка Flexbox', 'layout', 'flexbox.png')
-                .-centered
-                    h3.h3 Если необходимо знать, поддерживается ли последний синтаксис в браузере, то можно использовать такую проверку:
+            .slide
+                h3.h3.-subtheme-h Если необходимо знать, поддерживается ли последний синтаксис в браузере, то можно использовать такую проверку:
+                .-centered-wide
                     +code('html').
                         <script>
                             var d = document.documentElement.style;
@@ -55,7 +56,7 @@ block main
                 h3.h3.-subtheme-h Свойства flex-box для размеров дочерних блоков ("итемов")
                 +codepen()
                     <p data-height="265" data-theme-id="light" data-slug-hash="bgZppR" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - flexbox - child props - size" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/bgZppR/">[ layout ] - flexbox - child props - size</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-            //- TODO
+
             .slide.section
                 h3.h3.-subtheme-h Свойства flex-box для индивидуального выравнивания и относительного порядка следования дочерних блоков ("итемов")
                 +codepen()
@@ -65,20 +66,101 @@ block main
                 h3.h3.-subtheme-h Изменение порядка отображения элементов средствами css может вводить в заблуждение пользователей, использующих tab-навигацию
                 +codepen()
                     <p data-height="265" data-theme-id="light" data-slug-hash="BpbKdd" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - flexbox - order + tab navigation" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/BpbKdd/">[ layout ] - flexbox - order + tab navigation</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-            //- TODO
-            .slide.section
-                h3.h3.-subtheme-h Основные баги flexbox и способы их обойти
-                +codepen()
-                    <p data-height="265" data-theme-id="light" data-slug-hash="GreZzv" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - flexbugs" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/GreZzv/">[ layout ] - flexbugs</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 
-            //- TODO
             .slide(id=subthemes.centering.href).-pushed-down
                 h2.h2.-subtheme-h= subthemes.centering.title
+                h3.h3 Центрирование относительно друг друга (inline-block)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="jyJMYy" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - centering - относительно друг друга" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/jyJMYy/">[ layout ] - centering - относительно друг друга</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide.section
+                h3.h3.-subtheme-h Центрирование относительно родительского элемента (inline-block)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="oBVzqm" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - centering - относительно родительского элемента" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/oBVzqm/">[ layout ] - centering - относительно родительского элемента</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 
-            //- TODO
+            .slide.section
+                h3.h3.-subtheme-h Центрирование относительно родительского элемента (absolute, ширина и высота известны)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="QdoKZp" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - centering - относительно родительского элемента (absolute,  ширина и высота известны)" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/QdoKZp/">[ layout ] - centering - относительно родительского элемента (absolute,  ширина и высота известны)</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h "Растягивание" до границ родительского элемента (absolute, ширина и высота не известны)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="LxaRqa" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - "Растягивание" до границ родительского элемента (absolute, ширина и высота не известны)" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/LxaRqa/">[ layout ] - "Растягивание" до границ родительского элемента (absolute, ширина и высота не известны)</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Центрирование относительно родительского элемента (absolute, ширина и высота не известны)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="EZMgMd" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - centering - относительно родительского элемента (absolute,  ширина и высота не известны)" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/EZMgMd/">[ layout ] - centering - относительно родительского элемента (absolute,  ширина и высота не известны)</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Центрирование относительно родительского элемента (flexbox)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="rjRMbK" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - centering - относительно родительского элемента (flexbox)" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/rjRMbK/">[ layout ] - centering - относительно родительского элемента (flexbox)</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
             .slide(id=subthemes.stickyFooter.href).-pushed-down
                 h2.h2.-subtheme-h= subthemes.stickyFooter.title
+                h3.h3 Хак с display: table. Подойдет, если в нужных браузерах не поддерживаются флексы
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="bgZwXq" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - sticky footer - display: table хак" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/bgZwXq/">[ layout ] - sticky footer - display: table хак</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 
-            //- TODO
+            .slide.section
+                h3.h3.-subtheme-h Sticky footer с помощью flexbox (поддержка IE 10+, Android 2.1+)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="mRoOJV" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - sticky footer - flexbox" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/mRoOJV/">[ layout ] - sticky footer - flexbox</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
             .slide(id=subthemes.grid.href).-pushed-down
                 h2.h2.-subtheme-h= subthemes.grid.title
+                h3.h3 Сетка "на display: table". Крайне не универсальна. Почти не применяется.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="egXBEb" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - grid - display: table" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/egXBEb/">[ layout ] - grid - display: table</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Сетка "на float"
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="oBVYwg" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - grid - floats" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/oBVYwg/">[ layout ] - grid - floats</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Сетка "на inline-block"
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="EZMNXz" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - grid - inline-block" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/EZMNXz/">[ layout ] - grid - inline-block</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Сетка "на флексах". У варианта с переносом поддержка IE10+ Android 4.4+. Применять его "в продакшене" пока рано.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="zNboLg" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - grid - flexbox" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/zNboLg/">[ layout ] - grid - flexbox</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Сетка "на inline-block". Расстояние между колонками в %.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="bgZgbj" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - grid - inline-block - relative gap" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/bgZgbj/">[ layout ] - grid - inline-block - relative gap</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Сетка "на inline-block". Расстояние между колонками в px. Border хак.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="XpGpjm" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - grid - inline-block - fixed gap border-hack" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/XpGpjm/">[ layout ] - grid - inline-block - fixed gap border-hack</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Колонки с неизвестной шириной. Одна - по размеру контента, вторая - на все оставшееся пространство. Display: table хак.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="bgZgOP" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - grid - unknows width cols - display: table hack" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/bgZgOP/">[ layout ] - grid - unknows width cols - display: table hack</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Колонки с неизвестной шириной. Одна - по размеру контента, вторая - на все оставшееся пространство. Flexbox. Поддержка IE10+ Android 2+.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="vgPgzr" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - grid - unknows width cols - flexbox" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/vgPgzr/">[ layout ] - grid - unknows width cols - flexbox</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Колонки одинаковой высоты. Margin хак.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="rjRyNy" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - 2 cols equal height - inline-block. Margin hack" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/rjRyNy/">[ layout ] - 2 cols equal height - inline-block. Margin hack</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Колонки одинаковой высоты. Flexbox. Поддержка IE10+ Android 2+.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="MJxpyJ" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - 2 cols equal height - flexbox" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/MJxpyJ/">[ layout ] - 2 cols equal height - flexbox</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)
