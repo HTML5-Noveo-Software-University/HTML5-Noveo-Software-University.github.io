@@ -8,10 +8,77 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+      var listToRead = [{
+          id: "toRead-1",
+          title: "Complete guide to flexbox",
+          href: "https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
+      }, {
+          id: "toRead-2",
+          title: "Flexbugs",
+          href: "https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items"
+      }, {
+          id: "toRead-3",
+          title: "Autoprefixer online",
+          href: "https://autoprefixer.github.io/"
+      }]
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
             +main-slide(pageTitle, 'Света Шарипова')
-            .slide
+            .slide(id=subthemes.flexBox.href)
+                h2.h2.-subtheme-h= subthemes.flexBox.title
+                .-hidden-on-slide
+                    +p()
+                        | Браузерная поддержка на данный момент не позволяет полноценно использовать флексы на реальных проектах.
+                    +p()
+                        | К использованию флексов лучше подходить с позиции прогрессивного улучшения - сначала построить основной лейаут таким образом, чтобы он работал в старых браузерах, а затем в некоторых случаях применить флексы для лучшего визуального эффекта. Тогда в старых браузерах, не поддерживающих флексы, или поддерживающих только старый синтаксис (без переноса на новую строку) верстка не сломается.
+
+                .-text-centered-on-slide
+                    +figure('Поддержка Flexbox', 'layout', 'flexbox.png')
+                .-centered
+                    h3.h3 Если необходимо знать, поддерживается ли последний синтаксис в браузере, то можно использовать такую проверку:
+                    +code('html').
+                        <script>
+                            var d = document.documentElement.style;
+                            if (d.flexWrap !== '' && d.WebkitFlexWrap !== '' && d.msFlexWrap !== '') {
+                                // Добавить класс к html или body, загрузить стили для inline-block сетки и т.п.
+                            }
+                        </script>
+
+            .slide.section
+                h3.h3.-subtheme-h Свойства flex-box для контейнера (родительского блока)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="wgOGGd" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - flexbox - parent props" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/wgOGGd/">[ layout ] - flexbox - parent props</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Свойства flex-box для размеров дочерних блоков ("итемов")
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="bgZppR" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - flexbox - child props - size" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/bgZppR/">[ layout ] - flexbox - child props - size</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            //- TODO
+            .slide.section
+                h3.h3.-subtheme-h Свойства flex-box для индивидуального выравнивания и относительного порядка следования дочерних блоков ("итемов")
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="zNbqyO" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - flexbox - child props - order and align" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/zNbqyO/">[ layout ] - flexbox - child props - order and align</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Изменение порядка отображения элементов средствами css может вводить в заблуждение пользователей, использующих tab-навигацию
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="BpbKdd" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - flexbox - order + tab navigation" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/BpbKdd/">[ layout ] - flexbox - order + tab navigation</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            //- TODO
+            .slide.section
+                h3.h3.-subtheme-h Основные баги flexbox и способы их обойти
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="GreZzv" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - flexbugs" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/GreZzv/">[ layout ] - flexbugs</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            //- TODO
+            .slide(id=subthemes.centering.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.centering.title
+
+            //- TODO
+            .slide(id=subthemes.stickyFooter.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.stickyFooter.title
+
+            //- TODO
+            .slide(id=subthemes.grid.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.grid.title
