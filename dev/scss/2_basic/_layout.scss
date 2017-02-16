@@ -1,0 +1,137 @@
+html {
+    background: darken(white, 1%);
+    height: 100%;
+    &.-slides-layout {
+        background: $white;
+        overflow: hidden;
+    }
+}
+
+body {
+    height: 100%;
+    margin: auto;
+    max-width: $layout-max;
+    .-slides-layout & {
+        max-width: 100%;
+    }
+}
+
+.page {
+    background: white;
+    box-shadow: 0 0  0 1px darken(white, 6%), 0 0 20px 0 darken(white, 10%);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    .-slides-layout & {
+        box-shadow: none;
+    }
+}
+
+.content {
+    @include inline-nowrap();
+
+    display: flex;
+    flex: 1 0 auto;
+    min-height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.main {
+    padding: 1rem 6rem;
+    &:not(:only-child) {
+        background-clip: padding-box;
+        border-right: ($aside-width-mobile-small) solid transparent;
+        flex: 1 0 auto;
+        /*min-height: 2800px;*/
+        padding-right: 4rem;
+        width: 100%;
+        .-slides-layout & {
+            border-right: none;
+            height: 100vh;
+            overflow: hidden;
+            padding: 0;
+        }
+    }
+}
+
+.logo {
+    max-width: 240px;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    > div {
+        background: red;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 101;
+    }
+}
+
+.icon {
+    display: inline-block;
+    fill: currentColor;
+    height: 1em;
+    stroke: currentColor;
+    stroke-width: 0;
+    width: 1em;
+}
+
+.section {
+    margin: 2rem 0;
+}
+
+@media screen and (max-width: $layout-middle) {
+    footer, header {
+        .-show-aside & {
+            display: none;
+        }
+    }
+
+    .main {
+        padding: 1rem 2rem;
+        &:not(:only-child) {
+            padding-right: 1rem;
+            .-show-aside & {
+                height: 0;
+                min-height: 0;
+                opacity: 0;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: $layout-wide-phone +1) {
+    .main {
+        &:not(:only-child) {
+            border-right: ($aside-width-mobile) solid transparent;
+        }
+    }
+}
+
+
+@media screen and (min-width: $layout-middle +1) {
+    .main {
+        &:not(:only-child) {
+            border-right: ($aside-width + $basic-gap) solid transparent;
+            padding-top: 2rem;
+        }
+    }
+}
+
+
+@media screen and (min-width: $layout-wide+1) {
+    .main {
+        &:not(:only-child) {
+            border-right: ( $aside-width-wide + $basic-gap) solid transparent;
+        }
+    }
+}

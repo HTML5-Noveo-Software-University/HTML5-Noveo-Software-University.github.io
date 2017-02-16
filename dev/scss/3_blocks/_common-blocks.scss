@@ -1,0 +1,144 @@
+%max-line-length {
+    max-width: 70*.5em;
+}
+%max-line-length-extended {
+    max-width: 70*.5em + 3em;
+}
+.p {
+    @extend %max-line-length;
+
+    font-size: 1rem;
+    margin: 1rem 0;
+    &.-remember, &.-hint {
+        @extend %max-line-length-extended;
+    }
+    .-slides-layout & {
+        font-size: 1.3rem;
+    }
+
+    .-slides-layout .-centered & {
+        margin: 1rem auto;
+    }
+}
+.-hint {
+    border: .2em solid rgba($turq, .15);
+    padding: 1em;
+}
+
+.-remember {
+    background-clip: padding-box;
+    background-color: rgba(lighten($orange, 10%), .15);
+    border-left: 2em solid transparent;
+    padding: 1em;
+    position: relative;
+
+    &:before, &:after {
+        background: inherit;
+        box-sizing: border-box;
+        content: "";
+        position: absolute;
+    }
+
+    &:before {
+        bottom: 2em;
+        left: -1.9em;
+        top: 0;
+        width: 1.2em;
+    }
+    &:after {
+        border-radius: 50%;
+        bottom: 0;
+        height: 1.5em;
+        left: -2em;
+        width: 1.5em;
+    }
+}
+
+.strike {
+    position: relative;
+    text-decoration: none;
+    &:before {
+        border-top: 1px solid red;
+        content: "";
+        left: 0;
+        margin-top: .15em;
+        position: absolute;
+        right: 0;
+        top: 50%;
+    }
+}
+
+.-bold {
+    font-weight: bold;
+}
+
+.-italic {
+    font-style: italic;
+}
+
+.-underline {
+    border-bottom: 2px solid rgba($turq, .4);
+    color: $turq;
+    display: inline-block;
+}
+
+.blockquote {
+    @extend %max-line-length-extended;
+
+    padding: .5rem 2rem;
+    position: relative;
+    &:before, &:after {
+        color: $orange;
+        font-size: 3rem;
+        line-height: 1;
+        position: absolute;
+    }
+    &:before {
+        content: "«";
+        left: -.5rem;
+        top: -.2rem;
+    }
+    &:after {
+        bottom: 3rem;
+        content: "»";
+        right: -.5rem;
+    }
+    &__footer {
+        margin-top: 1rem;
+    }
+    &__autor {
+        color: $orange;
+        display: inline-block;
+        font-style: italic;
+        font-weight: bold;
+        padding: .1em 0;
+    }
+}
+.slide__codepen {
+    overflow: hidden;
+
+    &-inner {
+        transform: scale(1.45);
+        transform-origin: top left;
+        width: 68%;
+    }
+}
+
+.figure {
+    border-top: 1px solid rgba($turq, .3);
+    display: inline-block;
+    font-style: italic;
+    padding: .5rem 0 0;
+    text-align: center;
+    &__caption {
+        border-bottom: 1px solid rgba($turq, .3);
+        border-top: 1px solid rgba($turq, .1);
+        padding: 1rem 0;
+    }
+    img {
+        height: auto;
+        max-height: 65vh;
+        max-width: 100%;
+        width: auto;
+    }
+}

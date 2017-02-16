@@ -1,0 +1,92 @@
+extends ../base/base-lect.pug
+
+block layout-settings
+    include ../lectures/themes/layout-part3.pug
+    - var conf = layout3;
+    - var pageTitle = conf.title;
+    - var pageType = 'lecture'
+    - var currentPage = conf.page;
+    - var subthemes = conf.subthemes;
+    -
+        var listMQ = [
+            '<span class="-bold">screen / print / speech / all</span> - тип устройства',
+            '<span class="-bold">min-width / max-width</span> - ширина окна браузера',
+            '<span class="-bold">min-height / max-height</span> - высота окна браузера',
+            '<span class="-bold">min-device-width / max-device-width</span> - ширина устройства (используется для стилизации iframe)',
+            '<span class="-bold">min-device-height / max-device-height</span> - высота устройства (используется для стилизации iframe)',
+            '<span class="-bold">orientation ( landscape / portrait )</span> - раскладка устройства'
+        ]
+    -
+      var listToRead = [{
+          id: "toRead-1",
+          title: "@media",
+          href: "https://developer.mozilla.org/ru/docs/Web/CSS/@media"
+      }, {
+          id: "toRead-2",
+          title: "Retina Display Media Query",
+          href: "https://css-tricks.com/snippets/css/retina-display-media-query/"
+      }, {
+          id: "toRead-3",
+          title: "[Книга] Luke Wroblewski - Mobile First",
+          href: ""
+      }, {
+          id: "toRead-4",
+          title: "[Книга] Aaron Gustafson - Adaptive web design",
+          href: ""
+      }, {
+          id: "toRead-5",
+          title: "[Книга] Tim Kadlec - Implementing Responsive Design",
+          href: ""
+      }, {
+          id: "toRead-6",
+          title: "[Книга] Ethan Marcotte - Responsive Web Design",
+          href: ""
+      }, {
+          id: "toRead-7",
+          title: "[Книга] Ethan Marcotte - Responsive Design: Patterns & Principles",
+          href: ""
+      }]
+block main
+    include ../base/mixins/mixin-slides.pug
+    main.main
+        .slides-wrap
+            +main-slide(pageTitle, 'Света Шарипова')
+            .slide(id=subthemes.responsive.href)
+                h2.h2.-subtheme-h= subthemes.responsive.title
+                .-text-centered-on-slide
+                    a(href="http://www.liquidapsive.com/" target="_blanc") Демо: liquidapsive.com
+            .slide(id=subthemes.mediaQueries.href)
+                h2.h2.-subtheme-h= subthemes.mediaQueries.title
+                .-centered
+                    +listCap('Основные типы @media-query:', listMQ)
+            .slide.section
+                h3.h3.-subtheme-h Медиазапрос min-width
+                +codepen()
+                    <p data-height="294" data-theme-id="light" data-slug-hash="GreZzv" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - media queries - min-width" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/GreZzv/">[ layout ] - media queries - min-width</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide.section
+                h3.h3.-subtheme-h Медиазапрос min-width и max-width (диапазон)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="ggERWK" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - media queries - диапазон " class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/ggERWK/">[ layout ] - media queries - диапазон </a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Несколько медиазапросов
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="qRvjjr" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - media queries - multiple mq " class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/qRvjjr/">[ layout ] - media queries - multiple mq </a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Медизапрос для Retina экранов (c повышенной плотностью пикселей)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="NdJgvo" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - media queries - retina" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/NdJgvo/">[ layout ] - media queries - retina</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.breakpoints.href)
+                h2.h2.-subtheme-h= subthemes.breakpoints.title
+
+            .slide(id=subthemes.mobileFirst.href)
+                h2.h2.-subtheme-h= subthemes.mobileFirst.title
+
+            .slide(id=subthemes.progressiveEnhancement.href)
+                h2.h2.-subtheme-h= subthemes.progressiveEnhancement.title
+
+            .slide()
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)

@@ -1,0 +1,72 @@
+.view-switcher {
+    background: $white;
+    display: none;
+    height: 3rem;
+    left: 100%;
+    padding-right: 1rem;
+    position: absolute;
+    top: 1.8rem;
+    transform: translateX(-100%);
+    user-select: none;
+    white-space: nowrap;
+    z-index: 5;
+    .-slides-layout & {
+        text-align: center;
+        top: .5rem;
+    }
+    &__icon {
+        background: lighten(gray, 30%);
+        border-radius: .3em;
+        cursor: pointer;
+        display: inline-block;
+        height: .8em;
+        margin-right: .35em;
+        position: relative;
+        transition: background .2s;
+        width: 2em;
+        .-slides-layout & {
+            background: lighten(desaturate($green, 30%), 30%);
+            height: .7em;
+        }
+        &:before {
+            background: lighten(gray, 10%);
+            border-radius: 50%;
+            content: "";
+            height: 1em;
+            left: -.1em;
+            position: absolute;
+            top: -.1em;
+            transition: all .3s;
+            width: 1em;
+            .-slides-layout & {
+                background: darken($green, 10%);
+                left: 100%;
+                margin-left: -.9em;
+            }
+        }
+    }
+    &__text {
+        .-slides-layout & {
+            display: block;
+            font-size: .9rem;
+        }
+    }
+}
+
+@media screen and (min-width: $layout-middle +1) {
+    .view-switcher {
+        display: block;
+    }
+}
+
+@media screen and (min-width: $layout-max +1) {
+    .view-switcher {
+        left: 50%;
+        margin-left: $layout-max/2 - 16;
+        transform: translateX(-100%);
+        .-slides-layout & {
+            left: 100%;
+            margin-left: -.9em;
+        }
+    }
+}

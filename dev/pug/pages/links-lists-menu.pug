@@ -1,0 +1,538 @@
+extends ../base/base-lect.pug
+
+block layout-settings
+    include ../lectures/themes/links-lists-menu.pug
+    - var conf = linksListsMenu;
+    - var pageTitle = conf.title;
+    - var pageType = 'lecture'
+    - var currentPage = conf.page;
+    - var subthemes = conf.subthemes;
+    -
+        var listToRead = [{
+            id: "toRead-1",
+            title: "Типы маркеров списков",
+            href: "http://htmlbook.ru/css/list-style-type"
+        }, {
+            id: "toRead-2",
+            title: "Тег nav",
+            href: "https://developer.mozilla.org/ru/docs/Web/HTML/Element/nav"
+        }]
+    -
+        var listLinkAttrs = [
+            'href - задает адрес документа, на который следует перейти;',
+            'target - указывает, где браузеру открыть новый документ (target="_blank" - открыть в новой вкладке);',
+            'title - добавляет всплывающую подсказку к тексту ссылки.'
+        ];
+    -
+        var listTestAnswers = [
+            'Ссылка, так как клик по ней осуществляет переход наверх страницы (якорь).',
+            'Кнопка, так как нет перехода на другую страницу (просто действие - показ меню).',
+            'Однозначного ответа нет. В зависимости от структуры сайта может быть как ссылкой (бронирование происходит на отдельной странице), так и кнопкой (если по нажатию на нее появляется модальное окно).'
+        ];
+    -
+        var listListTypes = [
+            'ul - неупорядоченный (маркированный) список (порядок перечисляемых объектов не важен);',
+            'ol - упорядоченный список (важен порядок объектов или действий);',
+            'dl - список определений.'
+        ];
+
+block main
+    include ../base/mixins/mixin-slides.pug
+    main.main
+        .slides-wrap
+            +main-slide(pageTitle, 'Дмитрий Мещеряков')
+
+            .slide(id=subthemes.links.href)
+                h2.h2.-subtheme-h= subthemes.links.title
+                .-centered-wide
+                    +p()
+                        | Для создания ссылок в HTML используется тег
+                        +inline-html()
+                            <a>
+                        | .
+                        | Ссылка может быть на внешний ресурс, файл, часть текущей страницы (якорь).
+                    +list('Основные атрибуты ссылки:', listLinkAttrs)
+                    +p().
+                        Пример ссылки
+                    +code('html')
+                        <a href="https://google.com" target="_blank" title="google">Google</a>
+                    a(href='https://google.com' target='_blank' title='google' style='color: blue; text-decoration: underline;') Google
+
+            .slide
+                h2.h2.-subtheme-h Псевдоклассы для стилизации ссылок
+                .slide__cols
+                    .slide__col
+                        +p()
+                            +bold-no-sematics('a:link')
+                            | - определяет стиль для обычной непосещенной ссылки.
+                        +p()
+                            +bold-no-sematics('a:visited')
+                            | - определяет стиль для посещенной ссылки.
+                        +p()
+                            +bold-no-sematics('a:hover')
+                            | - определяет стиль для ссылки при наведении на нее мышью.
+                        +p()
+                            +bold-no-sematics('a:active')
+                            | - определяет стиль для активной ссылки. Активной ссылка становится при нажатии на нее.
+                        +remember()
+                            | Форматировать ссылки нужно в указанной последовательности, в противном случае состояние стилей перестанет работать (в силу механизма каскадности).
+                    .slide__col
+                        +code('css').
+                            a {
+                                color: blue;
+                                text-decoration: none;
+                            }
+                            a:visited {
+                                color: green;
+                            }
+                            a:hover {
+                                color: red;
+                                text-decoration: underline;
+                            }
+                            a:active{
+                                color: magenta;
+                                text-decoration: underline;
+                            }
+                        style(type='text/css').
+                            a.link-pseudo-classes {
+                                font-size: 1.5rem;
+                                cursor: pointer;
+                                color: blue;
+                                text-decoration: none;
+                            }
+                            a.link-pseudo-classes:visited {
+                                color: green;
+                            }
+                            a.link-pseudo-classes:hover {
+                                color: red;
+                                text-decoration: underline;
+                            }
+                            a.link-pseudo-classes:active {
+                                color: magenta;
+                                text-decoration: underline;
+                            }
+                        a(href='#' class='link-pseudo-classes') Link
+
+            .slide
+                h2.h2.-subtheme-h Ссылка или кнопка?
+                .-centered-wide
+                    .-hidden-on-slide
+                        +p().
+                            Часто в макетах интерактивные элементы (ссылки и кнопки) изображаются в одном стиле, практически одинаково (по крайней мере, редко когда дизайнер оставляет подчеркивание у ссылки).
+                        +p()
+                            | Из-за этого многие разработчики некорректно используют теги
+                            +inline-html()
+                                <a>
+                            | и
+                            +inline-html()
+                                <button>
+                            | для разметки таких элементов страницы.
+
+                        +p().
+                            Существует простое правило определения, когда элемент является ссылкой, а когда кнопкой:
+                    +remember()
+                        | Если клик по элементу влечет за собой переход на другой ресурс (страницу, часть страницы, файл), то это ссылка, иначе - кнопка.
+                    h3.h3 Мини-викторина
+                    div(style='display: inline-block; margin-right: 1.5rem; margin-bottom: 1.5rem;')
+                        +figure('1. Наверх', conf.page, 'scroll-top-btn.png')
+                    div(style='display: inline-block; margin-right: 1.5rem; margin-bottom: 1.5rem;')
+                        +figure('2. Меню', conf.page, 'hamburger-menu.png')
+                    div(style='display: inline-block; margin-right: 1.5rem; margin-bottom: 1.5rem;')
+                        +figure('3. Забронировать', conf.page, 'book.jpg')
+                    .-hidden-on-slide
+                        +listOrd('Правильные ответы:', listTestAnswers)
+
+            .slide(id=subthemes.lists.href)
+                h2.h2.-subtheme-h= subthemes.lists.title
+                .-hidden-on-slide
+                    +p().
+                        В HTML существует семейство тегов для создания списков: неупорядоченных, упорядоченных и списков определений.
+                    +list('Виды списков в HTML:', listListTypes)
+                .slide__cols
+                    .slide__col
+                        h3.h3 Неупорядоченный список
+                        +code('html').
+                            <ul class="list">
+                                <li class="list__item">Элемент списка 1</Li>
+                                <li class="list__item">Элемент списка 2</Li>
+                                <li class="list__item">Элемент списка 3</Li>
+                            </ul>
+                        ul(class='list' style='list-style-type: disc; padding-left: 2rem;')
+                            li.list__item Элемент списка 1
+                            li.list__item Элемент списка 2
+                            li.list__item Элемент списка 3
+                    .slide__col
+                        h3.h3 Упорядоченный список
+                        +code('html').
+                            <ol class="list">
+                                <li class="list__item">Действие 1</Li>
+                                <li class="list__item">Действие 2</Li>
+                                <li class="list__item">Действие 3</Li>
+                            </ol>
+                        ol(class='list' style='list-style-type: decimal; padding-left: 2rem;')
+                            li.list__item Действие 1
+                            li.list__item Действие 2
+                            li.list__item Действие 3
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.lists.title
+                .-centered
+                    h3.h3 Список определений
+                    +code('html').
+                        <dl>
+                            <dt>Термин 1</dt>
+                            <dd>Определение 1</dd>
+
+                            <dt>Термин 2</dt>
+                            <dd>Определение 2</dd>
+
+                            <dt>Термин 3</dt>
+                            <dd>Определение 3</dd>
+                        </dl>
+                    dl(class='list' style='list-style-type: disc; padding-left: 2rem;')
+                        dt Термин 1
+                        dd Определение 1
+                        dt Термин 2
+                        dd Определение 2
+                        dt Термин 3
+                        dd Определение 3
+
+            .slide
+                h2.h2.-subtheme-h Стили маркера списка
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство list-style-type
+                        table
+                            tr
+                                td list-style-type: disc;
+                                td
+                                    ul(style='list-style-type: disc; padding-left: 2rem;')
+                                        li Элемент списка
+                            tr
+                                td list-style-type: square;
+                                td
+                                    ul(style='list-style-type: square; padding-left: 2rem;')
+                                        li Элемент списка
+                            tr
+                                td list-style-type: armenian;
+                                td
+                                    ol(style='list-style-type: armenian; padding-left: 2rem;')
+                                        li Элемент списка
+                            tr
+                                td list-style-type: upper-roman;
+                                td
+                                    ol(style='list-style-type: upper-roman; padding-left: 2rem;')
+                                        li Элемент списка
+                            tr
+                                td list-style-type: none;
+                                td
+                                    ol(style='list-style-type: none; padding-left: 2rem;')
+                                        li Элемент списка
+                        h3.h3 Маркер списка в виде изображения
+                        +code('css').
+                            .list {
+                                list-style-image: url('images/img.png')
+                            }
+                        style(type='text/css').
+                            .list-img {
+                                padding-left: 2rem;
+                                list-style-image: url('static/images/pages/links-lists-menu/list-style-type.png');
+                            }
+                        ul.list-img
+                            li.list-img__item Элемент 1
+                            li.list-img__item Элемент 2
+                            li.list-img__item Элемент 3
+                    .slide__col
+                        h3.h3 Положение маркера списка
+                        +code('css').
+                            .list {
+                                list-style-position: inside;
+                            }
+                        ul(class='list' style='list-style-type: disc; padding-left: 2rem; list-style-position: inside;')
+                            li.list__item Очень-очень длиииииииииииииииииииинное название элемента списка
+                            li.list__item Элемент 2
+                        +code('css').
+                            .list {
+                                list-style-position: outside;
+                            }
+                        ul(class='list' style='list-style-type: disc; padding-left: 2rem; list-style-position: outside;')
+                            li.list__item Очень-очень длиииииииииииииииииииинное название элемента списка
+                            li.list__item Элемент 2
+
+            .slide
+                h2.h2.-subtheme-h Стили маркера списка
+                .slide__cols
+                    .slide__col
+                        h3.h3 Маркер списка псевдоэлементом
+                        +code('html').
+                            <ul class=”list”>
+                                <li class=”list__item”>Элемент 1</li>
+                                <li class=”list__item”>Элемент 2</li>
+                            </ul>
+                        +code('css').
+                            .list {
+                                list-style: none;
+                            }
+
+                            .list__item::before {
+                                content: '$';
+                                vertical-align: middle;
+                                color: blue;
+                                padding-right: .5rem;
+                            }
+                        style(type='text/css').
+                            .list-custom {
+                                list-style: none;
+                            }
+
+                            .list-custom__item::before {
+                                content: '$';
+                                color: blue;
+                                padding-right: 0.5em;
+                            }
+                        .-text-centered-on-slide
+                            ul.list-custom
+                                li.list-custom__item Элемент 1
+                                li.list-custom__item Элемент 2
+                    .slide__col
+                        h3.h3 Кастомный номер с помощью counter и ::before
+                        +code('html').
+                            <ul class=”list”>
+                                <li class=”list__item”>Элемент 1</li>
+                                <li class=”list__item”>Элемент 2</li>
+                            </ul>
+                        +code('css').
+                            .list {
+                                counter-reset: list;
+                            }
+                            .list__item::before {
+                                counter-increment: list;
+                                content: counter(list) ". ";
+                                background: #f00;
+                                color: #fff;
+                                margin-right: 0.5em;
+                                padding: 0.2em;
+                            }
+                        style(type='text/css').
+                            .list-num {
+                                counter-reset: list;
+                            }
+                            .list-num__item + .list-num__item {
+                                margin-top: 0.5em;
+                            }
+                            .list-num__item::before {
+                                counter-increment: list;
+                                content: counter(list) ". ";
+                                background: #f00;
+                                color: #fff;
+                                margin-right: 0.5em;
+                                padding: 0.2em;
+                            }
+                        .-text-centered-on-slide
+                            ul.list-num
+                                li.list-num__item Элемент 1
+                                li.list-num__item Элемент 2
+                        .-hidden-on-slide
+                            +p().
+                                Свойство counter-reset инициирует счетчик и устанавливает идентификатор (в нашем случае переменная li), в котором будет храниться счётчик отображений определенного элемента, а также начальное значение счётчика (просто указание переменной означает, что счетчик будет начинаться с 1).
+                            +p().
+                                Свойство counter-increment предназначено для увеличения значения счётчика приращений, который задается свойством counter-reset (просто указание переменной означает, что к счетчику будет прибавляться 1).
+                            +p().
+                                При помощи псевдоэлемента ::before и его свойства content значение счетчика выводится на экран и стилизуется.
+
+            .slide
+                h2.h2.-subtheme-h Пример стилизации списка
+                .-text-centered-on-slide
+                    h3.h3 Задача. Стилизовать список в следующем виде:
+                    style(type='text/css').
+                        .list-styling {
+                            list-style-type: none;
+                        }
+                        .list-styling__item {
+                            display: inline-block;
+                            padding: 0.2em 0.5em;
+                        }
+                        .list-styling__item:not(:last-child) {
+                            border-right: 1px solid #000;
+                        }
+                    ul.list-styling
+                        li.list-styling__item Элемент 1
+                        li.list-styling__item Элемент 2
+                        li.list-styling__item Элемент 3
+                        li.list-styling__item Элемент 4
+                .slide__cols
+                    .slide__col
+                        h3.h3 Решение 1. Псевдокласс :not
+                        +code('css').
+                            .list {
+                                list-style-type: none;
+                            }
+                            .list__item {
+                                display: inline-block;
+                                padding: 0.2em 0.5em;
+                            }
+                            .list__item:not(:last-child) {
+                                border-right: 1px solid #000;
+                            }
+                    .slide__col
+                        h3.h3 Решение 2. Селектор +
+                        +code('css').
+                            .list {
+                                list-style-type: none;
+                            }
+                            .list__item {
+                                display: inline-block;
+                                padding: 0.2em 0.5em;
+                            }
+                            .list__item + .list__item {
+                                border-left: 1px solid #000;
+                            }
+
+            .slide
+                h2.h2.-subtheme-h Задание
+                h3.h3 Используя псевдоклассы, сверстайте следующий список:
+                style(type='text/css').
+                    .list-test {
+                        display: inline-block;
+                        padding-left: 2rem;
+                        list-style-type: decimal;
+                        font-size: 1.5rem;
+                    }
+                    .list-test__item:first-child {
+                        font-style: italic;
+                    }
+
+                    .list-test__item:nth-child(even):not(:last-child) {
+                        color: red;
+                        text-decoration: underline;
+                    }
+
+                    .list-test__item:nth-child(3) {
+                        font-weight: bold;
+                        text-decoration: line-through;
+                    }
+
+                    .list-test__item:last-child {
+                        color: blue;
+                    }
+                .-text-centered-on-slide
+                    ol.list-test
+                        li.list-test__item Item 1
+                        li.list-test__item Item 2
+                        li.list-test__item Item 3
+                        li.list-test__item Item 4
+                        li.list-test__item Item 5
+                        li.list-test__item Item 6
+                        li.list-test__item Item 7
+                        li.list-test__item Item 8
+
+            .slide(id=subthemes.menu.href)
+                h2.h2.-subtheme-h= subthemes.menu.title
+                .-hidden-on-slide
+                    +p().
+                        Меню на сайте представляет собой набор ссылок, ведущих на разные страницы. Поэтому разметка меню выполняется при помощи неупорядоченного списка, в каждый элемент которого вставляется ссылка.
+                    +p()
+                        | Как правило, на сайте есть одно навигационное меню с ссылками на разделы сайта (чаще всего оно находится в хедере). Оно дополнительно оборачивается в семантический тег
+                        +inline-html()
+                            <nav>
+                        | .
+                    +p()
+                        | Допустимо использовать несколько тегов
+                        +inline-html()
+                            <nav>
+                        | на странице.
+                .slide__cols
+                    .slide__col
+                        +code('html').
+                            <nav>
+                                <ul class="menu">
+                                    <li class="menu__item">
+                                        <a class="menu__link is-active"
+                                        href="/index.html">Главная</a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a class="menu__link"
+                                        href="/catalog.html">Каталог</a>
+                                    </li>
+                                    <li class="menu__item">
+                                        <a class="menu__link"
+                                        href="/about.html">О компании</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        .-visible-on-slide
+                            nav
+                                ul.menu
+                                    li.menu__item
+                                        a(class='menu__link is-active' href='#') Главная
+                                    li.menu__item
+                                        a(class='menu__link' href='#') Каталог
+                                    li.menu__item
+                                        a(class='menu__link' href='#') О компании
+                    .slide__col
+                        .-hidden-on-slide
+                            h3.h3 Пример стилизации меню
+                        style(type='text/css').
+                            .menu {
+                                margin: 0;
+                                padding: 0;
+                                list-style-type: none;
+                                font-family: Verdana, sans-serif;
+                                font-size: 1.5rem;
+                                line-height: 1.2;
+                                letter-spacing: -0.25em;
+                            }
+                            .menu__item {
+                                display: inline-block;
+                                letter-spacing: normal;
+                            }
+                            .menu__link {
+                                display: block;
+                                padding: 1em;
+                                background-color: rgba(0, 0, 0, 0.75);
+                                color: #ccc;
+                                text-decoration: none;
+                            }
+                            .menu__link:link,
+                            .menu__link:visited,
+                            .menu__link:active {
+                                color: #ccc;
+                            }
+                            .menu__link:hover,
+                            .menu__link.is-active {
+                                background-color: #000;
+                            }
+                        +code('css').
+                            .menu {
+                                margin: 0;
+                                padding: 0;
+                                list-style-type: none;
+                                letter-spacing: -0.25em;
+                            }
+                            .menu__item {
+                                display: inline-block;
+                                letter-spacing: normal;
+                            }
+                            .menu__link {
+                                display: block;
+                                padding: 1em;
+                                background-color: rgba(0, 0, 0, 0.75);
+                                color: #ccc;
+                                text-decoration: none;
+                            }
+                            .menu__link:hover, .menu__link.is-active {
+                                background-color: #000;
+                            }
+                        .-hidden-on-slide
+                            nav
+                                ul.menu
+                                    li.menu__item
+                                        a(class='menu__link is-active' href='#') Главная
+                                    li.menu__item
+                                        a(class='menu__link' href='#') Каталог
+                                    li.menu__item
+                                        a(class='menu__link' href='#') О компании
+
+            .slide
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)

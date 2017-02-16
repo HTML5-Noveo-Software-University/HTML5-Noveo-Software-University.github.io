@@ -1,0 +1,1038 @@
+extends ../base/base-lect.pug
+
+block layout-settings
+    include ../lectures/themes/text-semantics-style.pug
+    - var conf = textSemanticsStyle;
+    - var pageTitle = conf.title;
+    - var pageType = 'lecture'
+    - var currentPage = conf.page;
+    - var subthemes = conf.subthemes;
+    -
+        var listToRead = [{
+            id: "toRead-1",
+            title: "Справочник по тегам HTML5",
+            href: "https://developer.mozilla.org/ru/docs/Web/HTML/Element"
+        }, {
+            id: "toRead-2",
+            title: "Спецификация HTML5",
+            href: "https://www.w3.org/TR/html5/"
+        }, {
+            id: "toRead-3",
+            title: "Google web fonts",
+            href: "https://fonts.google.com/"
+        }, {
+            id: "toRead-4",
+            title: "Webfont-генератор FontSquirrel",
+            href: "https://www.fontsquirrel.com/"
+        }, {
+            id: "toRead-5",
+            title: "REM vs EM – Великий спор",
+            href: "https://habrahabr.ru/post/280125/"
+        }];
+    -
+        var listBasicFonts = [
+            'Arial;',
+            'Georgia;',
+            'Times New Roman;',
+            'Verdana.'
+        ];
+    -
+        var listFontWeight = [
+            'ключевыми словами: normal, bold, lighter, bolder;',
+            'числами: от 100 (самый тонкий) до 900 (самый толстый).'
+        ];
+    -
+        var listTextTransform = [
+            'none; - значение по умолчанию, отменяет изменение регистра;',
+            'lowercase; - все буквы строчные;',
+            'uppercase; - все буквы заглавные;',
+            'capitalize; - каждое слово начинается с большой буквы.'
+        ];
+    -
+        var listTextDecoration = [
+            'none; - значение по умолчанию, эффектов нет;',
+            'underline; - подчеркивание;',
+            'line-through; - зачеркивание;',
+            'overline; - черта сверху.'
+        ];
+    -
+        var listTextAlign = [
+            'left; - значение по умолчанию, текст выравнивается по левому краю;',
+            'right; - текст выравнивается по правому краю;',
+            'center; - текст выравнивается по центру;',
+            'justify; - текст растягивается по всей ширине контейнера.'
+        ];
+    -
+        var listColorFormats = [
+            'шестнадцатеричный: #fa452e; #000;',
+            'RGB: rgb(0, 150, 0);',
+            'RGBA: rgba(0, 0, 0, 0.5);',
+            'цветовые константы: red, blue, green...'
+        ];
+    -
+        var listWhiteSpace = [
+            'normal; - значение по умолчанию;',
+            'nowrap; - отображает весь текст одной строкой без переносов;',
+            'pre; - сохраняет пробелы и переносы как в исходном коде аналогично тегу pre;',
+            'pre-wrap; - работает как значение pre, но добавляет автоматические переносы, если текст не помещается в контейнер.'
+        ];
+    -
+        var listWordBreak = [
+            'normal; - используются правила переноса строк по умолчанию. Как правило, в этом случае строки не переносятся или переносятся в тех местах, где явно задан перенос (например, с помощью тега br);',
+            'break-all; - перенос строк добавляется автоматически, чтобы слово поместилось в заданную ширину блока. Значение не работает для текста на китайском, корейском или японском языке;',
+            'keep-all; - не разрешает перенос строк в словах на китайском, корейском или японском языке. Для остальных языков действует как normal.',
+        ];
+    -
+        var listWordWrap = [
+            'normal; - строки не переносятся или переносятся в тех местах, где явно задан перенос (например, с помощью тега br);',
+            'break-word; - перенос строк добавляется автоматически, чтобы слово поместилось в заданную ширину блока;',
+            'inherit; - наследует значение родителя.',
+        ];
+    -
+        var listTextOverflow = [
+            'clip; - текст обрезается по размеру области;',
+            'ellipsis; - текст обрезается и к концу строки добавляется многоточие.'
+        ];
+
+block main
+    include ../base/mixins/mixin-slides.pug
+    main.main
+        .slides-wrap
+            +main-slide(pageTitle, 'Дмитрий Мещеряков')
+
+            .slide(id=subthemes.semantics.href)
+                h2.h2.-subtheme-h= subthemes.semantics.title
+                .-centered
+                    +p().
+                        Семантика - раздел лингвистики, изучающий смысловое значение единиц языка.
+                    +p().
+                        Семантическая вёрстка, или семантический HTML-код, — это подход к созданию веб-страниц на языке HTML, основанный на использовании HTML-тегов в соответствии с их семантикой (предназначением), а также предполагающий логичную и последовательную иерархию страницы. Он противопоставляется подходу, при котором написание HTML-кода определяется внешним видом веб-страницы.
+                    +remember()
+                        | Текст - основной контент веб-страниц. Правильная разметка текста и использование подходящих тегов отличает профессионала от дилетанта.
+
+            .slide
+                h2.h2.-subtheme-h Абзацы и заголовки
+                .slide__cols
+                    .slide__col
+                        +p().
+                            Абзацы - основные строительные блоки, из которых состоит текст.
+                        +code('html').
+                            <p>Абзац — отрезок речи,
+                            состоящий из нескольких предложений.</p>
+                        br
+                    .slide__col
+                        .-hidden-on-slide
+                            +p()
+                                | В языке HTML для выделения заголовков предусмотрено целое семейство тегов: от
+                                +inline-html()
+                                    <h1>
+                                | до
+                                +inline-html()
+                                    <h6>
+                                |.
+                                | Тег
+                                +inline-html()
+                                    <h1>
+                                | обозначает самый важный заголовок (заголовок верхнего уровня), а тег
+                                +inline-html()
+                                    <h6>
+                                | обозначает подзаголовок самого нижнего уровня.
+                        .-hidden-on-slide
+                            +p()
+                                | Чаще всего на практике применяются заголовки
+                                +inline-html()
+                                    <h1>
+                                | ,
+                                +inline-html()
+                                    <h2>
+                                | и
+                                +inline-html()
+                                    <h3>
+                                | .
+                            +p()
+                                | Не рекомендуется, чтобы на странице содержалось несколько заголовков
+                                +inline-html()
+                                    <h1>
+                                | .
+                            +p()
+                                | При использовании подзаголовков не рекомендуется пропускать уровни заголовков, то есть после заголовка
+                                +inline-html()
+                                    <h1>
+                                | должен идти подзаголовок
+                                +inline-html()
+                                    <h2>
+                                | и только потом подзаголовок
+                                +inline-html()
+                                    <h3>
+                                | .
+                        .-visible-on-slide
+                            +p()
+                                | 6 уровней заголовков:
+                                | от
+                                +inline-html()
+                                    <h1>
+                                | (заголовок верхнего уровня)
+                                | до
+                                +inline-html()
+                                    <h6>
+                                | (заголовок самого нижнего уровня)
+                                | .
+                        h3.p Пример уровней заголовков (статья про CSS на Википедии)
+                        +code('html').
+                            <h1>CSS</h1>
+                                <h2>Обзор</h2>
+                                    <h3>Цель создания CSS</h3>
+                                    <h3>Способы подключения CSS к док-ту</h3>
+                                    <h3>Иерархия элементов внутри док-та</h3>
+                                    <h3>Правила построения CSS</h3>
+                                        <h4>Виды селекторов</h4>
+                                            <h5>Универсальный селектор</h5>
+                                            <h5>Селектор тегов</h5>
+                                    <h3>Классы и идентификаторы элементов</h3>
+                                <h2>CSS-верстка</h2>
+
+            .slide
+                h2.h2.-subtheme-h Разделители текста
+                .slide__cols
+                    .slide__col
+                        +p()
+                            | Тег
+                            +inline-html()
+                                <br>
+                            | делает перенос строки в тексте, не создавая при этом абзац. Используется, например, в разметке стихов или текстов песен.
+                    .slide__col
+                        +p()
+                            | Тег
+                            +inline-html()
+                                <hr>
+                            | используется для создания горизонтальной линии-разделителя.
+                .-centered
+                    +p()
+                        | Мороз и солнце; день чудесный!
+                        br
+                        | Еще ты дремлешь, друг прелестный -
+                        br
+                        | Пора, красавица, проснись:
+                        br
+                        | Открой сомкнуты негой взоры
+                        br
+                        | Навстречу северной Авроры,
+                        br
+                        | Звездою севера явись!
+                        hr
+                    +p()
+                        | Вечор, ты помнишь, вьюга злилась,
+                        br
+                        | На мутном небе мгла носилась;
+                        br
+                        | Луна, как бледное пятно,
+                        br
+                        | Сквозь тучи мрачные желтела,
+                        br
+                        | И ты печальная сидела -
+                        br
+                        | А нынче..... погляди в окно...
+                        hr
+
+            .slide
+                h2.h2.-subtheme-h
+                    | Теги
+                    +inline-html()
+                        <b>
+                    | и
+                    +inline-html()
+                        <strong>
+                .slide__cols
+                    .slide__col
+                        +p()
+                            | Тег
+                            +inline-html()
+                                <b>
+                            | служит для выделения частей текста с целью обратить внимание читателей (например, ключевые слова в документе, названия продуктов, первый абзац в статье).
+                        h3.p Пример
+                        +code('html').
+                            <p>Хотя текст в тегах <b> и <strong>
+                            выглядит одинаково,
+                            <b>(полужирное выделение)</b>,
+                            смысл у него разный.</p>
+                        +p()
+                            | Хотя текст в тегах
+                            +inline-html()
+                                <b>
+                            | и
+                            +inline-html()
+                                <strong>
+                            | выглядит одинаково
+                            +bold-no-sematics('(полужирное выделение)')
+                            |, смысл у него разный.
+                        br
+                    .slide__col
+                        +p()
+                            | Тег
+                            +inline-html()
+                                <strong>
+                            | означает повышенную значимость своего содержимого.
+                        h3.p Пример
+                        +code('html').
+                            <p>При разметке текста
+                            <strong>стоит уделять особое внимание
+                            семантике</strong></p>
+                        +p()
+                            | При разметке текста
+                            +bold-sematics-attention('стоит уделять особое внимание семантике')
+                            | .
+
+            .slide
+                h2.h2.-subtheme-h
+                    | Теги
+                    +inline-html()
+                        <i>
+                    | и
+                    +inline-html()
+                        <em>
+                .slide__cols
+                    .slide__col
+                        +p()
+                            | Тег
+                            +inline-html()
+                                <i>
+                            | содержит текст, выбивающийся из общего окружения, но не имеющий эмоциональной окраски.
+                        h3.p Пример
+                        +code('html').
+                            <p>В переводе с латыни изречение
+                            <i>Per aspera ad Astra</i>
+                            означает «Через тернии к звёздам».</p>
+                        +p()
+                            | В переводе с латыни изречение
+                            +italic-sematics-intonation('Per aspera ad Astra')
+                            | означает «Через тернии к звёздам».
+                        br
+                    .slide__col
+                        +p()
+                            | Тег
+                            +inline-html()
+                                <em>
+                            | определяет текст, на который сделан особый акцент, меняющий смысл предложения.
+                        h3.p Пример
+                        +code('html')
+                            <p>Казнить <em>нельзя</em>, помиловать!</p>
+                        +p()
+                            | Казнить
+                            +italic-sematics-important('нельзя')
+                            | , помиловать!
+            .slide
+                h2.h2.-subtheme-h
+                    | Теги
+                    +inline-html()
+                        <s>
+                    | и
+                    +inline-html()
+                        <del>
+                .slide__cols
+                    .slide__col
+                        +p()
+                            | Тег
+                            +inline-html()
+                                <s>
+                            | представляет информацию, которая утратила свою актуальность.
+                        h3.p Пример
+                        +code('html')
+                            <p>Купи по цене 999 р. вместо <s>1000 р.</s>!</p>
+                        +p()
+                            | Купи по цене 999 р. вместо
+                            s 1000 р.
+                            | !
+                        br
+                    .slide__col
+                        +p()
+                            | Тег
+                            +inline-html()
+                                <del>
+                            | представляет информацию, которая была удалена в новой версии документа.
+                        h3.p Пример
+                        +code('html')
+                            <p>В последующих версиях
+                            <del>этот недостаток был удален</del>.</p>
+                        +p()
+                            | В последующих версиях
+                            +space()
+                            del этот недостаток был удален
+                            | .
+
+            .slide
+                h2.h2.-subtheme-h Цитаты
+                .slide__cols
+                    .slide__col
+                        +p()
+                            | Тег
+                            +inline-html()
+                                <q>
+                            | определяет короткую цитату, выделяя ее кавычками.
+                        h3.p Пример
+                        +code('html')
+                            <q>Не стыдно не знать - стыдно не учиться.</q>
+                        +p()
+                            q Не стыдно не знать - стыдно не учиться.
+                        br
+                    .slide__col
+                        +p()
+                            | Тег
+                            +inline-html()
+                                <blockquote>
+                            | определяет блок с цитатой.
+                        +p()
+                            | Тег
+                            +inline-html()
+                                <cite>
+                            | используется для выделения источника или автора цитаты.
+                        h3.p Пример
+                        +code('html').
+                            <p>В книге <cite>Мастер и Маргарита</cite>
+                            есть такая цитата:</p>
+                            <blockquote>Никогда ничего не просите!
+                            Никогда и ничего, и в особенности у тех,
+                            кто сильнее вас. Сами предложат
+                            и сами всё дадут!</blockquote>
+                        +p()
+                            | В книге
+                            +space()
+                            cite Мастер и Маргарита
+                            +space()
+                            | есть такая цитата:
+                            +space()
+                            blockquote(style='font-size: 1.3rem;') Никогда ничего не просите! Никогда и ничего, и в особенности у тех, кто сильнее вас. Сами предложат и сами всё дадут!
+
+            .slide
+                h2.h2.-subtheme-h Выделение текста
+                .-centered
+                    +p()
+                        | Тег
+                        +inline-html()
+                            <mark>
+                        | выделяет текст, на который стоит обратить внимание. В совеременных браузерах подсвечивается желтым цветом.
+                    h3.p Пример
+                    +code('html')
+                        <p>Так можно выделить <mark>ключевое слово</mark>.</p>
+                    +p()
+                        | Так можно выделить
+                        +space()
+                        mark ключевое слово
+                        |.
+
+            .slide
+                h2.h2.-subtheme-h Преформатированный текст
+                .-centered
+                    +p()
+                        | Браузер игнорирует пробелы и переносы строк в редакторе кода. Для изменения этого поведения используется тег
+                        +inline-html()
+                            <pre>
+                        | .
+                    +p()
+                        | Этот тег обозначает "предварительно отформатированный текст". Браузер сохраняет и отображает все пробелы и переносы, которые есть внутри тега
+                        +inline-html()
+                            <pre>
+                        | .
+                    +p().
+                        Обычно этот тег используют для отображения примеров кода.
+                    h3.p Пример
+                    +code('html')
+                        <pre>В этом     теге    все   пробелы сохранятся</pre>
+                    +p()
+                        pre В этом     теге    все   пробелы сохранятся
+
+            .slide
+                h2.h2.-subtheme-h
+                    | Тег
+                    +inline-html()
+                        <time>
+                .-centered
+                    +p()
+                        | Тег
+                        +inline-html()
+                            <time>
+                        | используется для представления либо времени в 24-рехчасовом формате, либо точной даты по Григорианскому календарю (с опциональным указанием времени и часового пояса).
+                    +p().
+                        Этот элемент предназначен для представления дат и времени в машиночитаемом формате. Это облегчает клиентским приложениям добавление событий в календарь пользователя.
+                    h3.p Пример
+                    +code('html').
+                        <p>Пост был опубликован
+                        <time datetime=”2017-02-03”>3 февраля 2017 года</time>.</p>
+                    +p()
+                        | Пост был опубликован
+                        +space()
+                        time(datetime='2017-02-03') 3 февраля 2017 года
+                        |.
+
+            .slide(id=subthemes.style.href)
+                h2.h2.-subtheme-h= subthemes.style.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство font-family
+                        +p().
+                            Определяет семейство шрифтов.
+                        +code('css').
+                            .text {
+                                font-family: 'Open Sans', Arial, sans-serif;
+                            }
+                        .-hidden-on-slide
+                            +p().
+                                Если название шрифта состоит из одного слова, то оно пишется без кавычек, если из нескольких - то в кавычках.
+                            +p().
+                                Рекомендуется указывать через запятую несколько шрифтов. Если браузер не найдет шрифт, указанный первым, он подключит следующий за ним, и так далее до самого последнего. В конце рекомендуется указывать тип шрифта: serif - шрифт с засечками (Times New Roman), sans-serif - без засечек (Arial, Verdana).
+                        +list('Базовые шрифты - шрифты, доступные во всех операционнах системах:', listBasicFonts)
+                    .slide__col
+                        h3.h3 Свойство font-weight
+                        +p().
+                            Определяет толщину начертания шрифта.
+                        +code('css').
+                            .text {
+                                font-weight: 700;
+                            }
+                        +list('Свойство font-weight может задаваться:', listFontWeight)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство font-style
+                        +p().
+                            Определяет отображение шрифта.
+                        +code('css').
+                            .text {
+                                font-style: italic; /* курсив */
+                            }
+                        +p().
+                            Свойство имеет два основных значения: normal и italic.
+                    .slide__col
+                        h3.h3 Свойство font-size
+                        +p().
+                            Определяет размер шрифта.
+                        +p().
+                            Размер шрифта обычно задается в px (абсолютная единица измерения), %, em, rem, vh (относительные единицы измерения).
+                        +p().
+                            Размер шрифта может быть задан в пикселях:
+                        +code('css').
+                            .text {
+                                font-size: 16px;
+                            }
+                        p(class='p' style='font-size: 16px;') Текст высотой 16px.
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .slide__cols
+                    .slide__col
+                        h3.h3.-visible-on-slide Свойство font-size
+                        +p().
+                            Размер шрифта может быть задан в em. Размер шрифта в em вычисляется относительно размера шрифта родительского элемента:
+                        +code('css').
+                            .parent {
+                                font-size: 30px;
+                            }
+                            .child {
+                                font-size: 0.8em;
+                                /* размер шрифта будет равен 24px */
+                            }
+                        div(class='parent' style='font-size: 30px;')
+                            p(class='p child' style='font-size: 0.8em;') Текст высотой 0.8 em.
+                    .slide__col
+                        +p().
+                            Размер шрифта может быть задан в rem. Размер шрифта в rem вычисляется относительно корневого элемента страницы (тег html):
+                        +code('css').
+                            :root {
+                                font-size: 2.3vh;
+                                /* 1vh = 1/100 высоты вьюпорта (экрана) */
+                            }
+                            .text {
+                                font-size: 1rem;
+                                /* размер шрифта будет равен 2.3vh */
+                            }
+                        p(class='p' style='font-size: 1rem;') Текст высотой 1rem.
+
+            .slide
+                h2.h2.-subtheme-h Rem или em?
+                .-centered
+                    +remember()
+                        | Рекомендуется задавать размеры текстовых элементов страницы (заголовки, абзацы) в rem, а величину отступов и полей (margin и padding), а также декоративных элементов (например, толщину рамок или радиус скругления) в em.
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Rem или em?
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="OWEjQq" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[text-semantics-style ] - Rem & Em" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/OWEjQq/">[text-semantics-style ] - Rem & Em</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство color
+                        +p().
+                            Определяет цвет текста.
+                        +list('Цвет текста может быть задан в одном из цветовых форматов:', listColorFormats)
+                    .slide__col
+                        h3.h3 Свойство line-height
+                        +p().
+                            Определяет высоту строки.
+                            Может быть задано в px, em, rem, %, безразмерной величиной (например, 1.5).
+                        +p().
+                            Предпочтительнее задавать межстрочный интервал либо множителем, либо в относительных единицах измерения.
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство text-transform
+                        +p().
+                            Определяет регистр символов.
+                        +list('Значения:', listTextTransform)
+                    .slide__col
+                        h3.h3 Свойство text-decoration
+                        +p().
+                            Позволяет добавить тексту декоративное оформление.
+                        +list('Значения:', listTextDecoration)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство text-align
+                        +p().
+                            Определяет горизонтальное выравнивание текста.
+                        +list('Значения:', listTextAlign)
+                    .slide__col
+                        h3.h3 Свойство letter-spacing
+                        +p().
+                            Определяет межбуквенный интервал.
+                            Может быть задано в px, em, rem.
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .-centered-wide
+                    h3.p Пример использования вышеуказанных свойств
+                    +code('css').
+                        .title {
+                            font-family: Arial, sans-serif;
+                            font-weight: 700;
+                            font-style: italic;
+                            font-size: 1.5rem;
+                            line-height: 1.5;
+                            letter-spacing: 15px;
+                            text-transform: capitalize;
+                            text-decoration: underline;
+                            text-align: center;
+                            color: #f1652a;
+                        }
+                    style(type='text/css').
+                        .title {
+                            font-family: Arial, sans-serif;
+                            font-weight: 700;
+                            font-style: italic;
+                            font-size: 1.5rem;
+                            line-height: 1.5;
+                            text-transform: capitalize;
+                            text-decoration: underline;
+                            text-align: center;
+                            color: #f1652a;
+                            letter-spacing: 15px;
+                        }
+                    div.title Век живи - век учись
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство text-indent
+                        .-hidden-on-slide
+                            +p().
+                                Устанавливает величину отступа первой строки блока текста (например, для абзаца). Воздействия на все остальные строки не оказывается. Допускается отрицательное значение для создания выступа первой строки, но следует проверить, чтобы текст не выходил за пределы окна браузера.
+                            +p().
+                                В качестве значений принимаются любые единицы длины, принятые в CSS. При задании значения в процентах, отступ первой строки вычисляется в зависимости от ширины блока.
+                        .-visible-on-slide
+                            +p().
+                                Устанавливает величину отступа первой строки блока текста (например, для абзаца).
+                    .slide__col
+                        h3.h3 Псевдоэлемент ::first-line
+                        +p().
+                            Задает стиль первой строки форматированного текста.
+                        h3.h3 Псевдоэлемент ::first-letter
+                        +p().
+                            Определяет стиль первого символа в тексте элемента.
+                        .-hidden-on-slide
+                            +p().
+                                В правилах стиля обоих псевдоэлементов допустимо использовать только свойства, относящиеся к шрифту, размерам полей и отступов, изменению цвета текста и фона.
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            p {
+                                text-indent: 3rem;
+                            }
+                            p::first-line {
+                                font-weight: bold;
+                            }
+                            p::first-letter {
+                                font-family: 'Times New Roman', serif;
+                                font-size: 2rem;
+                                color: red;
+                            }
+                    .slide__col
+                        style(type='text/css').
+                            p.text-indent {
+                                text-indent: 3rem;
+                            }
+                            p.text-indent::first-line {
+                                font-weight: bold;
+                            }
+                            p.text-indent::first-letter {
+                                font-family: 'Times New Roman', serif;
+                                font-size: 2rem;
+                                color: red;
+                            }
+                            .-slides-layout p.text-indent {
+                                padding-top: 100px;
+                            }
+                        p.text-indent В некотором царстве, в некотором государстве жил да был царь с царицею; у него было три сына – все молодые, холостые, удальцы такие, что ни в сказке сказать, ни пером написать; младшего звали Иван-царевич...
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .-centered
+                        h3.h3 Псевдоэлемент ::selection
+                        +p().
+                            Применяет стиль к выделенному пользователем тексту. В правилах стилей допускается использовать следующие свойства: color, background и background-color.
+                        +code('css').
+                            p::selection {
+                                color: #fc0;
+                                background-color: #000;
+                            }
+                        style(type='text/css').
+                            p.selection::selection {
+                                color: #fc0;
+                                background-color: #000;
+                            }
+                        p.selection При выделении этого текста он изменит свой цвет.
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство vertical-align
+                        +p().
+                            Определяет выравнивание текста по вертикали.
+                        .-hidden-on-slide
+                            +p().
+                                Внутри текстовой строки «работа» этого свойства заметна, если в ней есть фрагменты разного размера.
+                        +code('html').
+                            <div class="block">
+                                <span class="block__basic">Text
+                                    <span class="top">top</span>
+                                </span>
+                                <span class="block__basic">Text
+                                    <span class="bottom">bottom</span>
+                                </span>
+                                <span class="block__basic">Text
+                                    <span class="middle">middle</span>
+                                </span>
+                                <span class="block__basic">Text
+                                    <span class="sub">sub</span>
+                                </span>
+                            </div>
+                    .slide__col
+                        +code('css').
+                            .top {
+                                vertical-align: top;
+                            }
+                            .bottom {
+                                vertical-align: bottom;
+                            }
+                            .middle {
+                                vertical-align: middle;
+                            }
+                            .sub {
+                                vertical-align: sub;
+                            }
+                        div(style='line-height: 2; text-align: center; color: #f1652a;')
+                            span(style='font-size: 2rem;') Text
+                                span(style='font-size: 1rem; vertical-align: top; margin-right: 1rem;') top
+                            span(style='font-size: 2rem;') Text
+                                span(style='font-size: 1rem; vertical-align: bottom; margin-right: 1rem;') bottom
+                            span(style='font-size: 2rem;') Text
+                                span(style='font-size: 1rem; vertical-align: middle; margin-right: 1rem;') middle
+                            span(style='font-size: 2rem;') Text
+                                span(style='font-size: 1rem; vertical-align: sub;') sub
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .-centered
+                    h3.p Пример. Использование вертикального выравнивания для отображения степени числа
+                    +code('html').
+                        <div class="number">2
+                            <span class="number__index">8</span>
+                        </div>
+                    +code('css').
+                        .number {
+                            font-size: 2rem;
+                        }
+                        .number__index {
+                            font-size: 0.7em;
+                            vertical-align: super;
+                        }
+                    div(style='font-size: 2rem; line-height: 1.5; text-align: center; color: #f1652a;') 2
+                        span(style='font-size: 0.7em; vertical-align: super;') 8
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство font-variant
+                        +p().
+                            Определяет, как нужно представлять строчные  буквы, значение small-caps модифицирует все строчные буквы как заглавные уменьшенного размера.
+                        p(style='font-family: Arial, sans-serif; font-weight: 700; font-size: 1.5rem; line-height: 1.2; text-align: center; color: #f1652a;') Текст без свойства font-variant
+                        +code('css').
+                            p {
+                                font-variant: small-caps;
+                            }
+                        p(style='font-family: Arial, sans-serif; font-weight: 700; font-size: 1.5rem; line-height: 1.2; text-align: center; color: #f1652a; font-variant: small-caps;') Текст со свойством font-variant: small-caps.
+                    .slide__col
+                        h3.h3 Свойство white-space
+                        +p().
+                            Управляет пробелами и переносами.
+                        +list('Значения:', listWhiteSpace)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство word-break
+                        +p().
+                            Указывает, как делать перенос строк внутри слов, не помещающихся по ширине в заданную область.
+                        +list('Значения:', listWordBreak)
+                    .slide__col
+                        h3.h3 Свойство overflow-wrap (word-wrap)
+                        +p().
+                            Указывает, переносить или нет длинные слова, которые не помещаются по ширине в заданную область.
+                        .-hidden-on-slide
+                            +p().
+                                Свойство word-wrap исторически появилось раньше и не включено в стандарт. Браузеры обрабатывают значения свойств word-wrap и overflow-wrap одинаково. Предпочтительнее использовать свойство word-wrap (лучше браузерная поддержка).
+                            +p().
+                                Предпочтительнее использовать свойство word-wrap (лучше браузерная поддержка).
+                        +list('Значения:', listWordWrap)
+
+            .slide
+                h2.h2.-subtheme-h Перенос слов. Примеры
+                .slide__cols
+                    .slide__col
+                        h3.h3 Без свойств word-break и word-wrap
+                        +code('html').
+                            <div>Уже переосвидетельствовался наш
+                            тысячадевятьсотдевяностодевяти-килограммовый
+                            погрузчик.</div>
+                        div(style='width: 150px; margin-left: 100px; padding: 10px; background-color: rgba(244, 136, 90, 0.15); border: 1px solid #999; word-wrap: normal;') Уже переосвидетельствовался наш тысячадевятьсотдевяностодевяти-килограммовый погрузчик.
+                    .slide__col
+                        h3.h3 Со свойством word-break: break-all;
+                        div(style='width: 150px; margin-left: 100px; padding: 10px; background-color: rgba(244, 136, 90, 0.15); border: 1px solid #999; word-wrap: normal; word-break: break-all;') Уже переосвидетельствовался наш тысячадевятьсотдевяностодевяти-килограммовый погрузчик.
+                        h3.h3 Со свойством overflow-wrap: break-word;
+                        div(style='width: 150px; margin-left: 100px; padding: 10px; background-color: rgba(244, 136, 90, 0.15); border: 1px solid #999; overflow-wrap: break-word;') Уже переосвидетельствовался наш тысячадевятьсотдевяностодевяти-килограммовый погрузчик.
+                        .-hidden-on-slide
+                            +hint().
+                                Поведение свойств word-break и overflow-wrap (word-wrap) очень похоже. Свойство word-break лучше подходит для контента на восточных языках (китайский, японский, корейский), в которых существуют специфические правила переноса. Свойство overflow-wrap (word-wrap) используется для того, чтобы избежать "поломки" лэйаута страницы из-за длинных слов, независимо от языка контента.
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.style.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство text-overflow
+                        +p().
+                            Определяет параметры видимости текста в блоке, если текст целиком не помещается в заданную область.
+                        +list('Значения:', listTextOverflow)
+                        +remember().
+                            Для корректной работы свойства text-overflow у блока с текстом должна быть определена ширина и установлены свойства white-space: nowrap; и overflow со значением auto, scroll или hidden.
+                    .slide__col
+                        h3.h3 Свойство text-overflow: clip;
+                        +code('css').
+                            .block {
+                                width: 300px;
+                                overflow: hidden;
+                                white-space: nowrap;
+                                text-overflow: clip;
+                            }
+                        div.block(style='width: 300px; overflow: hidden; white-space: nowrap; text-overflow: clip; padding: 10px; background-color: rgba(244, 136, 90, 0.15); border: 1px solid #999;') Очень длинный текст, который не влазит в этот блок.
+                        h3.h3 Свойство text-overflow: ellipsis;
+                        +code('css').
+                            .block {
+                                ...
+                                text-overflow: ellipsis;
+                            }
+                        div.block(style='width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 10px; background-color: rgba(244, 136, 90, 0.15); border: 1px solid #999;') Очень длинный текст, который не влазит в этот блок.
+
+            .slide
+                h2.h2.-subtheme-h Стилизация кавычек
+                .-centered
+                    h3.h3 Свойство quotes
+                    .-hidden-on-slide
+                        +p().
+                            В разных языках кавычки отображаются по-разному. Например, в русском или французском языках «вот так», а в английском "вот так".
+                    +code('html').
+                        <p class="block">Цитата на французском:
+                            <q lang="fr" class="block__quotes">Ce que femme veut, Dieu le veut</q>.
+                        </p>
+                        <p class="block">Цитата на английском:
+                            <q lang="en" class="block__quotes">То be or not to be</q>.
+                        </p>
+                    +code('css').
+                        .block__quotes:lang(en) {
+                            quotes: "\201C" "\201D";
+                        }
+                        .block__quotes:lang(fr) {
+                            quotes: "\00AB" "\00BB";
+                        }
+                    p(style='font-size: 1.3rem;') Цитата на французском:
+                        +space()
+                        q(lang='fr') Ce que femme veut, Dieu le veut
+                    p(style='font-size: 1.3rem;') Цитата на английском:
+                        +space()
+                        q(lang='en') То be or not to be
+
+            .slide(id=subthemes.type.href)
+                h2.h2.-subtheme-h Типографика. Подключение нестандартных шрифтов
+                .-centered
+                    h3.h3 Способ 1. Google Fonts
+                    .-hidden-on-slide
+                        +p()
+                            | Для того чтобы подключить нестандартный бесплатный шрифт, можно воспользоваться сервисом Google Fonts
+                            +link-to-source(listToRead, 3)
+                            | .
+                    h3.p Алгоритм
+                    +p()
+                        | 1. Выбираем нужный шрифт:
+                    .-text-centered-on-slide
+                        +figure('Выбор шрифта в Google Fonts', conf.page, 'google-fonts1.jpg')
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Способ 1. Google Fonts
+                .-centered
+                    +p()
+                        | 2. Переходим на страницу с выбранным шрифтом и кликаем на кнопку Select this font. Внизу появится окно с заголовком Family Selected:
+                    .-text-centered-on-slide
+                        +figure('Окно с настройками выбранного шрифта', conf.page, 'google-fonts2.jpg')
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Способ 1. Google Fonts
+                .-centered
+                    +p()
+                        | 3. На вкладке CUSTOMIZE указываем, какие нужны стили шрифта (light, regular, bold) и требуемые языки (Cyrillic для русского):
+                    .-text-centered-on-slide
+                        +figure('Кастомизация шрифта', conf.page, 'google-fonts3.jpg')
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Способ 1. Google Fonts
+                .-centered
+                    +p()
+                        | 4. Добавляем код для подключения шрифта (из вкладки EMBED) в
+                        +inline-html()
+                            <head>
+                        | (перед подключением вашего стилевого файла):
+                    +code('html').
+                        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700&amp;subset=cyrillic" rel="stylesheet">
+                        <link href="styles.css" rel="stylesheet">
+                    +p()
+                        | 5. Используем в css:
+                    +code('css').
+                        body {
+                            font-family: 'Open Sans', Arial, sans-serif;
+                        }
+
+            .slide
+                h2.h2.-subtheme-h Способ 2. Подключение через @font-face
+                .-centered
+                    .-hidden-on-slide
+                        +p().
+                            Если у вас есть в наличии настандартный шрифт (от дизайнера или заказчика), то его можно подключить на страницу при помощи css-директивы @font-face.
+                        +p().
+                            При этом у вас должны быть разные файлы для разных начертаний шрифта (regular, bold, italic) разного формата. Для поддержки браузеров IE9+ достаточно форматов woff и woff2, для старых версий Android (ниже 4.4) дополнительно потребуется формат ttf.
+                    h3.p Алгоритм
+                    +p()
+                        | 1. Добавляем в папку fonts все файлы со шрифтами.
+                    +p()
+                        | 2. В css до использования свойства font-family указываем директиву @font-face и перечисляем адреса всех нужных файлов:
+                    +code('css').
+                        @font-face {
+                            font-family: 'Web font';
+                            src: url('../fonts/webfont.woff2') format('woff2'),
+                                 url('../fonts/webfont.ttf')  format('truetype'),
+                                 /* если нужна поддержка старых Android */
+                                 url('../fonts/webfont.woff') format('woff');
+                            font-weight: normal;
+                            font-style: normal;
+                        }
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Способ 2. Подключение через @font-face
+                .-centered
+                    +p()
+                        | 3. Подключаем разные файлы шрифта с указанием одного и того же имени, но разных значений font-weight и font-style:
+                    .-hidden-on-slide
+                        +code('css').
+                            @font-face {
+                                font-family: 'Web font';
+                                src: url('../fonts/webfontRegular.woff2') format('woff2'),
+                                     url('../fonts/webfontRegular.woff') format('woff'),
+                                font-weight: 400;
+                                font-style: normal;
+                            }
+                            @font-face {
+                                font-family: 'Web font';
+                                src: url('../fonts/webfontBold.woff2') format('woff2'),
+                                     url('../fonts/webfontBold.woff') format('woff'),
+                                font-weight: 700;
+                                font-style: normal;
+                            }
+                            @font-face {
+                                font-family: 'Web font';
+                                src: url('../fonts/webfontItalic.woff2') format('woff2'),
+                                     url('../fonts/webfontITalic.woff') format('woff'),
+                                font-weight: 400;
+                                font-style: italic;
+                            }
+                    .-visible-on-slide
+                        +code('css').
+                            @font-face {
+                                font-family: 'Web font';
+                                src: url('../fonts/webfontRegular.woff2') format('woff2'),
+                                font-weight: 400;
+                            }
+                            @font-face {
+                                font-family: 'Web font';
+                                src: url('../fonts/webfontBold.woff2') format('woff2'),
+                                font-weight: 700;
+                            }
+                            @font-face {
+                                font-family: 'Web font';
+                                src: url('../fonts/webfontItalic.woff2') format('woff2'),
+                                font-weight: 400;
+                                font-style: italic;
+                            }
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Способ 2. Подключение через @font-face
+                .-centered
+                    +p()
+                        | 4. Далее при указании селекторам шрифта и плотности, можно использовать одно имя, но разные плотности, например:
+                    +code('css').
+                        h1 {
+                            font-family: 'Web font', sans-serif;
+                            font-weight: 700;
+                        }
+                        p {
+                            font-family: 'Web font', sans-serif;
+                            font-weight: 400;
+                        }
+                        i {
+                            font-family: 'Web font', sans-serif;
+                            font-weight: 400;
+                            font-style: italic;
+                        }
+                .-hidden-on-slide
+                    +p()
+                        | 5. Если у вас отсутствуют необходимые форматы шрифта, то можно их сгенерировать при помощи webfont-генератором, самый известный из которых - FontSquirrel
+                        +link-to-source(listToRead, 4)
+                        | .
+
+            .slide
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)

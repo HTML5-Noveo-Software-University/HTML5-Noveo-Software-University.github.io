@@ -1,0 +1,63 @@
+html:not(.-slides-layout) {
+    .slides-wrap {
+        margin: 0 !important; /* will keep slides in last state when open again */
+    }
+}
+.slides-switcher {
+    display: none;
+    .-slides-layout & {
+        bottom: 1rem;
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+    }
+    &__group {
+        flex: 0 0 auto;
+        &:nth-child(2) {
+            flex: 1 0 auto;
+            text-align: center;
+        }
+    }
+    &__current-slide {
+        position: relative;
+        top: .5rem;
+    }
+    &__to-start {
+        @extend %btn-reset;
+
+        border: .15rem solid $orange;
+        border-radius: .2rem;
+        margin: 0 .5rem;
+        padding: .2rem 1rem;
+        &:hover {
+            background: $orange;
+            color: $white;
+        }
+    }
+    &__prev {
+        @extend %btn-reset;
+
+        border: .15rem solid $orange;
+        border-radius: .2rem;
+        margin: 0 .5rem;
+        padding: .2rem 1rem;
+        &:hover {
+            background: $orange;
+            color: $white;
+        }
+    }
+    &__next {
+        @extend %btn-reset;
+
+        border: .15rem solid $orange;
+        border-radius: .2rem;
+        margin: 0 .5rem;
+        padding: .2rem 1rem;
+        &:hover {
+            background: $orange;
+            color: $white;
+        }
+    }
+}

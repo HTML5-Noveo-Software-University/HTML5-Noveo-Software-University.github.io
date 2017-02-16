@@ -1,0 +1,191 @@
+extends ../base/base-lect.pug
+
+block layout-settings
+    include ../lectures/themes/tables.pug
+    - var conf = tables;
+    - var pageTitle = conf.title;
+    - var pageType = 'lecture'
+    - var currentPage = conf.page;
+    - var subthemes = conf.subthemes;
+    -
+      var listToRead = [{
+          id: "toRead-1",
+          title: "Спецификация по таблицам",
+          href: "https://www.w3.org/TR/CSS2/tables.html#propdef-table-layout"
+      }, {
+          id: "toRead-2",
+          title: "A Complete Guide to the Table Element",
+          href: "https://css-tricks.com/complete-guide-table-element/"
+      }, {
+          id: "toRead-3",
+          title: "Тени для скролла",
+          href: "http://lea.verou.me/2012/04/background-attachment-local/"
+      }]
+block main
+    include ../base/mixins/mixin-slides.pug
+    main.main
+        .slides-wrap
+            +main-slide(pageTitle, 'Света Шарипова')
+            .slide(id=subthemes.markup.href)
+                h2.h2.-subtheme-h= subthemes.markup.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="jyROOe" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] -" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/jyROOe/">[ tables ] -</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.verticalAlignInCell.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.verticalAlignInCell.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="YNMyba" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - вертикальное выравнивание в ячейке" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/YNMyba/">[ tables ] - вертикальное выравнивание в ячейке</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.bordersBackground.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.bordersBackground.title
+                .-centered
+                    +p()
+                        +bold-no-sematics('border')
+                        | и
+                        +bold-no-sematics('background')
+                        | лучше применять к
+                        +inline-html()
+                            <td>
+                        |и
+                        +inline-html()
+                            <th>
+                        |, а не к
+                        +inline-html()
+                            <tr>
+                        |Бордеры у
+                        +inline-html()
+                            <tr>
+                        |отображаются только при наличии свойства
+                        +bold-no-sematics('border-collapse: collapse;.')
+
+                    +p().
+                        Однако, это свойство некорректно отображает бордеры в некоторых браузерах как на экране, так и при печати.
+
+            .slide.section
+                h3.h3.-subtheme-h Зазор между рамками
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="NdmGQZ" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - зазор между бордерами" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/NdmGQZ/">[ tables ] - зазор между бордерами</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Фон ячейки при печати
+                .-centered
+                    +p()
+                        |По умолчанию при печати фон у ячеек прозрачный (если не указано свойство
+                        +bold-no-sematics('background')
+                        |) или белый (если указан ЛЮБОЙ
+                        +bold-no-sematics('background')
+                        |).
+
+                    +p()
+                        |Если очень важно выделить какую-то ячейку с помощью фона,
+                        |это нужно делать с помощью свойства
+                        +bold-no-sematics('box-shadow')
+
+
+            .slide.section
+                h3.h3.-subtheme-h Фон ячейки при печати
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="jyRWeV" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - фон при печати" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/jyRWeV/">[ tables ] - фон при печати</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
+            .slide(id=subthemes.colspanRowspan.href)
+                h2.h2.-subtheme-h= subthemes.colspanRowspan.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="vgMYLm" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - table layout - colspan, rowspan" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/vgMYLm/">[ tables ] - table layout - colspan, rowspan</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Дополнительная семантика для заголовков. Атрибут scope.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="RKOapP" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - table layout - scope" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/RKOapP/">[ tables ] - table layout - scope</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
+            .slide(id=subthemes.tableWidth.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.tableWidth.title
+                .-centered
+                    +p().
+                        Таблица принимает ширину, необходимую для вмещения контента.
+
+                    +p().
+                        Если ширина указана (например, 100%), то при малом количестве контента таблица будет растягиваться до указанной ширины
+
+                    +p().
+                        Если ширина указана, но контент не помещается, таблица растягивается за пределы указанной ширины.
+
+            .slide.section
+                h3.h3.-subtheme-h Ширина таблицы задана, ячеек - нет
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="PWgoeB" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - table layout - width" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/PWgoeB/">[ tables ] - table layout - width</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Ширина колонок (ячеек)
+                .-centered
+                    +p().
+                        Если ширина одной ячейки указана в %, а других - auto, то расчет фактических значений ширин будет произведен браузером в несколько этапов, результат будет зависеть от размеров контента, размеров таблицы и указанного значения в %. Поскольку по умолчанию ячейка не может быть меньше контента, результат вычисления ширины, заданной в %, может отличаться от ожидаемого.
+
+                    +p().
+                        Если ширина одной ячейки указана в px, а другой - 100%, то первая примет минимальную ширину контента, а вторая растянется на всю доступную ширину.
+
+            .slide.section
+                h3.h3.-subtheme-h Ширина таблицы задана, ширина одной из колонок - в %, остальных - auto
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="KaYKbP" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - table width - cell width in %" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/KaYKbP/">[ tables ] - table width - cell width in %</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.overflowInTables.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.overflowInTables.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="egomgv" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - table width - перенос слов" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/egomgv/">[ tables ] - table width - перенос слов</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h table-layout:fixed - заставляет работать word-wrap: break-word
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="egomWv" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - table width - перенос слов - table-layout: fixed" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/egomWv/">[ tables ] - table width - перенос слов - table-layout: fixed</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h table-layout:fixed - одна колонка в %
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="PWgPjR" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - table width - table-layout: fixed - колонки разной ширины" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/PWgPjR/">[ tables ] - table width - table-layout: fixed - колонки разной ширины</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
+            .slide.section
+                h3.h3.-subtheme-h table-layout:fixed - все колонки в %
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="XpQJea" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - table width - table-layout: fixed - колонки разной ширины" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/XpQJea/">[ tables ] - table width - table-layout: fixed - колонки разной ширины</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
+            .slide.section
+                h3.h3.-subtheme-h table-layout:fixed и объединенные колонки (colspan)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="KaYdvY" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - table width - table-layout: fixed - объединенные колонки" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/KaYdvY/">[ tables ] - table width - table-layout: fixed - объединенные колонки</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h table-layout:fixed и ограничение по высоте
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="PWgPdd" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - table width - table-layout: fixed - ограничение по высоте" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/PWgPdd/">[ tables ] - table width - table-layout: fixed - ограничение по высоте</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.scrollableTable.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.scrollableTable.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="vgMGeN" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - overflow: auto и таблица" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/vgMGeN/">[ tables ] - overflow: auto и таблица</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Вертикальный скролл на обертке и эффект с тенями
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="qRwZoe" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - overflow: auto и эффект с тенями - вертикальный" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/qRwZoe/">[ tables ] - overflow: auto и эффект с тенями - вертикальный</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide.section
+                h3.h3.-subtheme-h Горизонтальный скролл на обертке и эффект с тенями
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="QdPNYr" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - overflow: auto и эффект с тенями - горизонтальный" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/QdPNYr/">[ tables ] - overflow: auto и эффект с тенями - горизонтальный</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Вертикальный скролл на обертке и эффект с тенями
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="qRwZoe" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - overflow: auto и эффект с тенями - вертикальный" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/qRwZoe/">[ tables ] - overflow: auto и эффект с тенями - вертикальный</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.dataAttributesForTables.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.dataAttributesForTables.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="ygrJNZ" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ tables ] - responsive table with data-attributes" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/ygrJNZ/">[ tables ] - responsive table with data-attributes</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide()
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)

@@ -1,0 +1,287 @@
+mixin space()
+    | &#x20;
+
+mixin icon(iconName)
+    svg(class=iconName + ' icon')
+        use(xlink:href="#"+iconName)
+
+mixin escape
+    - var oldBuf = pug_html;
+    - pug_html = '';
+    block
+    - pug_html = oldBuf + pug.escape(pug_html);
+
+mixin main-slide(title, autor)
+    .slide.main-slide
+        h1.h1.main-slide__theme= title
+        h2.main-slide__internship.-visible-on-slide Стажировка HTML5
+        h3.main-slide__autors.-visible-on-slide= autor
+
+mixin console(path, command)
+    pre.command-line.language-(data-prompt=path)
+        code= command
+
+mixin code(lang)
+    if lang === 'html'
+        pre.line-numbers
+            code.language-html
+                - var oldBuf = pug_html
+                - pug_html = ''
+                block
+                - pug_html = oldBuf + pug.escape(pug_html)
+    else
+        pre.line-numbers
+            code(class="language-" + lang)
+                block
+
+mixin code-no-lines(lang)
+    if lang === 'html'
+        pre
+            code.language-html
+                - var oldBuf = pug_html
+                - pug_html = ''
+                block
+                - pug_html = oldBuf + pug.escape(pug_html)
+    else
+        pre
+            code(class="language-" + lang)
+                block
+
+
+
+mixin codepen()
+    .-hidden-on-slide
+        block
+    .slide__codepen.-visible-on-slide
+        .slide__codepen-inner
+            block
+
+mixin codepen-article()
+    .-hidden-on-slide
+        block
+
+mixin codepen-slide()
+    .slide__codepen.-visible-on-slide
+        .slide__codepen-inner
+            block
+
+//- TODO maybe expand this mixin for different cases?
+mixin strike-block()
+    .strike-block
+        block
+
+mixin capitalizeFirst(text)
+    - text = text.charAt(0).toUpperCase() + text.slice(1);
+    .
+      !{text}
+
+mixin link-to-source(sorceList, number)
+    - var source = sorceList[number-1]
+    if source.id.length
+        - var href = "#" + source.id
+        a(href=href title=source.title).link-to-source
+            sup.link-to-source__sup= number
+
+mixin external-logo(link)
+    - var isMDN = link.indexOf('developer.mozilla.org') !== -1
+    - var isUdacity = link.indexOf('udacity.com') !== -1
+    - var isCSSTricks = link.indexOf('css-tricks.com') !== -1
+    - var isCanIUse = link.indexOf('caniuse.com') !== -1
+    - var isGithub = link.indexOf('github.com') !== -1
+    - var isYoutube = link.indexOf('youtube.com') !== -1
+    - var isW3 = link.indexOf('w3.org') !== -1
+    - var isLearnJs = link.indexOf('learn.javascript.ru') !== -1
+    - var isGoogleDevelopers = link.indexOf('developers.google.com') !== -1
+    - var isDeveloperChrome = link.indexOf('developer.chrome.com') !== -1
+    - var isAppleDevelopers = link.indexOf('developer.apple.com') !== -1
+
+    if isMDN
+        .source-logo.-mdn
+            img(src="static/images/logos/mdn.svg" alt="Mozilla Developers Network")
+    else if isUdacity
+        .source-logo.-udacity
+            img(src="static/images/logos/udacity.svg" alt="Udacity")
+    else if isCSSTricks
+        .source-logo.-css-tricks
+            img(src="static/images/logos/css-tricks.svg" alt="CSS Tricks")
+    else if isCanIUse
+        .source-logo.-can-i-use
+            img(src="static/images/logos/caniuse.png" alt="Can I use")
+    else if isGithub
+        .source-logo.-github
+            img(src="static/images/logos/github.svg" alt="Github")
+    else if isYoutube
+        .source-logo.-youtube
+            img(src="static/images/logos/youtube.svg" alt="Youtube")
+    else if isW3
+        .source-logo.-w3c
+            img(src="static/images/logos/w3c.svg" alt="W3C")
+    else if isLearnJs
+        .source-logo.learn-js
+            img(src="static/images/logos/learnjsru.svg" alt="Learn.JavaScript.ru")
+    else if isGoogleDevelopers
+        .source-logo.google-dev
+            img(src="static/images/logos/google-developers.svg" alt="Google Developers")
+    else if isAppleDevelopers
+        .source-logo.apple-dev
+            img(src="static/images/logos/apple.svg" alt="Apple Developer")
+    else if isDeveloperChrome
+        .source-logo.chrome-dev
+            img(src="static/images/logos/chrome.svg" alt="Chrome")
+mixin toRead(header, data)
+    section.section
+        if header.length
+            h3.h3.-subtheme-h
+                +capitalizeFirst(header)
+        block
+        ol.list.-ordered.-ordered-gray.-to-read
+            each val in data
+                li.list__item(id=val.id)
+                    if val.href !== '#'
+                        a.list__link(href=val.href target="_blank")
+                            +external-logo(val.href)
+                            +capitalizeFirst(val.title)
+                            +icon('icon-open-in-new-tab')
+
+                    else
+                        span.-disabled.list__link= val.title
+mixin list(header, data)
+    div.section
+        if header.length
+            h3.h3
+                +capitalizeFirst(header)
+        block
+        ul.list.-unordered
+            each val in data
+                li.list__item.
+                  !{val}
+
+mixin listCap(header, data)
+    div.section
+        if header.length
+            h3.h3
+                +capitalizeFirst(header)
+        block
+        ul.list.-unordered
+            each val in data
+                li.list__item
+                    +capitalizeFirst(val)
+
+mixin listOrd(header, data)
+    div.section
+        if header.length
+            h3.h3
+                +capitalizeFirst(header)
+        block
+        ul.list.-ordered
+            each val in data
+                li.list__item.
+                    !{val}
+
+mixin listOrdCap(header, data)
+    div.section
+        if header.length
+            h3.h3
+                +capitalizeFirst(header)
+        block
+        ul.list.-ordered
+            each val in data
+                li.list__item
+                    +capitalizeFirst(val)
+
+mixin p()
+    p.p
+        block
+
+mixin hint()
+    .p.-hint
+        block
+
+mixin remember()
+    .p.-remember
+        block
+
+mixin strike(text)
+    +space()
+    s.strike= text
+    +space()
+
+mixin bold-no-sematics(text)
+    +space()
+    span.-bold= text
+    +space()
+mixin bold-sematics-super-important(text)
+    +space()
+    strong.-bold= text
+    +space()
+mixin bold-sematics-attention(text)
+    +space()
+    strong.-bold= text
+    +space()
+
+mixin italic-no-sematics(text)
+    +space()
+    span.-italic= text
+    +space()
+mixin italic-sematics-important(text)
+    +space()
+    em.-italic= text
+    +space()
+mixin italic-sematics-intonation(text)
+    +space()
+    i.-italic= text
+    +space()
+mixin blockquote(autor, sorceList, number)
+    - var source = sorceList[number-1]
+
+    blockquote.blockquote
+        block
+        footer.blockquote__footer
+            if source.id.length
+                a(href=source.href target="_blank")
+                    cite.blockquote__autor= autor
+            else
+                cite.blockquote__autor= auto
+
+mixin gif(filename)
+    - var path = 'static/images/gif/' + filename + '.gif'
+
+    .gif
+        button(type="button" data-gif-source=path title="GIF").gif__btn
+        .gif__image
+
+mixin figure(title, lecture, name, sourceList, number)
+    - var imgSource = "static/images/pages/" + lecture + "/" + name
+    figure.figure
+        img(src=imgSource alt=title)
+        figcaption.figure__caption= title
+            if sourceList && sourceList[number-1]
+                |&#x20;
+                +link-to-source(sourceList, number)
+
+
+
+mixin line(number)
+    span.line
+        | line
+        +space()
+        = number
+        +space()
+        | –
+        +space()
+mixin inline-html()
+    +space()
+    span.-bold
+        +escape()
+            block
+    +space()
+
+mixin two-col-table-th-in-tbody-css(data)
+    .simple-table
+        table.-fixed-two-col
+            each val in data
+                tr
+                    th= val[0]
+                    td(data-th=val[0])
+                        +code-no-lines('css')
+                            = val[1]

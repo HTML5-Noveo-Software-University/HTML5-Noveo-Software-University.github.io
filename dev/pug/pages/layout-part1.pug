@@ -1,0 +1,315 @@
+extends ../base/base-lect.pug
+
+block layout-settings
+    include ../lectures/themes/layout-part1.pug
+    - var conf = layout1;
+    - var pageTitle = conf.title;
+    - var pageType = 'lecture'
+    - var currentPage = conf.page;
+    - var subthemes = conf.subthemes;
+    -
+        var listInlineAndBlock = [
+            'Расположение - <br> блочный элемент - всегда с новой строки. Строчный - справа от предыдущего строчного, если достаточно места.',
+            'Боксовая модель - <br> блочный элемент по умолчанию занимает 100% ширины, строчный - только необходимое ему пространство. Вертикальные паддинги игнорируются при расчете высоты строчного элемента',
+            'Пробелы между блоками - <br> если между закрывающим и следующим открывающих тегами двух строчных элементов есть пробел, табуляция или перенос строки, то браузер отобразит это как пробел между словами.',
+            'Margin - <br> к строчным элементам применяется только горизонтальный margin'
+        ]
+    -
+        var listInlineAndBlockSimple = [
+            'Расположение',
+            'Боксовая модель',
+            'Пробелы между блоками',
+            'Margin'
+        ]
+    -
+        var listInlineBlock = [
+            'Расположение - как у <span class="-bold">inline</span> элемента',
+            'Боксовая модель - ширина по умолчанию как у <span class="-bold">inline</span>, но может быть задана любая. Боксовая модель полноценная, как у <span class="-bold">block</span>.',
+            'Пробелы между блоками - как у <span class="-bold">inline</span>',
+            'Margin - как у <span class="-bold">block</span>, но без margin collapse'
+        ]
+    -
+        var listMarginCollapseWithParent = [
+            'Задания родительскому блоку свойства <span class="-bold">padding</span>',
+            'Задания родительскому блоку свойства <span class="-bold">overflow</span> со значением: <span class="-bold">auto</span>, <span class="-bold">scroll</span> или <span class="-bold">hidden</span>',
+            'Применения к родительскому блоку зачистки (<span class="-bold">clearfix</span>)'
+        ]
+    -
+        var breakingFlowStyles = [
+            '<span class="-bold">float</span>',
+            'отрицательный вертикальный <span class="-bold">margin</span> (у блочных элементов)',
+            '<span class="-bold">position: absolute;</span> или <span class="-bold">position: fixed;</span>',
+            '<span class="-bold">display: none;</span>'
+        ]
+    -
+        var listStackingContext = [
+            'root элемент (html)',
+            'элемент с позиционированием (не static)',
+            'элемент с opacity < 1',
+            'элемент с трансформацией (transform)'
+        ]
+    -
+      var listToRead = [{
+          id: "toRead-1",
+          title: "Micro clearfix hack",
+          href: "http://nicolasgallagher.com/micro-clearfix-hack/"
+      }, {
+          id: "toRead-2",
+          title: "What You Should Know About Collapsing Margins",
+          href: "https://css-tricks.com/what-you-should-know-about-collapsing-margins/"
+      }]
+block main
+    include ../base/mixins/mixin-slides.pug
+    main.main
+        .slides-wrap
+            +main-slide(pageTitle, 'Света Шарипова')
+            .slide(id=subthemes.boxModel.href)
+                h2.h2.-subtheme-h= subthemes.boxModel.title
+                .-centered-wide.-text-centered-on-slide
+                    +figure('Боксовая модель', 'layout', 'box-model.jpg')
+
+            .slide.section
+                h3.h3.-subtheme-h Box-sizing (content-box vs border-box)
+                .-centered-wide
+                    .-hidden-on-slide
+                        +p()
+                            | По умолчанию используется значение
+                            +bold-no-sematics('content-box.')
+                            | Это означает, что
+                            +bold-no-sematics('width')
+                            | и
+                            +bold-no-sematics('height')
+                            | не включают в себя внутренние отступы, рамки и внешние отступы.
+                    +code('html').
+                        <div class="block block--default">Content-box</div>
+                        <div class="block block--border-box">Border-box</div>
+                    +code('css').
+                        .block {
+                            background: #c5c5c5;
+                            border: 5px solid black;
+                            margin: 10px;
+                            padding: 20px;
+                        }
+
+                        .block--default {
+                            width: 150px;
+                            height: 150px;
+                        }
+
+                        .block--border-box {
+                            width: 200px;
+                            height: 200px;
+                            box-sizing: border-box;
+                        }
+            .slide.section
+                h3.h3.-subtheme-h.-visible-on-slide Box-sizing (content-box vs border-box)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="BpvRzY" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Box model" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/BpvRzY/">[ layout ] - Box model</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h.-visible-on-slide Box-sizing (content-box vs border-box)
+                .-centered-wide.-text-centered-on-slide
+                    +figure('Боксовая модель', 'layout', 'box-sizing.png')
+
+            .slide.section
+                h3.h3.-subtheme-h Вложенные блочные элементы занимают 100% доступной ширины родительского блока
+                .-hidden-on-slide
+                    +p()
+                        | Доступная ширина родительского блока не включает в себя padding или border (не важно, какой при этом box-sizing).
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="bgOLzO" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Box model - nested elements" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/bgOLzO/">[ layout ] - Box model - nested elements</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.blockInline.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.blockInline.title
+                h3.h3.-subtheme-h.-visible-on-slide В чем разница между строчными и блочными тегами?
+
+            .slide
+                h3.h3.-subtheme-h В чем разница между строчными и блочными тегами?
+                .-centered
+                    .-hidden-on-slide
+                        +listCap('', listInlineAndBlock)
+                    .-visible-on-slide
+                        +listCap('', listInlineAndBlockSimple)
+
+            .slide(id=subthemes.marginCollapse.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.marginCollapse.title
+                h3.h3 Margin collapse с родительским блоком
+                .-hidden-on-slide
+                    +listCap('Избавиться от схлапывания margin\'ов дочернего элемента с родительским блоком можно с помощью:', listMarginCollapseWithParent)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="PWXRjg" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Margin collapse с родительским блоком" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/PWXRjg/">[ layout ] - Margin collapse с родительским блоком</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Margin collapse с соседними блоками
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="pRqVJw" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Margin collapse с соседними блоками" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/pRqVJw/">[ layout ] - Margin collapse с соседними блоками</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
+            .slide(id=subthemes.inlineBlock.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.inlineBlock.title
+                .-centered
+                    +listCap('', listInlineBlock)
+
+            .slide.section
+                h3.h3.-subtheme-h Margin collapse отсутствует у inline-block
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="ZLVoQv" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Margin collapse отсутствует у inline-block" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/ZLVoQv/">[ layout ] - Margin collapse отсутствует у inline-block</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Пробелы между inline-block
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="zNewqQ" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Inline-block пробелы" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/zNewqQ/">[ layout ] - Inline-block пробелы</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Вертикальное выравнивание inline-block зависит от контента (по умолчанию - baseline)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="XpoEjp" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Inline-block vertical aligning (default)" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/XpoEjp/">[ layout ] - Inline-block vertical aligning (default)</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Задаем вертикальное выравнивание inline-block
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="JEwLEO" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Inline-block vertical aligning (top, middle, bottom )" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/JEwLEO/">[ layout ] - Inline-block vertical aligning (top, middle, bottom )</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.position.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.position.title
+                h3.h3.-hidden-on-slide По-умолчанию - static
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="rjoqKa" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Positioning" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/rjoqKa/">[ layout ] - Positioning</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.overflow.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.overflow.title
+                h3.h3.-hidden-on-slide По умолчанию - overflow: visible
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="rjorpm" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Overflow" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/rjorpm/">[ layout ] - Overflow</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide.section
+                h3.h3.-subtheme-h overflow-x и overflow-y
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="wgZWdx" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Overflow-x и overflow-y" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/wgZWdx/">[ layout ] - Overflow-x и overflow-y</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
+            .slide(id=subthemes.flow.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.flow.title
+                .-hidden-on-slide
+                    +p()
+                        | Если к элементам на странице не применять никаких стилей, то они будут находиться в нормальном потоке. Высота родительского элемента будет включать в себя сумму высот дочерних элементов.
+                .-centered
+                    +listCap('Элемент выбивается из потока, если к нему применяется:', breakingFlowStyles)
+
+            .slide.section
+                h3.h3.-subtheme-h Выбившийся из потока элемент не включается в box-model родителя
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="OWrZdm" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Flow" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/OWrZdm/">[ layout ] - Flow</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.negativeMargin.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.negativeMargin.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="Grzmmm" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Negative margins" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/Grzmmm/">[ layout ] - Negative margins</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.clearfix.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.clearfix.title
+                .-centered
+                    +code('css').
+                        .block--clearfix::before, .block--clearfix::after {
+                            content: '';
+                            display: table;
+                            clear: both;
+                        }
+            .slide.section
+                h3.h3.-subtheme-h.-visible-on-slide= subthemes.clearfix.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="EZGRaq" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Flow - clearfix" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/EZGRaq/">[ layout ] - Flow - clearfix</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.hiding.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.hiding.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="rjoKeg" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Hiding element" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/rjoKeg/">[ layout ] - Hiding element</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.overlap.href).-pushed-down
+                h2.h2.-subtheme-h.-hidden-on-slide= subthemes.overlap.title
+                h3.h3.-subtheme-h Перекрытие (overlap) в результате переполнения
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="jydmjR" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Перекрытие (overlap) и нормальный поток" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/jydmjR/">[ layout ] - Перекрытие (overlap) и нормальный поток</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Перекрытие (overlap) в результате позиционирования или float
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="rjPwVO" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Перекрытие (overlap) и позиционирование (без z-index)" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/rjPwVO/">[ layout ] - Перекрытие (overlap) и позиционирование (без z-index)</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Перекрытие (overlap) и порядок наложения (z-index)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="VPgWer" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Перекрытие (overlap) и z-index родительского элемента" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/VPgWer/">[ layout ] - Перекрытие (overlap) и z-index родительского элемента</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.zIndex.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.zIndex.title
+
+            .slide.section
+                h3.h3.-subtheme-h z-index на разных уровнях вложенности
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="dNazGw" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Перекрытие (overlap) и z-index  - разные уровни" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/dNazGw/">[ layout ] - Перекрытие (overlap) и z-index  - разные уровни</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Отрицательный z-index
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="VPgzXo" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Перекрытие (overlap) и отрицательный z-index  " class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/VPgzXo/">[ layout ] - Перекрытие (overlap) и отрицательный z-index  </a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h z-index: auto
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="oBmeyR" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Перекрытие (overlap) и отрицательный z-index  " class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/oBmeyR/">[ layout ] - Перекрытие (overlap) и отрицательный z-index  </a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.opacity.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.opacity.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="PWVKyz" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Opacity" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/PWVKyz/">[ layout ] - Opacity</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.stackingContext.href).-pushed-down
+                h2.h2.-subtheme-h= subthemes.stackingContext.title
+                +listCap('Элементы, имеющие свой контекст наложения:', listStackingContext)
+
+            .slide.section
+                h3.h3.-subtheme-h.-visible-on-slide Контекст наложения (stacking context)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="mRvBbE" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Stacking context" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/mRvBbE/">[ layout ] - Stacking context</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Контекст наложения  (stacking context) и позиционирование
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="apPQzp" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Positioning - stacking context" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/apPQzp/">[ layout ] - Positioning - stacking context</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Position: fixed и контекст наложения с opacity или position + z-index
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="BpMmRM" data-default-tab="result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Fixed элементы и контекст наложения с opacity" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/BpMmRM/">[ layout ] - Fixed элементы и контекст наложения с opacity</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h Влияние трансформации родительского блока на его позиционирование и позиционирование дочерних блоков
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="JExOpr" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Fixed и absolute в блоке с трансформацией" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/JExOpr/">[ layout ] - Fixed и absolute в блоке с трансформацией</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide.section
+                h3.h3.-subtheme-h.-visible-on-slide Влияние трансформации родительского блока на его позиционирование и позиционирование дочерних блоков
+
+                +p()
+                    | Блок, к которому применяется
+                    +space()
+                    span.-bold transform
+                    |, создает новый контекст наложения, ведет себя так, как если к нему применить
+                    +bold-no-sematics('position: relative')
+                    |. Поэтому дочерние элементы с
+                    +bold-no-sematics('position: absolute')
+                    | будут позиционироваться относительно этого родительского элемента с трансформацией.
+
+                +p()
+                    | Фиксированные (
+                    +bold-no-sematics('position: fixed')
+                    |) элементы внутри блока, к которому применяется
+                    +bold-no-sematics('transform,')
+                    | будут вести себя как элементы с
+                    +bold-no-sematics('position: absolute.')
+                    | Т.е. они будут позиционироваться относительно родитеского элемента с трансформацией, их можно "проскроллить", будто они не фиксированные.
+
+
+            .slide()
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)

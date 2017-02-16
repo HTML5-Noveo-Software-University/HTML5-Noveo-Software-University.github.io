@@ -1,0 +1,22 @@
+.strike-block {
+    margin: 1rem auto;
+    overflow: hidden;
+    padding: .5rem 0;
+    position: relative;
+
+    &:before, &:after {
+        bottom: .5rem;
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: .5rem;
+        z-index: 100;
+    }
+    &:before {
+        background: linear-gradient(to right top, rgba(white, .01) 49.5%, red 49.8%, red 50.2%, rgba(white, .01) 50.5%);
+    }
+    &:after {
+        background: linear-gradient(to right bottom, rgba(white, .01) 49.5%, red 49.8%, red 50.2%, rgba(white, .01) 50.5%);
+    }
+}

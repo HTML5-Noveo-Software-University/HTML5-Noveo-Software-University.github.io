@@ -1,0 +1,72 @@
+
+.gif {
+    border: 2px solid gray;
+    max-height: 80vh;
+    max-width: 30rem;
+    min-height: 10em;
+    position: relative;
+    z-index: 1;
+    .-slides-layout & {
+        margin: auto;
+        max-width: 80%;
+    }
+    &:before {
+        content: "GIF";
+        height: 1rem;
+        left: 50%;
+        margin-left: -2rem;
+        margin-top: -.5rem;
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        width: 4rem;
+        z-index: -1;
+    }
+    &__btn {
+        @extend %btn-reset;
+
+        background: lighten(desaturate($orange,5%), 10%);
+        border-radius: 50%;
+        bottom: .5em;
+        height: 2.5em;
+        left: .5em;
+        position: absolute;
+        width: 2.5em;
+        z-index: 2;
+        &:hover {
+            background: $orange;
+        }
+        &:before {
+            border: .5em solid transparent;
+            border-left-color: $white;
+            content: "";
+            display: inline-block;
+            left: 1.1em;
+            position: absolute;
+            top: .8em;
+        }
+        &.-stop {
+            opacity: .5;
+            &:before {
+                border: .45em solid $white;
+                left: .85em;
+                top: .85em;
+            }
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    &__image {
+        margin: auto;
+        position: relative;
+        z-index: 1;
+        img {
+            height: auto;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+    }
+}

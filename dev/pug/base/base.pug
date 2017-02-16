@@ -1,0 +1,70 @@
+mixin icon(iconName)
+    .icon(class='.icon--'+iconName)
+        svg
+            use(xlink:href="#"+iconName)
+doctype html
+<!--[if IE 9 ]><html dir="ltr" lang="ru" class="ie9"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!-->
+html(dir="ltr" lang="en")
+    <!--<![endif]-->
+    block layout-settings
+        - var pageTitle = 'Courses'
+
+    block visible
+        head
+            meta(charset="utf-8")
+            meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1.0")
+            meta(name="apple-mobile-web-app-status-bar-style", content="black")
+            meta(name="apple-mobile-web-app-capable", content="yes")
+            meta(name="mobile-web-app-capable" content="yes")
+            meta(name="apple-mobile-web-app-status-bar-style" content="black-translucent")
+            title #{pageTitle}
+            meta(name="apple-mobile-web-app-title" content=pageTitle)
+
+            link(rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png")
+            link(rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png")
+            link(rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png")
+            link(rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png")
+            link(rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png")
+            link(rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png")
+            link(rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png")
+            link(rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png")
+            link(rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32")
+            link(rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192")
+            link(rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96")
+            link(rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16")
+            //- <link rel="manifest" href="/manifest.json">
+            meta(name="msapplication-TileColor" content="#c8f2ff")
+            meta(name="msapplication-TileImage" content="/mstile-144x144.png")
+            meta(name="theme-color" content="#69bcd6")
+
+            <meta property="og:title" content="Noveo University - Обучение в Noveo">
+            <meta property="og:description" content="Мы предлагаем различные форматы образовательных программ как для студентов технических факультетов, еще только мечтающих о карьере программиста, так и для разработчиков с небольшим стажем работы.">
+            <meta property="og:image" content="https://university.noveogroup.ru/images/banner.png">
+
+            //- //- <title>Noveo University - Обучение в Noveo</title>
+            <meta name="description" content="Мы предлагаем различные форматы образовательных программ как для студентов технических факультетов, еще только мечтающих о карьере программиста, так и для разработчиков с небольшим стажем работы.">
+
+            //--- Styles ---//
+            link(rel='stylesheet', href='./static/css/main.css')
+
+        body
+            include ../blocks/graphics/svg-sprite.pug
+
+            block body
+                .page
+                    include ../blocks/common/header.pug
+                    .content
+                        block content
+                    include ../blocks/common/footer.pug
+                block modals
+            block scripts
+                script.
+                    function loadLocal(name) {
+                        console.log('Failed to load external! TODO - polyfill', name)
+                    }
+                script(src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"  onerror="loadLocal('jquery')" defer="")
+                script(src="./static/js/prism.js" defer="")
+                script(src="./static/js/lectures.js" defer="")
+
+            link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;subset=cyrillic,latin" type="text/css")
