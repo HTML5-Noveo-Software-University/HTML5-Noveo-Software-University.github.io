@@ -56,6 +56,18 @@ block layout-settings
             id: "toRead-12",
             title: "Плагин svg4everybody",
             href: "https://github.com/jonathantneal/svg4everybody"
+        }, {
+            id: "toRead-13",
+            title: "Полифил Picturefill",
+            href: "http://scottjehl.github.io/picturefill/"
+        }, {
+            id: "toRead-14",
+            title: "Примеры использования тега picture и атрибутов srcset и sizes",
+            href: "http://frontender.info/responsive-images/"
+        }, {
+            id: "toRead-15",
+            title: "Курс по отзывчивым изображениям на Udacity",
+            href: "https://www.udacity.com/course/responsive-images--ud882"
         }];
     -
         var listImgAttrs = [
@@ -294,6 +306,133 @@ block main
 
             .slide(id=subthemes.optimization.href)
                 h2.h2.-subtheme-h= subthemes.optimization.title
+                .-centered
+                    +p()
+                        | Современные браузеры позволяются делать изображения по-настоящему отзывчивыми. Для этого применяются тег
+                        +inline-html()
+                            <picture>
+                        +space()
+                        | и 2 атрибута тега
+                        +inline-html()
+                            <img>
+                        | :
+                        +bold-no-sematics('srcset')
+                        | и
+                        +bold-no-sematics('sizes')
+                        | .
+                    +p()
+                        | Тег
+                        +inline-html()
+                            <picture>
+                        +space()
+                        | и атрибуты
+                        +bold-no-sematics('srcset')
+                        | и
+                        +bold-no-sematics('sizes')
+                        | позволяют браузеру на этапе парсинга HTML выбрать подходящее изображение, в зависимости от ширины окна браузера (viewport) и плотности пикселей экрана (device pixel ratio).
+                    .-hidden-on-slide
+                        +p().
+                            В результате браузер не будет скачивать огромное изображение, предназначенное для десктопов с высокой четкостью, если вы зайдете на сайт с телефона. Профит: быстрая загрузка изображений на устройствах с небольшой шириной экрана и, как правило, ограниченной скоростью интернета.
+                    +p()
+                        | Браузерная поддержка атрибутов
+                        +bold-no-sematics('srcset')
+                        | и
+                        +bold-no-sematics('sizes')
+                        | : Edge13+, Firefox, Chrome, Opera, Safari9+, iOS Safari9.2+, Android5+.
+                    +p()
+                        | Браузерная поддержка тега
+                        +inline-html()
+                            <picture>
+                        | : Edge13+, Firefox, Chrome, Opera, Safari9.1+, iOS Safari9.3+, Android5+.
+                    +p()
+                        | Есть полифил Picturefill для неподдерживающих браузеров
+                        +link-to-source(listToRead, 13)
+                        | .
+
+            .slide
+                h2.h2.-subtheme-h Атрибут srcset
+                .-hidden-on-slide
+                    +p()
+                        | Атрибут
+                        +bold-no-sematics('srcset')
+                        | позволяет определить наиболее подходящее изображение для конкретного экрана (в зависимости от его пиксельной плотности или ширины).
+                .-centered
+                    +p().
+                        Пример 1. Разный файл с изображением для разной пиксельной плотности экрана (dpi).
+                    .-hidden-on-slide
+                        +p().
+                            На стандартных экранах загрузится файл wombat_1x.jpg, на экранах с повышенной пиксельной плотностью (например, Retina) загрузится файл wombat_2x.jpg.
+                    +codepen()
+                        <p data-height="265" data-theme-id="light" data-slug-hash="VPJZNZ" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[graphics] - srcset, dpi" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/VPJZNZ/">[graphics] - srcset, dpi</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Атрибут srcset
+                .-centered
+                    +p().
+                        Пример 2. Разный файл с изображением для разного размера экрана.
+                    .-hidden-on-slide
+                        +p().
+                            На экранах шириной менее 400px загрузится файл wombat_400.jpg, на экранах от 401 до 640px загрузится файл wombat_640.jpg, на экранах свыше 640px - файл wombat_1024.jpg.
+                    +codepen()
+                        <p data-height="265" data-theme-id="light" data-slug-hash="BpgBXp" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[graphics] - srcset, w" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/BpgBXp/">[graphics] - srcset, w</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h Атрибут sizes
+                .-hidden-on-slide
+                    +p()
+                        | При парсинге html и загрузке изображений браузер не знает о размерах изображений, заданных в css (css обрабатывается после html). Он предполагает, что изображение будет занимать всю ширину вьюпорта (так работает атрибут
+                        +bold-no-sematics('srcset')
+                        | ).
+                    +p().
+                        Что делать, если изображение занимает не всю ширину вьюпорта?
+                    +p()
+                        | Для того чтобы браузер при загрузке страницы мог выбрать подходящее изображение в зависимости от его размера, в дополнение к атрибуту
+                        +bold-no-sematics('srcset')
+                        | используется атрибут
+                        +bold-no-sematics('sizes')
+                        | .
+                    +p()
+                        | Атрибут
+                        +bold-no-sematics('sizes')
+                        | не изменяет размеры изображения (это делается в css), он просто указывает браузеру, какой ширины будет изображение при конкретной ширине вьюпорта (соответствует медиа-запросам в css).
+                .-centered
+                    +p()
+                        | Пример. Разный файл с изображением для разного размера экрана и разного размера изображения.
+                    .-hidden-on-slide
+                        +p().
+                            На экранах шириной менее 400px загрузится файл wombat_400.jpg, на экранах от 401 до 640px загрузится файл wombat_640.jpg, на экранах от 641 до 1280px также загрузится файл wombat_640.jpg (так как с ширины экрана 640px изображение занимает только 50% экрана), и только при ширине экрана более 1280px загрузится файл wombat_1024.jpg.
+                    +codepen()
+                        <p data-height="265" data-theme-id="light" data-slug-hash="xgoxgv" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[graphics] - sizes" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/xgoxgv/">[graphics] - sizes</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h Тег picture
+                .-hidden-on-slide
+                    +p()
+                        | Тег
+                        +inline-html()
+                            <picture>
+                        | так же, как и атрибут
+                        +bold-no-sematics('srcset')
+                        | указывает браузеру, какой файл с изображением выбрать для определенных параметров экрана.
+                    +p()
+                        | Помимо этого, в теге
+                        +inline-html()
+                            <picture>
+                        | можно указать несколько файлов с разным форматом (например, изображение в современном, но плохо поддерживаемом формате webp, и изображение в формате jpeg для браузеров без поддержки webp).
+                    +p()
+                        | Еще одна возможность, которую дает тег
+                        +inline-html()
+                            <picture>
+                        | , - это подключение разных изображений или частей изображения в зависимости от ширины вьюпорта.
+                .-centered
+                    +p()
+                        | Пример. Разные изображения для разного размера экрана.
+                    .-hidden-on-slide
+                        +p().
+                            На ширине до 1000px подключится файл wombat_small.jpg, в котором вомбат занимает центральное место. На ширине свыше 1000px подключится файл wombat_large.jpg, в котором в основном изображена природа, и вомбат не занимает центральное положение.
+                    +codepen()
+                        <p data-height="265" data-theme-id="light" data-slug-hash="dNBPZZ" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[graphics] - picture" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/dNBPZZ/">[graphics] - picture</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
 
             .slide(id=subthemes.icons.href)
                 h2.h2.-subtheme-h= subthemes.icons.title
