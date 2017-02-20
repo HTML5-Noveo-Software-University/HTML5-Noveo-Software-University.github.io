@@ -8,10 +8,684 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+        var listToRead = [];
+    -
+        var listBorderProps = [
+            'border-width - толщина',
+            'border-style - стиль',
+            'border-color - цвет.'
+        ];
+    -
+        var listOutlineProps = [
+            'outline-width - толщина',
+            'outline-style - стиль',
+            'outline-color - цвет.'
+        ];
+    -
+        var listMultiBordersMethods = [
+            'Использование псевдоэлементов и свойства border.',
+            'Использование свойств border и outline (см. предыдущий слайд).',
+            'Использование свойства box-shadow (см тему Тени).',
+            'Использование свойства background-clip (см. тему Фоновые изображения).'
+        ];
+    -
+        var listBoxShadowProps = [
+            '[inset] - внутренняя тень',
+            'h-shadow - смещение по горизонтали ( > 0 - вправо, < 0 - влево)',
+            'v-shadow - смещение по вертикали ( > 0 - вниз, < 0 - вверх),',
+            '[blur] - размытие',
+            '[spread] - растяжение',
+            '[color] - цвет'
+        ];
+    -
+        var listTextShadowProps = [
+            'h-shadow - смещение по горизонтали ( > 0 - вправо, < 0 - влево)',
+            'v-shadow - смещение по вертикали ( > 0 - вниз, < 0 - вверх),',
+            '[blur] - размытие',
+            '[color] - цвет'
+        ];
+
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
-            +main-slide(pageTitle, 'Имя автора лекции')
-        .slide
+            +main-slide(pageTitle, 'Дмитрий Мещеряков')
+
+            .slide(id=subthemes.borders.href)
+                h2.h2.-subtheme-h= subthemes.borders.title
+                .-centered
+                    h3.h3 Свойство border
+                    +code('css').
+                        .block {
+                            border: 1em solid #000;
+                        }
+                    +p()
+                        | Синтаксис:
+                    +code('css').
+                            border: border-width border-style border-color;
+                    +list('', listBorderProps)
+                    .-text-centered-on-slide
+                        +figure('Стили рамок', conf.page, 'border-style.png')
+
+            .slide
+                h2.h2.-subtheme-h Рамка с определенной стороны блока
+                h3.h3 Свойства border-top, border-bottom, border-left, border-right
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                border-top: 1em solid #000;
+                            }
+                        style(type='text/css').
+                            .borders {
+                                width: 30em;
+                                height: 13em;
+                                margin: 0 auto;
+                                margin-bottom: 2em;
+                                background-color: #f1652a;
+                                font-size: 10px;
+                            }
+                            .borders-top {
+                                border-top: 1em solid #000;
+                            }
+                        .borders.borders-top
+                    .slide__col
+                        +code('css').
+                            .block {
+                                border-left: 1em solid #000;
+                            }
+                        style(type='text/css').
+                            .borders-left {
+                                border-left: 1em solid #000;
+                            }
+                        .borders.borders-left
+
+            .slide
+                h2.h2.-subtheme-h Разные размеры и стили для разных границ
+                .-centered
+                    +p().
+                        Свойства border-width, border-style, border-color могут иметь разное число значений.
+                    style(type='text/css').
+                        .table-bordered {
+                            margin: auto;
+                        }
+                        .table-bordered td {
+                            padding: 0.75em;
+                            border: 1px solid #000;
+                        }
+                    table.table-bordered
+                        tr
+                            td
+                                | 1
+                            td
+                                | Все стороны одинаковые
+                        tr
+                            td
+                                | 2
+                            td
+                                | 1 значение - задает свойства для верхней/нижней границы;
+                                br
+                                | 2 значение - задает свойства для левой/правой границы
+                        tr
+                            td
+                                | 3
+                            td
+                                | 1 значение - задает свойства для верхней границы;
+                                br
+                                | 2 значение - задает свойства для левой/правой границы;
+                                br
+                                | 3 значение - задает свойства для нижней границы
+                        tr
+                            td
+                                | 4
+                            td
+                                | 1 значение - задает свойства для верхней границы;
+                                br
+                                | 2 значение - задает свойства для правой границы;
+                                br
+                                | 3 значение - задает свойства для нижней границы;
+                                br
+                                | 4 значение - задает свойства для левой границы
+
+            .slide
+                h2.h2.-subtheme-h Примеры
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                border-width: 1em 2em;
+                                border-style: inset;
+                                border-color: #ccc;
+                            }
+                        style(type='text/css').
+                            .borders-double {
+                                border-width: 1em 2em;
+                                border-style: inset;
+                                border-color: #ccc;
+                            }
+                        .borders.borders-double
+                    .slide__col
+                        +code('css').
+                            .block {
+                                border-width: 2em 1.5em 3em;
+                                border-style: dotted solid double;
+                                border-color: #eee #aaa #000;
+                            }
+                        style(type='text/css').
+                            .borders-triple {
+                                border-width: 2em 1.5em 3em;
+                                border-style: dotted solid double;
+                                border-color: #eee #aaa #000;
+                            }
+                        .borders.borders-triple
+
+            .slide
+                h2.h2.-subtheme-h Контур блока
+                h3.h3 Свойство outline
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                border: 1em solid #ccc;
+                                outline: 1em solid #000;
+                            }
+                        style(type='text/css').
+                            .borders-outline {
+                                margin-top: 2em;
+                                border: 1em solid #ccc;
+                                outline: 1em solid #000;
+                            }
+                        .borders.borders-outline
+                        +p()
+                            | Синтаксис:
+                        +code('css').
+                                outline: outline-width outline-style outline-color;
+                        +list('', listOutlineProps)
+                    .slide__col
+                        +remember()
+                            | Border увеличивает размеры блока, outline - нет.
+                            br
+                            | Outline применяется ко всем четырем сторонам блока.
+
+            .slide
+                h2.h2.-subtheme-h Несколько рамок у блока
+                .-centered
+                    +listOrd('Способы создания нескольких рамок у блока:', listMultiBordersMethods)
+
+            .slide
+                h2.h2.-subtheme-h Несколько рамок у блока при помощи псевдоэлементов и свойства border
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="LxKzQX" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[borders] - multiple borders" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/LxKzQX/">[borders] - multiple borders</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h Скругление углов
+                h3.h3 Свойство border-radius
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                border-radius: 1em;
+                            }
+                        +p().
+                            Свойство border-radius может иметь разное число значений (аналогично свойствам border-width, border-style, border-color).
+                        +p().
+                            Допускается писать 2 значения через слэш:
+                        +code('css').
+                            .block {
+                                border-radius: 5em/3em;
+                            }
+                        style(type='text/css').
+                            .borders-radius {
+                                border-radius: 5em/3em;
+                            }
+                        .borders.borders-radius
+                    .slide__col
+                        +p().
+                            Круг на css:
+                        +code('css').
+                            .block {
+                                border-radius: 50%;
+                            }
+                        style(type='text/css').
+                            .borders-radius50 {
+                                width: 20em;
+                                height: 20em;
+                                border-radius: 50%;
+                            }
+                        .borders.borders-radius50
+
+            .slide
+                h2.h2.-subtheme-h Треугольники на css
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="PWrEYE" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[borders] - css triangles" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/PWrEYE/">[borders] - css triangles</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.shadows.href)
+                h2.h2.-subtheme-h= subthemes.shadows.title
+                h3.h3 Свойство box-shadow
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                box-shadow: 0.5em 0.5em 1em 0.5em #aaa;
+                            }
+                        style(type='text/css').
+                            .box-shadow {
+                                box-shadow: 0.5em 0.5em 1em 0.5em #aaa;
+                            }
+                        .borders.box-shadow
+                    .slide__col
+                        +p()
+                            | Синтаксис:
+                        +code('css').
+                                box-shadow: [inset] h-shadow v-shadow [blur] [spread] [color];
+                        +list('', listBoxShadowProps)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.shadows.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Внутренняя тень
+                        +code('css').
+                            .block {
+                                box-shadow: inset 0 0 0 1em #aaa;
+                            }
+                        style(type='text/css').
+                            .box-shadow-inset {
+                                box-shadow: inset 0 0 0 1em #aaa;
+                            }
+                        .borders.box-shadow-inset
+                    .slide__col
+                        h3.h3 Тень только с одной стороны
+                        +code('css').
+                            .block {
+                                box-shadow: 0 2em 2em -1em #000;
+                            }
+                        style(type='text/css').
+                            .box-shadow-1-side {
+                                box-shadow: 0 2em 2em -1em #000;
+                            }
+                        .borders.box-shadow-1-side
+
+            .slide
+                h2.h2.-subtheme-h Несколько рамок у одного блока при помощи множественных теней
+                .-centered
+                    +code('css').
+                        .block {
+                            box-shadow: inset 0 0 0 1em #aaa,
+                                                    inset 0 0 0 2em #f55,
+                                                    inset 0 0 0 3em #eee;
+                        }
+                    style(type='text/css').
+                        .box-shadow-multi {
+                            box-shadow: inset 0 0 0 1em #aaa,
+                                         inset 0 0 0 2em #f55,
+                                         inset 0 0 0 3em #eee;
+                        }
+                    .borders.box-shadow-multi
+
+            .slide(id=subthemes.textShadows.href)
+                h2.h2.-subtheme-h= subthemes.textShadows.title
+                h3.h3 Свойство text-shadow (поддержка IE10+)
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .text {
+                                text-shadow: 0.3em 0.3em 0.2em #bbb;
+                            }
+                        style(type='text/css').
+                            .text-shadow {
+                                font-size: 4rem;
+                                color: #000;
+                                text-shadow: 0.3em 0.3em 0.2em #bbb;
+                            }
+                        .text-shadow
+                            | Hello, World!
+                    .slide__col
+                        +p()
+                            | Синтаксис:
+                        +code('css').
+                                text-shadow: h-shadow v-shadow [blur] [color];
+                        +list('', listTextShadowProps)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.textShadows.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Винтажный заголовок при помощи текстовой тени
+                        +code('css').
+                            .text {
+                                text-shadow: 4px 3px 0 #fff,
+                                                        8px 6px 0 #ccc;
+                            }
+                        style(type='text/css').
+                            .text-shadow-vintage {
+                                font-size: 4rem;
+                                font-weight: bold;
+                                color: #000;
+                                text-shadow: 4px 3px 0 #fff,
+                                                8px 6px 0 #ccc;
+                            }
+                        .text-shadow-vintage
+                            | Hello, World!
+                    .slide__col
+                        h3.h3 Внутренняя тень у текста
+                        +p().
+                            У свойства text-shadow нет параметра inset. Один из способов сделать внутреннюю тень у текста:
+                        +code('css').
+                            .text {
+                                color: rgba(0, 0, 0, 0.4);
+                                text-shadow: 1px 4px 6px #fff,
+                                                        0 0 0 #000,
+                                                        1px 4px 6px #fff;
+                            }
+                        style(type='text/css').
+                            .text-shadow-inset {
+                                font-size: 4rem;
+                                font-weight: bold;
+                                color: rgba(0, 0, 0, 0.4);
+                                text-shadow: 1px 4px 6px #fff,
+                                                      0 0 0 #000,
+                                                      1px 4px 6px #fff;
+                                }
+                            }
+                        .text-shadow-inset
+                            | Hello, World!
+
+            .slide(id=subthemes.gradients.href)
+                h2.h2.-subtheme-h Линейные градиенты
+                .-hidden-on-slide
+                    +p().
+                        Градиент — это функция, показывающая направление наискорейшего возрастания некоторой величины, значение которой меняется от одной точки пространства к другой.
+                    +p().
+                        В CSS градиенты используются для задания плавного перехода от одного цвета к другому.
+                .-centered
+                    +code('css').
+                        .block {
+                            background-image: linear-gradient(#e65100, #fff9c4);
+                        }
+                    style(type='text/css').
+                        .linear-gradient {
+                            width: 30em;
+                            height: 13em;
+                            margin: 0 auto;
+                            margin-bottom: 2em;
+                            background-image: linear-gradient(#e65100, #fff9c4);
+                            font-size: 10px;
+                        }
+                    .linear-gradient
+                    +p().
+                        Направление градиента по умолчанию: сверху вниз.
+                    +p().
+                         Поддержка браузерами: IE10+, Android 4.0, 4.1, 4.3 - с префиксом -webkit.
+
+            .slide
+                h2.h2.-subtheme-h Направление градиента
+                .slide__cols
+                    .slide__col
+                        h3.h3 Ключевое слово to с указанием направления: top, bottom, left, right.
+                        +code('css').
+                            .block {
+                                background-image: linear-gradient(
+                                    to right,
+                                    #e65100,
+                                    #fff9c4
+                                );
+                            }
+                        style(type='text/css').
+                            .linear-gradient-right {
+                                background-image: linear-gradient(to right, #e65100, #fff9c4);
+                            }
+                        .linear-gradient.linear-gradient-right
+                    .slide__col
+                        h3.h3 Градиент по диагонали: достигается комбинированием слов top, bottom, left, right.
+                        +code('css').
+                            .block {
+                                background-image: linear-gradient(
+                                    to left bottom,
+                                    #e65100,
+                                    #fff9c4
+                                );
+                            }
+                        style(type='text/css').
+                            .linear-gradient-left-bottom {
+                                background-image: linear-gradient(to left bottom, #e65100, #fff9c4);
+                            }
+                        .linear-gradient.linear-gradient-left-bottom
+
+            .slide
+                h2.h2.-subtheme-h Градиенты под углом
+                .slide__cols
+                    .slide__col
+                        h3.h3 Направление в градусах задается ключевым словом deg.
+                        +code('css').
+                            .block {
+                                background-image: linear-gradient(
+                                    270deg,
+                                    #e65100,
+                                    #fff9c4
+                                );
+                            }
+                        style(type='text/css').
+                            .linear-gradient-deg {
+                                background-image: linear-gradient(270deg, #e65100, #fff9c4);
+                            }
+                        .linear-gradient.linear-gradient-deg
+                    .slide__col
+                        +p().
+                            Углы градиента рассчитываются при помощи окружности:
+                        +figure('Окружность для расчета углов градиента', conf.page, 'circle.png')
+
+            .slide
+                h2.h2.-subtheme-h Градиенты с несколькими цветами
+                .-centered
+                    h3.h3 В градиент можно включать несколько цветов:
+                    +code('css').
+                        .block {
+                            background-image: linear-gradient(
+                                to right,
+                                blue,
+                                red,
+                                yellow
+                            );
+                        }
+                    style(type='text/css').
+                        .linear-gradient-multi {
+                            background-image: linear-gradient(to right, blue, red, yellow);
+                        }
+                    .linear-gradient.linear-gradient-multi
+
+            .slide
+                h2.h2.-subtheme-h Пропорции цветов. Колорстопы
+                .-centered
+                    +p().
+                        По умолчанию цвета в градиентах распределяются равномерно. Чтобы изменить это поведение, нужно использовать колорстопы.
+                    +p().
+                        Колорстопы записываются сразу после значений цветов. Их можно задавать в %, px и других единицах.
+                .slide__cols
+                    .slide__col
+                        +p().
+                            Поведение по умолчанию:
+                        +code('css').
+                            .block {
+                                background-image: linear-gradient(
+                                    to right,
+                                    #e65100,
+                                    #fff9c4
+                                );
+                            }
+                        style(type='text/css').
+                            .linear-gradient-right {
+                                background-image: linear-gradient(to right, #e65100, #fff9c4);
+                            }
+                        .linear-gradient.linear-gradient-right
+                    .slide__col
+                        +p().
+                            Колорстопы заданы явно:
+                        +code('css').
+                            .block {
+                                background-image: linear-gradient(
+                                    to right,
+                                    #e65100 150px,
+                                    #fff9c4 75%
+                                );
+                            }
+                        style(type='text/css').
+                            .linear-gradient-colorstop {
+                                background-image: linear-gradient(to right, #e65100 150px, #fff9c4 75%);
+                            }
+                        .linear-gradient.linear-gradient-colorstop
+
+            .slide
+                h2.h2.-subtheme-h Резкие переходы цветов
+                .-centered
+                    +p().
+                        Если у соседних цветов задать одинаковые колорстопы, то получится резкий переход цветов:
+                    +code('css').
+                        .block {
+                            background-image: linear-gradient(
+                                white 50px,
+                        		blue 50px,
+                        		blue 100px,
+                        		red 100px
+                            );
+                        }
+                    style(type='text/css').
+                        .linear-gradient-sharp {
+                            height: 15em;
+                            border: 0.2em solid #000;
+                            box-shadow: 0.3em 0.3em 0.5em 0 #000;
+                            background-image: linear-gradient(
+                                white 50px,
+                        		blue 50px,
+                        		blue 100px,
+                        		red 100px
+                            );
+                        }
+                    .linear-gradient.linear-gradient-sharp
+
+            .slide
+                h2.h2.-subtheme-h Повторяющийся линейный градиент
+                .-centered
+                    +code('css').
+                        .block {
+                            background-image: repeating-linear-gradient(
+                                #ff5722 0,
+                                #ff5722 25px,
+                                #ffab91 25px,
+                                #ffab91 50px,
+                                #ffccbc 50px,
+                                #ffccbc 75px
+                            );
+                        }
+                    style(type='text/css').
+                        .linear-gradient-repeat {
+                            height: 30em;
+                            background-image: repeating-linear-gradient(
+                                #ff5722 0,
+                                #ff5722 25px,
+                                #ffab91 25px,
+                                #ffab91 50px,
+                                #ffccbc 50px,
+                                #ffccbc 75px
+                            );
+                        }
+                    .linear-gradient.linear-gradient-repeat
+
+            .slide
+                h2.h2.-subtheme-h Колонки одинаковой высоты на градиентах
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="QdXQmK" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[gradients] - equal height columns" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/QdXQmK/">[gradients] - equal height columns</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h Радиальные градиенты
+                .slide__cols
+                    .slide__col
+                        h3.h3 Радиальный градиент в CSS:
+                        +code('css').
+                            .block {
+                                background-image: radial-gradient(
+                                    #fff,
+                                    #e65100
+                                );
+                            }
+                        style(type='text/css').
+                            .radial-gradient {
+                                width: 20em;
+                                height: 20em;
+                                margin: 0 auto;
+                                margin-bottom: 2em;
+                                background-image: radial-gradient(#fff, #e65100);
+                                font-size: 10px;
+                            }
+                        .radial-gradient
+                    .slide__col
+                        h3.h3 Явное задание радиуса градиента:
+                        +code('css').
+                            .block {
+                                background-image: radial-gradient(
+                                    circle 5em,
+                                    #fff,
+                                    #e65100
+                                );
+                            }
+                        style(type='text/css').
+                            .radial-gradient-radius {
+                                background-image: radial-gradient(
+                                    circle 5em,
+                                    #fff,
+                                    #e65100
+                                );
+                            }
+                        .radial-gradient.radial-gradient-radius
+
+            .slide
+                h2.h2.-subtheme-h Позиционирование радиального градиента
+                .-centered
+                    h3.h3 Ключевое слово at с указанием единиц измерения, аналогичных свойству background-position:
+                    +code('css').
+                        .block {
+                            background-image: radial-gradient(
+                                circle 25em at 100% 0,
+                                #fff,
+                                #e65100
+                            );
+                        }
+                    style(type='text/css').
+                        .radial-gradient-position {
+                            background-image: radial-gradient(
+                                circle 25em at 100% 0,
+                                #fff,
+                                #e65100
+                            );
+                        }
+                    .radial-gradient.radial-gradient-position
+
+            .slide
+                h2.h2.-subtheme-h Резкие переходы цветов
+                .-centered
+                    h3.h3 Тот же принцип, что и у линейных градиентов: одинаковые колорстопы у соседних цветов:
+                    +code('css').
+                        .block {
+                            border-radius: 50%;
+                            background-image: radial-gradient(
+                                circle,
+                                #ff5722 25px,
+                                #ffab91 25px,
+                                #ffab91 50px,
+                                #ffccbc 50px
+                            );
+                        }
+                    style(type='text/css').
+                        .radial-gradient-colorstop {
+                            width: 15em;
+                            height: 15em;
+                            border-radius: 50%;
+                            background-image: radial-gradient(
+                                circle,
+                                #ff5722 25px,
+                                #ffab91 25px,
+                                #ffab91 50px,
+                                #ffccbc 50px
+                            );
+                        }
+                    .radial-gradient.radial-gradient-colorstop

@@ -8,10 +8,356 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+        var listToRead = [];
+    -
+        var listColorFormats = [
+            'шестнадцатеричный: #fa452e; #000;',
+            'RGB: rgb(0, 150, 0);',
+            'RGBA: rgba(0, 0, 0, 0.5);',
+            'цветовые константы: red, blue, green...'
+        ];
+    -
+        var listBgShortItems = [
+            '[bc] - background-color',
+            '[bi] - background-image',
+            '[br] - background-repeat',
+            '[bp] - background-position',
+            '[ba] - background-attachment'
+        ];
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
-            +main-slide(pageTitle, 'Имя автора лекции')
-        .slide
+            +main-slide(pageTitle, 'Дмитрий Мещеряков')
+
+            .slide(id=subthemes.background.href)
+                h2.h2.-subtheme-h= subthemes.background.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Свойство background-color
+                        +code('css').
+                            body {
+                                background-color: #ff0000;
+                            }
+                        +list('Форматы задания цветов в вебе:', listColorFormats)
+                    .slide__col
+                        h3.h3 Свойство background-image
+                        +code('css').
+                            body {
+                                background-image: url('images/bg.jpg');
+                            }
+
+            .slide(id=subthemes.backgroundRepeat.href)
+                h2.h2.-subtheme-h= subthemes.backgroundRepeat.title
+                h3.h3 Свойство background-repeat
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                background-repeat: repeat; /* по умолчанию */
+                            }
+                        style(type='text/css').
+                            .bg {
+                                width: 330px;
+                                height: 135px;
+                                margin: 0 auto;
+                                margin-bottom: 20px;
+                                border: 5px solid #ccc;
+                                background-image: url('static/images/pages/graphics-part2/cat.jpg');
+                            }
+                        .bg
+                        +code('css').
+                            .block {
+                                background-repeat: no-repeat;
+                            }
+                        style(type='text/css').
+                            .bg-no-repeat {
+                                background-repeat: no-repeat;
+                            }
+                        .bg.bg-no-repeat
+                    .slide__col
+                        +code('css').
+                            .block {
+                                background-repeat: repeat-x;
+                            }
+                        style(type='text/css').
+                            .bg-repeat-x {
+                                background-repeat: repeat-x;
+                            }
+                        .bg.bg-repeat-x
+                        +code('css').
+                            .block {
+                                background-repeat: repeat-y;
+                            }
+                        style(type='text/css').
+                            .bg-repeat-y {
+                                background-repeat: repeat-y;
+                            }
+                        .bg.bg-repeat-y
+
+            .slide(id=subthemes.backgroundPosition.href)
+                h2.h2.-subtheme-h= subthemes.backgroundPosition.title
+                h3.h3 Свойство background-position
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                background-position: x y;
+                                /* x - расположение по горизонтали,
+                                   y - по вертикали */
+                            }
+                        +p().
+                            Допустимые значения x и y: px, %, em, rem, ключевые слова left, center, right, top, bottom.
+                        +code('css').
+                            .block {
+                                background-position: 0 0;
+                            }
+                        style(type='text/css').
+                            .bg00 {
+                                background-position: 0 0;
+                            }
+                        .bg.bg-no-repeat.bg00
+                    .slide__col
+                        +code('css').
+                            .block {
+                                background-position: 50% 50%;
+                            }
+                        style(type='text/css').
+                            .bg50 {
+                                background-position: 50% 50%;
+                            }
+                        .bg.bg-no-repeat.bg50
+                        +code('css').
+                            .block {
+                                background-position: left bottom;
+                            }
+                        style(type='text/css').
+                            .bg-left-bottom {
+                                background-position: left bottom;
+                            }
+                        .bg.bg-no-repeat.bg-left-bottom
+
+            .slide(id=subthemes.backgroundFixed.href)
+                h2.h2.-subtheme-h= subthemes.backgroundFixed.title
+                h3.h3 Свойство background-attachment
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                background-attachment: scroll;
+                                /* фон прокручивается
+                                   вместе с содержимым */
+                            }
+                    .slide__col
+                        +code('css').
+                            .block {
+                                background-attachment: fixed;
+                                /* фон не прокручивается,
+                                   зафиксирован */
+                            }
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.backgroundFixed.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="MJMozL" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[graphics] - background-attachment" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/MJMozL/">[graphics] - background-attachment</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.backgroundShort.href)
+                h2.h2.-subtheme-h= subthemes.backgroundShort.title
+                .-centered
+                    h3.h3 background: [bc] [bi] [br] [bp] [ba];
+                    +list('', listBgShortItems)
+                    +p().
+                        Порядок свойств не важен.
+
+            .slide(id=subthemes.backgroundMulti.href)
+                h2.h2.-subtheme-h= subthemes.backgroundMulti.title
+                .-centered
+                    +code('css').
+                        body {
+                            background-image: url('bg-image1.jpg'),
+                                                                url('bg-image2.jpg');
+                        }
+                    +p().
+                        Выше будет то изображение, которое раньше в списке.
+
+            .slide(id=subthemes.backgroundSize.href)
+                h2.h2.-subtheme-h= subthemes.backgroundSize.title
+                .-centered
+                    h3.h3 Свойство background-size
+                    +code('css').
+                        .block {
+                            background-size: x [y];
+                            /* x - ширина фонового изображения,
+                                 y - высота */
+                        }
+                    +p().
+                        Если высота не указывается, то она определяется автоматически в зависимости от ширины и исходных пропорций.
+                    +p().
+                        По умолчанию оба аргумента равны auto.
+
+            .slide
+                h2.h2.-subtheme-h background-size: auto;
+                .-centered
+                    +p().
+                        Исходные размеры изображения.
+                +gif('bg-size-auto')
+
+            .slide
+                h2.h2.-subtheme-h background-size: 100%;
+                .-centered
+                    +p().
+                        Ширина изображения совпадает с шириной блока.
+                +gif('bg-size-100')
+
+            .slide
+                h2.h2.-subtheme-h background-size: 100% 100%;
+                .-centered
+                    +p().
+                        Изображение полностью вписывается в блок.
+                +gif('bg-size-100-100')
+
+            .slide
+                h2.h2.-subtheme-h background-size: contain;
+                .-centered
+                    +p().
+                        Изображение целиком вписывается в блок, часть блока может оказаться пустой.
+                +gif('bg-size-contain')
+
+            .slide
+                h2.h2.-subtheme-h background-size: cover;
+                .-centered
+                    +p().
+                        Ширина или высота изображения равна ширине или высоте блока, часть изображения может обрезаться.
+                +gif('bg-size-cover')
+
+            .slide(id=subthemes.backgroundOrigin.href)
+                h2.h2.-subtheme-h= subthemes.backgroundOrigin.title
+                h3.h3 Свойство background-origin
+                .slide__cols
+                    .slide__col
+                        +remember().
+                            Не применяется, когда задано свойство background-attachment: fixed;
+                        +code('css').
+                            .block {
+                                box-sizing: border-box;
+                                width: 16em;
+                                height: 16em;
+                                padding: 2em;
+                                border: 2em solid rgba(0, 0, 0, 0.5);
+                                font-size: 16px;
+                                background-size: auto;
+                                background-repeat: no-repeat;
+                            }
+                    .slide__col
+                        +code('css').
+                            .block {
+                                background-origin: padding-box;
+                            }
+                        +p().
+                            Фон позиционируется относительно края элемента с учетом толщины рамки (значение по умолчанию).
+                        style(type='text/css').
+                            .bg-origin {
+                                box-sizing: border-box;
+                                width: 16em;
+                                height: 16em;
+                                margin: 0 auto;
+                                padding: 2em;
+                                border: 2em solid rgba(0, 0, 0, 0.5);
+                                font-size: 16px;
+                                background-image: url('static/images/pages/graphics-part2/cat2.jpg');
+                                background-size: auto;
+                                background-repeat: no-repeat;
+                                background-origin: padding-box;
+                            }
+                        .bg-origin
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.backgroundOrigin.title
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                background-origin: border-box;
+                            }
+                        +p().
+                            Фон позиционируется относительно границы, при этом линия границы может перекрывать изображение.
+                        style(type='text/css').
+                            .bg-origin-border {
+                                background-origin: border-box;
+                            }
+                        .bg-origin.bg-origin-border
+                    .slide__col
+                        +code('css').
+                            .block {
+                                background-origin: content-box;
+                            }
+                        +p().
+                            Фон позиционируется относительно содержимого элемента (учитываются рамки и внутренние отступы).
+                        style(type='text/css').
+                            .bg-origin-content {
+                                background-origin: content-box;
+                            }
+                        .bg-origin.bg-origin-content
+
+            .slide(id=subthemes.backgroundClip.href)
+                h2.h2.-subtheme-h= subthemes.backgroundClip.title
+                h3.h3 Свойство background-clip
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                background-clip: border-box;
+                            }
+                        +p().
+                            Фон выводится под границами, совсем не обрезается (значение по умолчанию).
+                        style(type='text/css').
+                            .bg-clip-border {
+                                background-clip: border-box;
+                            }
+                        .bg-origin.bg-clip-border
+                    .slide__col
+                        +code('css').
+                            .block {
+                                background-clip: padding-box;
+                            }
+                        +p().
+                            Фон обрезается по внутреннему краю области рамки.
+                        style(type='text/css').
+                            .bg-clip-padding {
+                                background-clip: padding-box;
+                            }
+                        .bg-origin.bg-clip-padding
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.backgroundClip.title
+                .-centered
+                    h3.h3.-visible-on-slide Свойство background-clip
+                    +code('css').
+                        .block {
+                            background-clip: content-box;
+                        }
+                    +p().
+                        Фон обрезается по краю области содержимого.
+                    style(type='text/css').
+                        .bg-clip-content {
+                            background-clip: content-box;
+                        }
+                    .bg-origin.bg-clip-content
+
+            .slide
+                h2.h2.-subtheme-h Использование свойства background-clip для построения сетки с фиксированными отступами
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="EZBvMm" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[graphics] - fixed margins with background-clip" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/EZBvMm/">[graphics] - fixed margins with background-clip</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.backgroundRetina.href)
+                h2.h2.-subtheme-h= subthemes.backgroundRetina.title
+                .-hidden-on-slide
+                    +p()
+                        | В css можно загружать фоновые картинки разного качества в зависимости от разрешения экрана (аналогично атрибуту
+                        +bold-no-sematics('srcset')
+                        | тега
+                        +inline-html()
+                            <img>
+                        | ).
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="rjEzEj" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[graphics] - background-image for Retina" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/rjEzEj/">[graphics] - background-image for Retina</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
