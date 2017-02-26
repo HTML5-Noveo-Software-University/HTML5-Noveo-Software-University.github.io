@@ -8,10 +8,588 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+        var listToRead = [{
+            id: "toRead-1",
+            title: "2D трансформации",
+            href: "https://html5book.ru/css3-transform/"
+        }, {
+            id: "toRead-2",
+            title: "3D трансформации",
+            href: "https://html5book.ru/3d-transform/"
+        }, {
+            id: "toRead-3",
+            title: "Матрицы трансформаций в CSS",
+            href: "https://dev.opera.com/articles/ru/understanding-the-css-transforms-matrix/"
+        }];
+    -
+        var listTransformationsBasics = [
+            'поддержка трансформаций: IE9+;',
+            'нужны вендорные префиксы для IE9, Safari 8-, Android;',
+            'значение по умолчанию: transform: none;'
+        ];
+    -
+        var listTransformationsFunctions = [
+            'перемещение элемента: translate(), translateX(), translateY() — единицы длины (положительные и отрицательные), %;',
+            'масштабирование элемента: scale(), scaleX(), scaleY() — любое число;',
+            'вращение элемента: rotate() — угол (deg, grad, rad или turn);',
+            'искажение элемента: skew(), skewX(), skewY() — угол (deg, grad, rad).'
+        ];
+    -
+        var listTransformations3DBasics = [
+            'поддержка 3D трансформаций: IE10+;',
+            'для активации 3D пространства нужно установить свойство perspective для родительского контейнера;',
+            'допустимые 3D трансформации: translate(), scale(), rotate(), matrix().'
+        ];
+    -
+        var listTransformStyle = [
+            'flat - значение по умолчанию. Все дочерние элементы отображаются плоскими в двухмерной плоскости блока-контейнера;',
+            'preserve-3d - располагает элементы в трехмерном пространстве.'
+        ];
+    -
+        var listBackfaceVisibility = [
+            'visible - значение по умолчанию. Указывает, что обратная сторона видна;',
+            'hidden - скрывает обратную сторону элемента.'
+        ];
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
-            +main-slide(pageTitle, 'Имя автора лекции')
-        .slide
+            +main-slide(pageTitle, 'Дмитрий Мещеряков')
+
+            .slide(id=subthemes.transformations2D.href)
+                h2.h2.-subtheme-h= subthemes.transformations2D.title
+                .-centered
+                    h3.h3 Свойство transform
+                    .-hidden-on-slide
+                        +p().
+                            CSS3 трансформации изменяют размер, форму и положение элемента на странице с помощью свойства transform. Трансформации преобразовывают элемент, не затрагивая остальные элементы страницы, т.е. другие элементы не сдвигаются относительно него. По умолчанию трансформация происходит относительно центра элемента.
+                    +list('', listTransformationsBasics)
+                    +list('Допустимые функции трансформации:', listTransformationsFunctions)
+
+            .slide(id=subthemes.translate.href)
+                h2.h2.-subtheme-h= subthemes.translate.title
+                .-centered
+                    h3.h3 Свойство transform: translate();
+                    +p().
+                        Перемещает элемент относительно его текущего местоположения.
+                    +remember().
+                        В отличие от margin, вертикальное смещение, указанное в %, считается от высоты элемента, а не от ширины родительского блока.
+                    h3.h3 Примеры
+                    +code('css').
+                        .block:hover {
+                            transform: translate(10%, 50%);
+                        }
+                    style(type='text/css').
+                        .trf-wrapper {
+                            width: 330px;
+                            height: 135px;
+                            margin: 0 auto;
+                            margin-bottom: 20px;
+                            background-color: rgba(0, 0, 0, 0.2);
+                        }
+                        .trf {
+                            width: 330px;
+                            height: 135px;
+                            line-height: 135px;
+                            font-size: 2rem;
+                            background-color: #f1652a;
+                            text-align: center;
+                            transition: all 0.5s ease-in-out;
+                        }
+                        .trf-translate:hover {
+                            transform: translate(10%, 50%);
+                        }
+                    .trf-wrapper
+                        .trf.trf-translate Some text
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.translate.title
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: translateX(50px);
+                            }
+                        style(type='text/css').
+                            .trf-translateX:hover {
+                                transform: translateX(50px);
+                            }
+                        .trf-wrapper
+                            .trf.trf-translateX Some text
+                        +code('css').
+                            .block:hover {
+                                transform: translateX(-50px);
+                            }
+                        style(type='text/css').
+                            .trf-translateX-neg:hover {
+                                transform: translateX(-50px);
+                            }
+                        .trf-wrapper
+                            .trf.trf-translateX-neg Some text
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: translateY(50px);
+                            }
+                        style(type='text/css').
+                            .trf-translateY:hover {
+                                transform: translateY(50px);
+                            }
+                        .trf-wrapper
+                            .trf.trf-translateY Some text
+                        +code('css').
+                            .block:hover {
+                                transform: translateY(-50px);
+                            }
+                        style(type='text/css').
+                            .trf-translateY-neg:hover {
+                                transform: translateY(-50px);
+                            }
+                        .trf-wrapper
+                            .trf.trf-translateY-neg Some text
+
+            .slide(id=subthemes.centerViaTransform.href)
+                h2.h2.-subtheme-h= subthemes.centerViaTransform.title
+                .-hidden-on-slide
+                    +p().
+                        При помощи свойства transform: translate(); можно отцентрировать элемент по горизонтали, по вертикали или одновременно по горизонтали и по вертикали.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="BWaGNg" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[transformations] - h & v center via transform: translate()" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/BWaGNg/">[transformations] - h & v center via transform: translate()</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.scale.href)
+                h2.h2.-subtheme-h= subthemes.scale.title
+                .-centered
+                    h3.h3 Свойство transform: scale();
+                    +p().
+                        Масштабирует элемент по ширине, делая его шире или уже. Если указано отрицательное значение, то элемент отображается зеркально.
+                    h3.h3 Примеры
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: scale(0.5, 2);
+                            }
+                        style(type='text/css').
+                            .trf-scale:hover {
+                                transform: scale(0.5, 2);
+                            }
+                        .trf-wrapper
+                            .trf.trf-scale Some text
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: scale(-1);
+                            }
+                        style(type='text/css').
+                            .trf-scale-neg:hover {
+                                transform: scale(-1);
+                            }
+                        .trf-wrapper
+                            .trf.trf-scale-neg Some text
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.scale.title
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: scaleX(1.5);
+                            }
+                        style(type='text/css').
+                            .trf-scaleX:hover {
+                                transform: scaleX(1.5);
+                            }
+                        .trf-wrapper
+                            .trf.trf-scaleX Some text
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: scaleY(0.5);
+                            }
+                        style(type='text/css').
+                            .trf-scaleY:hover {
+                                transform: scaleY(0.5);
+                            }
+                        .trf-wrapper
+                            .trf.trf-scaleY Some text
+
+            .slide(id=subthemes.rotate.href)
+                h2.h2.-subtheme-h= subthemes.rotate.title
+                .-centered
+                    h3.h3 Свойство transform: rotate();
+                    +p().
+                        Поворачивает элемент на указанное количество градусов; положительные значения поворачивают элемент по часовой стрелке, отрицательные - против часовой стрелки.
+                    h3.h3 Примеры
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: rotate(45deg);
+                            }
+                        style(type='text/css').
+                            .trf-rotate-pos:hover {
+                                transform: rotate(45deg);
+                            }
+                        .trf-wrapper
+                            .trf.trf-rotate-pos Some text
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: rotate(-45deg);
+                            }
+                        style(type='text/css').
+                            .trf-rotate-neg:hover {
+                                transform: rotate(-45deg);
+                            }
+                        .trf-wrapper
+                            .trf.trf-rotate-neg Some text
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.rotate.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Поворот на 360 градусов
+                        +code('css').
+                            .block:hover {
+                                transform: rotate(360deg);
+                            }
+                        style(type='text/css').
+                            .trf-rotate-360:hover {
+                                transform: rotate(360deg);
+                            }
+                        .trf-wrapper
+                            .trf.trf-rotate-360 Some text
+                    .slide__col
+                        h3.h3 Поворот на 720 градусов
+                        +code('css').
+                            .block:hover {
+                                transform: rotate(720deg);
+                            }
+                        style(type='text/css').
+                            .trf-rotate-720:hover {
+                                transform: rotate(720deg);
+                            }
+                        .trf-wrapper
+                            .trf.trf-rotate-720 Some text
+
+            .slide(id=subthemes.skew.href)
+                h2.h2.-subtheme-h= subthemes.skew.title
+                .-centered
+                    h3.h3 Свойство transform: skew();
+                    +p().
+                        Используется для искажения сторон элемента относительно координатных осей.
+                    h3.h3 Примеры
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: skew(30deg, 30deg);
+                            }
+                        style(type='text/css').
+                            .trf-skew-1:hover {
+                                transform: skew(30deg, 30deg);
+                            }
+                        .trf-wrapper
+                            .trf.trf-skew-1 Some text
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: skew(-30deg, 30deg);
+                            }
+                        style(type='text/css').
+                            .trf-skew-2:hover {
+                                transform: skew(-30deg, 30deg);
+                            }
+                        .trf-wrapper
+                            .trf.trf-skew-2 Some text
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.skew.title
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: skewX(30deg);
+                            }
+                        style(type='text/css').
+                            .trf-skewX:hover {
+                                transform: skewX(30deg);
+                            }
+                        .trf-wrapper
+                            .trf.trf-skewX Some text
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transform: skewY(30deg);
+                            }
+                        style(type='text/css').
+                            .trf-skewY:hover {
+                                transform: skewY(30deg);
+                            }
+                        .trf-wrapper
+                            .trf.trf-skewY Some text
+
+            .slide(id=subthemes.transformOrigin.href)
+                h2.h2.-subtheme-h= subthemes.transformOrigin.title
+                .-centered
+                    h3.h3 Свойство transform-origin;
+                    .-hidden-on-slide
+                        +p().
+                            Позволяет сместить центр трансформации, относительно которого происходит изменение положения/размера/формы элемента. Значение по умолчанию — center, или 50% 50%.
+                        +p().
+                            В качестве значений могут использоваться любые единицы измерения длины (px, em, rem, %, ключевые слова top, bottom, left, right).
+                    h3.h3 Примеры
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                transform: rotate(360deg);
+                                transform-origin: center;
+                            }
+                        style(type='text/css').
+                            @keyframes rotate {
+                                100% {
+                                    transform: rotate(360deg);
+                                }
+                            }
+                            .trf-wrapper-origin {
+                                width: 100px;
+                                height: 100px;
+                                margin: 50px auto;
+                            }
+                            .trf-origin {
+                                width: 100px;
+                                height: 100px;
+                            }
+                            .trf-origin-center {
+                                animation: rotate 6s linear infinite;
+                                transform-origin: center;
+                            }
+                        .trf-wrapper.trf-wrapper-origin
+                            .trf.trf-origin.trf-origin-center
+                    .slide__col
+                        +code('css').
+                            .block {
+                                transform: rotate(360deg);
+                                transform-origin: top left;
+                            }
+                        style(type='text/css').
+                            .trf-origin-top-left {
+                                animation: rotate 6s linear infinite;
+                                transform-origin: top left;
+                            }
+                        .trf-wrapper.trf-wrapper-origin(style='margin-top: 150px;')
+                            .trf.trf-origin.trf-origin-top-left
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.transformOrigin.title
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                transform: rotate(360deg);
+                                transform-origin: bottom left;
+                            }
+                        style(type='text/css').
+                            .trf-origin-bottom-left {
+                                animation: rotate 6s linear infinite;
+                                transform-origin: bottom left;
+                            }
+                        .trf-wrapper.trf-wrapper-origin(style='margin-bottom: 150px;')
+                            .trf.trf-origin.trf-origin-bottom-left
+                    .slide__col
+                        +code('css').
+                            .block {
+                                transform: rotate(360deg);
+                                transform-origin: bottom right;
+                            }
+                        style(type='text/css').
+                            .trf-origin-bottom-right {
+                                animation: rotate 6s linear infinite;
+                                transform-origin: bottom right;
+                            }
+                        .trf-wrapper.trf-wrapper-origin(style='margin-bottom: 150px;')
+                            .trf.trf-origin.trf-origin-bottom-right
+
+            .slide(id=subthemes.skewOnlyBackground.href)
+                h2.h2.-subtheme-h= subthemes.skewOnlyBackground.title
+                .-hidden-on-slide
+                    +p().
+                        По умолчанию все функции трансформации применяются ко всему элементу, включая текст. Но, как правило, нужно, чтобы трансформации подвергался только фон элемента, а текст оставался прежним. Ниже представлен один из способов как сделать трансформацию искажения элемента, не затронув при этом текстовое содержание.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="LWYXLB" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[transformations] - text without skew" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/LWYXLB/">[transformations] - text without skew</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.multiTransforms.href)
+                h2.h2.-subtheme-h= subthemes.multiTransforms.title
+                .-centered
+                    h3.h3 Способ 1. Значения через пробел
+                    +code('css').
+                        .block:hover {
+                            transform: scale(0.5) translateX(50%) rotate(45deg);
+                        }
+                    style(type='text/css').
+                        .trf-multi:hover {
+                            transform: scale(0.5) translateX(50%) rotate(45deg);
+                        }
+                    .trf-wrapper
+                        .trf.trf-multi Some text
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.multiTransforms.title
+                .-centered
+                    h3.h3 Способ 2. Значения через функцию matrix()
+                    .-hidden-on-slide
+                        +p().
+                            Матрица преобразований предназначена для вычисления новых координат элемента с целью его трансформации.
+                    +p().
+                        Матрица преобразований имеет размер 3х3 и в общем виде записывается так:
+                    .-text-centered-on-slide
+                        +figure('Матрица преобразований', conf.page, 'matrix1.png')
+                    +p().
+                        Мы можем записать это при помощи ключевого слова matrix в свойстве transform:
+                    +code('css').
+                        .block {
+                            transform: matrix(a, b, c, d, e, f);
+                        }
+                    .-hidden-on-slide
+                        +p().
+                            Буквы от a до f — числа, определяемые типом трансформации. Матрицы — это рецепты тех видов трансформации, которые мы хотим применить.
+                        +p().
+                            Когда мы применяем двумерную трансформацию, браузер умножает матрицу на вектор [x, y, 1]. Значения X и Y — координаты конкретной точки блока, к которому применяется трансформация.
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Функция matrix()
+                .-centered
+                    +p().
+                        Чтобы найти координаты после трансформации, мы умножаем каждый элемент каждой строки матрицы на соответствующую ему строку вектора. Затем складываем произведения:
+                    .-text-centered-on-slide
+                        +figure('Умножение матрицы на вектор', conf.page, 'matrix2.png')
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Функция matrix()
+                .-centered
+                    +p().
+                        У каждого типа трансформаций — своя собственная матрица. Например, так выглядит матрица для трансформации сдвига:
+                    .-text-centered-on-slide
+                        +figure('Матрица сдвига', conf.page, 'matrix3.png')
+                    +p().
+                        Значения tx и ty — значения, на которые должно быть сдвинуто начало координат. Мы также можем представить это с помощью вектора [1 0 0 1 tx ty]. Этот вектор служит аргументом для функции matrix():
+                    +code('css').
+                        .block {
+                            transform: matrix(1, 0, 0, 1, tx, ty);
+                        }
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Функция matrix()
+                .-centered
+                    .-hidden-on-slide
+                        +p().
+                            Так выглядят матрицы преобразований для разных видов трансформации:
+                    .-text-centered-on-slide
+                        +figure('Матрицы преобразований для каждого вида трансофрмации', conf.page, 'matrix5.jpg')
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Функция matrix()
+                .-centered
+                    .-hidden-on-slide
+                        +p().
+                            Для вычисления составных трансформаций используется перемножение соответствующих матриц преобразований. Например, если нужно повернуть элемент на 45 градусов и увеличить его в 1.5 раза, то нужно умножить две матрицы:
+                    .-text-centered-on-slide
+                        +figure('Умножение матриц', conf.page, 'matrix4.png')
+                    +code('css').
+                        .block:hover {
+                            transform: matrix(1.0606, 1.0606, -1.0606, 1.0606, 0, 0);
+                        }
+                    style(type='text/css').
+                        .trf-matrix:hover {
+                            transform: matrix(1.0606, 1.0606, -1.0606, 1.0606, 0, 0);
+                        }
+                    .trf-wrapper
+                        .trf.trf-matrix Some text
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Пример составной трансформации при помощи функции matrix()
+                .-hidden-on-slide
+                    h3.h3 Пример составной трансформации при помощи функции matrix()
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="YZPZBq" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[transformations] - matrix()" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/YZPZBq/">[transformations] - matrix()</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.newContext.href)
+                h2.h2.-subtheme-h= subthemes.newContext.title
+                .-hidden-on-slide
+                    +p()
+                        | Блок, к которому применяется
+                        +space()
+                        span.-bold transform
+                        |, создает новый контекст наложения, ведет себя так, как если к нему применить
+                        +bold-no-sematics('position: relative')
+                        |. Поэтому дочерние элементы с
+                        +bold-no-sematics('position: absolute')
+                        | будут позиционироваться относительно этого родительского элемента с трансформацией.
+
+                    +p()
+                        | Фиксированные (
+                        +bold-no-sematics('position: fixed')
+                        |) элементы внутри блока, к которому применяется
+                        +bold-no-sematics('transform,')
+                        | будут вести себя как элементы с
+                        +bold-no-sematics('position: absolute.')
+                        | Т.е. они будут позиционироваться относительно родитеского элемента с трансформацией, их можно "проскроллить", будто они не фиксированные.
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="JExOpr" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ layout ] - Fixed и absolute в блоке с трансформацией" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/JExOpr/">[ layout ] - Fixed и absolute в блоке с трансформацией</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.transformations3D.href)
+                h2.h2.-subtheme-h= subthemes.transformations3D.title
+                .-centered
+                    .-hidden-on-slide
+                        +p().
+                            3D трансформации создают объемные реалистичные эффекты на веб-страницах.
+                        +p().
+                            3D трансформации работают аналогично с 2D трансформациями с разницей в том, что элементы могут перемещаться вдоль оси Z, вглубь экрана и из него.
+                    +list('', listTransformations3DBasics)
+
+            .slide
+                h2.h2.-subtheme-h Установка 3D-перспективы
+                h3.h3 Свойство perspective (задает глубину просмотра, т.е. расстояние по оси Z между z=0 и пользователем)
+                .-hidden-on-slide
+                    +p().
+                        Чем меньше значение, тем ближе Z-пространство к зрителю и тем больше эффект, заданный с помощью свойства transform. 0 (как и none) означает отсутствие перспективы.
+                .-text-centered-on-slide
+                    +figure('Разные значения перспективы', conf.page, 'perspective-3d.png')
+
+            .slide
+                h2.h2.-subtheme-h Задание точки трансформации
+                h3.h3 Свойство perspective-origin (аналогично transform-origin)
+                .-text-centered-on-slide
+                    +figure('Задание точки трансформации', conf.page, 'perspective-origin.png')
+
+            .slide
+                h2.h2.-subtheme-h Стиль 3D-преобразований
+                .-centered
+                    h3.h3 Свойство transform-style (не поддерживается во всех IE)
+                    +list('Определяет, как вложенные элементы отрисовываются в трехмерном пространстве:', listTransformStyle)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Стиль 3D-преобразований
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="gmbWjK" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[transformations] - transform-style" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/gmbWjK/">[transformations] - transform-style</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h Видимость обратной стороны элемента
+                .-centered
+                    h3.h3 Свойство backface-visibility
+                    +list('Определяет, будет ли видна пользователю обратная сторона преобразованного элемента:', listBackfaceVisibility)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide Видимость обратной стороны элемента
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="ZeYKPb" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[transformations] - backface-visibility" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/ZeYKPb/">[transformations] - backface-visibility</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h 3D-вращение
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="ZeYKZb" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[transformations] - 3D rotate" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/ZeYKZb/">[transformations] - 3D rotate</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)
