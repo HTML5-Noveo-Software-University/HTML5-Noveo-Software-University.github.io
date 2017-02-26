@@ -8,10 +8,742 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+        var listToRead = [{
+            id: "toRead-1",
+            title: "Плавные переходы",
+            href: "https://html5book.ru/css3-transition/"
+        }, {
+            id: "toRead-2",
+            title: "Список анимируемых свойств",
+            href: "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties"
+        }, {
+            id: "toRead-3",
+            title: "Построение кривой Безье онлайн",
+            href: "http://roblaplaca.com/examples/bezierBuilder/"
+        }, {
+            id: "toRead-4",
+            title: "Why Moving Elements With Translate() Is Better Than Pos:abs Top/left",
+            href: "https://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/"
+        }, {
+            id: "toRead-5",
+            title: "CSS анимации",
+            href: "https://html5book.ru/css3-animation/"
+        }, {
+            id: "toRead-6",
+            title: "CSS узоры",
+            href: "http://lea.verou.me/css3patterns/"
+        }, {
+            id: "toRead-7",
+            title: "Параллакс-эффект на чистом CSS",
+            href: "http://keithclark.co.uk/articles/pure-css-parallax-websites/"
+        }];
+    -
+        var listTransitionProperty = [
+            'none - нет свойств для перехода;',
+            'all - значение по умолчанию. Применяет эффект перехода ко всем свойствам элемента;',
+            'property - определяет свойство или список свойств через запятую, участвующих в переходе.'
+        ];
+    -
+        var listTransitionTimingFunctionExamplesFull = [
+            'ease - функция по умолчанию, переход начинается медленно, разгоняется быстро и замедляется в конце;',
+            'ease-in - переход начинается медленно, а затем плавно ускоряется в конце;',
+            'ease-out - переход начинается быстро и плавно замедляется в конце;',
+            'ease-in-out - переход медленно начинается и медленно заканчивается;',
+            'linear - переход происходит равномерно на протяжении всего времени;',
+            'step-start - как таковой анимации нет, стилевые свойства сразу же принимают конечное значение;',
+            'step-end - как таковой анимации нет, стилевые свойства находятся в начальном значении заданное время, затем сразу же принимают конечное значение;',
+            'steps - ступенчатая функция, имеющая заданное число шагов;',
+            'cubic-bezier(x1, y1, x2, y2) - позволяет вручную установить значения от 0 до 1 для кривой ускорения.'
+        ];
+    -
+        var listTransitionTimingFunctionExamplesShort = [
+            'ease;',
+            'ease-in;',
+            'ease-out;',
+            'ease-in-out;',
+            'linear;',
+            'step-start;',
+            'step-end;',
+            'steps;',
+            'cubic-bezier(x1, y1, x2, y2).'
+        ];
+    -
+        var listMovingElementsMethods = [
+            'при помощи свойства transform: translate();',
+            'при помощи абсолютного позиционирования и задания координат top/left.'
+        ];
+    -
+        var listAnimationDirection = [
+            'normal - значение по умолчанию, анимация проигрывается в обычном направлении, с начала и до конца;',
+            'reverse - анимация проигрывается с конца;',
+            'alternate - анимация проигрывается с начала до конца, затем в обратном направлении;',
+            'alternate-reverse - анимация проигрывается с конца до начала, затем в обратном направлении.'
+        ];
+    -
+        var listAnimationFillMode = [
+            'none - значение по умолчанию, состояние элемента не меняется до или после воспроизведения анимации;',
+            'forwards - воспроизводит анимацию до последнего кадра по окончанию последнего повтора и не отматывает ее к первоначальному состоянию;',
+            'backwards - возвращает состояние элемента после загрузки страницы к первому кадру и оставляет его там, пока не начнется анимация;',
+            'both - анимация будет вести себя так, как будто значения forwards и backwards заданы одновременно.'
+        ];
+    -
+        var listAnimationPlayState = [
+            'paused - останавливет анимацию;',
+            'running - значение по умолчанию, означает проигрывание анимации.'
+        ];
+
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
-            +main-slide(pageTitle, 'Имя автора лекции')
-        .slide
+            +main-slide(pageTitle, 'Дмитрий Мещеряков')
+
+            .slide(id=subthemes.transition.href)
+                h2.h2.-subtheme-h= subthemes.transition.title
+                .-centered
+                    h3.h3 Свойство transition
+                    +p().
+                        Позволяет отображать изменения CSS-свойств плавно и в течение некоторого  времени.
+                    +p().
+                        Смена свойств происходит при наступлении определенного события (наведение курсора на элемент, клик по элементу).
+                    +p().
+                        Поддержка браузерами: IE10+.
+                    .-hidden-on-slide
+                        +p()
+                            | Анимировать можно только те свойства, которые могут быть вычислены (размеры, расстояния, цвета). Нельзя анимировать свойста display, position, текстовые свойста и т.д. Полный список анимируемых свойств см. здесь
+                            +link-to-source(listToRead, 2)
+                            | .
+
+            .slide(id=subthemes.transitionProperty.href)
+                h2.h2.-subtheme-h= subthemes.transitionProperty.title
+                .-centered
+                    h3.h3 Свойство transition-property
+                    +p().
+                        Содержит название CSS-свойств, к которым будет применен эффект перехода. Несколько свойств перечисляется через запятую.
+                    +list('Значения: ', listTransitionProperty)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.transitionProperty.title
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transition-property: width;
+                            }
+                        style(type='text/css').
+                            .transition {
+                                width: 300px;
+                                height: 100px;
+                                background-color: #f1652a;
+                            }
+                            .transition-property1 {
+                                transition-property: width;
+                                transition-duration: 1s;
+                            }
+                            .transition-property1:hover {
+                                width: 500px;
+                            }
+                        .transition.transition-property1
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                transition-property: width, background-color;
+                            }
+                        style(type='text/css').
+                            .transition-property2 {
+                                transition-property: width, background-color;
+                                transition-duration: 1s;
+                            }
+                            .transition-property2:hover {
+                                width: 500px;
+                                background-color: #ccc;
+                            }
+                        .transition.transition-property2
+
+            .slide(id=subthemes.transitionDuration.href)
+                h2.h2.-subtheme-h= subthemes.transitionDuration.title
+                .-centered
+                    h3.h3 Свойство transition-duration
+                    .-hidden-on-slide
+                        +p().
+                            Задает промежуток времени, в течение которого должен осуществляться переход. Если разные свойства имеют разные значения для перехода, они указываются через запятую.
+                    +p().
+                        Задается в секундах или миллисекундах.
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block--fast {
+                                transition-duration: 0.5s;
+                            }
+                            .block--medium {
+                                transition-duration: 1s;
+                            }
+                            .block--slow {
+                                transition-duration: 3s;
+                            }
+                    .slide__col
+                        style(type='text/css').
+                            .transition-duration-wrap:hover .transition-duration {
+                                width: 300px;
+                            }
+                            .transition-duration {
+                                width: 100px;
+                                height: 100px;
+                                margin-bottom: 20px;
+                                font-size: 2rem;
+                                line-height: 100px;
+                                text-align: center;
+                                background-color: #f1652a;
+                                transition-property: width;
+                            }
+                            .transition-duration-05s {
+                                transition-duration: 0.5s;
+                            }
+                            .transition-duration-1s {
+                                transition-duration: 1s;
+                            }
+                            .transition-duration-3s {
+                                transition-duration: 3s;
+                            }
+                        .transition-duration-wrap
+                            .transition-duration.transition-duration-05s 0.5s
+                            .transition-duration.transition-duration-1s 1s
+                            .transition-duration.transition-duration-3s 3s
+
+            .slide(id=subthemes.transitionTimingFunction.href)
+                h2.h2.-subtheme-h= subthemes.transitionTimingFunction.title
+                .-centered
+                    h3.h3 Свойство transition-timing-function
+                    .-hidden-on-slide
+                        +p().
+                            Задает временную функцию, которая описывает скорость перехода объекта от одного значения к другому.
+                        +list('Значения: ', listTransitionTimingFunctionExamplesFull)
+                .slide__cols
+                    .slide__col
+                        .-visible-on-slide
+                            +list('', listTransitionTimingFunctionExamplesShort)
+                    .slide__col
+                        style(type='text/css').
+                            .transition-function-wrap:hover .transition-function {
+                                width: 600px;
+                            }
+                            .transition-function {
+                                width: 400px;
+                                height: 40px;
+                                margin-bottom: 20px;
+                                padding-left: 20px;
+                                font-weight: 700;
+                                font-size: 1rem;
+                                line-height: 40px;
+                                background-color: #f1652a;
+                                transition-property: width;
+                                transition-duration: 3s;
+                            }
+                            .transition-function-ease {
+                                transition-timing-function: ease;
+                            }
+                            .transition-function-ease-in {
+                                transition-timing-function: ease-in;
+                            }
+                            .transition-function-ease-out {
+                                transition-timing-function: ease-out;
+                            }
+                            .transition-function-ease-in-out {
+                                transition-timing-function: ease-in-out;
+                            }
+                            .transition-function-linear {
+                                transition-timing-function: linear;
+                            }
+                            .transition-function-step-start {
+                                transition-timing-function: step-start;
+                            }
+                            .transition-function-step-end {
+                                transition-timing-function: step-end;
+                            }
+                            .transition-function-steps {
+                                transition-timing-function: steps(3, end);
+                            }
+                            .transition-function-cubic {
+                                transition-timing-function: cubic-bezier(0.1, -0.6, 0.2, 0);
+                            }
+                        .transition-function-wrap
+                            .transition-function.transition-function-ease ease
+                            .transition-function.transition-function-ease-in ease-in
+                            .transition-function.transition-function-ease-out ease-out
+                            .transition-function.transition-function-ease-in-out ease-in-out
+                            .transition-function.transition-function-linear linear
+                            .transition-function.transition-function-step-start step-start
+                            .transition-function.transition-function-step-end step-end
+                            .transition-function.transition-function-steps steps(5, end)
+                            .transition-function.transition-function-cubic cubic-bezier(0.1, -0.6, 0.2, 0)
+
+            .slide(id=subthemes.transitionDelay.href)
+                h2.h2.-subtheme-h= subthemes.transitionDelay.title
+                .-centered
+                    h3.h3 Свойство transition-delay
+                    +p().
+                        Изменение свойства происходит не моментально, а с заданной задержкой (в секундах или миллисекундах).
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block--fast {
+                                transition-delay: 0;
+                            }
+                            .block--medium {
+                                transition-delay: 1s;
+                            }
+                            .block--slow {
+                                transition-delay: 3s;
+                            }
+                    .slide__col
+                        style(type='text/css').
+                            .transition-delay-wrap:hover .transition-delay {
+                                width: 300px;
+                            }
+                            .transition-delay {
+                                width: 100px;
+                                height: 100px;
+                                margin-bottom: 20px;
+                                font-size: 2rem;
+                                line-height: 100px;
+                                text-align: center;
+                                background-color: #f1652a;
+                                transition-property: width;
+                                transition-duration: 1s;
+                            }
+                            .transition-delay-0s {
+                                transition-delay: 0;
+                            }
+                            .transition-delay-1s {
+                                transition-delay: 1s;
+                            }
+                            .transition-delay-3s {
+                                transition-delay: 3s;
+                            }
+                        .transition-delay-wrap
+                            .transition-delay.transition-delay-0s 0s
+                            .transition-delay.transition-delay-1s 1s
+                            .transition-delay.transition-delay-3s 3s
+
+            .slide(id=subthemes.transitionShort.href)
+                h2.h2.-subtheme-h= subthemes.transitionShort.title
+                .-centered
+                    +code('css').
+                        .block {
+                            transition: transition-property transition-duration
+                            transition-timing-function transition-delay;
+                        }
+                    +p().
+                        Запись
+                    +code('css').
+                        .block {
+                            transition: 1s;
+                        }
+                    +p().
+                        эквивалентна
+                    +code('css').
+                        .block {
+                            transition: all 1s ease 0s;
+                        }
+
+            .slide(id=subthemes.transitionMulti.href)
+                h2.h2.-subtheme-h= subthemes.transitionMulti.title
+                .-centered
+                    +p().
+                        Для элемента можно задать несколько последовательных переходов, перечислив их через запятую.
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                transition: width 0.5s ease-in,
+                                                   background-color 2s ease-out;
+                            }
+                    .slide__col
+                        style(type='text/css').
+                            .transition {
+                                width: 300px;
+                                height: 100px;
+                                background-color: #f1652a;
+                            }
+                            .transition-multi {
+                                transition: width 0.5s ease-in,
+                                            background-color 2s ease-out;
+                            }
+                            .transition-multi:hover {
+                                width: 500px;
+                                background-color: #ccc;
+                            }
+                        .transition.transition-multi
+
+            .slide(id=subthemes.translateVSposition.href)
+                h2.h2.-subtheme-h= subthemes.translateVSposition.title
+                .-centered
+                    +list('Существует 2 способа перемещения элементов на экране:', listMovingElementsMethods)
+                    +p()
+                        | Исследования
+                        +link-to-source(listToRead, 4)
+                        +space()
+                        | показывают, что анимирование перемещения элементов при помощи transform: translate() менее затратно для браузера, чем при использовании абсолютного позиционирования.
+                    .-hidden-on-slide
+                        +p().
+                            При использовании абсолютного позиционирования браузер тратит очень много времени на перерисовку каждого кадра, что приводит к прерывистости анимации (особенно это заметно на мобильных устройствах с экранами высокого разрешения). При этом все вычисления происходят в центральном процессоре.
+                        +p().
+                            Элементу со свойством transform: translate() выделяется отдельный слой в графическом процессоре (RenderLayer). В результате все вычисления производятся в графическом процессоре, и перерисовка кадров происходит намного быстрее и менее затратно для центрального процессора.
+
+            .slide(id=subthemes.animation.href)
+                h2.h2.-subtheme-h= subthemes.animation.title
+                .-centered
+                    +p().
+                        @keyframes анимация позволяет более гибко управлять анимацией, по сравнению со свойством transition.
+                    +p().
+                        Поддержка браузерами: IE10+.
+                    +p()
+                        | Анимация состоит из двух компонентов: правила
+                        +bold-no-sematics('@keyframes')
+                        | , содержащего имя анимации и задающего ключевые кадры, и свойства
+                        +bold-no-sematics('animation')
+                        | , ссылающегося на имя правила
+                        +bold-no-sematics('@keyframes')
+                        | .
+
+            .slide(id=subthemes.keyframes.href)
+                h2.h2.-subtheme-h= subthemes.keyframes.title
+                .-centered
+                    +p().
+                        Правило @keyframes содержит имя анимации элемента, которое связывает правило и блок объявления элемента.
+                    +p()
+                        | Ключевые кадры создаются с помощью ключевых слов
+                        +bold-no-sematics('from')
+                        | и
+                        +bold-no-sematics('to')
+                        | (эквивалентны значениям 0% и 100%) или с помощью процентных пунктов, которых можно задавать сколько угодно.
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            @keyframes color {
+                                from { background-color: #f1652a; }
+                                50% { background-color: #ccc; }
+                                to { background-color: #f1652a; }
+                            }
+                            .block {
+                                animation: color 3s infinite;
+                            }
+                    .slide__col
+                        style(type='text/css').
+                            @keyframes color {
+                                from { background-color: #f1652a; }
+                                50% { background-color: #ccc; }
+                                to { background-color: #f1652a; }
+                            }
+                            .animation {
+                                width: 100px;
+                                height: 100px;
+                                margin: 50px auto 0;
+                                font-size: 2rem;
+                                line-height: 100px;
+                                text-align: center;
+                                background-color: #f1652a;
+                                animation: color 3s infinite;
+                            }
+                        .animation
+
+            .slide(id=subthemes.animationName.href)
+                h2.h2.-subtheme-h= subthemes.animationName.title
+                .-centered
+                    h3.h3 Свойство animation-name
+                    +p().
+                        Задает имя анимации, при обращении к которому будет производиться анимация (можно указать несколько через запятую).
+                    +code('css').
+                        .block {
+                            animation-name: move-element;
+                        }
+
+            .slide(id=subthemes.animationDuration.href)
+                h2.h2.-subtheme-h= subthemes.animationDuration.title
+                .-centered
+                    h3.h3 Свойство animation-duration
+                    +p().
+                        Задает продолжительность цикла анимации (в секундах или миллисекундах).
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block--fast {
+                                animation-duration: 2s;
+                            }
+                            .block--slow {
+                                animation-duration: 5s;
+                            }
+                    .slide__col
+                        style(type='text/css').
+                            @keyframes move-element {
+                                from {
+                                    transform: translateX(0);
+                                }
+                                to {
+                                    transform: translateX(400px);
+                                }
+                            }
+                            .animation-wrap {
+                                width: 504px;
+                                border: 2px dotted #000;
+                            }
+                            .animation-duration {
+                                width: 100px;
+                                height: 100px;
+                                margin-bottom: 50px;
+                                font-size: 2rem;
+                                line-height: 100px;
+                                text-align: center;
+                                background-color: #f1652a;
+                                animation-name: move-element;
+                                animation-iteration-count: infinite;
+                            }
+                            .animation-duration:last-child {
+                                margin-bottom: 0;
+                            }
+                            .animation-duration-fast {
+                                animation-duration: 2s;
+                            }
+                            .animation-duration-slow {
+                                animation-duration: 5s;
+                            }
+                        .animation-wrap
+                            .animation-duration.animation-duration-fast 2s
+                            .animation-duration.animation-duration-slow 5s
+
+            .slide(id=subthemes.animationTimingFunction.href)
+                h2.h2.-subtheme-h= subthemes.animationTimingFunction.title
+                .-centered
+                    h3.h3 Свойство animation-timing-function
+                    +p().
+                        Такие же значения, как и у transition-timing-function.
+
+            .slide(id=subthemes.animationDelay.href)
+                h2.h2.-subtheme-h= subthemes.animationDelay.title
+                .-centered
+                    h3.h3 Свойство animation-delay
+                    +p().
+                        Свойство игнорирует анимацию заданное количество времени, что даёт возможность по отдельности запускать каждую анимацию. Отрицательная задержка начинает анимацию с определенного момента внутри её цикла, т.е. со времени, указанного в задержке.
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block--top {
+                                animation-delay: 0;
+                            }
+                            .block--bottom {
+                                animation-delay: 1.5s;
+                            }
+                    .slide__col
+                        style(type='text/css').
+                            .animation-delay-fast {
+                                animation-duration: 3s;
+                                animation-delay: 0;
+                            }
+                            .animation-delay-slow {
+                                animation-duration: 3s;
+                                animation-delay: 1.5s;
+                            }
+                        .animation.animation-delay-fast
+                        .animation.animation-delay-slow
+
+            .slide(id=subthemes.animationIterationCount.href)
+                h2.h2.-subtheme-h= subthemes.animationIterationCount.title
+                .-centered
+                    h3.h3 Свойство animation-iteration-count
+                    +p().
+                        Позволяет запустить анимацию несколько раз. Значение 0 или любое отрицательное число удаляют анимацию из проигрывания, значение infinite проигрывает анимацию бесконечно.
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block--fixed {
+                                animation-iteration-count: 5;
+                            }
+                            .block--infinite {
+                                animation-iteration-count: infinite;
+                            }
+                    .slide__col
+                        style(type='text/css').
+                            .animation-count-fixed {
+                                animation-duration: 3s;
+                                animation-iteration-count: 5;
+                            }
+                            .animation-count-infinite {
+                                animation-duration: 3s;
+                                animation-iteration-count: infinite;
+                            }
+                        .animation.animation-count-fixed 5
+                        .animation.animation-count-infinite inf
+
+            .slide(id=subthemes.animationDirection.href)
+                h2.h2.-subtheme-h= subthemes.animationDirection.title
+                .-centered
+                    h3.h3 Свойство animation-direction
+                    +p().
+                        Задает направление повтора анимации. Если анимация повторяется только один раз, то это свойство не имеет смысла.
+                    +list('Значения: ', listAnimationDirection)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.animationDirection.title
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block--normal {
+                                animation-direction: normal;
+                            }
+                            .block--reverse {
+                                animation-direction: reverse;
+                            }
+                            .block--alternate {
+                                animation-direction: alternate;
+                            }
+                            .block--alternate-reverse {
+                                animation-direction: alternate-reverse;
+                            }
+                    .slide__col
+                        style(type='text/css').
+                            @keyframes move-element-dir {
+                                from {
+                                    transform: translateX(0);
+                                }
+                                to {
+                                    transform: translateX(300px);
+                                }
+                            }
+                            .animation-direction-wrap {
+                                width: 504px;
+                                border: 2px dotted #000;
+                            }
+                            .animation-direction {
+                                width: 200px;
+                                height: 40px;
+                                margin-bottom: 20px;
+                                padding-left: 20px;
+                                font-weight: 700;
+                                font-size: 1rem;
+                                line-height: 40px;
+                                background-color: #f1652a;
+                                animation-name: move-element-dir;
+                                animation-iteration-count: infinite;
+                                animation-duration: 3s;
+                            }
+                            .animation-direction:last-child {
+                                margin-bottom: 0;
+                            }
+                            .animation-normal {
+                                animation-direction: normal;
+                            }
+                            .animation-reverse {
+                                animation-direction: reverse;
+                            }
+                            .animation-alternate {
+                                animation-direction: alternate;
+                            }
+                            .animation-alternate-reverse {
+                                animation-direction: alternate-reverse;
+                            }
+                        .animation-direction-wrap
+                            .animation-direction.animation-normal normal
+                            .animation-direction.animation-reverse reverse
+                            .animation-direction.animation-alternate alternate
+                            .animation-direction.animation-alternate-reverse alternate-reverse
+
+            .slide(id=subthemes.animationFillMode.href)
+                h2.h2.-subtheme-h= subthemes.animationFillMode.title
+                .-centered
+                    h3.h3 Свойство animation-fill-mode
+                    .-hidden-on-slide
+                        +p().
+                            Определяет порядок применения определенных в @keyframes стилей к объекту.
+                    +list('Значения: ', listAnimationFillMode)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.animationFillMode.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="xqbmze" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[animations] - animation-fill-mode" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/xqbmze/">[animations] - animation-fill-mode</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.animationPlayState.href)
+                h2.h2.-subtheme-h= subthemes.animationPlayState.title
+                .-centered
+                    h3.h3 Свойство animation-play-state
+                    +p().
+                        Управляет проигрыванием и остановкой анимации.
+                    .-hidden-on-slide
+                        +p().
+                            Остановка анимации внутри цикла возможна через использование этого свойства в скрипте JavaScript. Также можно останавливать анимацию при наведении курсора мыши на объект — состояние :hover.
+                    +list('Значения: ', listAnimationPlayState)
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block:hover {
+                                animation-play-state: paused;
+                            }
+                    .slide__col
+                        style(type='text/css').
+                            .animation-play-state:hover {
+                                animation-play-state: paused;
+                            }
+                        .animation.animation-play-state
+
+            .slide(id=subthemes.animationShort.href)
+                h2.h2.-subtheme-h= subthemes.animationShort.title
+                .-centered
+                    +code('css').
+                        .block {
+                            animation: animation-name animation-duration
+                                                animation-timing-function animation-delay
+                                                animation-iteration-count animation-direction;
+                        }
+                    +p()
+                        | Для воспроизведения анимации достаточно указать только два свойства —
+                        +bold-no-sematics('animation-name')
+                        | и
+                        +bold-no-sematics('animation-duration')
+                        | , остальные свойства примут значения по умолчанию. Порядок перечисления свойств не имеет значения, единственное, время выполнения анимации
+                        +bold-no-sematics('animation-duration')
+                        | обязательно должно стоять перед задержкой
+                        +bold-no-sematics('animation-delay')
+                        | .
+
+            .slide(id=subthemes.animationMulti.href)
+                h2.h2.-subtheme-h= subthemes.animationMulti.title
+                .-centered
+                    +p().
+                        Для одного элемента можно задавать несколько анимаций, перечислив их названия через запятую:
+                .slide__cols
+                    .slide__col
+                        +code('css').
+                            .block {
+                                animation: color 2s ease-in,
+                                                    move-element 3s linear;
+                            }
+                    .slide__col
+                        style(type='text/css').
+                            .animation-multi {
+                                margin: 0;
+                                animation: color 2s ease-in infinite, move-element 3s linear infinite;
+                            }
+                        .animation.animation-multi
+
+            .slide(id=subthemes.showingMenu.href)
+                h2.h2.-subtheme-h= subthemes.showingMenu.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="aJzXoe" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[animations] - showing menu" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/aJzXoe/">[animations] - showing menu</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.expandingBlock.href)
+                h2.h2.-subtheme-h= subthemes.expandingBlock.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="aJzXyO" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[animations] - expanding block" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/aJzXyO/">[animations] - expanding block</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.gradientsAnimation.href)
+                h2.h2.-subtheme-h= subthemes.gradientsAnimation.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="gmbqKe" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[animations] - gradient animations" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/gmbqKe/">[animations] - gradient animations</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.bgScroll.href)
+                h2.h2.-subtheme-h= subthemes.bgScroll.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="yMyZrB" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[animations] - backgrounds scroll" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/yMyZrB/">[animations] - backgrounds scroll</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)
