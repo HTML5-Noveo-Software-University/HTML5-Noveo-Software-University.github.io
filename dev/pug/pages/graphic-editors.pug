@@ -14,4 +14,8 @@ block main
     main.main
         .slides-wrap
             +main-slide(pageTitle, 'Имя автора лекции')
-        .slide
+            .slide
+
+            .slide()
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)

@@ -8,10 +8,75 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+        var listToRead = [{
+              id: "toRead-1",
+              title: "Полифил плейсхолдера для IE9",
+              href: "https://jamesallardice.github.io/Placeholders.js"
+          }, {
+              id: "toRead-2",
+              title: "Паттерны валидации",
+              href: "https://www.w3schools.com/tags/att_input_pattern.asp"
+          }, {
+              id: "toRead-3",
+              title: "Курс по формам",
+              href: "https://www.udacity.com/course/building-high-conversion-web-forms--ud890"
+        }]
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
             +main-slide(pageTitle, 'Имя автора лекции')
-        .slide
+            .slide(id=subthemes.defaultLookInput.href)
+                h2.h2.-subtheme-h= subthemes.defaultLookInput.title
+                .-text-centered-on-slide
+                    +figure('Стандартное отображение input type: text, email, password', 'forms', 'input-text.png')
+            .slide(id=subthemes.defaultLookInputReset.href)
+                h2.h2.-subtheme-h= subthemes.defaultLookInputReset.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="bqVyMY" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - input-reset" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/bqVyMY/">[ forms ] - input-reset</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.defaultLookButtonReset.href)
+                h2.h2.-subtheme-h= subthemes.defaultLookButtonReset.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="ryOgZR" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - button reset" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/ryOgZR/">[ forms ] - button reset</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.placeholderStyling.href)
+                h2.h2.-subtheme-h= subthemes.placeholderStyling.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="zZvQbg" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - placeholder styling" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/zZvQbg/">[ forms ] - placeholder styling</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
+            .slide(id=subthemes.validation.href)
+                h2.h2.-subtheme-h= subthemes.validation.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="gmaJVG" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - validation" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/gmaJVG/">[ forms ] - validation</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.validation.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="NpxWOm" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - validation - pattern & custom message" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/NpxWOm/">[ forms ] - validation - pattern & custom message</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.textareaStyling.href)
+                h2.h2.-subtheme-h= subthemes.textareaStyling.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="EWVBYx" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - textarea" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/EWVBYx/">[ forms ] - textarea</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
+            .slide(id=subthemes.defaultLookCheckboxRadio.href)
+                h2.h2.-subtheme-h= subthemes.defaultLookCheckboxRadio.title
+                .-text-centered-on-slide
+                    +figure('Стандартное отображение input type: checkbox, radio', 'forms', 'checkbox.png')
+
+            .slide(id=subthemes.checkboxStyling.href)
+                h2.h2.-subtheme-h= subthemes.checkboxStyling.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="vxNqBx" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - custom checkbox" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/vxNqBx/">[ forms ] - custom checkbox</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.selectStyling.href)
+                h2.h2.-subtheme-h= subthemes.selectStyling.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="ryOEBE" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - styling select with jQuery plugin" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/ryOEBE/">[ forms ] - styling select with jQuery plugin</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide()
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)
