@@ -8,10 +8,180 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+        var inputAttrs = [
+            '<span class="-bold">type</span> - задает тип инпута, влияет на его отображение',
+            '<span class="-bold">name</span> - задает ключ, нужен для бекенда, на отображение не влияет, нужен для корректного взаимодействия с radio',
+            '<span class="-bold">value</span> - данные, введенные по умолчанию',
+            '<span class="-bold">placeholder</span> - подсказка, пример того, что пользователь должен ввести',
+            '<span class="-bold">requred</span> - означает, что поле обязательно заполнить, используется для валидации',
+            '<span class="-bold">pattern</span> - содержит регулярное выражение для валидации',
+            '<span class="-bold">disabled</span> - блокирует ввод',
+            '<span class="-bold">autocomplete</span> - определяет, может ли браузер автоматически заполнить это поле на основании ранее введенных данных'
+        ]
+    -
+        var listToRead = [{
+              id: "toRead-1",
+              title: "Form element",
+              href: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form"
+          }, {
+              id: "toRead-2",
+              title: "Input element",
+              href: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"
+          }, {
+              id: "toRead-3",
+              title: "Автозаполнение - спецификация",
+              href: "https://html.spec.whatwg.org/multipage/forms.html#autofill"
+        }]
+
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
             +main-slide(pageTitle, 'Имя автора лекции')
-        .slide
+
+            .slide(id=subthemes.nestedForms.href)
+                h2.h2.-subtheme-h= subthemes.nestedForms.title
+                .-centered
+                    +strike-block()
+                        +code('html').
+                            <form>
+                                ...
+                                <form>
+                                ...
+                                </form>
+                                ...
+                            </form>
+
+            .slide(id=subthemes.tagsInForm.href)
+                h2.h2.-subtheme-h= subthemes.tagsInForm.title
+                .-centered
+                    +code('html').
+                        <form>
+                            <input>
+                            <button>Save</button>
+                        </form>
+
+            .slide(id=subthemes.groupingTagsInForm.href)
+                h2.h2.-subtheme-h= subthemes.groupingTagsInForm.title
+                .-centered
+                    +p()
+                        | Для группировки в целях
+                        +bold-no-sematics('стилизации')
+                        | используйте
+                        +inline-html().
+                            <div>
+                    +p()
+                        | Для
+                        +bold-no-sematics('семантической')
+                        | группировки используйте
+                        +inline-html().
+                            <fieldset>
+                        | и
+                        +inline-html().
+                            <legend>
+
+            .slide()
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.groupingTagsInForm.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="evpXdO" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - grouping elements together" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/evpXdO/">[ forms ] - grouping elements together</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
+            .slide(id=subthemes.inputAttributes.href)
+                h2.h2.-subtheme-h= subthemes.inputAttributes.title
+                .-centered
+                    +list('', inputAttrs)
+
+            .slide(id=subthemes.inputTypes.href)
+                h2.h2.-subtheme-h= subthemes.inputTypes.title
+                .-text-centered-on-slide
+                    +figure('Основные типы input', 'forms', 'input-types.png')
+
+            .slide(id=subthemes.autocomplete.href)
+                h2.h2.-subtheme-h= subthemes.autocomplete.title
+                .-centered
+                    +p()
+                        | В большинстве браузеров автозаполнение для некоторых типов инпутов будет предлагаться автоматически, на основании значения атрибутов
+                        +bold-no-sematics('type')
+                        | и
+                        +bold-no-sematics('name')
+                    +p()
+                        | Стандартное автозаполнение можно запретить или разрешить для всей формы с помощью атрибута
+                        +bold-no-sematics('autocomplete')
+                        | со значениями
+                        +bold-no-sematics('on')
+                        | и
+                        +bold-no-sematics('off')
+                    +p()
+                        | Чтобы указать конкретный тип автозаполнения для инпута, используется атрибут
+                        +bold-no-sematics('autocomplete')
+
+            .slide()
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.autocomplete.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="EWVMby" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - autocomplete" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/EWVMby/">[ forms ] - autocomplete</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide(id=subthemes.label.href)
+                h2.h2.-subtheme-h= subthemes.label.title
+                .-centered
+                    +p()
+                        +bold-no-sematics('label')
+                        | - заголовок для элемента формы.
+                        | Он должен всегда присутствовать в разметке,
+                        +bold-sematics-super-important('не должен быть скрыт')
+                        | с помощью свойства display.
+
+                    +p()
+                        | Использование атрибута
+                        +bold-no-sematics('placeholder')
+                        | не отменяет необходимость использования
+                        +bold-no-sematics('label')
+
+            .slide()
+                h3.h3.-subtheme-h Связь label и input
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="RpWOez" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - label & input connection" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/RpWOez/">[ forms ] - label & input connection</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
+            .slide(id=subthemes.radio.href)
+                h2.h2.-subtheme-h= subthemes.radio.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="WpQWPo" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - label & input connection" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/WpQWPo/">[ forms ] - label & input connection</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.checked.href)
+                h2.h2.-subtheme-h= subthemes.checked.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="bqVJyw" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - checked" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/bqVJyw/">[ forms ] - checked</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.buttons.href)
+                h2.h2.-subtheme-h= subthemes.buttons.title
+                .-text-centered-on-slide
+                    +figure('Кнопки input и button: общее', 'forms', 'buttons1.png')
+
+            .slide()
+                h3.h3.-subtheme-h Разница между кнопками input и button
+                .-text-centered-on-slide
+                    +figure('Кнопки input и button: различия', 'forms', 'buttons2.png')
+
+
+            .slide(id=subthemes.textarea.href)
+                h2.h2.-subtheme-h= subthemes.textarea.title
+                .-centered
+
+                    +code('html').
+                            <textarea></textarea>
+
+                    +code('html').
+                        <textarea>Значение по умолчанию</textarea>
+            .slide
+                h4.h4.-subtheme-h cols - примерное количество символов на основании средней ширины символа
+                .-centered
+                    +code('html').
+                        <textarea cols=”15” rows=”5”></textarea>
+                    +gif('textarea')
+
+            .slide(id=subthemes.select.href)
+                h2.h2.-subtheme-h= subthemes.select.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="GWpLVJ" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ forms ] - select" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/GWpLVJ/">[ forms ] - select</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            .slide()
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)
