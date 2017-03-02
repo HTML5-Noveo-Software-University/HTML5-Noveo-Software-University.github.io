@@ -8,14 +8,300 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+      var listToRead = [{
+          id: "toRead-1",
+          title: "Pug documentation",
+          href: "https://pugjs.org/language/attributes.html"
+      }]
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
             +main-slide(pageTitle, 'Имя автора лекции')
-            .slide
+            .slide(id=subthemes.pugBasics.href)
+                h2.h2.-subtheme-h= subthemes.pugBasics.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="Npxopd" data-default-tab="html" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ pug ] - basic syntax" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/Npxopd/">[ pug ] - basic syntax</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 
+            .slide(id=subthemes.pugBase.href)
+                h2.h2.-subtheme-h= subthemes.pugBase.title
+                .-hidden-on-slide
+                    +p()
+                        | Один документ можно использовать как основу для другого документа
+
+                h3.h3 Базовый шаблон:
+                +code('jade').
+                    doctype html
+                    html
+                        head
+                            meta(charset='utf-8')
+                            title Example
+                            meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2.0")
+                        body
+                            h1 Hello Pug!
+                h3.h3 Страница, использующая базовый шаблон:
+                +code('jade').
+                    extends ../base/base.pug
+
+            .slide(id=subthemes.pugBlocks.href)
+                h2.h2.-subtheme-h= subthemes.pugBlocks.title
+                .-centered
+                    +p()
+                        | На странице, которая "экстендится" от базового шаблона, можно переопределять блоки
+
+
+                h3.h3 Базовый шаблон:
+                +code('jade').
+                    doctype html
+                    html
+                        head
+                            meta(charset='utf-8')
+                            title Example
+                            meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2.0")
+                        body
+                            block body
+                                h1 Hello Pug!
+
+                h3.h3 Страница, использующая базовый шаблон:
+                +code('jade').
+                    extends ../base/base.pug
+                    block body
+                        h1 I can overwrite this!
+
+
+            .slide()
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.pugBlocks.title
+                .-centered
+                    +p()
+                        | Можно добавить контент к блоку из базового шаблона (в начало или в конец блока), без переопределения всего блока:
+
+
+                h3.h3 Страница, использующая базовый шаблон:
+                +code('jade').
+                    extends ../base/base.pug
+                    block prepend body
+                        h1 I can add this before content in base!
+                    block append body
+                        h1 I can add this after content in base!
+
+            .slide()
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.pugBlocks.title
+                .-centered
+                    +p()
+                        | Блоков может быть несколько, они могут быть вложены друг в друга
+
+                h3.h3 Базовый шаблон:
+                +code('jade').
+                    doctype html
+                    html
+                        head
+                            meta(charset='utf-8')
+                            title Example
+                            meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2.0")
+                        body
+                            block body
+                                block header
+                                block main
+                                    main
+                                        h1 Hello Pug!
+                                block footer
+
+            .slide()
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.pugBlocks.title
+                h3.h3 Страница, использующая базовый шаблон:
+                +code('jade').
+                    extends ../base/base.pug
+                    block body
+                        h1 I can overwrite everything!
+
+            .slide()
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.pugBlocks.title
+                h3.h3 Страница, использующая базовый шаблон:
+                +code('jade').
+                    extends ../base/base.pug
+                    block header
+                        h2 I can overwrite header!
+                    block footer
+                        h2 And footer!
+
+            .slide(id=subthemes.pugInclude.href)
+                h2.h2.-subtheme-h= subthemes.pugInclude.title
+                .-centered
+                    +p()
+                        | Интерфейс можно разделить на компоненты, вынести их в отдельные документы и подключать в базовый шаблон или на страницах.
+
+                h3.h3 Базовый шаблон:
+                +code('jade').
+                    doctype html
+                    html
+                        head
+                            meta(charset='utf-8')
+                            title Example
+                            meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2.0")
+                        body
+                            block body
+                                block header
+                                    include ../blocks/common/header.pug
+                                block main
+                                    main
+                                        h1 Hello Pug!
+                                block footer
+
+                h3.h3 header.pug
+                +code('jade').
+                    header Hi, I'm header!
+
+            .slide(id=subthemes.pugVars.href)
+                h2.h2.-subtheme-h= subthemes.pugVars.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="NpxJvB" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ pug ] - variables" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/NpxJvB/">[ pug ] - variables</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h Переменные можно использовать при экстенде
+                h3.h3 Базовый шаблон:
+                +code('jade').
+                    doctype html
+                    html
+                        block vars
+                            - var pageTitle = '';
+                        head
+                            meta(charset='utf-8')
+                            title=pageTitle
+                            meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2.0")
+                        body
+                            block body
+
+                h3.h3 Страница, использующая базовый шаблон:
+                +code('jade').
+                    extends ../base/base.pug
+                    block vars
+                        - var pageTitle = 'My custom title!';
+
+            .slide(id=subthemes.pugIf.href)
+                h2.h2.-subtheme-h= subthemes.pugIf.title
+                +code('jade').
+                    doctype html
+                    html
+                        block vars
+                            - var pageType = '';
+                            - var pageTitle = '';
+                        head
+                            meta(charset='utf-8')
+                            title= pageTitle
+                            meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=2.0")
+                        body
+                            block body
+                                block header
+                                    if pageType === 'dashboard'
+                                        include ../blocks/common/header--dashboard.pug
+                                    else if pageType === 'checkout'
+                                        include ../blocks/common/header--checkout.pug
+                                    else
+                                        include ../blocks/common/header.pug
+
+            .slide(id=subthemes.pugLoop.href)
+                h2.h2.-subtheme-h= subthemes.pugLoop.title
+                h3.h3 Цикл while
+                +code('jade').
+                    - var n = 0;
+                    ul
+                      while n < 4
+                        li= n++
+                +code('jade').
+                    - var n = 0;
+                    ul
+                      while n < 4
+                        - n++
+                        li Hi
+            .slide
+                h3.h3.-subtheme-h Цикл each
+                +code('jade').
+                    -
+                      var pages = [{
+                        id: "home",
+                        href: "index.html",
+                        title: "Home"
+                      }, {
+                        id: "about",
+                        href: "about-us.html",
+                        title: "About us"
+                      }];
+
+                    nav.menu
+                      ul.menu__list
+                        each item in pages
+                          li.menu__item
+                            a.menu__link= item.title
+
+            .slide
+                h2.h2.-subtheme-h Условный класс в цикле
+                +code('jade').
+                    -
+                      var pages = [{
+                        id: "home",
+                        href: "index.html",
+                        title: "Home"
+                      }, {
+                        id: "about",
+                        href: "about-us.html",
+                        title: "About us"
+                      }];
+                    - var currentPage = "home"
+
+                    nav.menu
+                      ul.menu__list
+                        each item in pages
+                          li.menu__item(class=(currentPage === item.id) ? 'menu__item--active': '')
+                            a.menu__link(href=item.href)= item.title
+
+            .slide(id=subthemes.pugMixins.href)
+                h2.h2.-subtheme-h= subthemes.pugMixins.title
+                +p()
+                    | Есть svg-sprite:
+                +code('html').
+                    <svg style="position: absolute; width: 0; height: 0" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs>
+                    <symbol id="star-empty" viewBox="0 0 16 16">
+                    <title>star-empty
+                    </title>
+                    <path class="path1" d="M16 6.204l-5.528-0.803-2.472-5.009-2.472 5.009-5.528 0.803 4 3.899-0.944 5.505 4.944-2.599 4.944 2.599-0.944-5.505 4-3.899zM8 11.773l-3.492 1.836 0.667-3.888-2.825-2.753 3.904-0.567 1.746-3.537 1.746 3.537 3.904 0.567-2.825 2.753 0.667 3.888-3.492-1.836z"></path>
+                    </symbol>
+                    <symbol id="star-half" viewBox="0 0 16 16">
+                    <title>star-half</title>
+                    <path class="path1" d="M16 6.204l-5.528-0.803-2.472-5.009-2.472 5.009-5.528 0.803 4 3.899-0.944 5.505 4.944-2.599 4.944 2.599-0.944-5.505 4-3.899zM8 11.773l-0.015 0.008 0.015-8.918 1.746 3.537 3.904 0.567-2.825 2.753 0.667 3.888-3.492-1.836z">
+                    </path>
+                    </symbol>
+                    <symbol id="star-full" viewBox="0 0 16 16">
+                    <title>star-full
+                    </title>
+                    <path class="path1" d="M16 6.204l-5.528-0.803-2.472-5.009-2.472 5.009-5.528 0.803 4 3.899-0.944 5.505 4.944-2.599 4.944 2.599-0.944-5.505 4-3.899z">
+                    </path>
+                    </symbol>
+                    </defs>
+                    </svg>
+            .slide
+                h3.h3.-subtheme-h Миксин для иконок:
+                +code('jade').
+                    mixin icon(iconName, className)
+                      svg(class=className + ' ' + className+'--'+iconName)
+                        use(xlink:href="#"+iconName)
+
+                h3.h3.-subtheme-h Использование миксина:
+                +code('jade').
+                    +icon('star-empty', 'icon')
+            .slide
+                h3.h3.-subtheme-h Миксин с блоком:
+                +code('jade').
+                    mixin modal(h)
+                      .modal-wrapper
+                        .modal
+                          h3.modal__heading=h
+                          .modal__body
+                            block
+                h3.h3.-subtheme-h Использование миксина:
+                +code('jade').
+                    +modal('My custom heading!')
+                      p Hi!
             .slide()
                 .-centered
                     +toRead("Полезные ссылки", listToRead)

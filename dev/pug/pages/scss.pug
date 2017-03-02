@@ -8,7 +8,15 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+        var listToRead = [{
+            id: "toRead-1",
+            title: "Sass Basics",
+            href: "http://sass-lang.com/guide"
+        }, {
+            id: "toRead-2",
+            title: "Sass Documentation",
+            href: "http://sass-lang.com/documentation/file.SASS_REFERENCE.html"
+        }]
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
