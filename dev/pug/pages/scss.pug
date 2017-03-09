@@ -22,7 +22,60 @@ block main
     main.main
         .slides-wrap
             +main-slide(pageTitle, 'Имя автора лекции')
-            .slide
+            .slide(id=subthemes.scssComments.href)
+                h2.h2.-subtheme-h= subthemes.scssComments.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="vxgWJM" data-default-tab="css" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ scss ] - Comments" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/vxgWJM/">[ scss ] - Comments</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.scssVars.href)
+                h2.h2.-subtheme-h= subthemes.scssVars.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="bqgYYE" data-default-tab="css" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ scss ] - Vars" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/bqgYYE/">[ scss ] - Vars</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+
+            .slide(id=subthemes.scssDefault.href)
+                h2.h2.-subtheme-h= subthemes.scssDefault.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="JWEOOB" data-default-tab="css" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[ scss ] - Vars and !default" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/JWEOOB/">[ scss ] - Vars and !default</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.scssInterpolation.href)
+                h2.h2.-subtheme-h= subthemes.scssInterpolation.title
+                +code('sass')
+
+            .slide(id=subthemes.scssNesting.href)
+                h2.h2.-subtheme-h= subthemes.scssNesting.title
+                +codepen()
+
+            .slide(id=subthemes.scssNestingAmp.href)
+                h2.h2.-subtheme-h= subthemes.scssNestingAmp.title
+                +codepen()
+
+            .slide(id=subthemes.scssNestedMQ.href)
+                h2.h2.-subtheme-h= subthemes.scssNestedMQ.title
+                +codepen()
+
+            .slide(id=subthemes.scssExtend.href)
+                h2.h2.-subtheme-h= subthemes.scssExtend.title
+                +codepen()
+
+            .slide(id=subthemes.scssMixin.href)
+                h2.h2.-subtheme-h= subthemes.scssMixin.title
+                +codepen()
+
+            .slide(id=subthemes.scssPlaceholders.href)
+                h2.h2.-subtheme-h= subthemes.scssPlaceholders.title
+                +codepen()
+
+            .slide(id=subthemes.scssMath.href)
+                h2.h2.-subtheme-h= subthemes.scssMath.title
+                +codepen()
+
+            .slide(id=subthemes.scssColorFunctions.href)
+                h2.h2.-subtheme-h= subthemes.scssColorFunctions.title
+                +codepen()
+
+            .slide(id=subthemes.scssFileStructure.href)
+                h2.h2.-subtheme-h= subthemes.scssFileStructure.title
 
             .slide()
                 .-centered
