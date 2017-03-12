@@ -8,10 +8,383 @@ block layout-settings
     - var currentPage = conf.page;
     - var subthemes = conf.subthemes;
     -
-      var listToRead = []
+        var listToRead = [{
+            id: "toRead-1",
+            title: "Официальный сайт Bootstrap",
+            href: "http://getbootstrap.com/"
+        }, {
+            id: "toRead-2",
+            title: "Bootstrap на Sass",
+            href: "https://github.com/twbs/bootstrap-sass"
+        }];
+    -
+        var listFrameworksExamples = [
+            'Bootstrap;',
+            'Foundation;',
+            'Maxmertkit;',
+            '...'
+        ];
+    -
+        var listFrameworksPros = [
+            'более быстрая разработка;',
+            'кроссбраузерность;',
+            'легкая настраиваемость;',
+            'единообразие кода при работе в команде.'
+        ];
+    -
+        var listFrameworksCons = [
+            'может быть много лишнего кода, не используемого в конкретном проекте;',
+            'при постоянном использовании фреймворков разработчик может превратиться в "настройщика фреймворков" и "интегратора плагинов".'
+        ];
+    -
+        var listBootstrapParts = [
+            'css компоненты;',
+            'javascript компоненты (требуется подключение библиотеки jQuery);',
+            'иконочный шрифт (250+ иконок).'
+        ];
+    -
+        var listBootstrapTypeClasses = [
+            'классы для заголовков: <span class="-bold">.h1, ... .h6</span>;',
+            'классы для выравнивания текста: <span class="-bold">.text-left, .text-right, .text-center, .text-justify, .text-nowrap</span>;',
+            'классы для трансформации текста: <span class="-bold">.text-lowercase, .text-uppercase, .text-capitalize</span>;',
+            'контекстные цвета и фоны: <span class="-bold">.text-muted, .text-primary, .bg-info, .bg-success</span>.'
+        ];
+    -
+        var listBootstrapGridFeatures = [
+            '12 колонок;',
+            'responsive;',
+            'mobile first.'
+        ];
+    -
+        var listBootstrapGridRules = [
+            'строки помещаются в блок <span class="-bold">.container</span>;',
+            'строки с классом <span class="-bold">.row</span> формируют горизонтальные группы столбцов;',
+            'контент помещается в блоки-колонки с классами <span class="-bold">.col-*.</span>'
+        ];
+    -
+        var listBootstrapDropdownRules = [
+            '<span class="-bold">.dropdown</span> - блок-обертка;',
+            '<span class="-bold">data-toggle="dropdown"</span> - элемент, клик по которому вызывает отображение выпадающего списка;',
+            '<span class="-bold">.caret</span> - создает иконку-стрелку вниз;',
+            '<span class="-bold">.dropdown-menu</span> - делает список выпадающим.'
+        ];
+    -
+        var listBootstrapModalToggleRules = [
+            '<span class="-bold">data-toggle="modal"</span> - показывает модальное окно;',
+            '<span class="-bold">data-target="#myModal"</span> - указывает id окна, которое нужно открыть.'
+        ];
+    -
+        var listBootstrapModalRules = [
+            '<span class="-bold">.modal</span> - определяет содержимое окна;',
+            '<span class="-bold">.fade</span> - добавляет эффект плавного появления/затухания окна;',
+            '<span class="-bold">tabindex="-1"</span> - закрытие окна по нажатию клавиши Esc;',
+            '<span class="-bold">.modal-dialog</span> - устанавливает ширину и отступы у окна;',
+            '<span class="-bold">.modal-content</span> - добавляет стили Bootstrap к окну.'
+        ];
+    -
+        var listBootstrapTabsRules = [
+            '<span class="-bold">.nav, .nav-tabs</span> - добавляет стили Bootstrap для создания табов;',
+            '<span class="-bold">data-toggle="tab"</span> - активизирует переключение табов;',
+            '<span class="-bold">href="#tab1"</span> - указывает id блока, который нужно отобразить;',
+            'переключение контента (блок с классом <span class="-bold">.tab-pane</span>) в блоке-обертке <span class="-bold">.tab-content</span> осуществляется за счет переключения класса <span class="-bold">.active</span> у блоков <span class="-bold">.tab-pane</span> при клике на соответствующий таб.'
+        ];
 block main
     include ../base/mixins/mixin-slides.pug
     main.main
         .slides-wrap
-            +main-slide(pageTitle, 'Имя автора лекции')
-        .slide
+            +main-slide(pageTitle, 'Дмитрий Мещеряков')
+
+            .slide(id=subthemes.frameworks.href)
+                h2.h2.-subtheme-h= subthemes.frameworks.title
+                .slide__cols
+                    .slide__col
+                        .-visible-on-slide
+                            +p().
+                                Фреймворк — каркас, структура.
+                        .-hidden-on-slide
+                            +p().
+                                Фреймворк — каркас, структура. Это программная платформа, определяющая структуру программной системы; программное обеспечение, облегчающее разработку и объединение разных компонентов большого программного проекта.
+                            +p().
+                                CSS-фреймворк — фреймворк, созданный для упрощения работы верстальщика, быстроты разработки и исключения максимально возможного числа ошибок вёрстки (проблемы совместимости различных версий браузеров и т. д.). Как и библиотеки скриптовых языков программирования, CSS-библиотеки, обычно имеющие вид внешнего css-файла, «подключаются» к проекту (добавляются в заголовок веб-страницы).
+                    .slide__col
+                        +list('CSS фреймворки:', listFrameworksExamples)
+                .slide__cols
+                    .slide__col
+                        +list('Плюсы: ', listFrameworksPros)
+                    .slide__col
+                        +list('Минусы: ', listFrameworksCons)
+
+            .slide(id=subthemes.bootstrap.href)
+                h2.h2.-subtheme-h= subthemes.bootstrap.title
+                .-centered
+                    .-hidden-on-slide
+                        +p().
+                            На данный момент, Bootstrap (продукт компании Twitter) - самый популярный фреймворк для фронтенда.
+                    +list('3 основных составляющих: ', listBootstrapParts)
+
+            .slide(id=subthemes.bootstrapIntegrity.href)
+                h2.h2.-subtheme-h= subthemes.bootstrapIntegrity.title
+                .-centered
+                    h3.h3 Способ 1. Подключение готовых файлов, скачанных с сайта Bootstrap
+                    +p()
+                        | Для использования bootstrap подключаем его в теге
+                        +inline-html()
+                            <head>
+                        | :
+                    +code('html').
+                        <link rel="stylesheet" href="path-to-file/bootstrap.min.css">
+                    +p().
+                        Если используются js-компоненты, то подключаем jQuery и bootstrap:
+                    +code('html').
+                        <script src="path-to-file/jquery.min.js"></script>
+                        <script src="path-to-file/bootstrap.min.js"></script>
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.bootstrapIntegrity.title
+                .-centered
+                    h3.h3 Способ 2. Подключение готовых файлов через CDN
+                    +code('html').
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.bootstrapIntegrity.title
+                .-centered
+                    h3.h3 Способ 3. Использование исходных файлов (написанных на Less или Sass)
+                    +p()
+                        | Алгоритм:
+                    +p()
+                        | 1. Скачать bootstrap с сайта вручную или при помощи npm.
+                    +p()
+                        | 2. Подключить bootstrap в главном .scss файле (например, index.scss) при помощи директивы
+                        +bold-no-sematics(' @import')
+                        | :
+                    +code('css').
+                        @import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+                    +p()
+                        | 3. Скомпилировать .scss файлы в css при помощи сборщика (gulp, grunt, webpack).
+
+            .slide(id=subthemes.bootstrapCustomize.href)
+                h2.h2.-subtheme-h= subthemes.bootstrapCustomize.title
+                .-centered
+                    .-hidden-on-slide
+                        +p().
+                            Для чего настраивать (или кастомизировать) Bootstrap?
+                        +p().
+                            Причин две: во-первых, скорее всего вам понадобятся не все компоненты Bootstrap, а во-вторых, вес такого шаблона даже в сжатом виде немал — 530 Кб. Добавьте 90 Кб jQuery, без которого js-компоненты работать не будут. Поэтому все лишнее следует удалять.
+                    h3.h3 Способ 1. Настройка вручную на сайте Bootstrap
+                    a(href="http://getbootstrap.com/customize/" class="list__link") http://getbootstrap.com/customize/
+                    +p()
+                        | 1. Выбрать необходимые компоненты (как правило, все Common CSS и нужные из Components и JavaScript components).
+                    +p()
+                        | 2. В блоке Less Variables задать необходимые значения любых переменных Bootstrap.
+                    +p()
+                        | 3. Скачать скомпилированные файлы.
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.bootstrapCustomize.title
+                .-centered
+                    h3.h3 Способ 2. Настройка в проектной папке
+                    +p()
+                        | 1. Скачать исходные файлы Bootstrap (.less или .scss).
+                    +p()
+                        | 2. Создать файл, например, bootstrap-custom.scss в папке со стилями проекта и подключить только необходимые компоненты из Bootstrap при помощи директивы
+                        +bold-no-sematics(' @import')
+                        | :
+                        +code('css').
+                            @import "bootstrap/dropdowns";
+                            @import "bootstrap/navbar";
+                            @import "bootstrap/breadcrumbs";
+                    +p()
+                        | 3. Подключить bootstrap-custom.scss в главном .scss файле проекта.
+                    +p()
+                        | 4. При необходимости переопределить переменные Bootstrap в проектном файле, например, в vars.scss:
+                    +code('css').
+                        $gray-base: #ccc; // по дефолту #000
+                    +p()
+                        | 5. При необходимости переопределить стили для Bootstrap классов в проектных файлах (они должны поключаться после файла c Bootstrap).
+
+            .slide(id=subthemes.buttons.href)
+                h2.h2.-subtheme-h= subthemes.buttons.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="rymOjM" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css-frameworks] - Bootstrap buttons" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/rymOjM/">[css-frameworks] - Bootstrap buttons</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.tables.href)
+                h2.h2.-subtheme-h= subthemes.tables.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="NpjGaK" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css-frameworks] - Bootstrap  tables" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/NpjGaK/">[css-frameworks] - Bootstrap  tables</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.forms.href)
+                h2.h2.-subtheme-h= subthemes.forms.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="oZWjqd" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css-frameworks] - Bootstrap  forms" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/oZWjqd/">[css-frameworks] - Bootstrap  forms</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.type.href)
+                h2.h2.-subtheme-h= subthemes.type.title
+                .-centered
+                    +list('', listBootstrapTypeClasses)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.type.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="RpVWqv" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css-frameworks] - Bootstrap  type" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/RpVWqv/">[css-frameworks] - Bootstrap  type</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.grid.href)
+                h2.h2.-subtheme-h= subthemes.grid.title
+                .-centered
+                    +list('Особенности:', listBootstrapGridFeatures)
+                    +list('Основные правила построения сетки:', listBootstrapGridRules)
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.grid.title
+                .-centered
+                    h3.h3 Классы для создания колонок
+                    +p()
+                        | 1. Каждый класс
+                        +bold-no-sematics('.col-*')
+                        | имеет в названии префикс, указывающий, на какой ширине экрана будет применяться данный класс:
+                    style(type='text/css').
+                        .bootstrap-grid-table td,
+                        .bootstrap-grid-table th {
+                            padding: 1em;
+                            border: 1px solid #ccc;
+                        }
+                    table.bootstrap-grid-table
+                        tr
+                            th Screen size
+                            th Extra small devices Phones (<768px)
+                            th Small devices Tablets (≥768px)
+                            th Medium devices Desktops (≥992px)
+                            th Large devices Desktops (≥1200px)
+                        tr
+                            td Class prefix
+                            td 	.col-xs-
+                            td .col-sm-
+                            td 	.col-md-
+                            td 	.col-lg-
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.grid.title
+                .-centered
+                    h3.h3.-visible-on-slide Классы для создания колонок
+                    +p()
+                        | 2. Каждый класс
+                        +bold-no-sematics('.col-*')
+                        | имеет 2 свойства:
+                    +code('css').
+                        .col-* {
+                            float: left;
+                            width: x;
+                        }
+                    +p()
+                        | Ширина колонки =
+                        +bold-no-sematics('100% * n / 12')
+                        | ,
+                    +p()
+                        | где
+                        +bold-no-sematics('n')
+                        | - число в названии класса
+                        +bold-no-sematics('.col-*')
+                        | .
+                    .slide__cols
+                        .slide__col
+                            +p()
+                                +bold-no-sematics('.col-xs-1')
+                                | :
+                            +p()
+                                | ширина =
+                                +bold-no-sematics('100% * 1 / 12 = 8,3%')
+                        .slide__col
+                            +p()
+                                +bold-no-sematics('.col-xs-12')
+                                | :
+                            +p()
+                                | ширина =
+                                +bold-no-sematics('100% * 12 / 12 = 100%')
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.grid.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="ZeKbwK" data-default-tab="css,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css-frameworks] - Bootstrap  grid" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/ZeKbwK/">[css-frameworks] - Bootstrap  grid</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.grid.title
+                .slide__cols
+                    .slide__col
+                        h3.h3 Смещение колонок
+                        +p()
+                            | Сдвиг колонок осуществляется при помощи классов
+                            +bold-no-sematics('.col-*-offset-*')
+                            | .
+                        +p()
+                            | Каждый класс
+                            +bold-no-sematics('.col-*-offset-*')
+                            | имеет свойство:
+                        +code('css').
+                            .col-*-offset-* {
+                                margin-left: x;
+                            }
+                    .slide__col
+                        h3.h3 Порядок колонок
+                        +p()
+                            | Порядок колонок легко изменить при помощи классов
+                            +bold-no-sematics('.col-*-push-*')
+                            | и
+                            +bold-no-sematics('.col-*-pull-*')
+                            | .
+                        +p()
+                            | Каждый класс
+                            +bold-no-sematics('.col-*-push-*')
+                            | и
+                            +bold-no-sematics('.col-*-pull-*')
+                            | имеет свойство
+                            +bold-no-sematics('left')
+                            | или
+                            +bold-no-sematics('right')
+                            | .
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.grid.title
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="mWmPRm" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css-frameworks] - Bootstrap  grid offset and push/pull" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/mWmPRm/">[css-frameworks] - Bootstrap  grid offset and push/pull</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                h2.h2.-subtheme-h.-visible-on-slide= subthemes.grid.title
+                .-centered
+                    h3.h3 Задание
+                    +p()
+                        | Используя классы
+                        +bold-no-sematics('.col-md-*')
+                        | и
+                        +bold-no-sematics('.col-md-offset-*')
+                        | , сверстайте сетку:
+                    .-text-centered-on-slide
+                        img(src="static/images/pages/css-frameworks/grid-task.jpg")
+
+            .slide(id=subthemes.dropdown.href)
+                h2.h2.-subtheme-h= subthemes.dropdown.title
+                .-hidden-on-slide
+                    +list('Основные элементы для создания выпадающего списка:', listBootstrapDropdownRules)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="rymJMR" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css-frameworks] - Bootstrap  dropdown" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/rymJMR/">[css-frameworks] - Bootstrap  dropdown</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.modal.href)
+                h2.h2.-subtheme-h= subthemes.modal.title
+                .-hidden-on-slide
+                    h3.h3 Основные элементы для создания модального окна
+                    +list('Кнопка:', listBootstrapModalToggleRules)
+                    +list('Модальное окно:', listBootstrapModalRules)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="gmWvWR" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css-frameworks] - Bootstrap  modal" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/gmWvWR/">[css-frameworks] - Bootstrap  modal</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide(id=subthemes.tabs.href)
+                h2.h2.-subtheme-h= subthemes.tabs.title
+                .-hidden-on-slide
+                    +list('Основные элементы для создания табов:', listBootstrapTabsRules)
+                +codepen()
+                    <p data-height="265" data-theme-id="light" data-slug-hash="dvWdJp" data-default-tab="html,result" data-user="HTML5-Noveo-SU" data-embed-version="2" data-pen-title="[css-frameworks] - Bootstrap  tabs" class="codepen">See the Pen <a href="http://codepen.io/HTML5-Noveo-SU/pen/dvWdJp/">[css-frameworks] - Bootstrap  tabs</a> by HTML Five Noveo Software University (<a href="http://codepen.io/HTML5-Noveo-SU">@HTML5-Noveo-SU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+
+            .slide
+                .-centered
+                    +toRead("Полезные ссылки", listToRead)
